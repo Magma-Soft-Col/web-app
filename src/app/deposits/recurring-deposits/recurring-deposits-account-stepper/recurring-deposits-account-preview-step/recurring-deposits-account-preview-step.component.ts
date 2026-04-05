@@ -75,6 +75,7 @@ export class RecurringDepositsAccountPreviewStepComponent implements OnChanges {
   @Input() recurringDepositAccountData: any;
   /** Output the submit action */
   @Output() submitEvent = new EventEmitter();
+  @Input() isSimulation: boolean = false;
 
   /** Charges Displayed Columns */
   chargesDisplayedColumns: string[] = [

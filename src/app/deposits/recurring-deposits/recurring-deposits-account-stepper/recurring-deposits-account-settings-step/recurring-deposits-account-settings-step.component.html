@@ -110,6 +110,34 @@
         </mat-error>
       </mat-form-field>
     }
+    @if (isSimulation) {
+      <h4 class="mat-h4 flex-98">Depósitos Extra (Simulación)</h4>
+
+      <mifosx-input-amount
+        [currency]="currency"
+        [isRequired]="true"
+        class="flex-48"
+        [inputFormControl]="recurringDepositAccountSettingsForm.controls.depositExtraAmount"
+        [inputLabel]="'Recurring Deposit Amount'"
+      >
+      </mifosx-input-amount>
+
+      <mat-form-field class="flex-48">
+        <mat-label>{{ 'labels.inputs.Deposit Period' | translate }}</mat-label>
+        <input type="number" matInput formControlName="depositPeriodExtra" required />
+      </mat-form-field>
+
+      <mat-form-field class="flex-48">
+        <mat-label>{{ 'labels.inputs.Type' | translate }}</mat-label>
+        <mat-select formControlName="depositPeriodExtraFrequencyId" required>
+          @for (periodFrequencyType of periodFrequencyTypeData; track periodFrequencyType) {
+            <mat-option [value]="periodFrequencyType.id">
+              {{ periodFrequencyType.value | translateKey: 'catalogs' }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
 
     <mat-divider class="flex-98"></mat-divider>
 

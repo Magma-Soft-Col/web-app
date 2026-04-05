@@ -144,14 +144,14 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "node scripts/check-file-headers.js",
-      "eslint --cache"
+      "eslint --fix"
     ],
     "*.{css,scss}": [
       "node scripts/check-file-headers.js",
-      "stylelint"
+      "stylelint --fix"
     ],
     "*.html": "node scripts/check-file-headers.js",
-    "*": "prettier --check --ignore-unknown"
+    "*": "prettier --write"
   },
   "overrides": {
     "exceljs": {

@@ -7,7 +7,7 @@
  */
 
 /** Angular Imports */
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /** Custom Services */
@@ -25,6 +25,27 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RecurringDepositsAccountInterestRateChartStepComponent } from '../recurring-deposits-account-stepper/recurring-deposits-account-interest-rate-chart-step/recurring-deposits-account-interest-rate-chart-step.component';
 import { RecurringDepositsAccountPreviewStepComponent } from '../recurring-deposits-account-stepper/recurring-deposits-account-preview-step/recurring-deposits-account-preview-step.component';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable
+} from '@angular/material/table';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle
+} from '@angular/material/dialog';
 
 /**
  * Create new recurring deposit account
@@ -35,6 +56,22 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./create-recurring-deposits-account.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    FormsModule,
+    MatButtonToggleModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef,
     MatStepper,
     MatStepperIcon,
     FaIconComponent,
@@ -54,6 +91,7 @@ export class CreateRecurringDepositsAccountComponent {
   private dateUtils = inject(Dates);
   private recurringDepositsService = inject(RecurringDepositsService);
   private settingsService = inject(SettingsService);
+  private dialog = inject(MatDialog);
 
   /** Imports all the step component */
   @ViewChild(RecurringDepositsAccountDetailsStepComponent, { static: true })
@@ -64,11 +102,25 @@ export class CreateRecurringDepositsAccountComponent {
   recurringDepositAccountSettingsStep: RecurringDepositsAccountSettingsStepComponent;
   @ViewChild(RecurringDepositsAccountChargesStepComponent, { static: true })
   recurringDepositAccountChargesStep: RecurringDepositsAccountChargesStepComponent;
+  @ViewChild('simulationResultsDialog') simulationResultsDialog: TemplateRef<unknown>;
 
   /** Recurring Deposits Account Template */
   recurringDepositsAccountTemplate: any;
   /** Recurring Deposit Account Product Template */
   recurringDepositsAccountProductTemplate: any;
+
+  isSimulation = false;
+  simulationResult: SimulationResultData | null = null;
+  simulationSummary: SimulationSummary | null = null;
+  readonly simulationDisplayedColumns = [
+    'installmentNumber',
+    'installmentDate',
+    'interestRate',
+    'amount',
+    'extraAmount',
+    'interestAmount',
+    'cumulatedAmount'
+  ];
 
   constructor() {
     this.route.data.subscribe((data: { recurringDepositsAccountTemplate: any }) => {
@@ -82,6 +134,12 @@ export class CreateRecurringDepositsAccountComponent {
    */
   setTemplate($event: any) {
     this.recurringDepositsAccountProductTemplate = $event;
+  }
+
+  onSimulationModeChange() {
+    this.dialog.closeAll();
+    this.simulationResult = null;
+    this.simulationSummary = null;
   }
 
   /** Get Recurring Deposit Account Details Form Data */
@@ -128,6 +186,14 @@ export class CreateRecurringDepositsAccountComponent {
     };
   }
 
+  get simulationCurrencyCode() {
+    return (
+      this.recurringDepositsAccountProductTemplate?.currency?.code ||
+      this.recurringDepositsAccountTemplate?.currency?.code ||
+      'USD'
+    );
+  }
+
   /**
    * Submits the recurring deposit form to create a new recurring deposit account
    */
@@ -158,14 +224,83 @@ export class CreateRecurringDepositsAccountComponent {
       locale
     };
 
-    this.recurringDepositsService.createRecurringDepositAccount(recurringDepositAccount).subscribe((response: any) => {
-      this.router.navigate(
-        [
-          '../',
-          response.resourceId
-        ],
-        { relativeTo: this.route }
-      );
-    });
+    if (!this.isSimulation) {
+      this.dialog.closeAll();
+      this.simulationResult = null;
+      this.simulationSummary = null;
+      this.recurringDepositsService
+        .createRecurringDepositAccount(recurringDepositAccount)
+        .subscribe((response: any) => {
+          this.router.navigate(
+            [
+              '../',
+              response.resourceId
+            ],
+            { relativeTo: this.route }
+          );
+        });
+    } else {
+      this.recurringDepositsService
+        .simulateRecurringDepositAccount(recurringDepositAccount)
+        .subscribe((response: any) => {
+          this.simulationResult = {
+            installments: Array.isArray(response?.installments) ? response.installments : []
+          };
+          this.simulationSummary = this.buildSimulationSummary(this.simulationResult.installments);
+          this.dialog.open(this.simulationResultsDialog, {
+            width: '960px',
+            maxWidth: '95vw'
+          });
+        });
+    }
   }
+
+  private buildSimulationSummary(installments: SimulationInstallment[]): SimulationSummary {
+    const totals = installments.reduce(
+      (accumulator, installment) => ({
+        deposits:
+          accumulator.deposits +
+          (this.toNumericValue(installment.amount) || 0) +
+          (this.toNumericValue(installment.extraAmount) || 0),
+        interest: accumulator.interest + (this.toNumericValue(installment.interestAmount) || 0),
+        finalBalance: this.toNumericValue(installment.cumulatedAmount) || accumulator.finalBalance
+      }),
+      {
+        deposits: 0,
+        interest: 0,
+        finalBalance: 0
+      }
+    );
+
+    return {
+      depositsAmount: totals.deposits,
+      interestAmount: totals.interest,
+      finalBalance: totals.finalBalance
+    };
+  }
+
+  private toNumericValue(value: unknown): number {
+    const parsedValue = Number(value);
+    return Number.isFinite(parsedValue) ? parsedValue : 0;
+  }
+}
+
+interface SimulationResultData {
+  installments: SimulationInstallment[];
+}
+
+interface SimulationInstallment {
+  installmentNumber?: number;
+  installmentDate?: string;
+  interestRate?: number;
+  amount?: number;
+  extraAmount?: number;
+  interestAmount?: number;
+  cumulatedAmount?: number;
+}
+
+interface SimulationSummary {
+  depositsAmount: number;
+  interestAmount: number;
+  finalBalance: number;
 }

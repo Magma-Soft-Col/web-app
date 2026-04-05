@@ -171,7 +171,7 @@ export class CreateFloatingRateComponent implements OnInit {
     floatingRatePeriodDialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
         this.floatingRatePeriodsData.push({
-          fromDate: this.dateUtils.formatDate(response.fromDate, this.dateFormat),
+          fromDate: response.fromDate,
           interestRate: response.interestRate,
           isDifferentialToBaseLendingRate: response.isDifferentialToBaseLendingRate,
           locale: this.settingsService.language.code,
@@ -198,7 +198,7 @@ export class CreateFloatingRateComponent implements OnInit {
     editFloatingRatePeriodDialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
         this.floatingRatePeriodsData[this.floatingRatePeriodsData.indexOf(ratePeriod)] = {
-          fromDate: this.dateUtils.formatDate(response.fromDate, this.dateFormat),
+          fromDate: response.fromDate,
           interestRate: response.interestRate,
           isDifferentialToBaseLendingRate: response.isDifferentialToBaseLendingRate,
           locale: this.settingsService.language.code,

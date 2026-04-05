@@ -50,6 +50,7 @@ export class RecurringDepositsAccountSettingsStepComponent implements OnInit, On
   @Input() isNew = true;
   @Input() recurringDepositsAccountTemplate: any;
   @Input() recurringDepositsAccountProductTemplate: any;
+  @Input() isSimulation: boolean = false;
 
   /** Recurring Deposits Account Settings Form */
   recurringDepositAccountSettingsForm: UntypedFormGroup;
@@ -77,6 +78,8 @@ export class RecurringDepositsAccountSettingsStepComponent implements OnInit, On
   }
 
   ngOnChanges() {
+    this.toggleSimulationFields();
+
     const recurringDepositsAccount: any = this.isNew
       ? this.recurringDepositsAccountProductTemplate
       : this.recurringDepositsAccountTemplate;
@@ -146,6 +149,9 @@ export class RecurringDepositsAccountSettingsStepComponent implements OnInit, On
 
   ngOnInit() {
     this.maxDate = this.settingsService.businessDate;
+
+    this.toggleSimulationFields();
+    this.setupExtraDepositValidation();
     if (this.recurringDepositsAccountTemplate) {
       this.recurringDepositAccountSettingsForm.patchValue({
         lockinPeriodFrequency: this.recurringDepositsAccountTemplate.lockinPeriodFrequency,
@@ -198,7 +204,10 @@ export class RecurringDepositsAccountSettingsStepComponent implements OnInit, On
       preClosurePenalApplicable: [{ value: '', disabled: true }],
       preClosurePenalInterest: [{ value: '', disabled: true }],
       preClosurePenalInterestOnTypeId: [{ value: '', disabled: true }],
-      minBalanceForInterestCalculation: [{ value: '', disabled: true }]
+      minBalanceForInterestCalculation: [{ value: '', disabled: true }],
+      depositExtraAmount: [''],
+      depositPeriodExtraFrequencyId: [''],
+      depositPeriodExtra: ['']
     });
   }
 
@@ -235,5 +244,53 @@ export class RecurringDepositsAccountSettingsStepComponent implements OnInit, On
    */
   get recurringDepositAccountSettings() {
     return this.recurringDepositAccountSettingsForm.value;
+  }
+
+  toggleSimulationFields() {
+    const fields = [
+      'depositExtraAmount',
+      'depositPeriodExtraFrequencyId',
+      'depositPeriodExtra'
+    ];
+
+    fields.forEach((field) => {
+      const control = this.recurringDepositAccountSettingsForm.get(field);
+      if (!control) return;
+
+      if (this.isSimulation) {
+        control.enable({ emitEvent: false });
+      } else {
+        control.disable({ emitEvent: false });
+        control.reset();
+      }
+    });
+  }
+
+  /*Validation for extra fields with is simulation */
+  setupExtraDepositValidation() {
+    const amount = this.recurringDepositAccountSettingsForm.get('depositExtraAmount');
+    const period = this.recurringDepositAccountSettingsForm.get('depositPeriodExtra');
+    const frequency = this.recurringDepositAccountSettingsForm.get('depositPeriodExtraFrequencyId');
+
+    this.recurringDepositAccountSettingsForm.valueChanges.subscribe(() => {
+      const anyFilled =
+        (amount?.value !== null && amount?.value !== '') ||
+        (period?.value !== null && period?.value !== '') ||
+        (frequency?.value !== null && frequency?.value !== '');
+
+      if (anyFilled) {
+        amount?.setValidators([Validators.required]);
+        period?.setValidators([Validators.required]);
+        frequency?.setValidators([Validators.required]);
+      } else {
+        amount?.clearValidators();
+        period?.clearValidators();
+        frequency?.clearValidators();
+      }
+
+      amount?.updateValueAndValidity({ emitEvent: false });
+      period?.updateValueAndValidity({ emitEvent: false });
+      frequency?.updateValueAndValidity({ emitEvent: false });
+    });
   }
 }

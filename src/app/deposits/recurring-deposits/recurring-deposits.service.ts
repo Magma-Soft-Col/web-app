@@ -75,6 +75,10 @@ export class RecurringDepositsService {
     return this.http.post(`/recurringdepositaccounts`, recurringAccountData);
   }
 
+  simulateRecurringDepositAccount(recurringAccountData: any): Observable<any> {
+    return this.http.post(`/recurringdepositaccounts/simulate`, recurringAccountData);
+  }
+
   /**
    * @param {string} accountId Savings Account Id
    * @param {string} command Command
