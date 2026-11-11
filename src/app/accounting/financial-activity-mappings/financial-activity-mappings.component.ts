@@ -30,7 +30,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -62,7 +63,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

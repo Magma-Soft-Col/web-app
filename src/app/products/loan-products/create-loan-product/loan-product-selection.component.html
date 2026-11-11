@@ -6,12 +6,9 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="landing-page">
-  <section class="landing-page__hero">
-    <p class="landing-page__eyebrow">{{ 'labels.text.Products' | translate }}</p>
-    <h1>{{ 'labels.heading.Loan product creation' | translate }}</h1>
-    <p class="landing-page__copy">{{ 'labels.text.Select a product below' | translate }}</p>
-  </section>
+<!-- The page title is rendered by the shell header. -->
+<div class="ms-page landing-page">
+  <p class="ms-page-subtitle landing-page__copy">{{ 'labels.text.Select a product below' | translate }}</p>
 
   <section class="product-grid">
     <mat-card
@@ -21,10 +18,10 @@
       [class.product-card--disabled]="product.disabled"
     >
       <div class="product-card__header">
-        <div class="product-card__icon">
+        <span class="ms-icon-wrap product-card__icon">
           <mat-icon aria-hidden="true">{{ product.icon }}</mat-icon>
-        </div>
-        <span class="product-chip" [class.product-chip--active]="product.active">
+        </span>
+        <span class="ms-badge" [class.ms-badge--success]="product.active">
           {{ (product.active ? 'labels.inputs.Active' : 'labels.text.Upcoming') | translate }}
         </span>
       </div>
@@ -34,8 +31,7 @@
 
       <a
         *ngIf="product.active"
-        mat-button
-        color="primary"
+        mat-stroked-button
         class="product-card__cta"
         [routerLink]="['/products', 'loan-products', product.route]"
         [queryParams]="{ productType: 'loan' }"

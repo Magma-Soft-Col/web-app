@@ -6,18 +6,45 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.expandcollapsebutton {
-  margin-top: -7px;
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.loan-form__toggle {
+  margin-bottom: var(--ms-space-3);
 }
 
-.container {
-  max-width: 37rem;
+// Breakdown of the quoted amount: label left, amount right.
+.prepay-summary {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-2) var(--ms-space-6);
+  margin: 0 0 var(--ms-space-4);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  background: var(--ms-color-surface-subtle);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.right-input {
-  text-align: right;
-}
+.prepay-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
 
-.right-label {
-  padding-right: 25px !important;
+  dt,
+  dd {
+    margin: 0;
+  }
+
+  dd {
+    text-align: right;
+    white-space: nowrap;
+  }
 }

@@ -6,29 +6,64 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+// Preview: label/value pairs grouped under section titles (pen fact layout).
+.preview {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview__section {
+  margin: var(--ms-space-6) 0 var(--ms-space-2);
+  padding-bottom: var(--ms-space-2);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.preview__row {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(160px, 30%) minmax(0, 1fr);
+  gap: var(--ms-space-4);
+  align-items: baseline;
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ms-space-1);
+  }
+}
+
+.preview__label {
+  font-size: var(--ms-font-size-label);
+}
+
+.preview__value {
+  overflow-wrap: anywhere;
+}
+
+.preview__block {
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-panel {
+  margin-top: var(--ms-space-2);
+}
+
 table {
   width: 100%;
 }
 
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-h2,
-h3,
-h4 {
-  margin: 0;
-  font-weight: 500;
-}
-
-span {
-  margin: 0.5em 0;
-}
-
-mat-divider {
-  margin: 0 0 0.5em;
-}
-
-.margin-t {
-  margin-top: 1em;
+.ms-num {
+  text-align: right;
+  white-space: nowrap;
 }

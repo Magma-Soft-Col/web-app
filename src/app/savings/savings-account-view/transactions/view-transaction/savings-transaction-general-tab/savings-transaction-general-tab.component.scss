@@ -7,7 +7,6 @@
  */
 
 @use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
 
 .container {
   max-width: 37rem;
@@ -30,16 +29,16 @@
 }
 
 .active {
-  background-color: $status-active;
+  background-color: var(--ms-color-success);
   height: 4px;
 }
 
 .linked {
-  background-color: $status-approved;
+  background-color: var(--ms-color-info);
   height: 4px;
 }
 
 .undo {
-  background-color: $status-active-overdue;
+  background-color: var(--ms-color-danger);
   height: 4px;
 }

@@ -7,5 +7,11 @@
  */
 
 .password-never-expires-wrapper {
-  padding: 17.5px 0;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+}
+
+.error {
+  color: var(--ms-color-danger);
 }

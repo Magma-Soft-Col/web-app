@@ -68,13 +68,14 @@
     }
   </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious disabled>
+  <div class="ms-actions align-end margin-t">
+    <button mat-stroked-button matStepperPrevious disabled>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
+      color="primary"
       matStepperNext
       [disabled]="
         !fixedDepositAccountDetailsForm.get('productId')?.value ||

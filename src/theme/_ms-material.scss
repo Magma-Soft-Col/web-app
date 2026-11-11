@@ -1,0 +1,308 @@
+/**
+ * Copyright since 2025 Mifos Initiative
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/*
+ * Magma Soft Design System — Angular Material layer.
+ *
+ * Feeds the semantic tokens from `assets/styles/_ms-tokens.scss` into
+ * Material's own `--mat-*` tokens, so every existing screen picks up the new
+ * typography, geometry and palette without editing its template.
+ *
+ * Material emits its theme tokens on `html` (light) and on every `.dark-theme`
+ * element — the body and the `mifosx-web-app` root both carry that class. The
+ * `body.*` / `body .*` selectors below outrank both, and because they only
+ * reference `--ms-*` tokens one block serves every theme.
+ */
+
+body,
+body.light-theme,
+body.dark-theme,
+body .light-theme,
+body .dark-theme {
+  /* Typography */
+  --mat-sys-body-font: var(--ms-font-family);
+  --mat-button-filled-label-text-font: var(--ms-font-family);
+  --mat-button-outlined-label-text-font: var(--ms-font-family);
+  --mat-button-protected-label-text-font: var(--ms-font-family);
+  --mat-button-text-label-text-font: var(--ms-font-family);
+  --mat-button-tonal-label-text-font: var(--ms-font-family);
+  --mat-tab-label-text-font: var(--ms-font-family);
+  --mat-table-header-headline-font: var(--ms-font-family);
+  --mat-table-row-item-label-text-font: var(--ms-font-family);
+  --mat-table-footer-supporting-text-font: var(--ms-font-family);
+  --mat-form-field-container-text-font: var(--ms-font-family);
+  --mat-form-field-filled-label-text-font: var(--ms-font-family);
+  --mat-form-field-outlined-label-text-font: var(--ms-font-family);
+  --mat-select-trigger-text-font: var(--ms-font-family);
+  --mat-menu-item-label-text-font: var(--ms-font-family);
+  --mat-list-list-item-label-text-font: var(--ms-font-family);
+  --mat-paginator-container-text-font: var(--ms-font-family);
+  --mat-card-title-text-font: var(--ms-font-family);
+  --mat-card-subtitle-text-font: var(--ms-font-family);
+  --mat-dialog-subhead-font: var(--ms-font-family);
+  --mat-dialog-supporting-text-font: var(--ms-font-family);
+  --mat-expansion-header-text-font: var(--ms-font-family);
+  --mat-expansion-container-text-font: var(--ms-font-family);
+  --mat-checkbox-label-text-font: var(--ms-font-family);
+  --mat-chip-label-text-font: var(--ms-font-family);
+
+  /* Buttons: 36px, 8px radius, flat */
+  --mat-button-filled-container-shape: var(--ms-radius-md);
+  --mat-button-outlined-container-shape: var(--ms-radius-control);
+  --mat-button-protected-container-shape: var(--ms-radius-md);
+  --mat-button-text-container-shape: var(--ms-radius-md);
+  --mat-button-tonal-container-shape: var(--ms-radius-md);
+  --mat-button-filled-container-height: var(--ms-control-height);
+  --mat-button-outlined-container-height: var(--ms-control-height);
+  --mat-button-protected-container-height: var(--ms-control-height);
+  --mat-button-text-container-height: var(--ms-control-height);
+  --mat-button-tonal-container-height: var(--ms-control-height);
+  --mat-button-filled-label-text-size: 13px;
+  --mat-button-outlined-label-text-size: 12px;
+  --mat-button-protected-label-text-size: 13px;
+  --mat-button-text-label-text-size: 13px;
+  --mat-button-filled-label-text-weight: 500;
+  --mat-button-outlined-label-text-weight: 500;
+  --mat-button-protected-label-text-weight: 500;
+  --mat-button-text-label-text-weight: 500;
+  --mat-button-outlined-outline-color: var(--ms-color-border);
+  --mat-button-protected-container-elevation-shadow: none;
+  --mat-button-protected-hover-container-elevation-shadow: var(--ms-shadow-xs);
+  --mat-button-protected-focus-container-elevation-shadow: none;
+  --mat-button-protected-pressed-container-elevation-shadow: none;
+  --mat-button-protected-disabled-container-elevation-shadow: none;
+
+  /* Cards: flat panels with a hairline border */
+  --mat-card-elevated-container-color: var(--ms-color-surface);
+  --mat-card-elevated-container-elevation: none;
+  --mat-card-elevated-container-shape: var(--ms-radius-md);
+  --mat-card-outlined-container-color: var(--ms-color-surface);
+  --mat-card-outlined-container-shape: var(--ms-radius-md);
+  --mat-card-outlined-outline-color: var(--ms-color-border-subtle);
+  --mat-card-title-text-size: var(--ms-font-size-section-title);
+  --mat-card-title-text-weight: 600;
+  --mat-card-subtitle-text-size: 13px;
+
+  /* Tables: dense, scannable */
+  --mat-table-background-color: var(--ms-color-surface);
+  --mat-table-header-container-height: 38px;
+  --mat-table-header-headline-color: var(--ms-color-text-secondary);
+  --mat-table-header-headline-size: var(--ms-font-size-label);
+  --mat-table-header-headline-weight: 600;
+  --mat-table-header-headline-tracking: 0.3px;
+  --mat-table-row-item-container-height: 42px;
+  --mat-table-row-item-label-text-color: var(--ms-color-text-primary);
+  --mat-table-row-item-label-text-size: var(--ms-font-size-table);
+  --mat-table-row-item-outline-color: var(--ms-color-border-subtle);
+  --mat-table-footer-container-height: 42px;
+  --mat-table-footer-supporting-text-size: var(--ms-font-size-table);
+  --mat-table-footer-supporting-text-weight: 600;
+
+  /* Tabs: underline navigation */
+  --mat-tab-container-height: 36px;
+  --mat-tab-label-text-size: 12px;
+  --mat-tab-label-text-weight: 400;
+  --mat-tab-label-text-tracking: normal;
+  --mat-tab-inactive-label-text-color: var(--ms-color-text-secondary);
+  --mat-tab-inactive-hover-label-text-color: var(--ms-color-text-primary);
+  --mat-tab-inactive-focus-label-text-color: var(--ms-color-text-primary);
+  --mat-tab-active-label-text-color: var(--ms-color-brand-primary);
+  --mat-tab-active-hover-label-text-color: var(--ms-color-brand-primary);
+  --mat-tab-active-focus-label-text-color: var(--ms-color-brand-primary);
+  --mat-tab-active-indicator-color: var(--ms-color-brand-primary);
+  --mat-tab-active-hover-indicator-color: var(--ms-color-brand-primary);
+  --mat-tab-active-focus-indicator-color: var(--ms-color-brand-primary);
+  --mat-tab-active-indicator-height: 2px;
+  --mat-tab-divider-color: var(--ms-color-border-subtle);
+  --mat-tab-divider-height: 1px;
+
+  /* Form fields */
+  --mat-form-field-container-text-size: 13px;
+  --mat-form-field-container-height: 40px;
+  --mat-form-field-container-vertical-padding: 9px;
+  --mat-form-field-outlined-input-text-color: var(--ms-color-text-primary);
+  --mat-form-field-outlined-input-text-placeholder-color: var(--ms-color-text-secondary);
+  --mat-form-field-filled-container-color: var(--ms-color-surface-subtle);
+  --mat-form-field-filled-container-shape: var(--ms-radius-control);
+  --mat-form-field-filled-label-text-size: 13px;
+  --mat-form-field-outlined-container-shape: var(--ms-radius-md);
+  --mat-form-field-outlined-outline-color: var(--ms-color-border);
+  --mat-form-field-outlined-label-text-size: 13px;
+  --mat-form-field-outlined-hover-outline-color: var(--ms-color-text-disabled);
+  --mat-form-field-outlined-focus-outline-color: var(--ms-color-brand-primary);
+  --mat-form-field-outlined-label-text-color: var(--ms-color-text-secondary);
+  --mat-select-trigger-text-size: 13px;
+
+  /* Floating surfaces */
+  --mat-menu-container-shape: var(--ms-radius-md);
+  --mat-menu-container-color: var(--ms-color-surface);
+  --mat-menu-container-elevation-shadow: var(--ms-shadow-float);
+  --mat-menu-item-label-text-size: 13px;
+  --mat-menu-item-label-text-color: var(--ms-color-text-primary);
+  --mat-select-panel-background-color: var(--ms-color-surface);
+  --mat-dialog-container-shape: var(--ms-radius-dialog);
+  --mat-dialog-container-color: var(--ms-color-surface);
+  --mat-dialog-container-elevation-shadow: var(--ms-shadow-dialog);
+
+  /* Lists, paginator, expansion, chips */
+  --mat-list-list-item-label-text-size: var(--ms-font-size-body);
+  --mat-list-list-item-label-text-color: var(--ms-color-text-primary);
+  --mat-paginator-container-text-size: var(--ms-font-size-label);
+  --mat-paginator-container-text-color: var(--ms-color-text-secondary);
+  --mat-paginator-container-background-color: var(--ms-color-surface);
+  --mat-expansion-container-shape: var(--ms-radius-md);
+  --mat-expansion-container-elevation-shadow: none;
+  --mat-expansion-header-text-size: var(--ms-font-size-body);
+  --mat-expansion-header-text-weight: 600;
+  --mat-chip-container-shape-radius: var(--ms-radius-control);
+  --mat-chip-label-text-size: var(--ms-font-size-label);
+
+  font-family: var(--ms-font-family);
+  font-size: var(--ms-font-size-body);
+  color: var(--ms-color-text-primary);
+  background-color: var(--ms-color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Material typography classes hard-code Roboto through the M2 typography config. */
+.mat-typography,
+.mat-typography h1,
+.mat-typography h2,
+.mat-typography h3,
+.mat-typography h4,
+.mat-typography p,
+.mat-mdc-card,
+.mat-mdc-table,
+.mat-mdc-tab,
+.mat-mdc-form-field,
+.mat-mdc-select,
+.mat-mdc-option,
+.mat-mdc-menu-item,
+.mat-mdc-dialog-container,
+.mat-mdc-paginator,
+.mat-expansion-panel,
+.mat-mdc-tooltip,
+.mat-mdc-snack-bar-container,
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  font-family: var(--ms-font-family);
+}
+
+.mat-sidenav-container,
+.mat-drawer-container {
+  background-color: var(--ms-color-background);
+  color: var(--ms-color-text-primary);
+}
+
+/* Cards: elevation is reserved for floating surfaces (spec §4.4). */
+.mat-mdc-card:not(.mat-mdc-card-outlined) {
+  border: 1px solid var(--ms-color-border-subtle);
+  box-shadow: none;
+}
+
+/* Tables */
+.mat-mdc-table {
+  font-variant-numeric: tabular-nums;
+
+  .mat-mdc-header-row {
+    background-color: var(--ms-color-surface-subtle);
+  }
+
+  .mat-mdc-header-cell {
+    border-bottom-color: var(--ms-color-border-subtle);
+  }
+
+  .mat-mdc-row:nth-child(even) {
+    background-color: var(--ms-color-surface-zebra);
+  }
+
+  .mat-mdc-row:hover {
+    background-color: var(--ms-color-surface-hover);
+  }
+
+  .mat-mdc-row.select-row,
+  .mat-mdc-row.clickable {
+    cursor: pointer;
+  }
+
+  .mat-mdc-footer-row {
+    background-color: var(--ms-color-surface-subtle);
+  }
+}
+
+/* Tabs (approved design): 8px/14px labels, active label in primary at 600. */
+.mat-mdc-tab,
+.mat-mdc-tab-link {
+  min-width: 0 !important;
+  padding: 0 14px !important;
+}
+
+.mdc-tab--active .mdc-tab__text-label {
+  font-weight: 600;
+}
+
+/* Tabs: left aligned, no tinted band behind the labels. */
+.mat-mdc-tab-header {
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+.mat-mdc-tab-nav-bar.mat-primary,
+.mat-mdc-tab-group.mat-primary {
+  --mat-tab-background-color: transparent;
+  --mat-tab-foreground-color: var(--ms-color-text-primary);
+}
+
+/* Outlined fields read as white inputs, also on the grey page background. */
+.mat-mdc-form-field-appearance-outline .mat-mdc-text-field-wrapper {
+  background-color: var(--ms-color-surface);
+  border-radius: var(--ms-radius-md);
+}
+
+/* Paginator */
+.mat-mdc-paginator {
+  border-top: 1px solid var(--ms-color-border-subtle);
+}
+
+/* Expansion panels behave like panels, not raised cards. */
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  border: 1px solid var(--ms-color-border-subtle);
+}
+
+/* Dividers */
+.mat-divider {
+  border-top-color: var(--ms-color-border-subtle);
+}
+
+/* Focus: visible, consistent and never hidden (spec §10). */
+:where(a, button, [role='button'], [role='tab'], [role='menuitem'], [tabindex]):focus-visible {
+  outline: 2px solid var(--ms-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--ms-radius-sm);
+}
+
+/* Tabular figures wherever amounts are shown. */
+.ms-num,
+.amount,
+.currency,
+.r-amount {
+  font-variant-numeric: tabular-nums;
+}
+
+/* stylelint-disable selector-max-universal */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* stylelint-enable selector-max-universal */

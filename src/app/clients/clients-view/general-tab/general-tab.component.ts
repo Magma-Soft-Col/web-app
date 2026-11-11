@@ -30,7 +30,6 @@ import { NgClass } from '@angular/common';
 import { AccountNumberComponent } from '../../../shared/account-number/account-number.component';
 import { LongTextComponent } from '../../../shared/long-text/long-text.component';
 import { MatTooltip } from '@angular/material/tooltip';
-import { StatusLookupPipe } from '../../../pipes/status-lookup.pipe';
 import { AccountsFilterPipe } from '../../../pipes/accounts-filter.pipe';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { FormatNumberPipe } from '../../../pipes/format-number.pipe';
@@ -66,7 +65,6 @@ import { LoanProductService } from 'app/products/loan-products/services/loan-pro
     AccountNumberComponent,
     LongTextComponent,
     MatTooltip,
-    StatusLookupPipe,
     AccountsFilterPipe,
     DateFormatPipe,
     FormatNumberPipe,
@@ -357,6 +355,22 @@ export class GeneralTabComponent implements OnDestroy {
     if (loan.status?.active) return 'active';
     if (loan.status?.closed) return 'closed';
     return 'pending';
+  }
+
+  /** Badge modifier (pen status colours) for a severity from loanSeverity/accountSeverity. */
+  badgeClass(severity: string): string {
+    switch (severity) {
+      case 'active':
+        return 'ms-badge--success';
+      case 'pending':
+        return 'ms-badge--warning';
+      case 'arrears':
+        return 'ms-badge--danger';
+      case 'overpaid':
+        return 'ms-badge--info';
+      default:
+        return '';
+    }
   }
 
   /**

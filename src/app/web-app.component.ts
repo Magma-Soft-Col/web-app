@@ -8,7 +8,15 @@
 
 /* eslint-disable @angular-eslint/prefer-inject */
 /** Angular Imports */
-import { ChangeDetectionStrategy, Component, OnInit, HostListener, HostBinding, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  HostListener,
+  HostBinding,
+  OnDestroy,
+  inject
+} from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
@@ -41,6 +49,9 @@ import { Dates } from './core/utils/dates';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { I18nService } from './core/i18n/i18n.service';
 import { ThemingService } from './shared/theme-toggle/theming.service';
+import { UiThemeService } from './shared/ui-theme/ui-theme.service';
+import { hideSplash } from './core/splash/splash';
+import { BrandAssetsService } from './shared/ui-theme/brand-assets.service';
 
 /** Initialize Logger */
 const log = new Logger('MifosX');
@@ -138,6 +149,9 @@ export class WebAppComponent implements OnInit, OnDestroy {
     private documentationLinks: DocumentationLinksService
   ) {}
 
+  private uiThemeService = inject(UiThemeService);
+  private brandAssets = inject(BrandAssetsService);
+
   @HostBinding('class') public cssClass: string;
 
   /**
@@ -158,6 +172,9 @@ export class WebAppComponent implements OnInit, OnDestroy {
     });
     this.themingService.setInitialDarkMode();
     this.themingService.setDarkMode(!!this.settingsService.themeDarkEnabled);
+    // Predesigned palette picked by the user (falls back to the dark-mode flag above).
+    this.uiThemeService.restore();
+    this.brandAssets.restore();
 
     // Setup logger
     if (environment.production) {
@@ -177,6 +194,8 @@ export class WebAppComponent implements OnInit, OnDestroy {
 
     // Change page title on navigation or language change, based on route data
     const onNavigationEnd = this.router.events.pipe(filter((event) => event instanceof NavigationEnd));
+    // The launch screen takes off once the first page has rendered.
+    onNavigationEnd.pipe(take(1)).subscribe(() => hideSplash());
     merge(this.translateService.onLangChange, onNavigationEnd)
       .pipe(
         map(() => {
@@ -264,9 +283,10 @@ export class WebAppComponent implements OnInit, OnDestroy {
     // carries no credentials, so the tenant header is the only thing saying
     // whose branding to return. Re-run when the session changes, since signing
     // in can switch tenant; it is a no-op for a tenant already read.
-    this.authenticationService.isAuthenticated$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.themeStorageService.loadTenantTheme());
+    this.authenticationService.isAuthenticated$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.themeStorageService.loadTenantTheme();
+      this.brandAssets.restore();
+    });
 
     // Subscribe to session timeout If IdleTimeout is higher than 0 (zero)
     if (environment.session.timeout.idleTimeout > 0) {

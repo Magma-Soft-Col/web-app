@@ -32,7 +32,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -59,7 +60,7 @@ import { TreeControlService } from 'app/shared/common-logic/tree-control.service
 import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { DatePipe } from '@angular/common';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { ExternalIdentifierComponent } from '../../shared/external-identifier/external-identifier.component';
@@ -98,12 +99,12 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatIconButton,
     MatNestedTreeNode,
     MatTreeNodeOutlet,
-    MatCardTitle,
     MatTabGroup,
     MatTab,
     ExternalIdentifierComponent,
     DatePipe,
-    DateFormatPipe
+    DateFormatPipe,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -31,7 +31,6 @@ import {
 } from '@angular/material/table';
 import { CurrencyPipe } from '@angular/common';
 import { ExternalIdentifierComponent } from '../../../shared/external-identifier/external-identifier.component';
-import { MatDivider } from '@angular/material/divider';
 import { MatStepperPrevious } from '@angular/material/stepper';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { FindPipe } from '../../../pipes/find.pipe';
@@ -57,7 +56,6 @@ import { OptionData, StringEnumOptionData } from 'app/shared/models/option-data.
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     ExternalIdentifierComponent,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

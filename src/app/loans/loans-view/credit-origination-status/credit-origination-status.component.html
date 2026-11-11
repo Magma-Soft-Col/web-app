@@ -7,24 +7,24 @@
 -->
 
 <section class="credit-origination-status" aria-live="polite">
-  <h2>{{ 'creditOrigination.title' | translate }}</h2>
+  <h2 class="ms-section-title">{{ 'creditOrigination.title' | translate }}</h2>
 
   @if (isLoading) {
-    <div class="state-panel">
+    <div class="ms-empty state-panel">
       <mat-spinner diameter="40"></mat-spinner>
       <p>{{ 'creditOrigination.loading' | translate }}</p>
     </div>
   } @else if (isUnavailable) {
     <mat-card class="state-card">
-      <mat-card-content>
-        <mat-icon>info_outline</mat-icon>
+      <mat-card-content class="ms-empty">
+        <mat-icon aria-hidden="true">info_outline</mat-icon>
         <p>{{ 'creditOrigination.empty' | translate }}</p>
       </mat-card-content>
     </mat-card>
   } @else if (error) {
     <mat-card class="state-card error-state">
-      <mat-card-content>
-        <mat-icon color="warn">error_outline</mat-icon>
+      <mat-card-content class="ms-empty">
+        <mat-icon class="error-icon" aria-hidden="true">error_outline</mat-icon>
         @switch (error) {
           @case ('unauthorized') {
             <p>{{ 'creditOrigination.errors.unauthorized' | translate }}</p>
@@ -46,8 +46,8 @@
     </mat-card>
   } @else if (!board?.stages?.length) {
     <mat-card class="state-card">
-      <mat-card-content>
-        <mat-icon>info_outline</mat-icon>
+      <mat-card-content class="ms-empty">
+        <mat-icon aria-hidden="true">info_outline</mat-icon>
         <p>{{ 'creditOrigination.empty' | translate }}</p>
       </mat-card-content>
     </mat-card>
@@ -67,7 +67,7 @@
 
           <mat-card class="stage-card">
             <mat-card-content>
-              <h3>
+              <h3 class="stage-title">
                 @switch (stage.code) {
                   @case ('ONBOARDING') {
                     {{ 'creditOrigination.stages.ONBOARDING' | translate }}
@@ -102,7 +102,7 @@
                 }
               </h3>
 
-              <mat-chip [ngClass]="statusClass(stage.status)">
+              <span class="ms-badge stage-status" [ngClass]="statusClass(stage.status)">
                 @switch (stage.status) {
                   @case ('COMPLETED') {
                     {{ 'creditOrigination.statuses.COMPLETED' | translate }}
@@ -132,7 +132,7 @@
                     {{ 'creditOrigination.statuses.WRITTEN_OFF' | translate }}
                   }
                 }
-              </mat-chip>
+              </span>
 
               @if (board?.currentStage === stage.code) {
                 <p class="current-indicator">
@@ -141,59 +141,59 @@
                 </p>
               }
 
-              <dl>
+              <dl class="stage-facts">
                 @if (stage.completedOn) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.completedOn' | translate }}</dt>
-                    <dd>{{ stage.completedOn | date: 'medium' }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.completedOn' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.completedOn | date: 'medium' }}</dd>
                   </div>
                 }
                 @if (stage.details?.source) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.source' | translate }}</dt>
-                    <dd>{{ stage.details?.source }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.source' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.source }}</dd>
                   </div>
                 }
                 @if (stage.details?.sourceStatus) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.sourceStatus' | translate }}</dt>
-                    <dd>{{ stage.details?.sourceStatus }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.sourceStatus' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.sourceStatus }}</dd>
                   </div>
                 }
                 @if (stage.details?.actorName || stage.details?.actorId) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.actor' | translate }}</dt>
-                    <dd>{{ stage.details?.actorName || stage.details?.actorId }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.actor' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.actorName || stage.details?.actorId }}</dd>
                   </div>
                 }
                 @if (stage.details?.sourceReference) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.sourceReference' | translate }}</dt>
-                    <dd>{{ stage.details?.sourceReference }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.sourceReference' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.sourceReference }}</dd>
                   </div>
                 }
                 @if (stage.details?.transactionId) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.transactionId' | translate }}</dt>
-                    <dd>{{ stage.details?.transactionId }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.transactionId' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.transactionId }}</dd>
                   </div>
                 }
                 @if (stage.details?.amount !== null && stage.details?.amount !== undefined) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.amount' | translate }}</dt>
-                    <dd>{{ stage.details?.amount }} {{ stage.details?.currencyCode }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.amount' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.amount }} {{ stage.details?.currencyCode }}</dd>
                   </div>
                 }
                 @if (stage.details?.loanStatus) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.loanStatus' | translate }}</dt>
-                    <dd>{{ stage.details?.loanStatus }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.loanStatus' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.loanStatus }}</dd>
                   </div>
                 }
                 @if (stage.details?.reason) {
                   <div>
-                    <dt>{{ 'creditOrigination.fields.reason' | translate }}</dt>
-                    <dd>{{ stage.details?.reason }}</dd>
+                    <dt class="ms-label">{{ 'creditOrigination.fields.reason' | translate }}</dt>
+                    <dd class="ms-value">{{ stage.details?.reason }}</dd>
                   </div>
                 }
               </dl>

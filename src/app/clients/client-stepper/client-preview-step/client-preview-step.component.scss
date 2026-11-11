@@ -6,43 +6,49 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-h2,
-h3,
-h4 {
-  margin: 0;
+/* Preview (pen detail rows): secondary label, primary value. */
+.ms-section-title {
+  margin: var(--ms-space-5) 0 var(--ms-space-2);
+}
+
+div.flex-fill {
+  display: flex;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  font-size: 13px;
+}
+
+.flex-40 {
+  color: var(--ms-color-text-secondary);
   font-weight: 500;
 }
 
-span {
-  margin: 0.5em 0;
+.flex-60 {
+  color: var(--ms-color-text-primary);
+  overflow-wrap: anywhere;
 }
 
 mat-divider {
-  margin: 0 0 0.5em;
+  margin: 0 0 var(--ms-space-2);
 }
 
-.margin-t {
-  margin-top: 2em;
-}
-
-.family-member {
-  h3 {
-    margin: 1% auto;
-  }
-
-  p {
-    line-height: 30px;
-    margin-left: 2%;
-  }
-}
-
+.family-member,
 .address {
-  h3 {
-    margin: 1% auto;
-  }
-
   p {
-    line-height: 30px;
-    margin-left: 2%;
+    margin: var(--ms-space-2) 0 0;
+    font-size: 13px;
+    line-height: 24px;
   }
+}
+
+/* Step navigation (pen form pattern): secondary + primary, right aligned. */
+.step-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+  margin-top: var(--ms-space-6);
+  padding-top: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }

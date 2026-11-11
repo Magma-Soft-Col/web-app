@@ -7,7 +7,13 @@
  */
 
 table {
-  .select-row {
-    cursor: pointer;
-  }
+  width: 100%;
+}
+
+.select-row {
+  cursor: pointer;
+}
+
+.section-heading {
+  margin-bottom: var(--ms-space-4);
 }

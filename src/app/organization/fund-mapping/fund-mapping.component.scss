@@ -7,17 +7,11 @@
  */
 
 .container {
-  max-width: 73rem;
-
-  .margin-v {
-    margin: 1em 0;
-  }
-
   .margin-b {
-    margin: 0 0 1em;
+    margin: 0 0 var(--ms-space-4);
   }
+}
 
-  .margin-t {
-    margin-top: 1em;
-  }
+table {
+  width: 100%;
 }

@@ -11,7 +11,7 @@
     position: relative;
 
     .active {
-      padding: 0 0 17.5px;
+      padding: 0 0 var(--ms-space-4);
       position: absolute;
       bottom: 0;
       right: 0;
@@ -20,5 +20,5 @@
 }
 
 .options-wrapper {
-  padding: 18px 0 0;
+  padding: var(--ms-space-4) 0 0;
 }

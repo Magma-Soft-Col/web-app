@@ -6,9 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
-}
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
 
 .installment-option-title {
   font-weight: 500;
@@ -18,9 +18,9 @@
 .installment-option-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  font-size: 0.75rem;
-  color: rgb(0 0 0 / 70%);
+  gap: var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
   line-height: 1.5;
 }
 
@@ -31,44 +31,32 @@
 
 .trigger-installment-details {
   display: inline;
-  font-size: 0.75rem;
-  color: rgb(0 0 0 / 70%);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }
 
-:host-context(.dark-theme) {
-  .trigger-installment-details {
-    color: rgb(255 255 255 / 70%);
-  }
-
-  .installment-option-details {
-    color: rgb(255 255 255 / 70%);
-  }
-
-  .penalty-item-container {
-    background-color: #3a3a3a;
-    color: rgb(255 255 255 / 87%);
-    border-color: #4a4a4a;
-  }
-}
-
+// One overdue penalty that can be waived: checkbox, name, due date and amount.
 .penalty-item-container {
   width: 100%;
   max-width: 100%;
   display: grid;
   grid-template-columns: auto minmax(80px, 110px) minmax(140px, 100%) minmax(130px, 170px) minmax(90px, 120px);
   align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  padding: 12px 16px;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  gap: var(--ms-space-2);
+  margin-top: var(--ms-space-2);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  background-color: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
   box-sizing: border-box;
   overflow: hidden;
+  font-size: 13px;
+  color: var(--ms-color-text-primary);
 }
 
 .penalty-label {
   min-width: 80px;
+  font-weight: 500;
 }
 
 .penalty-name {
@@ -76,7 +64,7 @@
 }
 
 .penalty-date {
-  color: rgb(0 0 0 / 70%);
+  color: var(--ms-color-text-secondary);
   white-space: nowrap;
 }
 

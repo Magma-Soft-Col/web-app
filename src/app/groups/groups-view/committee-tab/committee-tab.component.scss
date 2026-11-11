@@ -6,26 +6,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+/* Group committee tab: section header with action and roles table in a panel. */
+.group-committee {
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
+}
 
-  h3 {
-    margin: 1% auto;
-  }
+.group-committee__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
 
-  .action-button {
-    margin-left: auto;
-  }
+.group-committee__table {
+  width: 100%;
+}
 
-  table {
-    width: 100%;
+.group-committee__name {
+  font-weight: 500;
+}
 
-    .account-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
-  }
+.group-committee__action {
+  color: var(--ms-color-danger);
 }

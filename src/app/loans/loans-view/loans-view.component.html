@@ -7,242 +7,217 @@
 -->
 
 @if (loanDetailsData && buttonConfig) {
-  <mat-card class="account-card">
-    <mifosx-account-header
-      [statusCode]="iconLoanStatusColor()"
-      [statusTooltip]="'labels.status.' + loanDetailsData.status.value | translate"
-    >
-      <!-- Loan account icon -->
-      <div accountImage class="loan-icon-frame">
-        <mifosx-svg-icon
-          [iconClass]=""
-          iconFile="account_placeholder"
-          iconName="LOAN_ACCOUNT"
-          iconWidth="210"
-          matTooltip="{{ 'tooltips.Loan Account' | translate }}"
-        >
-        </mifosx-svg-icon>
-      </div>
-
-      <!-- Account number as title -->
-      <ng-container ngProjectAs="[accountTitle]">
-        <b>{{ 'labels.inputs.Account No' | translate }}:</b>
-        <mifosx-account-number [accountNo]="loanDetailsData.accountNo" display="left"></mifosx-account-number>
-        <span class="account-status-pill" [ngClass]="iconLoanStatusColor() | statusLookup">
-          {{ 'labels.status.' + loanDetailsData.status.value | translate }}
-        </span>
-        @if (loanProductService.isWorkingCapital && loanDetailsData.fraud) {
-          <span class="fraud-badge">{{ 'labels.status.Fraud' | translate }}</span>
-        }
-      </ng-container>
-
-      <!-- Actions menu trigger -->
-      @if (buttonConfig.singleButtons.length > 0) {
-        <button
-          accountMenu
-          mat-icon-button
-          [matMenuTriggerFor]="accountMenu"
-          [attr.aria-label]="'labels.text.Loan Account Actions' | translate"
-          yPosition="below"
-        >
-          <mat-icon matListIcon class="actions-menu">
-            <fa-icon icon="bars" size="sm"></fa-icon>
-          </mat-icon>
-        </button>
-      }
-
-      <!-- Metadata tables -->
-      <div accountMetadata>
-        <div class="layout-row responsive-column">
-          <div class="flex-60">
-            <div class="loan-information-table">
-              <table class="account-overview">
-                <tbody>
-                  <tr>
-                    <td>{{ 'labels.inputs.Product Name' | translate }}:</td>
-                    <td>
-                      <mifosx-long-text [chars]="50" [textValue]="loanDetailsData.loanProductName"></mifosx-long-text>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{{ 'labels.text.' + entityType | translate }} {{ 'labels.inputs.name' | translate }}:</td>
-                    <td>
-                      {{ loanDetailsData.clientName || loanDetailsData.group?.name }}
-                      ({{ loanDetailsData.clientAccountNo || loanDetailsData.group?.accountNo }})
-                    </td>
-                  </tr>
-                  @if (loanDetailsData.officeName) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Office' | translate }}:</td>
-                      <td>{{ loanDetailsData.officeName }}</td>
-                    </tr>
-                  }
-                  @if (loanDetailsData.externalId) {
-                    <tr>
-                      <td>{{ 'labels.inputs.External Id' | translate }}:</td>
-                      <td>
-                        <mifosx-external-identifier
-                          [externalId]="loanDetailsData.externalId"
-                          [completed]="true"
-                        ></mifosx-external-identifier>
-                      </td>
-                    </tr>
-                  }
-                  @if (loanProductService.isWorkingCapital && loanDetailsData.chargedOff) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Charged Off On' | translate }}:</td>
-                      <td>
-                        <span class="charged-off-badge">{{ 'labels.status.Charged Off' | translate }}</span>
-                        <span class="m-l-10">{{ loanDetailsData.chargedOffOnDate | dateFormat }}</span>
-                        @if (loanDetailsData.chargeOffReason?.name) {
-                          <span class="m-l-10">· {{ loanDetailsData.chargeOffReason.name }}</span>
-                        }
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-            @if (loanProductService.isLoanProduct && loanDisplayArrearsDelinquency !== 1) {
-              <div>
-                <table class="account-overview">
-                  <tbody>
-                    @if (loanDetailsData.delinquencyRange) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Delinquency Classification' | translate }} :</td>
-                        <td>
-                          <span class="m-r-3"><i [ngClass]="loanDelinquencyClassificationStyle"></i></span>
-                          {{ loanDetailsData?.delinquencyRange.classification }}
-                        </td>
-                      </tr>
-                    }
-                    @if (loanDetailsData.delinquent && loanDetailsData.delinquent.pastDueDays > 0) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Past Due Days' | translate }} :</td>
-                        <td>{{ loanDetailsData?.delinquent.pastDueDays | formatNumber }}</td>
-                      </tr>
-                    }
-                    @if (
-                      loanDetailsData.delinquent &&
-                      loanDetailsData.delinquent.delinquentDays > 0 &&
-                      loanDetailsData.delinquent.pastDueDays !== loanDetailsData.delinquent.delinquentDays
-                    ) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Delinquent Days' | translate }} :</td>
-                        <td>{{ loanDetailsData?.delinquent.delinquentDays | formatNumber }}</td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>
-              </div>
-            }
-            @if (
-              loanProductService.isWorkingCapital &&
-              loanDetailsData?.delinquent &&
-              (loanDetailsData.delinquent.pastDueDays > 0 || loanDetailsData.delinquent.delinquentDays > 0)
-            ) {
-              <div>
-                <table class="account-overview">
-                  <tbody>
-                    <tr>
-                      <td>{{ 'labels.inputs.Delinquency Classification' | translate }} :</td>
-                      <td>
-                        <span class="m-r-3"><i [ngClass]="loanDelinquencyClassificationStyle"></i></span>
-                        {{ loanDetailsData?.delinquencyBucket?.name }}
-                      </td>
-                    </tr>
-                    @if (loanDetailsData.delinquent.pastDueDays > 0) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Past Due Days' | translate }} :</td>
-                        <td>{{ loanDetailsData?.delinquent.pastDueDays | formatNumber }}</td>
-                      </tr>
-                    }
-                    @if (loanDetailsData.delinquent.delinquentDays > 0) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Delinquent Days' | translate }} :</td>
-                        <td>{{ loanDetailsData?.delinquent.delinquentDays | formatNumber }}</td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>
-              </div>
+  <div class="ms-page loan-view">
+    <!-- Loan header: identification, status and key balances (spec.md §6.3) -->
+    <section class="ms-entity-header" [attr.aria-label]="'labels.inputs.Account No' | translate">
+      <div class="ms-entity-header__identity">
+        <div class="ms-entity-header__block">
+          <div class="ms-entity-header__row">
+            <span class="ms-sr-only">{{ 'labels.inputs.Account No' | translate }}:</span>
+            <span class="ms-entity-header__id">
+              <mifosx-account-number [accountNo]="loanDetailsData.accountNo" display="left"></mifosx-account-number>
+            </span>
+            <span class="ms-badge" [ngClass]="statusBadgeClass()">
+              {{ 'labels.status.' + loanDetailsData.status.value | translate }}
+            </span>
+            @if (loanProductService.isWorkingCapital && loanDetailsData.fraud) {
+              <span class="ms-badge ms-badge--danger">{{ 'labels.status.Fraud' | translate }}</span>
             }
           </div>
-
-          <div class="loans-overview mat-typography flex-30">
-            <h3>{{ 'labels.heading.Account Overview' | translate }}</h3>
-            <table class="account-overview">
-              <tbody>
-                @if (loanProductService.isLoanProduct && loanDetailsData.summary) {
-                  <tr>
-                    <td>{{ 'labels.inputs.Current Balance' | translate }}</td>
-                    <td class="r-amount">
-                      {{
-                        loanDetailsData.summary.totalOutstanding | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                      }}
-                    </td>
-                  </tr>
-                  @if (loanDisplayArrearsDelinquency < 2) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Arrears By' | translate }}</td>
-                      @if (loanDetailsData.summary.totalOverdue >= 0) {
-                        <td class="r-amount">
-                          {{
-                            loanDetailsData.summary.totalOverdue | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                          }}
-                        </td>
-                      }
-                      @if (!(loanDetailsData.summary.totalOverdue >= 0)) {
-                        <td>
-                          {{ 'labels.inputs.Not Provided' | translate }}
-                        </td>
-                      }
-                    </tr>
-                  }
-                  @if (loanDetailsData.inArrears) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Arrears Since' | translate }}</td>
-                      <td>{{ loanDetailsData.summary.overdueSinceDate | dateFormat }}</td>
-                    </tr>
-                  }
-                  @if (loanDetailsData.totalOverpaid && loanDetailsData.totalOverpaid > 0) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Overpaid By' | translate }}</td>
-                      <td class="r-amount">
-                        {{ loanDetailsData.totalOverpaid | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
-                      </td>
-                    </tr>
-                  }
-                }
-
-                @if (loanProductService.isWorkingCapital) {
-                  <tr>
-                    <td>{{ 'labels.inputs.Current Balance' | translate }}</td>
-                    <td class="r-amount">
-                      {{
-                        loanDetailsData.balance.principalOutstanding
-                          | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                      }}
-                    </td>
-                  </tr>
-                  @if (loanDetailsData.balance?.overpaymentAmount > 0) {
-                    <tr>
-                      <td>{{ 'labels.inputs.Overpaid By' | translate }}</td>
-                      <td class="r-amount">
-                        {{
-                          loanDetailsData.balance.overpaymentAmount
-                            | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                        }}
-                      </td>
-                    </tr>
-                  }
-                }
-              </tbody>
-            </table>
-          </div>
+          <span class="ms-label loan-view__product">
+            <mifosx-long-text [chars]="50" [textValue]="loanDetailsData.loanProductName"></mifosx-long-text>
+          </span>
         </div>
+
+        <span class="ms-entity-header__divider" aria-hidden="true"></span>
+
+        <div class="ms-entity-header__block">
+          <span class="ms-label">{{ 'labels.text.' + entityType | translate }}</span>
+          <span class="ms-value">
+            {{ loanDetailsData.clientName || loanDetailsData.group?.name }}
+            <span class="loan-view__muted"
+              >({{ loanDetailsData.clientAccountNo || loanDetailsData.group?.accountNo }})</span
+            >
+          </span>
+        </div>
+
+        @if (loanDetailsData.officeName) {
+          <span class="ms-entity-header__divider" aria-hidden="true"></span>
+          <div class="ms-entity-header__block">
+            <span class="ms-label">{{ 'labels.inputs.Office' | translate }}</span>
+            <span class="ms-value">{{ loanDetailsData.officeName }}</span>
+          </div>
+        }
+
+        @if (loanDetailsData.externalId) {
+          <span class="ms-entity-header__divider" aria-hidden="true"></span>
+          <div class="ms-entity-header__block">
+            <span class="ms-label">{{ 'labels.inputs.External Id' | translate }}</span>
+            <span class="ms-value">
+              <mifosx-external-identifier
+                [externalId]="loanDetailsData.externalId"
+                [completed]="true"
+              ></mifosx-external-identifier>
+            </span>
+          </div>
+        }
       </div>
-    </mifosx-account-header>
+
+      <div class="loan-view__aside">
+        <dl class="ms-entity-header__stats loan-view__stats">
+          @if (loanProductService.isLoanProduct && loanDetailsData.summary) {
+            <div class="ms-stat">
+              <dt class="ms-label">{{ 'labels.inputs.Current Balance' | translate }}</dt>
+              <dd class="ms-amount">
+                {{ loanDetailsData.summary.totalOutstanding | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+              </dd>
+            </div>
+            @if (loanDisplayArrearsDelinquency < 2) {
+              <div class="ms-stat">
+                <dt class="ms-label">{{ 'labels.inputs.Arrears By' | translate }}</dt>
+                @if (loanDetailsData.summary.totalOverdue >= 0) {
+                  <dd
+                    class="ms-amount"
+                    [class.loan-view__amount--danger]="loanDetailsData.summary.totalOverdue > 0"
+                    [class.loan-view__amount--success]="loanDetailsData.summary.totalOverdue === 0"
+                  >
+                    {{ loanDetailsData.summary.totalOverdue | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+                  </dd>
+                } @else {
+                  <dd class="ms-value">{{ 'labels.inputs.Not Provided' | translate }}</dd>
+                }
+              </div>
+            }
+            @if (loanDetailsData.totalOverpaid && loanDetailsData.totalOverpaid > 0) {
+              <div class="ms-stat">
+                <dt class="ms-label">{{ 'labels.inputs.Overpaid By' | translate }}</dt>
+                <dd class="ms-amount">
+                  {{ loanDetailsData.totalOverpaid | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+                </dd>
+              </div>
+            }
+          }
+
+          @if (loanProductService.isWorkingCapital) {
+            <div class="ms-stat">
+              <dt class="ms-label">{{ 'labels.inputs.Current Balance' | translate }}</dt>
+              <dd class="ms-amount">
+                {{ loanDetailsData.balance.principalOutstanding | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+              </dd>
+            </div>
+            @if (loanDetailsData.balance?.overpaymentAmount > 0) {
+              <div class="ms-stat">
+                <dt class="ms-label">{{ 'labels.inputs.Overpaid By' | translate }}</dt>
+                <dd class="ms-amount">
+                  {{ loanDetailsData.balance.overpaymentAmount | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+                </dd>
+              </div>
+            }
+          }
+        </dl>
+
+        @if (buttonConfig.singleButtons.length > 0) {
+          <button
+            mat-stroked-button
+            type="button"
+            class="loan-view__actions"
+            [matMenuTriggerFor]="accountMenu"
+            [attr.aria-label]="'labels.text.Loan Account Actions' | translate"
+          >
+            <fa-icon icon="bars" size="sm"></fa-icon>
+            <span class="m-l-5">{{ 'labels.menus.More' | translate }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- Secondary facts, shown only when they apply: delinquency, arrears date, charge-off -->
+    @if (
+      (loanProductService.isLoanProduct &&
+        loanDisplayArrearsDelinquency !== 1 &&
+        (loanDetailsData.delinquencyRange ||
+          loanDetailsData.delinquent?.pastDueDays > 0 ||
+          loanDetailsData.delinquent?.delinquentDays > 0)) ||
+      (loanProductService.isLoanProduct && loanDetailsData.summary && loanDetailsData.inArrears) ||
+      (loanProductService.isWorkingCapital &&
+        (loanDetailsData.chargedOff ||
+          loanDetailsData.delinquent?.pastDueDays > 0 ||
+          loanDetailsData.delinquent?.delinquentDays > 0))
+    ) {
+      <dl class="loan-view__facts">
+        @if (loanProductService.isLoanProduct && loanDisplayArrearsDelinquency !== 1) {
+          @if (loanDetailsData.delinquencyRange) {
+            <div class="loan-view__fact">
+              <dt>{{ 'labels.inputs.Delinquency Classification' | translate }}</dt>
+              <dd>
+                <i class="m-r-3" [ngClass]="loanDelinquencyClassificationStyle" aria-hidden="true"></i>
+                {{ loanDetailsData?.delinquencyRange.classification }}
+              </dd>
+            </div>
+          }
+          @if (loanDetailsData.delinquent && loanDetailsData.delinquent.pastDueDays > 0) {
+            <div class="loan-view__fact">
+              <dt>{{ 'labels.inputs.Past Due Days' | translate }}</dt>
+              <dd>{{ loanDetailsData?.delinquent.pastDueDays | formatNumber }}</dd>
+            </div>
+          }
+          @if (
+            loanDetailsData.delinquent &&
+            loanDetailsData.delinquent.delinquentDays > 0 &&
+            loanDetailsData.delinquent.pastDueDays !== loanDetailsData.delinquent.delinquentDays
+          ) {
+            <div class="loan-view__fact">
+              <dt>{{ 'labels.inputs.Delinquent Days' | translate }}</dt>
+              <dd>{{ loanDetailsData?.delinquent.delinquentDays | formatNumber }}</dd>
+            </div>
+          }
+        }
+        @if (loanProductService.isLoanProduct && loanDetailsData.summary && loanDetailsData.inArrears) {
+          <div class="loan-view__fact">
+            <dt>{{ 'labels.inputs.Arrears Since' | translate }}</dt>
+            <dd>{{ loanDetailsData.summary.overdueSinceDate | dateFormat }}</dd>
+          </div>
+        }
+        @if (loanProductService.isWorkingCapital) {
+          @if (loanDetailsData.chargedOff) {
+            <div class="loan-view__fact">
+              <dt>{{ 'labels.inputs.Charged Off On' | translate }}</dt>
+              <dd>
+                <span class="ms-badge ms-badge--danger">{{ 'labels.status.Charged Off' | translate }}</span>
+                <span class="m-l-10">{{ loanDetailsData.chargedOffOnDate | dateFormat }}</span>
+                @if (loanDetailsData.chargeOffReason?.name) {
+                  <span class="m-l-10">· {{ loanDetailsData.chargeOffReason.name }}</span>
+                }
+              </dd>
+            </div>
+          }
+          @if (
+            loanDetailsData?.delinquent &&
+            (loanDetailsData.delinquent.pastDueDays > 0 || loanDetailsData.delinquent.delinquentDays > 0)
+          ) {
+            <div class="loan-view__fact">
+              <dt>{{ 'labels.inputs.Delinquency Classification' | translate }}</dt>
+              <dd>
+                <i class="m-r-3" [ngClass]="loanDelinquencyClassificationStyle" aria-hidden="true"></i>
+                {{ loanDetailsData?.delinquencyBucket?.name }}
+              </dd>
+            </div>
+            @if (loanDetailsData.delinquent.pastDueDays > 0) {
+              <div class="loan-view__fact">
+                <dt>{{ 'labels.inputs.Past Due Days' | translate }}</dt>
+                <dd>{{ loanDetailsData?.delinquent.pastDueDays | formatNumber }}</dd>
+              </div>
+            }
+            @if (loanDetailsData.delinquent.delinquentDays > 0) {
+              <div class="loan-view__fact">
+                <dt>{{ 'labels.inputs.Delinquent Days' | translate }}</dt>
+                <dd>{{ loanDetailsData?.delinquent.delinquentDays | formatNumber }}</dd>
+              </div>
+            }
+          }
+        }
+      </dl>
+    }
 
     @if (isWorkingCapitalWrittenOff) {
       <div class="written-off-banner">
@@ -312,7 +287,7 @@
       }
     </mat-menu>
 
-    <mat-card-content>
+    <div class="loan-view__tabs">
       <nav mat-tab-nav-bar class="navigation-tabs" [tabPanel]="tabPanel">
         <a
           mat-tab-link
@@ -723,6 +698,6 @@
           <router-outlet></router-outlet>
         </div>
       </mat-tab-nav-panel>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 }

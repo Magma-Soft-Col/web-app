@@ -6,8 +6,8 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="details-card">
+<div class="tab-container">
+  <div class="ms-panel details-card">
     <!-- Lifecycle stepper -->
     <div class="stepper">
       @for (step of timelineSteps; track step.label) {
@@ -29,7 +29,7 @@
     <!-- Terms -->
     <div class="section">
       <div class="section-head">
-        <h3 class="section-title">{{ 'labels.heading.Terms' | translate }}</h3>
+        <h3 class="ms-section-title section-title">{{ 'labels.heading.Terms' | translate }}</h3>
       </div>
       <div class="fact-grid">
         @if (loanDetails.transactionProcessingStrategyName) {
@@ -172,7 +172,7 @@
     @if (loanProductService.isLoanProduct) {
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.heading.Interest' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.heading.Interest' | translate }}</h3>
         </div>
         <div class="fact-grid">
           <div class="fact span-2">
@@ -298,7 +298,7 @@
     @if (loanProductService.isWorkingCapital && hasDiscountSection()) {
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.inputs.Discount Fee' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.inputs.Discount Fee' | translate }}</h3>
         </div>
         <div class="fact-grid">
           @if (has(loanDetails.proposedDiscountFee)) {
@@ -327,7 +327,7 @@
     @if (showDelinquencySection()) {
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.heading.Delinquency & Breach' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.heading.Delinquency & Breach' | translate }}</h3>
         </div>
         <div class="fact-grid">
           @if (loanProductService.isWorkingCapital) {
@@ -389,7 +389,7 @@
     <!-- Settings -->
     <div class="section">
       <div class="section-head">
-        <h3 class="section-title">{{ 'labels.heading.Settings' | translate }}</h3>
+        <h3 class="ms-section-title section-title">{{ 'labels.heading.Settings' | translate }}</h3>
       </div>
       <div class="chip-row">
         @if (loanProductService.isLoanProduct) {

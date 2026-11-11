@@ -54,14 +54,14 @@
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 0;
-  border-bottom: 1px solid var(--md-sys-color-outline-variant, #e0e0e0);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
 
   &:last-child {
     border-bottom: none;
   }
 
   &.highlight {
-    background-color: var(--md-sys-color-secondary-container, #e8f5e9);
+    background-color: var(--ms-color-success-bg);
     padding: 1rem;
     margin: 0.5rem -1rem;
     border-radius: 4px;
@@ -73,13 +73,13 @@
 }
 
 .detail-value {
-  color: var(--md-sys-color-on-surface, #333);
+  color: var(--ms-color-text-primary);
   text-align: right;
 
   &.amount {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--md-sys-color-tertiary, #2e7d32);
+    color: var(--ms-color-success);
   }
 }
 
@@ -97,20 +97,20 @@
 }
 
 .success-icon {
-  color: var(--md-sys-color-tertiary, #4caf50);
+  color: var(--ms-color-success);
   margin-bottom: 1rem;
 }
 
 .success-title {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--md-sys-color-on-surface, #333);
+  color: var(--ms-color-text-primary);
   margin: 0;
 }
 
 .transaction-details {
-  background-color: var(--md-sys-color-surface, #fff);
-  border: 1px solid var(--md-sys-color-outline-variant, #e0e0e0);
+  background-color: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
   border-radius: 4px;
   padding: 1.5rem;
   margin: 0 auto 2rem;

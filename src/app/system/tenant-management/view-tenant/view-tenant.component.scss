@@ -6,7 +6,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+.section-heading {
+  margin-bottom: var(--ms-space-3);
+}
+
+.detail-list .ms-label {
+  flex: 0 0 40%;
+}
+
 .connection-password-note {
-  margin-top: 16px;
-  color: var(--md-sys-color-on-surface-variant, #44474e);
+  margin: var(--ms-space-4) 0 0;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

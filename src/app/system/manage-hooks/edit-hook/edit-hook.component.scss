@@ -6,42 +6,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@media (width >= 992px) {
-  .is-active-wrapper {
-    position: relative;
+.is-active-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+}
 
-    .is-active {
-      padding: 0 0 17.5px;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-  }
+.section-toolbar {
+  margin: var(--ms-space-4) 0 var(--ms-space-3);
+}
+
+.required-mark {
+  color: var(--ms-color-danger);
+}
+
+.error-message {
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-label);
 }
 
 table {
   width: 100%;
-}
-
-.AddEventButton {
-  margin-bottom: 10px;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
-  padding: 5px;
-  background-color: #ffe6e6;
-  border: 1px solid red;
-  border-radius: 5px;
-}
-
-.error-snackbar {
-  background-color: #f44336;
-  color: white;
-}
-
-.error-snackbar .mat-simple-snackbar-action {
-  color: white;
 }

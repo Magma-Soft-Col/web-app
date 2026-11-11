@@ -7,10 +7,10 @@
 -->
 
 <div class="mat-typography">
-  <h3>{{ 'labels.heading.Address' | translate }}</h3>
+  <h3 class="ms-section-title">{{ 'labels.heading.Address' | translate }}</h3>
 
   <div class="layout-row align-end m-b-20">
-    <button mat-raised-button color="primary" (click)="addAddress()">
+    <button mat-stroked-button (click)="addAddress()">
       <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
     </button>
   </div>
@@ -27,12 +27,21 @@
               {{ address.relationship }}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <mat-divider></mat-divider>
           <div class="address-actions layout-row align-end align-items-center">
-            <button mat-button color="primary" (click)="editAddress(address, i)">
+            <button
+              mat-button
+              type="button"
+              (click)="editAddress(address, i)"
+              [attr.aria-label]="'labels.buttons.Edit' | translate"
+            >
               <fa-icon icon="edit"></fa-icon>
             </button>
-            <button mat-button color="warn" (click)="deleteAddress(address, i)">
+            <button
+              mat-button
+              type="button"
+              (click)="deleteAddress(address, i)"
+              [attr.aria-label]="'labels.buttons.Delete' | translate"
+            >
               <fa-icon icon="trash"></fa-icon>
             </button>
             <mat-slide-toggle [checked]="address.isActive" (change)="toggleAddress(address)"></mat-slide-toggle>
@@ -97,12 +106,12 @@
     </mat-accordion>
   }
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious>
+  <div class="step-actions">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext>
+    <button mat-flat-button color="primary" matStepperNext>
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

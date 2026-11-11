@@ -6,6 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.space {
-  padding-top: 10px;
+.time-pair {
+  display: flex;
+  gap: var(--ms-space-3);
+
+  mat-form-field {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }

@@ -6,15 +6,126 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+/* The shell `.container` already provides the horizontal padding. */
+.coa-page {
+  padding: 0;
+}
+
+.coa-header {
+  align-items: center;
+}
+
+.coa-hidden {
+  visibility: hidden;
+}
+
+.coa-actions {
+  margin-left: auto;
+}
+
+/* Segmented list / tree switch. */
+.coa-view-toggle {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-control);
+  background: var(--ms-color-surface);
+}
+
+.coa-view-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: var(--ms-control-height);
+  border: 0;
+  background: transparent;
+  color: var(--ms-color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--ms-duration-fast) var(--ms-easing);
+
+  & + & {
+    border-left: 1px solid var(--ms-color-border);
+  }
+
+  &:hover {
+    color: var(--ms-color-text-primary);
+    background: var(--ms-color-surface-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: -2px;
+  }
+}
+
+.coa-view-toggle__btn--active {
+  background: var(--ms-color-surface-subtle);
+  color: var(--ms-color-brand-primary);
+}
+
+/* List view */
+.coa-table {
   width: 100%;
 
-  .select-row:hover {
+  .select-row {
     cursor: pointer;
   }
 }
 
+.coa-name {
+  font-weight: 500;
+}
+
+.coa-muted,
+.coa-usage {
+  color: var(--ms-color-text-secondary);
+}
+
+.coa-usage {
+  font-size: var(--ms-font-size-label);
+  font-weight: 500;
+}
+
+.coa-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
+}
+
+.coa-flag--yes {
+  color: var(--ms-color-success);
+}
+
+/* Tree view */
+.coa-tree-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-6);
+  align-items: flex-start;
+}
+
+.coa-tree-panel {
+  flex: 1 1 480px;
+  min-width: 0;
+  padding: var(--ms-space-2) 0 var(--ms-space-4);
+}
+
+.coa-tree-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--ms-space-2) var(--ms-space-4) var(--ms-space-3);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  margin-bottom: var(--ms-space-2);
+}
+
 .gl-account-tree {
+  background: transparent;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-primary);
+
   ul,
   li {
     margin-top: 0;
@@ -22,10 +133,8 @@ table {
     list-style-type: none;
   }
 
-  li {
-    span {
-      cursor: pointer;
-    }
+  ul {
+    padding-left: var(--ms-space-6);
   }
 
   .gl-account-tree-invisible {
@@ -33,30 +142,62 @@ table {
   }
 }
 
-.content {
-  div {
-    margin: 1rem 0;
-    overflow-wrap: break-word;
+.coa-tree-toggle {
+  color: var(--ms-color-text-secondary);
+}
 
-    &.header {
-      font-weight: 500;
-    }
+.coa-tree-spacer {
+  display: inline-block;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.coa-tree-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+  min-height: 32px;
+  padding: 0 var(--ms-space-2);
+  border: 0;
+  border-radius: var(--ms-radius-control);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ms-color-surface-hover);
   }
 }
 
-// TODO: CONFIGURE THESE CLASSES GLOBALLY
-.enabled {
-  color: #32cd32;
+.coa-tree-label--selected {
+  background: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
+  font-weight: 500;
 }
 
-.disabled {
-  color: #f44366;
+.coa-tree-code {
+  color: var(--ms-color-text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
-.manual-entries-allowed {
-  color: #32cd32;
+.coa-detail {
+  flex: 0 1 380px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
 }
 
-.manual-entries-not-allowed {
-  color: #f44366;
+.coa-detail__list {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: var(--ms-space-3) var(--ms-space-4);
+  margin: 0;
+
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
 }

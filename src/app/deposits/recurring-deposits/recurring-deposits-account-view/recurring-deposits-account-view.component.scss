@@ -5,3 +5,33 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+
+// Deposit account view (pen): entity header, then tabbed content.
+.rd-view__product {
+  font-size: var(--ms-font-size-label);
+  font-weight: 400;
+}
+
+.rd-view__muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.rd-view__aside {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-6);
+  flex-wrap: wrap;
+}
+
+.rd-view__stats {
+  margin: 0;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.rd-view__tabs {
+  min-width: 0;
+}

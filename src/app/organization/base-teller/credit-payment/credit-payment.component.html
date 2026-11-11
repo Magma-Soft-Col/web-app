@@ -9,8 +9,6 @@
 <div class="container credit-payment">
   <mat-card class="workflow-card">
     <mat-card-content>
-      <h2>{{ 'creditPayment.heading.title' | translate }}</h2>
-
       @if (errorMessage) {
         <div class="message error-message" role="alert">{{ errorMessage | translate }}</div>
       }
@@ -21,7 +19,7 @@
         <div class="loading-state"><mat-spinner diameter="40"></mat-spinner></div>
       } @else if (!context) {
         <div class="message empty-state">{{ 'creditPayment.errors.configuration' | translate }}</div>
-        <button type="button" mat-raised-button color="primary" (click)="loadContext()">
+        <button type="button" mat-flat-button color="primary" (click)="loadContext()">
           {{ 'labels.buttons.Retry' | translate }}
         </button>
       } @else {
@@ -54,7 +52,7 @@
                 </mat-form-field>
                 <button
                   type="button"
-                  mat-raised-button
+                  mat-flat-button
                   color="primary"
                   (click)="searchCustomers()"
                   [disabled]="customerForm.invalid || isSearching"
@@ -99,7 +97,7 @@
                     ><strong>{{ selectedCustomer.status }}</strong>
                   </div>
                 </section>
-                <button type="button" mat-raised-button matStepperNext [disabled]="isLoadingLoans">
+                <button type="button" mat-stroked-button matStepperNext [disabled]="isLoadingLoans">
                   {{ 'labels.buttons.Next' | translate }}<fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
               }
@@ -228,10 +226,10 @@
               </mat-tab-group>
 
               <div class="layout-row align-center gap-2percent responsive-column step-actions">
-                <button type="button" mat-raised-button matStepperPrevious>
+                <button type="button" mat-stroked-button matStepperPrevious>
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ 'labels.buttons.Back' | translate }}
                 </button>
-                <button type="button" mat-raised-button matStepperNext>
+                <button type="button" mat-stroked-button matStepperNext>
                   {{ 'labels.buttons.Next' | translate }}<fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
               </div>
@@ -282,7 +280,7 @@
                   <div class="message empty-state">{{ 'creditPayment.empty.denominations' | translate }}</div>
                 } @else {
                   <section class="detail-panel">
-                    <h3>{{ 'creditPayment.heading.denominations' | translate }}</h3>
+                    <h3 class="ms-subsection-title">{{ 'creditPayment.heading.denominations' | translate }}</h3>
                     <div formArrayName="denominations" class="layout-column gap-20px">
                       @for (
                         denomination of denominations.controls;
@@ -379,12 +377,12 @@
             }
 
             <div class="layout-row align-center gap-2percent responsive-column step-actions">
-              <button type="button" mat-raised-button matStepperPrevious>
+              <button type="button" mat-stroked-button matStepperPrevious>
                 <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ 'labels.buttons.Back' | translate }}
               </button>
               <button
                 type="button"
-                mat-raised-button
+                mat-flat-button
                 color="primary"
                 (click)="requestPreview()"
                 [disabled]="!paymentDetailsValid || isPreviewing"
@@ -470,12 +468,12 @@
                 }
               }
               <div class="layout-row align-center gap-2percent responsive-column step-actions">
-                <button type="button" mat-raised-button matStepperPrevious [disabled]="isSubmitting">
+                <button type="button" mat-stroked-button matStepperPrevious [disabled]="isSubmitting">
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ 'labels.buttons.Back' | translate }}
                 </button>
                 <button
                   type="button"
-                  mat-raised-button
+                  mat-flat-button
                   color="primary"
                   (click)="submitPayment()"
                   [disabled]="isSubmitting || !canCreate"
@@ -498,7 +496,7 @@
             <ng-template matStepLabel>{{ 'creditPayment.steps.receipt' | translate }}</ng-template>
             @if (receipt) {
               <section class="receipt">
-                <h3>{{ 'creditPayment.heading.receipt' | translate }}</h3>
+                <h3 class="ms-subsection-title">{{ 'creditPayment.heading.receipt' | translate }}</h3>
                 <div class="lifecycle-status" [class.pending]="receipt.status === 'PENDING_COLLECTION'">
                   {{ 'creditPayment.status.' + receipt.status | translate }}
                 </div>
@@ -629,7 +627,7 @@
                   @if (canClear) {
                     <button
                       type="button"
-                      mat-raised-button
+                      mat-flat-button
                       color="primary"
                       (click)="clearCheck()"
                       [disabled]="isTransitioning"
@@ -645,7 +643,7 @@
                       </mat-form-field>
                       <button
                         type="button"
-                        mat-raised-button
+                        mat-stroked-button
                         color="warn"
                         (click)="returnCheck()"
                         [disabled]="isTransitioning || returnForm.invalid"
@@ -658,15 +656,20 @@
               }
 
               <div class="layout-row align-center gap-2percent responsive-column step-actions receipt-actions">
-                <button type="button" mat-raised-button color="primary" (click)="printReceipt()">
+                <button type="button" mat-flat-button color="primary" (click)="printReceipt()">
                   {{ 'creditPayment.actions.print' | translate }}
                 </button>
                 @if (canReprint) {
-                  <button type="button" mat-raised-button (click)="retrieveReceipt(true)" [disabled]="isLoadingReceipt">
+                  <button
+                    type="button"
+                    mat-stroked-button
+                    (click)="retrieveReceipt(true)"
+                    [disabled]="isLoadingReceipt"
+                  >
                     {{ 'creditPayment.actions.reprint' | translate }}
                   </button>
                 }
-                <button type="button" mat-raised-button (click)="newPayment()">
+                <button type="button" mat-stroked-button (click)="newPayment()">
                   {{ 'creditPayment.actions.newPayment' | translate }}
                 </button>
               </div>

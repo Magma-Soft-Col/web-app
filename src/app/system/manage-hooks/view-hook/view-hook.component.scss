@@ -6,13 +6,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+.detail-list .ms-label {
+  flex: 0 0 40%;
+}
 
-  .content {
-    div {
-      margin: 1rem 0;
-      overflow-wrap: break-word;
-    }
-  }
+.event-line {
+  display: block;
 }

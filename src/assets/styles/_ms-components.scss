@@ -1,0 +1,790 @@
+/**
+ * Copyright since 2025 Mifos Initiative
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/*
+ * Magma Soft Design System — shared layout and component patterns.
+ *
+ * Screens compose these classes instead of writing local variants (spec §3.5,
+ * §9). Contracts for each pattern are documented in docs/redesign/design-system.md.
+ */
+
+/* ---------------------------------------------------------------- Page ---- */
+
+.ms-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-5);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ms-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-4);
+  flex-wrap: wrap;
+}
+
+.ms-page-title {
+  margin: 0;
+  font-size: var(--ms-font-size-page-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-page-subtitle {
+  margin: var(--ms-space-1) 0 0;
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-section-title {
+  margin: 0;
+  font-size: var(--ms-font-size-section-title);
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
+/* List toolbar (approved design): filters on the left, actions on the right. */
+.ms-list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------- Panel ---- */
+
+.ms-panel {
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  overflow: hidden;
+}
+
+.ms-panel--padded {
+  padding: var(--ms-space-5);
+}
+
+/* -------------------------------------------------------------- Badges ---- */
+
+/* A badge always carries text: colour is never the only signal (spec §4.2). */
+.ms-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ms-space-1);
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ms-color-neutral);
+  background: var(--ms-color-neutral-bg);
+}
+
+.ms-badge--success {
+  color: var(--ms-color-success);
+  background: var(--ms-color-success-bg);
+}
+
+.ms-badge--warning {
+  color: var(--ms-color-warning);
+  background: var(--ms-color-warning-bg);
+}
+
+.ms-badge--danger {
+  color: var(--ms-color-danger);
+  background: var(--ms-color-danger-bg);
+}
+
+.ms-badge--info {
+  color: var(--ms-color-info);
+  background: var(--ms-color-info-bg);
+}
+
+.ms-badge--pill {
+  border-radius: var(--ms-radius-pill);
+}
+
+/* Status dot + label, for compact state columns. */
+.ms-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ms-font-size-label);
+  font-weight: 500;
+  color: var(--ms-color-text-secondary);
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentcolor;
+    flex-shrink: 0;
+  }
+
+  &--success {
+    color: var(--ms-color-success);
+  }
+
+  &--warning {
+    color: var(--ms-color-warning);
+  }
+
+  &--danger {
+    color: var(--ms-color-danger);
+  }
+
+  &--neutral {
+    color: var(--ms-color-text-disabled);
+  }
+}
+
+/* ---------------------------------------------------------- Filter bar ---- */
+
+.ms-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
+.ms-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 320px;
+  max-width: 100%;
+
+  .ms-search__icon {
+    position: absolute;
+    left: 12px;
+    color: var(--ms-color-text-secondary);
+    pointer-events: none;
+    font-size: 13px;
+  }
+
+  input {
+    width: 100%;
+    height: var(--ms-control-height);
+    padding: 0 var(--ms-space-3) 0 34px;
+    border: 1px solid var(--ms-color-border);
+    border-radius: var(--ms-radius-md);
+    background: var(--ms-color-surface);
+    color: var(--ms-color-text-primary);
+    font: inherit;
+    font-size: 13px;
+    box-sizing: border-box;
+    transition: border-color var(--ms-duration-fast) var(--ms-easing);
+
+    &::placeholder {
+      color: var(--ms-color-text-secondary);
+    }
+
+    &:hover {
+      border-color: var(--ms-color-text-disabled);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ms-color-focus-ring);
+      outline-offset: 0;
+      border-color: var(--ms-color-focus-ring);
+    }
+  }
+}
+
+/* Native select styled as a filter control. */
+.ms-select {
+  height: var(--ms-control-height);
+  padding: 0 32px 0 var(--ms-space-3);
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-md);
+  background-color: var(--ms-color-surface);
+  color: var(--ms-color-text-primary);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: 0;
+  }
+}
+
+/* --------------------------------------------------------------- Table ---- */
+
+/* For native <table> elements; mat-table is styled in theme/_ms-material.scss. */
+.ms-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ms-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--ms-font-size-table);
+  font-variant-numeric: tabular-nums;
+  color: var(--ms-color-text-primary);
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 10px var(--ms-space-3);
+    background: var(--ms-color-surface-subtle);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
+    color: var(--ms-color-text-secondary);
+    font-size: var(--ms-font-size-label);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 9px var(--ms-space-3);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--ms-color-surface-zebra);
+  }
+
+  tbody tr:hover {
+    background: var(--ms-color-surface-hover);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tfoot td,
+  tfoot th {
+    background: var(--ms-color-surface-subtle);
+    font-weight: 600;
+    border-top: 1px solid var(--ms-color-border);
+    border-bottom: 0;
+  }
+
+  .ms-num,
+  .text-right {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .ms-center {
+    text-align: center;
+  }
+
+  .ms-muted {
+    color: var(--ms-color-text-secondary);
+  }
+}
+
+.ms-table--compact {
+  th {
+    padding: 8px var(--ms-space-2);
+    font-size: var(--ms-font-size-caption);
+  }
+
+  td {
+    padding: 6px var(--ms-space-2);
+    font-size: var(--ms-font-size-label);
+  }
+}
+
+/* Cells shared by mat-table and .ms-table (approved design). */
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.mat-mdc-header-cell.ms-num,
+.mat-mdc-cell.ms-num,
+.mat-mdc-footer-cell.ms-num,
+.mat-mdc-header-cell.r-amount,
+.mat-mdc-cell.r-amount,
+.mat-mdc-footer-cell.r-amount {
+  text-align: right;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.mat-mdc-header-cell.ms-num .mat-sort-header-container,
+.mat-mdc-header-cell.r-amount .mat-sort-header-container {
+  justify-content: flex-end;
+}
+
+/* Label/value row of a detail panel. */
+.ms-detail-row,
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  > .ms-label {
+    flex: 0 0 40%;
+    min-width: 0;
+  }
+
+  > .ms-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.ms-subsection-title {
+  margin: 0 0 var(--ms-space-2);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
+}
+
+/* Forms (approved design): 2 columns on desktop, 1 below 768px; actions at the foot, right aligned. */
+.ms-form-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ms-form-full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Dense forms: 3 columns on wide screens, 2 on tablets, 1 below 768px. */
+.ms-form-grid--3 {
+  @media (width >= 1200px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  // Spans two of the three columns (one on narrower layouts).
+  .ms-form-span-2 {
+    @media (width >= 1200px) {
+      grid-column: span 2;
+    }
+  }
+}
+
+/* A titled group of related fields inside a form (spec §7.1). */
+.ms-form-section {
+  padding: var(--ms-space-5) 0 var(--ms-space-2);
+  border-top: 1px solid var(--ms-color-border-subtle);
+
+  &:first-of-type {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .ms-form-section__title {
+    margin: 0 0 var(--ms-space-4);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ms-color-text-secondary);
+  }
+
+  .ms-form-grid {
+    align-items: start;
+  }
+
+  // Every field keeps the same width, 56px height and bottom spacing, whatever
+  // its control (input, select, date with calendar button).
+  .mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: var(--ms-space-3);
+  }
+
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--textarea) {
+    height: 56px;
+    box-sizing: border-box;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 100%;
+    align-items: center;
+  }
+
+  // The calendar toggle is sized to fit the 56px field instead of growing it.
+  .mat-mdc-form-field-icon-suffix .mat-mdc-icon-button {
+    --mdc-icon-button-state-layer-size: 40px;
+    --mat-icon-button-state-layer-size: 40px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+}
+
+/* Starts a new grid row, whatever the column count. */
+.ms-form-row-start {
+  grid-column-start: 1;
+}
+
+/* A checkbox placed in a field cell, centred on the field row. */
+.ms-form-check {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  margin-bottom: var(--ms-space-3);
+}
+
+.ms-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+  padding-top: var(--ms-space-4);
+  margin-top: var(--ms-space-2);
+  border-top: 1px solid var(--ms-color-border-subtle);
+}
+
+/* Empty state inside a table cell: keeps the cell a table cell so colspan works. */
+td.ms-empty-cell {
+  padding: var(--ms-space-8) var(--ms-space-4);
+  text-align: center;
+  color: var(--ms-color-text-secondary);
+  font-size: 13px;
+}
+
+/* Stepper hosted as a panel. */
+.ms-stepper {
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+}
+
+/* Section title with its action on the right. */
+.ms-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  margin-bottom: var(--ms-space-3);
+}
+
+/* Secondary facts strip under an entity header (loans, clients, groups, centers). */
+.ms-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2) var(--ms-space-6);
+  padding: var(--ms-space-3) var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+}
+
+.ms-fact {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
+
+  strong {
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
+  }
+}
+
+/* Clear button inside .ms-search. */
+.ms-search__clear {
+  position: absolute;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: var(--ms-radius-sm);
+  background: transparent;
+  color: var(--ms-color-text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--ms-color-text-primary);
+    background: var(--ms-color-surface-subtle);
+  }
+}
+
+/* mat-menu hosts render an empty element; keep it out of flex/grid gaps. */
+.ms-page > mat-menu {
+  display: none;
+}
+
+/* ------------------------------------------------------- Entity header ---- */
+
+/* Identification, status and key figures of an account or client (spec §6.3). */
+.ms-entity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-5);
+  flex-wrap: wrap;
+  padding: var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+}
+
+.ms-entity-header__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-4);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.ms-entity-header__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-1);
+  min-width: 0;
+}
+
+.ms-entity-header__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+}
+
+.ms-entity-header__id {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ms-color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.ms-entity-header__divider {
+  width: 1px;
+  height: 36px;
+  background: var(--ms-color-border-subtle);
+
+  @media (width < 768px) {
+    display: none;
+  }
+}
+
+.ms-entity-header__stats {
+  display: flex;
+  gap: var(--ms-space-6);
+  flex-wrap: wrap;
+}
+
+.ms-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+
+  @media (width < 768px) {
+    align-items: flex-start;
+  }
+}
+
+.ms-label {
+  font-size: var(--ms-font-size-caption);
+  font-weight: 500;
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ms-color-text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------- Settings list ---- */
+
+/* Two-column list of administration entry points (Organización, Sistema...). */
+.ms-settings-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-6);
+  align-items: start;
+
+  @media (width < 1024px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ms-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--ms-radius-control);
+  background: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------- Empty state ---- */
+
+.ms-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-8) var(--ms-space-4);
+  text-align: center;
+  color: var(--ms-color-text-secondary);
+  font-size: 13px;
+
+  strong {
+    color: var(--ms-color-text-primary);
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+/* -------------------------------------------------- Visually hidden ------ */
+
+.ms-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------- Settings rows ---- */
+
+/*
+ * One entry of an administration hub (Organización, Sistema, Productos,
+ * Contabilidad, Importación masiva). The whole row is the link, so it is a
+ * single tab stop with a 40px+ target; the description stays visible because
+ * it explains the impact of the section (spec §6.7) and must not need hover.
+ * Rows may be wrapped in a plain <div> (configuration-wizard anchors), so the
+ * hairline is a bottom shadow clipped by the panel instead of a sibling border.
+ */
+.ms-settings-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-settings-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-3);
+  min-height: 56px;
+  padding: var(--ms-space-3) var(--ms-space-4);
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 var(--ms-color-border-subtle);
+  color: var(--ms-color-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--ms-duration-fast) var(--ms-easing);
+
+  &:hover {
+    background: var(--ms-color-surface-hover);
+
+    .ms-settings-row__chevron {
+      color: var(--ms-color-brand-primary);
+      transform: translateX(2px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: -2px;
+    border-radius: 0;
+  }
+}
+
+.ms-settings-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ms-settings-row__title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-settings-row__desc {
+  font-size: var(--ms-font-size-label);
+  line-height: 16px;
+  color: var(--ms-color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.ms-settings-row__chevron {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--ms-color-text-disabled);
+  transition:
+    color var(--ms-duration-fast) var(--ms-easing),
+    transform var(--ms-duration-fast) var(--ms-easing);
+}
+
+/* Entry shown for context but not available yet: not focusable, not clickable. */
+.ms-settings-row--disabled {
+  cursor: default;
+  opacity: 0.55;
+
+  &:hover {
+    background: transparent;
+  }
+}

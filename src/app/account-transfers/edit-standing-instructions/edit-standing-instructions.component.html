@@ -199,12 +199,12 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../view']">
+      <mat-card-actions class="ms-actions align-end">
+        <button type="button" mat-stroked-button [routerLink]="['../view']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!editStandingInstructionsForm.valid"
           (click)="submit()"

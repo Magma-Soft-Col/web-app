@@ -6,6 +6,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
-}
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;

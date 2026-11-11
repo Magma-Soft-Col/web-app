@@ -6,109 +6,90 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+.tasks-tab {
+  gap: var(--ms-space-4);
+}
 
-  .pending-prospects-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: start;
-    margin-bottom: 16px;
+.pending-prospects-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--ms-space-3);
+  align-items: start;
 
-    mat-form-field {
-      flex: 1 1 180px;
-    }
-  }
-
-  .filter-actions {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    min-height: 56px;
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  .status-chip {
-    display: inline-flex;
-    align-items: center;
-    min-height: 24px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .status-completed {
-    background-color: #e6f4ea;
-    color: #137333;
-  }
-
-  .status-pending,
-  .status-submitted,
-  .status-in_progress {
-    background-color: #fff8e1;
-    color: #8d6e00;
-  }
-
-  .status-rejected {
-    background-color: #fdecea;
-    color: #b3261e;
-  }
-
-  .status-withdrawn {
-    background-color: #eceff1;
-    color: #455a64;
-  }
-
-  .status-unknown {
-    background-color: #f1f3f4;
-    color: #5f6368;
+  mat-form-field {
+    flex: 1 1 180px;
   }
 }
 
-.alert {
-  background-color: #e8f4fd;
-  padding: 6px 16px;
-  font-size: 0.875rem;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-weight: 400;
-  line-height: 1.43;
-  border-radius: 4px;
-  letter-spacing: normal;
-  margin: 10px 0;
+.filter-actions {
+  display: flex;
+  gap: var(--ms-space-2);
+  align-items: center;
+  min-height: 56px;
+}
 
-  &.error {
-    background-color: #fdecea;
-  }
+table {
+  width: 100%;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ms-color-neutral);
+  background-color: var(--ms-color-neutral-bg);
+}
+
+.status-completed {
+  color: var(--ms-color-success);
+  background-color: var(--ms-color-success-bg);
+}
+
+.status-pending,
+.status-submitted,
+.status-in_progress {
+  color: var(--ms-color-warning);
+  background-color: var(--ms-color-warning-bg);
+}
+
+.status-rejected {
+  color: var(--ms-color-danger);
+  background-color: var(--ms-color-danger-bg);
+}
+
+.tasks-notice {
+  padding: var(--ms-space-3) var(--ms-space-4);
+  border-radius: var(--ms-radius-md);
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-info);
+  background: var(--ms-color-info-bg);
 
   .message {
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 8px 0;
-    font-size: 18px;
+    gap: var(--ms-space-2);
   }
 
   .alert-check {
-    color: #359ff4;
-    width: 1.4rem;
-    height: 1.4rem;
-    font-size: 1.4rem;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
   }
 
   .loading-icon {
     animation: pending-prospects-spin 1s linear infinite;
   }
+}
+
+.tasks-notice--error {
+  color: var(--ms-color-danger);
+  background: var(--ms-color-danger-bg);
 }
 
 @keyframes pending-prospects-spin {

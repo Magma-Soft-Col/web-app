@@ -27,8 +27,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HasPermissionDirective } from '../../../directives/has-permission/has-permission.directive';
 import { MatButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { TranslatePipe as NgxTranslatePipe } from '@ngx-translate/core';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 
@@ -44,9 +42,6 @@ import { DateFormatPipe } from '../../../pipes/date-format.pipe';
     MatButton,
     RouterLink,
     FaIconComponent,
-    MatFormField,
-    MatLabel,
-    MatInput,
     MatTable,
     MatSort,
     MatColumnDef,

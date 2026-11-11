@@ -6,12 +6,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-form {
-  height: 170px;
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.export-transactions {
+  margin: var(--ms-space-5) 0;
+  padding: var(--ms-space-5);
 }
 
-.generate-button {
-  max-height: 2%;
-  padding: 1% 0 2%;
-  align-self: center;
+.export-transactions__output {
+  iframe {
+    display: block;
+  }
 }

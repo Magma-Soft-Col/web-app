@@ -22,12 +22,12 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -49,13 +49,13 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
     MatRow,
     MatPaginator,
-    DateFormatPipe
+    DateFormatPipe,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

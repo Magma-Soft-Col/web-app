@@ -20,7 +20,7 @@
       {{ 'labels.inputs.Allow Withdrawals' | translate }}
     </mat-checkbox>
 
-    <h4 class="mat-h4 flex-98">{{ 'labels.inputs.Lock-in Period' | translate }}</h4>
+    <h4 class="ms-section-title ms-section-title--sub flex-98">{{ 'labels.inputs.Lock-in Period' | translate }}</h4>
 
     <mat-form-field class="flex-48">
       <mat-label>{{ 'labels.inputs.Frequency' | translate }}</mat-label>
@@ -44,7 +44,9 @@
       </mat-select>
     </mat-form-field>
 
-    <h4 class="mat-h4 flex-98">{{ 'labels.inputs.Minimum Deposit Term' | translate }}</h4>
+    <h4 class="ms-section-title ms-section-title--sub flex-98">
+      {{ 'labels.inputs.Minimum Deposit Term' | translate }}
+    </h4>
 
     <mat-form-field class="flex-48">
       <mat-label>{{ 'labels.inputs.Frequency' | translate }}</mat-label>
@@ -77,7 +79,9 @@
       </mat-error>
     </mat-form-field>
 
-    <h4 class="mat-h4 flex-98">{{ 'labels.heading.And thereafter, in Multiples of' | translate }}</h4>
+    <h4 class="ms-section-title ms-section-title--sub flex-98">
+      {{ 'labels.heading.And thereafter, in Multiples of' | translate }}
+    </h4>
 
     <mat-form-field class="flex-48">
       <mat-label>{{ 'labels.inputs.Frequency' | translate }}</mat-label>
@@ -101,7 +105,9 @@
       </mat-select>
     </mat-form-field>
 
-    <h4 class="mat-h4 flex-98">{{ 'labels.inputs.Maximum Deposit Term' | translate }}</h4>
+    <h4 class="ms-section-title ms-section-title--sub flex-98">
+      {{ 'labels.inputs.Maximum Deposit Term' | translate }}
+    </h4>
 
     <mat-form-field class="flex-48">
       <mat-label>{{ 'labels.inputs.Frequency' | translate }}</mat-label>
@@ -125,9 +131,9 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-divider class="flex-98"></mat-divider>
-
-    <h4 class="mat-h4 flex-23">{{ 'labels.heading.For Pre-mature closure' | translate }}</h4>
+    <h4 class="ms-section-title ms-section-title--sub flex-23">
+      {{ 'labels.heading.For Pre-mature closure' | translate }}
+    </h4>
 
     <mat-checkbox class="flex-73 margin-v" labelPosition="before" formControlName="preClosurePenalApplicable">
       {{ 'labels.inputs.Apply Penal Interest (less)' | translate }}
@@ -148,8 +154,6 @@
         }
       </mat-select>
     </mat-form-field>
-
-    <mat-divider class="flex-98"></mat-divider>
 
     <mat-checkbox labelPosition="before" formControlName="withHoldTax" class="margin-v flex-48">
       {{ 'labels.inputs.Is Withhold Tax Applicable' | translate }}
@@ -173,12 +177,12 @@
     }
   </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious>
+  <div class="layout-row align-end gap-12px margin-t responsive-column">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext>
+    <button mat-flat-button color="primary" matStepperNext>
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

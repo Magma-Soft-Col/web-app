@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="transferClientForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="action-form__grid">
           <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="destinationOfficeId">
@@ -48,18 +48,18 @@
             }
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="action-form__full">
             <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
             <textarea matInput formControlName="note" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
           </mat-form-field>
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../../']">
+      <mat-card-actions class="action-form__actions">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="!transferClientForm.valid">
+        <button mat-flat-button color="primary" [disabled]="!transferClientForm.valid">
           {{ 'labels.buttons.Confirm' | translate }}
         </button>
       </mat-card-actions>

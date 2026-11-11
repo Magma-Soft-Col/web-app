@@ -7,19 +7,17 @@
 -->
 
 <div class="container">
-  <div class="gap-2percent m-b-20">
-    <mat-card class="layout-column gap-2percent flex-50">
-      <h3>
-        <strong
-          >{{ 'labels.heading.' + bulkImport.name | translate }} {{ 'labels.heading.Template' | translate }}</strong
-        >
-      </h3>
+  <div class="ms-page">
+    <div class="import-cards">
+      <mat-card class="import-card">
+        <mat-card-content class="import-card__content">
+          <h2 class="ms-section-title">
+            {{ 'labels.heading.' + bulkImport.name | translate }} {{ 'labels.heading.Template' | translate }}
+          </h2>
 
-      <form [formGroup]="bulkImportForm">
-        <mat-card-content>
-          @if (bulkImport.formFields >= 1) {
-            <div>
-              <mat-form-field class="flex-fill">
+          <form [formGroup]="bulkImportForm">
+            @if (bulkImport.formFields >= 1) {
+              <mat-form-field>
                 <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
                 <mat-select formControlName="officeId">
                   @for (office of officeData; track office) {
@@ -29,12 +27,10 @@
                   }
                 </mat-select>
               </mat-form-field>
-            </div>
-          }
+            }
 
-          @if (bulkImport.formFields >= 2) {
-            <div>
-              <mat-form-field class="flex-fill">
+            @if (bulkImport.formFields >= 2) {
+              <mat-form-field>
                 <mat-label>{{ 'labels.inputs.Staff' | translate }}</mat-label>
                 <mat-select formControlName="staffId">
                   @for (staff of staffData; track staff) {
@@ -44,126 +40,126 @@
                   }
                 </mat-select>
               </mat-form-field>
-            </div>
-          }
+            }
 
-          @if (bulkImport.formFields === 3) {
-            <div>
-              <mat-form-field class="flex-fill">
+            @if (bulkImport.formFields === 3) {
+              <mat-form-field>
                 <mat-label>{{ 'labels.inputs.Legal Form' | translate }}</mat-label>
                 <mat-select required formControlName="legalForm">
                   <mat-option value="Entity">{{ 'labels.inputs.Entity' | translate }}</mat-option>
                   <mat-option value="Person">{{ 'labels.inputs.Person' | translate }}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-          }
-        </mat-card-content>
-      </form>
+            }
+          </form>
 
-      <div class="flex-13">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="downloadTemplate()"
-          *mifosxHasPermission="bulkImport.permission"
-        >
-          <i class="fa fa-download"></i>&nbsp;&nbsp;{{ 'labels.buttons.Download' | translate }}
-        </button>
-      </div>
-    </mat-card>
-
-    <mat-card class="layout-column gap-2percent flex-50">
-      <h3>
-        <strong>{{ 'labels.heading.' + bulkImport.name | translate }}</strong>
-      </h3>
-
-      <h4>{{ 'labels.heading.Select Excel File' | translate }}</h4>
-
-      <mifosx-file-upload flex="75%" (change)="onFileSelect($event)" acceptFilter=".xls,.xlsx"></mifosx-file-upload>
-
-      @if (bulkImport.name === 'Clients') {
-        <mat-hint>{{ 'labels.text.Please retain the value Entity/Person in the filename.' | translate }}</mat-hint>
-      }
-
-      <div class="flex-spacer"></div>
-
-      <div class="flex-13">
-        <button mat-raised-button color="primary" [disabled]="!template" (click)="uploadTemplate()">
-          <i class="fa fa-upload"></i>&nbsp;&nbsp;{{ 'labels.buttons.Upload' | translate }}
-        </button>
-      </div>
-    </mat-card>
-  </div>
-
-  <mat-card>
-    <div>
-      <h3 class="documents">
-        <strong>{{ 'labels.heading.Documents' | translate }}</strong>
-      </h3>
-    </div>
-
-    <div class="m-b-10 layout-align-end">
-      <button mat-raised-button color="primary" (click)="refreshDocuments()">
-        <i class="fa fa-repeat"></i>&nbsp;&nbsp;{{ 'labels.buttons.Refresh' | translate }}
-      </button>
-    </div>
-
-    <div class="imports-table mat-elevation-z1">
-      <table #importsTable mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.name' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.name }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="importTime">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Import Time' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.importTime | dateFormat }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="endTime">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.End Time' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.endTime | dateFormat }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="completed">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Completed' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.completed }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="totalRecords">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Total Records' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.totalRecords }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="successCount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Success Count' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.successCount }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="failureCount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Failure Count' | translate }}</th>
-          <td mat-cell *matCellDef="let import">{{ import.failureCount }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="download">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Download' | translate }}</th>
-          <td mat-cell *matCellDef="let import">
+          <div class="import-card__actions">
             <button
-              mat-icon-button
-              (click)="downloadDocument(import.name, import.importId)"
-              *mifosxHasPermission="'READ_DOCUMENT'"
+              mat-flat-button
+              color="primary"
+              (click)="downloadTemplate()"
+              *mifosxHasPermission="bulkImport.permission"
             >
-              <fa-icon icon="cloud-download-alt"></fa-icon>
+              <i class="fa fa-download m-r-10" aria-hidden="true"></i>{{ 'labels.buttons.Download' | translate }}
             </button>
-          </td>
-        </ng-container>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="select-row"></tr>
-      </table>
+      <mat-card class="import-card">
+        <mat-card-content class="import-card__content">
+          <h2 class="ms-section-title">{{ 'labels.heading.' + bulkImport.name | translate }}</h2>
+
+          <h3 class="ms-subsection-title">{{ 'labels.heading.Select Excel File' | translate }}</h3>
+
+          <mifosx-file-upload flex="75%" (change)="onFileSelect($event)" acceptFilter=".xls,.xlsx"></mifosx-file-upload>
+
+          @if (bulkImport.name === 'Clients') {
+            <mat-hint>{{ 'labels.text.Please retain the value Entity/Person in the filename.' | translate }}</mat-hint>
+          }
+
+          <div class="import-card__actions">
+            <button mat-flat-button color="primary" [disabled]="!template" (click)="uploadTemplate()">
+              <i class="fa fa-upload m-r-10" aria-hidden="true"></i>{{ 'labels.buttons.Upload' | translate }}
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
 
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
-  </mat-card>
+    <div class="ms-list-toolbar">
+      <h2 class="ms-section-title">{{ 'labels.heading.Documents' | translate }}</h2>
+      <div class="ms-actions">
+        <button mat-stroked-button (click)="refreshDocuments()">
+          <i class="fa fa-repeat m-r-10" aria-hidden="true"></i>{{ 'labels.buttons.Refresh' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="ms-panel">
+      <div class="ms-table-wrap">
+        <table #importsTable mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.name' | translate }}</th>
+            <td mat-cell *matCellDef="let import" class="ms-cell-name">{{ import.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="importTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Import Time' | translate }}</th>
+            <td mat-cell *matCellDef="let import" class="ms-cell-muted">{{ import.importTime | dateFormat }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="endTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.End Time' | translate }}</th>
+            <td mat-cell *matCellDef="let import" class="ms-cell-muted">{{ import.endTime | dateFormat }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="completed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Completed' | translate }}</th>
+            <td mat-cell *matCellDef="let import" class="ms-cell-muted">{{ import.completed }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalRecords">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="ms-num">
+              {{ 'labels.inputs.Total Records' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let import" class="ms-num">{{ import.totalRecords }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="successCount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="ms-num">
+              {{ 'labels.inputs.Success Count' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let import" class="ms-num">{{ import.successCount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="failureCount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="ms-num">
+              {{ 'labels.inputs.Failure Count' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let import" class="ms-num">{{ import.failureCount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="download">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Download' | translate }}</th>
+            <td mat-cell *matCellDef="let import">
+              <button
+                mat-icon-button
+                (click)="downloadDocument(import.name, import.importId)"
+                [attr.aria-label]="'labels.inputs.Download' | translate"
+                *mifosxHasPermission="'READ_DOCUMENT'"
+              >
+                <fa-icon icon="cloud-download-alt"></fa-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns" class="select-row"></tr>
+        </table>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
 </div>

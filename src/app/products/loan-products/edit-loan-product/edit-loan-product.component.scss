@@ -6,8 +6,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 86rem;
-  width: 96%;
-  padding-bottom: 30px;
+.product-stepper {
+  padding-bottom: var(--ms-space-4);
 }

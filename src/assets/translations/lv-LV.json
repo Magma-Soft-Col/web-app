@@ -397,7 +397,7 @@
       "reason": "Iemesls"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "ielogojies Kā",
   "Remember me": "Atceries mani",
   "errors": {
@@ -899,7 +899,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Nomnieks",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Serveris",
       "Username": "Lietotājvārds",
@@ -5227,6 +5227,11 @@
       "Please select a delivery method": "Lūdzu, izvēlieties piegādes veidu",
       "Please select a screen report.": "Lūdzu, atlasiet ekrāna pārskatu.",
       "Please update your password": "Lūdzu, atjauniniet savu paroli",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "Darbojas ar",
       "Precedes of": "Iepriekšējie",
       "Preferences for generating account numbers for client": "Preferences kontu numuru ģenerēšanai klientu, kredītu un krājkontiem",

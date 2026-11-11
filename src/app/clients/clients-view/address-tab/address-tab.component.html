@@ -6,13 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="layout-row align-start">
-    <div class="m-b-10">
-      <h3>{{ 'labels.heading.Address' | translate }}</h3>
-    </div>
-    <div class="action-button m-b-10 gap-25px">
-      <button mat-raised-button color="primary" (click)="addAddress()">
+<div class="tab-container">
+  <div class="tab-header">
+    <h3 class="ms-section-title">{{ 'labels.heading.Address' | translate }}</h3>
+    <div class="ms-actions">
+      <button mat-flat-button color="primary" type="button" (click)="addAddress()">
         <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
       </button>
     </div>
@@ -33,70 +31,109 @@
             {{ address.relationship }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="address-actions layout-row align-end align-items-center">
-          <button mat-button color="primary" (click)="editAddress(address, i)">
-            <fa-icon icon="edit"></fa-icon>
+        <div class="address-actions">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="editAddress(address, i)"
+            [attr.aria-label]="'labels.buttons.Edit' | translate"
+          >
+            <fa-icon icon="edit" class="m-r-5"></fa-icon>{{ 'labels.buttons.Edit' | translate }}
           </button>
-          <mat-slide-toggle [checked]="address.isActive" (change)="toggleAddress(address)"></mat-slide-toggle>
+          <mat-slide-toggle
+            [checked]="address.isActive"
+            (change)="toggleAddress(address)"
+            [attr.aria-label]="'labels.inputs.Active Status' | translate"
+          ></mat-slide-toggle>
         </div>
-        <p>
+        <dl class="address-data">
           @if (isFieldEnabled('street')) {
-            <span>{{ 'labels.inputs.Street' | translate }} : {{ address.street }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Street' | translate }}</dt>
+              <dd>{{ address.street }}</dd>
+            </div>
           }
           @if (isFieldEnabled('addressLine1')) {
-            <span>{{ 'labels.inputs.Address Line 1' | translate }} : {{ address.addressLine1 }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Address Line 1' | translate }}</dt>
+              <dd>{{ address.addressLine1 }}</dd>
+            </div>
           }
           @if (isFieldEnabled('addressLine2')) {
-            <span>{{ 'labels.inputs.Address Line 2' | translate }} : {{ address.addressLine2 }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Address Line 2' | translate }}</dt>
+              <dd>{{ address.addressLine2 }}</dd>
+            </div>
           }
           @if (isFieldEnabled('addressLine3')) {
-            <span>{{ 'labels.inputs.Address Line 3' | translate }} : {{ address.addressLine3 }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Address Line 3' | translate }}</dt>
+              <dd>{{ address.addressLine3 }}</dd>
+            </div>
           }
           @if (isFieldEnabled('townVillage')) {
-            <span>{{ 'labels.inputs.Town / Village' | translate }} : {{ address.townVillage }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Town / Village' | translate }}</dt>
+              <dd>{{ address.townVillage }}</dd>
+            </div>
           }
           @if (isFieldEnabled('city')) {
-            <span>{{ 'labels.inputs.City' | translate }} : {{ address.city }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.City' | translate }}</dt>
+              <dd>{{ address.city }}</dd>
+            </div>
           }
           @if (isFieldEnabled('stateProvinceId')) {
-            <span
-              >{{ 'labels.inputs.State / Province' | translate }} :
-              {{ getSelectedValue('stateProvinceIdOptions', address.stateProvinceId)?.name }}<br
-            /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.State / Province' | translate }}</dt>
+              <dd>{{ getSelectedValue('stateProvinceIdOptions', address.stateProvinceId)?.name }}</dd>
+            </div>
           }
           @if (isFieldEnabled('countyDistrict')) {
-            <span>{{ 'labels.inputs.County / District' | translate }} : {{ address.countyDistrict }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.County / District' | translate }}</dt>
+              <dd>{{ address.countyDistrict }}</dd>
+            </div>
           }
           @if (isFieldEnabled('countryId')) {
-            <span
-              >{{ 'labels.inputs.Country' | translate }} :
-              {{ getSelectedValue('countryIdOptions', address.countryId)?.name }}<br
-            /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Country' | translate }}</dt>
+              <dd>{{ getSelectedValue('countryIdOptions', address.countryId)?.name }}</dd>
+            </div>
           }
           @if (isFieldEnabled('postalCode')) {
-            <span>{{ 'labels.inputs.Postal Code' | translate }} : {{ address.postalCode }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Postal Code' | translate }}</dt>
+              <dd>{{ address.postalCode }}</dd>
+            </div>
           }
           @if (
             clientAddressLocationEnabled &&
             isFieldEnabled('latitude') &&
             hasCoordinateValue(address.latitude, 'latitude')
           ) {
-            <span>{{ 'labels.inputs.Latitude' | translate }} : {{ address.latitude }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Latitude' | translate }}</dt>
+              <dd>{{ address.latitude }}</dd>
+            </div>
           }
           @if (
             clientAddressLocationEnabled &&
             isFieldEnabled('longitude') &&
             hasCoordinateValue(address.longitude, 'longitude')
           ) {
-            <span>{{ 'labels.inputs.Longitude' | translate }} : {{ address.longitude }}<br /></span>
+            <div class="address-data__item">
+              <dt>{{ 'labels.inputs.Longitude' | translate }}</dt>
+              <dd>{{ address.longitude }}</dd>
+            </div>
           }
           @if (isFieldEnabled('isActive')) {
-            <span data-testid="client-address-active-status"
-              >{{ 'labels.inputs.Active Status' | translate }} : {{ address.isActive | yesNo }}<br
-            /></span>
+            <div class="address-data__item" data-testid="client-address-active-status">
+              <dt>{{ 'labels.inputs.Active Status' | translate }}</dt>
+              <dd>{{ address.isActive | yesNo }}</dd>
+            </div>
           }
-        </p>
+        </dl>
         @if (
           clientAddressLocationEnabled &&
           isFieldEnabled('latitude') &&

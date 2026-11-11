@@ -6,40 +6,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.mat-card {
-  margin: 5px;
+.section-heading {
+  margin-bottom: var(--ms-space-3);
 }
 
-.survey-questions {
-  margin-bottom: 10px;
+.detail-list .ms-label {
+  flex: 0 0 40%;
 }
 
-#key-text {
-  margin: 10px;
+.survey-question {
+  margin-top: var(--ms-space-4);
 }
 
-#description {
-  margin: 10px;
-}
-
-#questionaire {
-  margin: 10px;
-}
-
-#response {
-  width: 100%;
-}
-
-#response th,
-#response td {
-  text-align: left;
-  width: 100px;
-}
-
-#response tr:hover {
-  background-color: #ddd;
-}
-
-mat-card-header {
-  margin-bottom: 12px;
+.options-title {
+  margin-top: var(--ms-space-4);
 }

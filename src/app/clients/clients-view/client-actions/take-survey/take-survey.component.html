@@ -6,53 +6,55 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-typography">
-  <div class="mat-elevation-z2-surveycont">
-    <div class="survey-select layout-row">
-      <mat-label class="name-label">{{ 'labels.inputs.Survey Name' | translate }}</mat-label>
-      <mat-select (selectionChange)="onSurveyChange($event)">
-        @for (surveyData of allSurveyData; track surveyData) {
-          <mat-option [value]="surveyData">
-            {{ surveyData.name }}
-          </mat-option>
-        }
-      </mat-select>
-    </div>
+<div class="container">
+  <mat-card>
+    <mat-card-content class="survey">
+      <div class="action-form__grid">
+        <mat-form-field>
+          <mat-label>{{ 'labels.inputs.Survey Name' | translate }}</mat-label>
+          <mat-select (selectionChange)="onSurveyChange($event)">
+            @for (surveyData of allSurveyData; track surveyData) {
+              <mat-option [value]="surveyData">
+                {{ surveyData.name }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <hr />
-
-    <div>
       @for (component of componentGroups; track component) {
-        @if (component[0].componentKey) {
-          <h2>component[0].componentKey</h2>
-        }
-        <div class="layout-column display-questions">
+        <section class="survey__group">
+          @if (component[0].componentKey) {
+            <h2 class="ms-section-title">component[0].componentKey</h2>
+          }
           @for (question of component; track question) {
-            <div class="layout-row question">
-              <mat-label class="flex-40 question-text">{{ question.text }}</mat-label>
-              <mat-radio-group class="flex-60 radio-group-spacing" [(ngModel)]="question.answer">
+            <div class="survey__question">
+              <span class="survey__question-text">{{ question.text }}</span>
+              <mat-radio-group class="survey__options" [(ngModel)]="question.answer">
                 @for (options of question.responseDatas; track options) {
-                  <mat-radio-button class="layout-column radio-button" [value]="options">
-                    <span class="wrap-mat-radio-label">
-                      {{ options.text }}
-                    </span>
+                  <mat-radio-button class="survey__option" [value]="options">
+                    {{ options.text }}
                   </mat-radio-button>
                 }
               </mat-radio-group>
+              @if (question.answer) {
+                <span class="survey__answer"
+                  >{{ 'labels.text.Your answer is' | translate }}: {{ question.answer.text }}</span
+                >
+              }
             </div>
-            @if (question.answer) {
-              <div>{{ 'labels.text.Your answer is' | translate }}: {{ question.answer.text }}</div>
-            }
           }
-        </div>
+        </section>
       }
-    </div>
+    </mat-card-content>
 
-    <button mat-raised-button class="button-cancel" color="danger" [routerLink]="['../../general']">
-      {{ 'labels.buttons.Cancel' | translate }}
-    </button>
-    <button mat-raised-button class="button-submit" color="primary" (click)="submit()">
-      {{ 'labels.buttons.Submit' | translate }}
-    </button>
-  </div>
+    <mat-card-actions class="action-form__actions">
+      <button type="button" mat-stroked-button [routerLink]="['../../general']">
+        {{ 'labels.buttons.Cancel' | translate }}
+      </button>
+      <button type="button" mat-flat-button color="primary" (click)="submit()">
+        {{ 'labels.buttons.Submit' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

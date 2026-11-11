@@ -17,7 +17,22 @@ import {
   inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatTableDataSource,
+  MatTable,
+  MatColumnDef,
+  MatHeaderCellDef,
+  MatHeaderCell,
+  MatCellDef,
+  MatCell,
+  MatHeaderRowDef,
+  MatHeaderRow,
+  MatRowDef,
+  MatRow
+} from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 /** rxjs Imports */
 import { Subject, Subscription } from 'rxjs';
@@ -46,7 +61,21 @@ type Severity = 'active' | 'pending' | 'closed' | 'rejected' | 'neutral';
     ...STANDALONE_SHARED_IMPORTS,
     PageLoaderComponent,
     AccountNumberComponent,
-    ExternalIdentifierComponent
+    ExternalIdentifierComponent,
+    FaIconComponent,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatSort,
+    MatSortHeader,
+    MatPaginator
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -60,6 +89,13 @@ export class CentersComponent implements OnInit, OnDestroy {
   private centersRequestSub: Subscription | null = null;
   private isComposing = false;
 
+  displayedColumns = [
+    'name',
+    'accountNo',
+    'externalId',
+    'status',
+    'officeName'
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   existsCentersToFilter = false;
@@ -120,6 +156,20 @@ export class CentersComponent implements OnInit, OnDestroy {
     if (status === 'closed') return 'closed';
     if (status === 'rejected') return 'rejected';
     return 'neutral';
+  }
+
+  /** Status modifier class (dot + text) for a row, from its severity. */
+  statusClass(row: any): string {
+    switch (this.severity(row)) {
+      case 'active':
+        return 'ms-status--success';
+      case 'pending':
+        return 'ms-status--warning';
+      case 'rejected':
+        return 'ms-status--danger';
+      default:
+        return 'ms-status--neutral';
+    }
   }
 
   /** Whether the center is closed (only these rows are hidden by default). */

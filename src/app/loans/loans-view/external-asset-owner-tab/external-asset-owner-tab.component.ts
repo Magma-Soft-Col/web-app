@@ -32,6 +32,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { FormatNumberPipe } from '../../../pipes/format-number.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatIconButton } from '@angular/material/button';
 import { LoanAccountTabBaseComponent } from '../loan-account-tab-base.component';
 
 @Component({
@@ -40,6 +41,7 @@ import { LoanAccountTabBaseComponent } from '../loan-account-tab-base.component'
   styleUrls: ['./external-asset-owner-tab.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    MatIconButton,
     NgClass,
     FaIconComponent,
     ExternalIdentifierComponent,

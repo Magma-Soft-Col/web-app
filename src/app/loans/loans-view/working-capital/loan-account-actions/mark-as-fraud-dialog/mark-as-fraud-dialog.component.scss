@@ -12,7 +12,7 @@
 
 // Secondary line explaining the accounting effect of the flag.
 .fraud-consequence {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  opacity: 0.85;
+  margin-top: var(--ms-space-3);
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
 }

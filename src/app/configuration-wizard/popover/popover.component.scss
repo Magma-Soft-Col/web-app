@@ -8,9 +8,12 @@
 
 :host {
   position: relative;
-  background: var(--md-sys-color-surface, white);
-  border-radius: 8px;
-  padding: 20px;
+  padding: var(--ms-space-5);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
+  color: var(--ms-color-text-primary);
+  box-shadow: var(--ms-shadow-float);
 }
 
 .arrow {

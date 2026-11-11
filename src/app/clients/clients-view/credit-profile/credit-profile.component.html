@@ -9,7 +9,7 @@
   <!-- Role selector -->
   <mat-card class="cbild-role-card">
     <mat-card-content>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>{{ 'labels.cbild.dashboard.role' | translate }}</mat-label>
         <mat-select [(ngModel)]="selectedRole" (ngModelChange)="onRoleChange($event)">
           @for (role of roles; track role.value) {
@@ -150,7 +150,7 @@
       <mat-card-content class="cbild-empty-content">
         <mat-icon color="warn">error_outline</mat-icon>
         <p>{{ 'labels.cbild.errors.unexpected' | translate }}</p>
-        <button mat-stroked-button color="primary" (click)="loadProfile()">
+        <button mat-stroked-button (click)="loadProfile()">
           {{ 'labels.buttons.Retry' | translate }}
         </button>
       </mat-card-content>

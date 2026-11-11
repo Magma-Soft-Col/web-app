@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faDownload, faPlus, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPlus, faSearch, faStop, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { describe, it, expect, jest, beforeEach, afterEach } from '@jest/globals';
 
 describe('ClientsComponent — debounce search', () => {
@@ -47,7 +47,7 @@ describe('ClientsComponent — debounce search', () => {
       ]
     }).compileComponents();
 
-    TestBed.inject(FaIconLibrary).addIcons(faDownload, faPlus, faStop);
+    TestBed.inject(FaIconLibrary).addIcons(faDownload, faPlus, faSearch, faStop, faTimes);
 
     fixture = TestBed.createComponent(ClientsComponent);
     component = fixture.componentInstance;
@@ -116,7 +116,7 @@ describe('ClientsComponent — debounce search', () => {
   });
 
   it('should not search during IME composition but should search on compositionend', () => {
-    const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.search input');
+    const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.ms-search input');
 
     inputEl.dispatchEvent(new CompositionEvent('compositionstart'));
     fixture.detectChanges();

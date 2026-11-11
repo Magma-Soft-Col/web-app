@@ -7,15 +7,15 @@
  */
 
 .report-design-hint {
-  color: var(--mat-sys-on-surface-variant);
-  font-size: 0.85rem;
+  color: var(--ms-color-text-secondary);
+  font-size: var(--ms-font-size-label);
 }
 
 .report-design-summary {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.85rem;
+  gap: var(--ms-space-4);
+  font-size: var(--ms-font-size-label);
 }
 
 .report-design-name {
@@ -25,10 +25,10 @@
 
 .report-design-size {
   white-space: nowrap;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--ms-color-text-secondary);
 }
 
 .report-design-error {
-  color: var(--mat-sys-error);
-  font-size: 0.85rem;
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-label);
 }

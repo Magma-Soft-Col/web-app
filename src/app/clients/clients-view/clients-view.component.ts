@@ -28,8 +28,6 @@ import { CaptureImageDialogComponent } from './custom-dialogs/capture-image-dial
 import { ClientsService } from '../clients.service';
 import { CreditBureauService } from 'app/credit-bureau/credit-bureau.service';
 import { LegalFormId } from '../models/legal-form.enum';
-import { MatCardMdImage } from '@angular/material/card';
-import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EntityNameComponent } from '../../shared/entity-name/entity-name.component';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
@@ -39,10 +37,8 @@ import { AccountNumberComponent } from '../../shared/account-number/account-numb
 import { ExternalIdentifierComponent } from '../../shared/external-identifier/external-identifier.component';
 import { MatTabNav, MatTabLink, MatTabNavPanel } from '@angular/material/tabs';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
-import { StatusLookupPipe } from '../../pipes/status-lookup.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { formatTabLabel } from 'app/shared/utils/format-tab-label.util';
-import { AccountHeaderComponent } from 'app/shared/account-header/account-header.component';
 
 @Component({
   selector: 'mifosx-clients-view',
@@ -50,11 +46,8 @@ import { AccountHeaderComponent } from 'app/shared/account-header/account-header
   styleUrls: ['./clients-view.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    AccountHeaderComponent,
-    MatCardMdImage,
     MatTooltip,
     EntityNameComponent,
-    MatIconButton,
     MatMenuTrigger,
     MatIcon,
     FaIconComponent,
@@ -67,8 +60,7 @@ import { AccountHeaderComponent } from 'app/shared/account-header/account-header
     RouterLinkActive,
     MatTabNavPanel,
     RouterOutlet,
-    DateFormatPipe,
-    StatusLookupPipe
+    DateFormatPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -120,6 +112,15 @@ export class ClientsViewComponent implements OnInit {
     if (!maskedDomain) return this.maskValue(email);
     return maskedUser + '@' + maskedDomain + domainRest;
   }
+  /** Badge modifier for the client status shown in the header. */
+  statusBadgeClass(): string {
+    const code: string = this.clientViewData?.status?.code ?? '';
+    if (code === 'clientStatusType.active') return 'ms-badge--success';
+    if (code === 'clientStatusType.rejected' || code === 'clientStatusType.withdraw') return 'ms-badge--danger';
+    if (code === 'clientStatusType.pending' || code.includes('transfer')) return 'ms-badge--warning';
+    return '';
+  }
+
   formatTabLabel(label: string): string {
     return formatTabLabel(label);
   }

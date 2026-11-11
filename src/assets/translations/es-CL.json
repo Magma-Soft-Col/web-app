@@ -400,7 +400,7 @@
       "reason": "Motivo"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "Conectado como",
   "Remember me": "Recordar me",
   "errors": {
@@ -899,10 +899,20 @@
     "wc.loan.charge.waiver.no.outstanding.amount": "El cargo no tiene saldo pendiente por condonar."
   },
   "labels": {
+    "themes": {
+      "Magma": "Magma Soft",
+      "Midnight": "Medianoche y porcelana",
+      "Obsidian": "Obsidiana (oscuro)",
+      "Ivory": "Marfil y pizarra",
+      "Emerald": "Esmeralda",
+      "Ocean": "Océano",
+      "Indigo": "Índigo",
+      "Graphite": "Grafito"
+    },
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Instancia",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Servidor",
       "Username": "Nombre de usuario",
@@ -2144,6 +2154,7 @@
       "Transferred From": "Transferido desde",
       "Transferred To": "Transferido a",
       "Transferring From Details": "Transferir desde detalles",
+      "List View": "Vista de lista",
       "Tree View": "Vista de árbol",
       "Two-Factor Authentication": "Autenticación de dos factores",
       "Unassign Role": "Desasignar rol",
@@ -4483,6 +4494,7 @@
       "More": "Más",
       "Navigation": "Navegación",
       "Notifications": "Notificaciones",
+      "Overview": "Resumen",
       "Organization": "Organización",
       "Interest Payment Waiver": "Exención de pago de intereses",
       "Payments": "Pagos",
@@ -4650,6 +4662,10 @@
       "Remove tenant": "Eliminar la entrada de registro de {{identifier}} — su base de datos queda intacta y no se elimina ningún dato de la instancia"
     },
     "text": {
+      "Brand images are stored in this browser": "Las imágenes de marca se guardan en este navegador para este tenant.",
+      "Image exceeds 512 KB": "La imagen supera los 512 KB.",
+      "Select a PNG, JPG, SVG, WEBP or ICO image": "Selecciona una imagen PNG, JPG, SVG, WEBP o ICO.",
+      "Brand images could not be stored": "No se pudieron guardar las imágenes en este navegador. Prueba con archivos más pequeños.",
       "Near Breach": "Cerca de incumplimiento",
       "In Progress": "En curso",
       "Cash received cannot be less than the check amount": "El efectivo recibido no puede ser menor que el monto del cheque.",
@@ -5245,6 +5261,11 @@
       "Please select a delivery method": "Por favor seleccione un método de entrega",
       "Please select a screen report.": "Seleccione un reporte de pantalla.",
       "Please update your password": "Por favor actualiza tu contraseña",
+      "Magma tagline highlight": "futuro.",
+      "Login welcome": "Bienvenido",
+      "Login welcome subtitle": "Ingrese con su usuario para continuar.",
+      "Magma tagline": "Construimos la base que sostiene tu",
+      "Magma subtitle": "MS Finance · Core bancario de MAGMA SOFT SAS",
       "Powered by": "Impulsado por",
       "Precedes of": "Precede de",
       "Preferences for generating account numbers for client": "Preferencias para generar números de cuenta para cuentas de clientes, Créditos y ahorros",

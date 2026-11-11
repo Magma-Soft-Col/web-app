@@ -6,10 +6,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
 .expandcollapsebutton {
   margin-top: -7px;
 }
 
-.container {
-  max-width: 37rem;
+// Maturity date shown as context above the form.
+.interest-pause__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--ms-space-4) var(--ms-space-4) 0;
 }

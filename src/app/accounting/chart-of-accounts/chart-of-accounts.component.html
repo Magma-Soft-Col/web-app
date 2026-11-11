@@ -6,211 +6,256 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row align-end gap-20px">
-  <div #buttonTreeView>
-    <mat-button-toggle-group [formControl]="viewGroup">
-      <mat-button-toggle value="listView">
-        <fa-icon icon="list"></fa-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="treeView">
-        <fa-icon icon="sitemap"></fa-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-  <div #buttonAddAccount>
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['gl-accounts/create']"
-      *mifosxHasPermission="'CREATE_GLACCOUNT'"
-    >
-      <fa-icon icon="plus" class="m-r-10"></fa-icon>
-      {{ 'labels.buttons.Add Account' | translate }}
-    </button>
-  </div>
-</div>
-
-<!-- List View -->
-
-<div class="container" [hidden]="viewGroup.value !== 'listView'">
-  <div #filter class="layout-row gap-20px">
-    <mat-form-field class="flex-fill">
-      <mat-label>{{ 'labels.inputs.Filter' | translate }}</mat-label>
-      <input matInput (keyup)="applyFilter($event.target.value)" />
-    </mat-form-field>
-  </div>
-
-  <div #accountsTable class="mat-elevation-z8">
-    <table mat-table [dataSource]="tableDataSource" matSort>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Account' | translate }}</th>
-        <td mat-cell *matCellDef="let glAccount">{{ glAccount.name }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="glCode">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.GL Code' | translate }}</th>
-        <td mat-cell *matCellDef="let glAccount">{{ glAccount.glCode }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="glAccountType">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Type' | translate }}</th>
-        <td mat-cell *matCellDef="let glAccount">
-          {{ 'labels.inputs.accounting.' + glAccount.type.value | translate }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="disabled">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Disabled' | translate }}</th>
-        <td mat-cell *matCellDef="let glAccount">
-          <div [className]="glAccount.disabled === true ? 'disabled' : 'enabled'">
-            <fa-icon
-              matTooltip="{{ glAccount.disabled === true ? 'Disabled' : 'Enabled' }}"
-              matTooltipPosition="right"
-              icon="circle"
-              size="lg"
-            ></fa-icon>
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="manualEntriesAllowed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'labels.inputs.Manual Entries Allowed' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let glAccount">
-          @if (glAccount.manualEntriesAllowed) {
-            <fa-icon
-              class="manual-entries-allowed"
-              matTooltip="{{ 'tooltips.Allowed' | translate }}"
-              matTooltipPosition="right"
-              icon="check-circle"
-              size="lg"
-            ></fa-icon>
+<div class="container">
+  <div class="ms-page coa-page">
+    <!-- Page actions; the page title is rendered by the shell header. -->
+    <div class="ms-page-header coa-header">
+      <div class="ms-filter-bar" [class.coa-hidden]="viewGroup.value !== 'listView'">
+        <div #filter class="ms-search">
+          <fa-icon icon="search" class="ms-search__icon" aria-hidden="true"></fa-icon>
+          <input
+            type="search"
+            [value]="searchText"
+            (input)="applyFilter($any($event.target).value)"
+            [placeholder]="'labels.inputs.Filter' | translate"
+            [attr.aria-label]="'labels.inputs.Filter' | translate"
+          />
+        </div>
+        <select
+          class="ms-select"
+          [value]="typeFilter"
+          (change)="applyTypeFilter($any($event.target).value)"
+          [attr.aria-label]="'labels.inputs.Type' | translate"
+        >
+          <option value="">{{ 'labels.inputs.Type' | translate }}: {{ 'labels.inputs.All' | translate }}</option>
+          @for (type of accountTypes; track type) {
+            <option [value]="type">{{ 'labels.inputs.accounting.' + type | translate }}</option>
           }
-          @if (!glAccount.manualEntriesAllowed) {
-            <fa-icon
-              class="manual-entries-not-allowed"
-              matTooltip="{{ 'tooltips.' | translate }}"
-              matTooltipPosition="right"
-              icon="times-circle"
-              size="lg"
-            ></fa-icon>
-          }
-        </td>
-      </ng-container>
+        </select>
+        <select
+          class="ms-select"
+          [value]="statusFilter"
+          (change)="applyStatusFilter($any($event.target).value)"
+          [attr.aria-label]="'labels.inputs.Status' | translate"
+        >
+          <option value="">{{ 'labels.inputs.Status' | translate }}: {{ 'labels.inputs.All' | translate }}</option>
+          <option value="enabled">{{ 'labels.inputs.Enabled' | translate }}</option>
+          <option value="disabled">{{ 'labels.inputs.Disabled' | translate }}</option>
+        </select>
+      </div>
 
-      <ng-container matColumnDef="usedAs">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Used as' | translate }}</th>
-        <td mat-cell *matCellDef="let glAccount">{{ glAccount.usage.value }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        [routerLink]="['gl-accounts/view', row.id]"
-        class="select-row"
-      ></tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
-  </div>
-</div>
-
-<!-- Tree View -->
-
-<div class="container" [hidden]="viewGroup.value !== 'treeView'">
-  <div class="m-b-20 layout-row align-start gap-20px">
-    <button mat-raised-button (click)="toggleExpandCollapse()">
-      {{ (isTreeExpanded ? 'labels.buttons.Collapse All' : 'labels.buttons.Expand All') | translate }}
-    </button>
-  </div>
-
-  <div class="layout-row gap-4percent responsive-column">
-    <div class="mat-elevation-z8 flex">
-      <mat-tree [dataSource]="nestedTreeDataSource" [treeControl]="nestedTreeControl" class="gl-account-tree">
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-          <li class="mat-tree-node">
-            <button mat-icon-button disabled></button>
-            <span (click)="viewGLAccountNode(node)">
-              @if (node.glCode) {
-                <span class="m-r-10">{{ '(' + node.glCode + ')' }}</span>
-              }
-              {{ node.name }}
-            </span>
-          </li>
-        </mat-tree-node>
-
-        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-          <li>
-            <div class="mat-tree-node">
-              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-                <fa-icon
-                  class="mat-icon-rtl-mirror"
-                  icon="{{ nestedTreeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right' }}"
-                ></fa-icon>
-              </button>
-              <span (click)="viewGLAccountNode(node)">
-                @if (node.glCode) {
-                  <span class="m-r-10">{{ '(' + node.glCode + ')' }}</span>
-                }
-                {{ node.name }}
-              </span>
-            </div>
-            <ul [class.gl-account-tree-invisible]="!nestedTreeControl.isExpanded(node)">
-              <ng-container matTreeNodeOutlet></ng-container>
-            </ul>
-          </li>
-        </mat-nested-tree-node>
-      </mat-tree>
+      <div class="ms-actions coa-actions">
+        <div #buttonTreeView class="coa-view-toggle" role="group">
+          <button
+            type="button"
+            class="coa-view-toggle__btn"
+            [class.coa-view-toggle__btn--active]="viewGroup.value === 'listView'"
+            [attr.aria-pressed]="viewGroup.value === 'listView'"
+            [attr.aria-label]="'labels.heading.List View' | translate"
+            [matTooltip]="'labels.heading.List View' | translate"
+            (click)="viewGroup.setValue('listView')"
+          >
+            <fa-icon icon="list"></fa-icon>
+          </button>
+          <button
+            type="button"
+            class="coa-view-toggle__btn"
+            [class.coa-view-toggle__btn--active]="viewGroup.value === 'treeView'"
+            [attr.aria-pressed]="viewGroup.value === 'treeView'"
+            [attr.aria-label]="'labels.heading.Tree View' | translate"
+            [matTooltip]="'labels.heading.Tree View' | translate"
+            (click)="viewGroup.setValue('treeView')"
+          >
+            <fa-icon icon="sitemap"></fa-icon>
+          </button>
+        </div>
+        <div #buttonAddAccount>
+          <button
+            mat-flat-button
+            color="primary"
+            [routerLink]="['gl-accounts/create']"
+            *mifosxHasPermission="'CREATE_GLACCOUNT'"
+          >
+            <fa-icon icon="plus" class="m-r-10"></fa-icon>
+            {{ 'labels.buttons.Add Account' | translate }}
+          </button>
+        </div>
+      </div>
     </div>
 
-    @if (glAccount) {
-      <div class="flex-48">
-        <mat-card>
-          <mat-card-content>
-            <div class="layout-row-wrap">
-              <div class="flex-50 header">
-                {{ 'labels.inputs.Account Name' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ glAccount.name }}
-              </div>
-              <div class="flex-50 header">
-                {{ 'labels.inputs.GL Code' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ glAccount.glCode }}
-              </div>
-              <div class="flex-50 header">
-                {{ 'labels.inputs.Account Type' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ 'labels.inputs.accounting.' + glAccount.type | translate }}
-              </div>
-              <div class="flex-50 header">
-                {{ 'labels.inputs.Account Usage' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ glAccount.usage }}
-              </div>
-              <div class="flex-50 header">
+    <!-- List View -->
+    <div [hidden]="viewGroup.value !== 'listView'">
+      <div #accountsTable class="ms-panel">
+        <div class="ms-table-wrap">
+          <table mat-table [dataSource]="tableDataSource" matSort class="coa-table">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Account' | translate }}</th>
+              <td mat-cell *matCellDef="let glAccount" class="coa-name">{{ glAccount.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="glCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.GL Code' | translate }}</th>
+              <td mat-cell *matCellDef="let glAccount" class="coa-muted ms-num">{{ glAccount.glCode }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="glAccountType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Type' | translate }}</th>
+              <td mat-cell *matCellDef="let glAccount">
+                <span class="ms-badge" [ngClass]="typeBadgeClass(glAccount.type?.value)">
+                  {{ 'labels.inputs.accounting.' + glAccount.type?.value | translate }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="disabled">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Status' | translate }}</th>
+              <td mat-cell *matCellDef="let glAccount">
+                @if (glAccount.disabled) {
+                  <span class="ms-status ms-status--neutral">{{ 'labels.inputs.Disabled' | translate }}</span>
+                } @else {
+                  <span class="ms-status ms-status--success">{{ 'labels.inputs.Enabled' | translate }}</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="manualEntriesAllowed">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'labels.inputs.Manual Entries Allowed' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ glAccount.manualEntriesAllowed }}
-              </div>
-              <div class="flex-50 header">
-                {{ 'labels.inputs.Description' | translate }}
-              </div>
-              <div class="flex-50">
-                {{ glAccount.description }}
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
+              </th>
+              <td mat-cell *matCellDef="let glAccount">
+                @if (glAccount.manualEntriesAllowed) {
+                  <span class="coa-flag coa-flag--yes">
+                    <fa-icon icon="check" aria-hidden="true"></fa-icon>
+                    {{ 'tooltips.Allowed' | translate }}
+                  </span>
+                } @else {
+                  <span class="coa-flag">
+                    <fa-icon icon="times" aria-hidden="true"></fa-icon>
+                    {{ 'tooltips.Not Allowed' | translate }}
+                  </span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="usedAs">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Used as' | translate }}</th>
+              <td mat-cell *matCellDef="let glAccount" class="coa-usage">{{ glAccount.usage?.value }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              [routerLink]="['gl-accounts/view', row.id]"
+              class="select-row"
+            ></tr>
+            <tr class="mat-mdc-row" *matNoDataRow>
+              <td class="mat-mdc-cell" [attr.colspan]="displayedColumns.length">
+                <div class="ms-empty">
+                  <strong>{{ 'labels.text.No results found' | translate }}</strong>
+                  @if (hasActiveFilters) {
+                    <span>{{ activeFilterSummary() }}</span>
+                    <button mat-stroked-button type="button" (click)="clearFilters()">
+                      {{ 'labels.buttons.Clear' | translate }}
+                    </button>
+                  }
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
       </div>
-    }
+    </div>
+
+    <!-- Tree View -->
+    <div [hidden]="viewGroup.value !== 'treeView'">
+      <div class="coa-tree-layout">
+        <div class="ms-panel coa-tree-panel">
+          <div class="coa-tree-toolbar">
+            <button mat-stroked-button type="button" (click)="toggleExpandCollapse()">
+              {{ (isTreeExpanded ? 'labels.buttons.Collapse All' : 'labels.buttons.Expand All') | translate }}
+            </button>
+          </div>
+          <mat-tree [dataSource]="nestedTreeDataSource" [treeControl]="nestedTreeControl" class="gl-account-tree">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+              <li class="mat-tree-node">
+                <span class="coa-tree-spacer" aria-hidden="true"></span>
+                <button
+                  type="button"
+                  class="coa-tree-label"
+                  [class.coa-tree-label--selected]="glAccount === node"
+                  (click)="viewGLAccountNode(node)"
+                >
+                  @if (node.glCode) {
+                    <span class="coa-tree-code">{{ node.glCode }}</span>
+                  }
+                  {{ node.name }}
+                </button>
+              </li>
+            </mat-tree-node>
+
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+              <li>
+                <div class="mat-tree-node">
+                  <button
+                    mat-icon-button
+                    matTreeNodeToggle
+                    class="coa-tree-toggle"
+                    [attr.aria-label]="'toggle ' + node.name"
+                    [attr.aria-expanded]="nestedTreeControl.isExpanded(node)"
+                  >
+                    <fa-icon
+                      class="mat-icon-rtl-mirror"
+                      icon="{{ nestedTreeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right' }}"
+                    ></fa-icon>
+                  </button>
+                  <button
+                    type="button"
+                    class="coa-tree-label"
+                    [class.coa-tree-label--selected]="glAccount === node"
+                    (click)="viewGLAccountNode(node)"
+                  >
+                    @if (node.glCode) {
+                      <span class="coa-tree-code">{{ node.glCode }}</span>
+                    }
+                    {{ node.name }}
+                  </button>
+                </div>
+                <ul [class.gl-account-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+                  <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+              </li>
+            </mat-nested-tree-node>
+          </mat-tree>
+        </div>
+
+        @if (glAccount) {
+          <section class="ms-panel ms-panel--padded coa-detail" aria-live="polite">
+            <h2 class="ms-section-title">{{ glAccount.name }}</h2>
+            <dl class="coa-detail__list">
+              <dt class="ms-label">{{ 'labels.inputs.GL Code' | translate }}</dt>
+              <dd class="ms-value ms-num">{{ glAccount.glCode }}</dd>
+              <dt class="ms-label">{{ 'labels.inputs.Account Type' | translate }}</dt>
+              <dd class="ms-value">
+                <span class="ms-badge" [ngClass]="typeBadgeClass(glAccount.type)">
+                  {{ 'labels.inputs.accounting.' + glAccount.type | translate }}
+                </span>
+              </dd>
+              <dt class="ms-label">{{ 'labels.inputs.Account Usage' | translate }}</dt>
+              <dd class="ms-value">{{ glAccount.usage }}</dd>
+              <dt class="ms-label">{{ 'labels.inputs.Manual Entries Allowed' | translate }}</dt>
+              <dd class="ms-value">
+                {{ (glAccount.manualEntriesAllowed ? 'tooltips.Allowed' : 'tooltips.Not Allowed') | translate }}
+              </dd>
+              <dt class="ms-label">{{ 'labels.inputs.Description' | translate }}</dt>
+              <dd class="ms-value">{{ glAccount.description || '—' }}</dd>
+            </dl>
+          </section>
+        }
+      </div>
+    </div>
   </div>
 </div>
 
@@ -218,14 +263,14 @@
   <h2>{{ 'labels.heading.Tree View' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.Alternative way-Tree view' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateButtonAddAccount, buttonAddAccount, 'bottom', true)"
     >
@@ -238,18 +283,18 @@
   <h2>{{ 'labels.heading.Add Account' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.Create New GL Account' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateButtonTreeView, buttonTreeView, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateFilter, filter, 'bottom', true)"
     >
@@ -261,18 +306,18 @@
 <ng-template #templateFilter let-popover="popover">
   <h4>{{ 'labels.heading.Search bar to filter GL accounts.' | translate }}</h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateButtonAddAccount, buttonAddAccount, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateAccountsTable, accountsTable, 'top', true)"
     >
@@ -286,17 +331,17 @@
     {{ 'labels.heading.List of chart of all the accounts being used by your organization.' | translate }}
   </h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateFilter, filter, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

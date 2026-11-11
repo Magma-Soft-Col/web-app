@@ -8,23 +8,18 @@
 
 @if (savingsAccountData.status.value === 'Active' && chargeData.amountOutstanding !== 0) {
   <div class="layout-row align-end gap-2percent layout-xs-column container m-b-20">
-    <button mat-raised-button color="accent" *mifosxHasPermission="'PAY_SAVINGSACCOUNTCHARGE'" (click)="payCharge()">
+    <button mat-stroked-button color="accent" *mifosxHasPermission="'PAY_SAVINGSACCOUNTCHARGE'" (click)="payCharge()">
       <fa-icon icon="dollar-sign" class="m-r-10"></fa-icon>
       Pay
     </button>
-    <button
-      mat-raised-button
-      color="primary"
-      *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'"
-      (click)="waiveCharge()"
-    >
+    <button mat-flat-button color="primary" *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'" (click)="waiveCharge()">
       <fa-icon icon="flag" class="m-r-10"></fa-icon>
       Waive
     </button>
     @if (isRecurringCharge()) {
       <span>
         <button
-          mat-raised-button
+          mat-stroked-button
           color="warn"
           *mifosxHasPermission="'INACTIVATE_SAVINGSACCOUNTCHARGE'"
           (click)="inactivateCharge()"
@@ -39,17 +34,12 @@
 
 @if (savingsAccountData.status.value === 'Submitted and pending approval') {
   <div class="layout-row align-end gap-2percent layout-xs-column container m-b-20">
-    <button
-      mat-raised-button
-      color="primary"
-      *mifosxHasPermission="'UPDATE_SAVINGSACCOUNTCHARGE'"
-      (click)="editCharge()"
-    >
+    <button mat-flat-button color="primary" *mifosxHasPermission="'UPDATE_SAVINGSACCOUNTCHARGE'" (click)="editCharge()">
       <fa-icon icon="edit" class="m-r-10"></fa-icon>
       Edit
     </button>
     <button
-      mat-raised-button
+      mat-stroked-button
       color="warn"
       *mifosxHasPermission="'DELETE_SAVINGSACCOUNTCHARGE'"
       (click)="deleteCharge()"
@@ -145,8 +135,8 @@
         </div>
       </div>
 
-      <div class="layout-row layout-align-center gap-2percent column-on-mobile">
-        <button type="button" mat-raised-button color="primary" [routerLink]="['../']">
+      <div class="ms-actions align-end">
+        <button type="button" mat-flat-button color="primary" [routerLink]="['../']">
           {{ 'labels.buttons.Back' | translate }}
         </button>
       </div>

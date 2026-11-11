@@ -6,8 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/* Step footer: secondary + primary aligned right (pen). */
 .margin-t {
-  margin-top: 1em;
+  margin-top: var(--ms-space-5);
 }
 
 .align-items-center {

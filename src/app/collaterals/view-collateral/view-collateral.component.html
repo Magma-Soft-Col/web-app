@@ -6,73 +6,87 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button
-    mat-raised-button
-    color="primary"
-    [routerLink]="['edit']"
-    *mifosxHasPermission="'UPDATE_CLIENT_COLLATERAL_PRODUCT'"
-  >
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-  <button
-    mat-raised-button
-    color="warn"
-    (click)="deleteCollateral()"
-    *mifosxHasPermission="'DELETE_CLIENT_COLLATERAL_PRODUCT'"
-  >
-    <fa-icon icon="trash" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Delete' | translate }}
-  </button>
-</div>
+<div class="ms-page">
+  <div class="ms-list-toolbar collateral__toolbar">
+    <div class="ms-actions">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="deleteCollateral()"
+        *mifosxHasPermission="'DELETE_CLIENT_COLLATERAL_PRODUCT'"
+      >
+        <fa-icon icon="trash" class="m-r-10" aria-hidden="true"></fa-icon>
+        {{ 'labels.buttons.Delete' | translate }}
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        [routerLink]="['edit']"
+        *mifosxHasPermission="'UPDATE_CLIENT_COLLATERAL_PRODUCT'"
+      >
+        <fa-icon icon="edit" class="m-r-10" aria-hidden="true"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
+  </div>
 
-<mat-card class="client-collateral-card">
-  <mat-card-content class="content"
-    >\
-
-    <div class="tab-container mat-typography">
-      <h3>{{ 'labels.heading.Client Collateral Details' | translate }}</h3>
-
-      <div class="layout-row gap-32px group-details-container m-b-30">
-        <p>
-          {{ 'labels.inputs.name' | translate }}: {{ clientCollateralData.name }}<br />
-          {{ 'labels.inputs.Quantity' | translate }}: {{ clientCollateralData.quantity }}<br />
-          {{ 'labels.inputs.Total Value' | translate }}: {{ clientCollateralData.total }}<br />
-          {{ 'labels.inputs.Total Collateral Value' | translate }}: {{ clientCollateralData.totalCollateral }}<br />
-        </p>
+  <section class="ms-panel ms-panel--padded collateral__summary">
+    <h3 class="ms-section-title">{{ 'labels.heading.Client Collateral Details' | translate }}</h3>
+    <dl class="collateral__grid">
+      <div class="collateral__item">
+        <dt class="ms-label">{{ 'labels.inputs.name' | translate }}</dt>
+        <dd class="ms-value">{{ clientCollateralData.name }}</dd>
       </div>
+      <div class="collateral__item">
+        <dt class="ms-label">{{ 'labels.inputs.Quantity' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ clientCollateralData.quantity }}</dd>
+      </div>
+      <div class="collateral__item">
+        <dt class="ms-label">{{ 'labels.inputs.Total Value' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ clientCollateralData.total }}</dd>
+      </div>
+      <div class="collateral__item">
+        <dt class="ms-label">{{ 'labels.inputs.Total Collateral Value' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ clientCollateralData.totalCollateral }}</dd>
+      </div>
+    </dl>
+  </section>
 
-      <h3>{{ 'labels.heading.Transaction Details' | translate }}</h3>
-
-      <table mat-table [dataSource]="clientCollateralData.loanTransactionData" class="mat-elevation-z1 m-b-30">
+  <section class="collateral__section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Transaction Details' | translate }}</h3>
+    <div class="ms-panel ms-table-wrap">
+      <table mat-table [dataSource]="clientCollateralData.loanTransactionData" class="collateral__table">
         <ng-container matColumnDef="ID">
           <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.ID' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.loanId }}
-          </td>
+          <td mat-cell *matCellDef="let element" class="ms-num">{{ element.loanId }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Last Repayment">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Last Repayment' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.lastRepayment }}</td>
+          <th mat-header-cell *matHeaderCellDef class="collateral__right">
+            {{ 'labels.inputs.Last Repayment' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element" class="ms-num collateral__right">{{ element.lastRepayment }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Remaining Amount">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Remaining Amount' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.remainingAmount | formatNumber }}</td>
+          <th mat-header-cell *matHeaderCellDef class="collateral__right">
+            {{ 'labels.inputs.Remaining Amount' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element" class="ms-num collateral__right">
+            {{ element.remainingAmount | formatNumber }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="Last Repayment Date">
           <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Last Repayment Date' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.lastRepaymentDate | dateFormat }}</td>
+          <td mat-cell *matCellDef="let element" class="collateral__muted">
+            {{ element.lastRepaymentDate | dateFormat }}
+          </td>
         </ng-container>
 
-        <!-- <tr mat-header-row *matHeaderRowDef="clientMemberColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: clientMemberColumns;" [routerLink]="['/clients', row.id, 'loans-accounts', 'create']" class="select-row"></tr> -->
         <tr mat-header-row *matHeaderRowDef="collateralColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: collateralColumns"></tr>
       </table>
     </div>
-  </mat-card-content>
-</mat-card>
+  </section>
+</div>

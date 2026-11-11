@@ -5,11 +5,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="cbild-reporting-dashboard">
+<div class="ms-page cbild-reporting-dashboard">
   <!-- Role selector -->
   <mat-card class="cbild-role-card">
     <mat-card-content>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>{{ 'labels.cbild.dashboard.role' | translate }}</mat-label>
         <mat-select [(ngModel)]="selectedRole" (ngModelChange)="onRoleChange($event)">
           @for (role of roles; track role.value) {
@@ -18,7 +18,7 @@
         </mat-select>
       </mat-form-field>
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         class="cbild-batch-btn"
         [disabled]="isBatchRunning || isLoading"
@@ -45,25 +45,25 @@
       <mat-card class="cbild-stat-card">
         <mat-card-content>
           <p class="cbild-stat-label">{{ 'labels.cbild.dashboard.total' | translate }}</p>
-          <p class="cbild-stat-value cbild-stat-total">{{ totalElements }}</p>
+          <p class="ms-num cbild-stat-value cbild-stat-total">{{ totalElements }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="cbild-stat-card">
         <mat-card-content>
           <p class="cbild-stat-label">{{ 'labels.cbild.dashboard.accepted' | translate }}</p>
-          <p class="cbild-stat-value cbild-stat-accepted">{{ acceptedCount }}</p>
+          <p class="ms-num cbild-stat-value cbild-stat-accepted">{{ acceptedCount }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="cbild-stat-card">
         <mat-card-content>
           <p class="cbild-stat-label">{{ 'labels.cbild.dashboard.pendingRetry' | translate }}</p>
-          <p class="cbild-stat-value cbild-stat-pending">{{ pendingRetryCount }}</p>
+          <p class="ms-num cbild-stat-value cbild-stat-pending">{{ pendingRetryCount }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="cbild-stat-card">
         <mat-card-content>
           <p class="cbild-stat-label">{{ 'labels.cbild.dashboard.permanentlyFailed' | translate }}</p>
-          <p class="cbild-stat-value cbild-stat-failed">{{ permanentlyFailedCount }}</p>
+          <p class="ms-num cbild-stat-value cbild-stat-failed">{{ permanentlyFailedCount }}</p>
         </mat-card-content>
       </mat-card>
     </div>
@@ -73,7 +73,7 @@
   @if (!isLoading && !hasError && dataSource.data.length > 0) {
     <mat-card class="cbild-table-card">
       <mat-card-content>
-        <div class="mat-elevation-z2">
+        <div class="ms-table-wrap">
           <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="clientId">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.cbild.dashboard.clientId' | translate }}</th>
@@ -128,7 +128,7 @@
   <!-- Empty state -->
   @if (!isLoading && !hasError && dataSource.data.length === 0) {
     <mat-card class="cbild-empty-card">
-      <mat-card-content class="cbild-empty-content">
+      <mat-card-content class="ms-empty cbild-empty-content">
         <mat-icon>inbox</mat-icon>
         <p>{{ 'labels.cbild.dashboard.noSubmissions' | translate }}</p>
       </mat-card-content>
@@ -138,7 +138,7 @@
   <!-- Error state -->
   @if (hasError && !isLoading) {
     <mat-card class="cbild-empty-card">
-      <mat-card-content class="cbild-empty-content">
+      <mat-card-content class="ms-empty cbild-empty-content">
         <mat-icon color="warn">error_outline</mat-icon>
         <p>{{ 'labels.cbild.errors.unexpected' | translate }}</p>
         <button mat-stroked-button color="primary" (click)="loadHistory()">

@@ -32,7 +32,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -40,7 +41,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PopoverService } from '../../configuration-wizard/popover/popover.service';
 import { ConfigurationWizardService } from '../../configuration-wizard/configuration-wizard.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -61,12 +61,12 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

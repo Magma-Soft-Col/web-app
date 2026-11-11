@@ -6,17 +6,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/* The shell provides page padding; the card is a full-width panel. */
 .product-card {
-  margin: 0 auto;
-  max-width: 80rem;
-  width: 90%;
   padding: 0;
 
   .navigation-tabs {
     overflow: auto;
-  }
-
-  i:hover {
-    cursor: pointer;
   }
 }

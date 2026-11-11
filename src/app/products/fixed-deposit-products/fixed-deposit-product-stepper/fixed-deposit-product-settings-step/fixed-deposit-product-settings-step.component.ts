@@ -15,7 +15,6 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MatDivider } from '@angular/material/divider';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -28,7 +27,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     MatTooltip,
-    MatDivider,
     MatCheckbox,
     MatStepperPrevious,
     FaIconComponent,

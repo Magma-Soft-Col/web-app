@@ -10,20 +10,10 @@
  * Shared design tokens for the loan-product creation flow (page wrapper,
  * wizard shell, stepper and every reused step component).
  *
- * Why this file exists
- * --------------------
- * The app is themed with Angular Material **M2** (`mat.m2-define-light-theme`
- * in `theme/mifosx-theme.scss`), so the M3 `--mat-sys-*` system tokens are
- * never emitted. Several stylesheets in this flow were written against them
- * (`var(--mat-sys-surface-container, #2e2e2e)`), which meant they silently fell
- * back to a hardcoded near-black in *both* themes. Everything here is built on
- * tokens M2 genuinely emits — declared on `html` and re-declared under
- * `.dark-theme`, so they flip themes on their own:
- *
- *   --mat-card-elevated-container-color   #fff              / #424242
- *   --mat-app-background-color            #fafafa           / #303030
- *   --mat-app-text-color                  rgb(0 0 0 / 87%)  / #e2e2e5
- *   --mat-card-outlined-outline-color     rgb(0 0 0 / 12%)  / rgb(255 255 255 / 12%)
+ * Every `--lp-*` token is an alias of a pen `--ms-*` token
+ * (`assets/styles/_ms-tokens.scss`). The pen tokens are redefined for each
+ * theme on `body`, so the `dark-*` mixins only re-resolve the aliases inside
+ * the dark scope; they carry no colours of their own.
  *
  * Usage — include once on an ancestor; CSS custom properties inherit, so the
  * whole subtree (including child components' Material internals) picks them up
@@ -33,9 +23,6 @@
  *
  *   :host { @include lpt.tokens; }
  *   :host-context(.dark-theme) { @include lpt.dark-tokens; }
- *
- * The loan-product *selection* (landing) page defines an equivalent `--lp-*`
- * set inline; it can adopt this partial later without any visual change.
  */
 
 /* ---------------------------------------------------------------- *
@@ -43,15 +30,14 @@
  *
  * For step components that are shared with the Classic stepper, where pulling
  * in the full Material remap would restyle a page outside this task's scope.
- * Gives them a contrast-safe accent and nothing else.
  * ---------------------------------------------------------------- */
 
 @mixin accent-tokens {
-  --lp-accent: var(--brand-primary-500, #1074b9);
+  --lp-accent: var(--ms-color-brand-primary);
 }
 
 @mixin accent-dark-tokens {
-  --lp-accent: color-mix(in srgb, var(--brand-primary-100, #5ba2ec) 60%, var(--mat-app-text-color, #fff));
+  @include accent-tokens;
 }
 
 /* ---------------------------------------------------------------- *
@@ -59,84 +45,50 @@
  * ---------------------------------------------------------------- */
 
 @mixin tokens {
-  /* Surfaces & text — straight off the Material theme, so they auto-flip. */
-  --lp-surface: var(--mat-card-elevated-container-color, #fff);
-  --lp-page-bg: var(--mat-app-background-color, #fafafa);
-  --lp-text: var(--mat-app-text-color, rgb(0 0 0 / 87%));
-  --lp-outline: var(--mat-card-outlined-outline-color, rgb(0 0 0 / 12%));
+  /* Surfaces & text */
+  --lp-surface: var(--ms-color-surface);
+  --lp-page-bg: var(--ms-color-background);
+  --lp-text: var(--ms-color-text-primary);
+  --lp-outline: var(--ms-color-border-subtle);
+  --lp-text-muted: var(--ms-color-text-secondary);
+  --lp-icon-muted: var(--ms-color-text-disabled);
 
-  /**
-   * Secondary text is faded from the real text colour rather than taken from
-   * `--mat-card-subtitle-text-color`, which is only `rgb(0 0 0 / 54%)` in the
-   * light theme and drops under AA on tinted surfaces. 78% clears AA on every
-   * surface used here (7.5:1 light, 5.5:1 dark).
-   */
-  --lp-text-muted: color-mix(in srgb, var(--lp-text) 78%, transparent);
+  /* Mixing operands kept for existing consumers. */
+  --lp-ink: var(--ms-color-text-primary);
+  --lp-shade: var(--ms-color-text-primary);
 
-  /* Decorative glyphs only need 3:1, so they sit lighter than body copy. */
-  --lp-icon-muted: color-mix(in srgb, var(--lp-text) 55%, transparent);
-
-  /**
-   * Mixing operands, not theme colours. `--lp-ink` is whichever of black/white
-   * reads as "raised" against the current surface; `--lp-shade` always darkens,
-   * which is what "recessed" means in both themes.
-   */
-  --lp-ink: #000;
-  --lp-shade: #000;
-
-  /* Brand accent. #1074b9 on #fff = 4.98:1 — AA for links, labels and fills. */
-  --lp-accent: var(--brand-primary-500, #1074b9);
-  --lp-on-accent: #fff;
+  /* Brand accent */
+  --lp-accent: var(--ms-color-brand-primary);
+  --lp-on-accent: var(--ms-color-on-primary);
 
   /* Derived surfaces */
-  --lp-surface-sunken: color-mix(in srgb, var(--lp-shade) 4%, var(--lp-surface));
-  --lp-accent-tint: color-mix(in srgb, var(--lp-accent) 10%, var(--lp-surface));
-  --lp-neutral-tint: color-mix(in srgb, var(--lp-ink) 6%, var(--lp-surface-sunken));
-  --lp-hero-bg: color-mix(in srgb, var(--lp-accent) 8%, var(--lp-surface));
-  --lp-outline-strong: color-mix(in srgb, var(--lp-ink) 24%, transparent);
+  --lp-surface-sunken: var(--ms-color-surface-zebra);
+  --lp-accent-tint: var(--ms-color-brand-primary-subtle);
+  --lp-neutral-tint: var(--ms-color-surface-subtle);
+  --lp-hero-bg: var(--ms-color-surface);
+  --lp-outline-strong: var(--ms-color-border);
 
-  /* Elevation. M2 emits no elevation-colour token, so it is defined once here. */
-  --lp-shadow-rest: 0 1px 2px rgb(0 0 0 / 6%);
-  --lp-shadow-hover: 0 6px 16px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 6%);
+  /* Elevation: the pen keeps panels flat; only floating surfaces get a shadow. */
+  --lp-shadow-rest: none;
+  --lp-shadow-hover: var(--ms-shadow-xs);
 
-  /**
-   * Spacing scale — 8px grid, per `AGENTS.md` ("Stick to the 8px grid system").
-   * Named by their pixel value to match the repo's existing spacing utilities
-   * (`m-b-16`, `gap-8px`) so the step size is obvious at every call site.
-   */
-  --lp-space-8: 0.5rem;
-  --lp-space-16: 1rem;
-  --lp-space-24: 1.5rem;
-  --lp-space-32: 2rem;
+  /* Spacing scale (pen 4px scale, named by pixel value). */
+  --lp-space-8: var(--ms-space-2);
+  --lp-space-16: var(--ms-space-4);
+  --lp-space-24: var(--ms-space-6);
+  --lp-space-32: var(--ms-space-8);
 
   /* Shape & motion */
-  --lp-radius: 0.75rem;
-  --lp-radius-sm: 0.5rem;
-  --lp-radius-pill: 999px;
-  --lp-motion: 160ms ease-out;
+  --lp-radius: var(--ms-radius-md);
+  --lp-radius-sm: var(--ms-radius-md);
+  --lp-radius-pill: var(--ms-radius-pill);
+  --lp-motion: var(--ms-duration) var(--ms-easing);
 
   @include material-tokens;
 }
 
 @mixin dark-tokens {
-  --lp-ink: #fff;
-
-  /**
-   * The M2 dark theme reuses palette hue 500 for primary, so the stock accent
-   * is #1074b9 on the #424242 surface — 2.02:1, effectively unreadable. Every
-   * primary-derived affordance in this flow (stepper icons, focus outlines,
-   * radios, links) inherits that problem. Lightening the dark-mode brand hue
-   * toward the theme's text colour lands at ~#91bce9: 5.06:1 on the surface.
-   * Derived, so a runtime brand-colour change still flows through.
-   */
-  --lp-accent: color-mix(in srgb, var(--brand-primary-100, #5ba2ec) 60%, var(--mat-app-text-color, #fff));
-
-  /* Filled accents invert in dark mode: light container, dark label. */
-  --lp-on-accent: var(--mat-app-background-color, #303030);
-
-  /* Shadows read weakly on dark surfaces; keep them soft and lean on borders. */
-  --lp-shadow-rest: 0 1px 2px rgb(0 0 0 / 24%);
-  --lp-shadow-hover: 0 6px 16px rgb(0 0 0 / 32%), 0 2px 4px rgb(0 0 0 / 20%);
+  @include tokens;
 }
 
 /* ---------------------------------------------------------------- *
@@ -170,20 +122,20 @@
 
   /* Weight, not just colour, carries "you are here". */
   --mat-stepper-header-label-text-color: var(--lp-text-muted);
-  --mat-stepper-header-label-text-size: 0.875rem;
+  --mat-stepper-header-label-text-size: var(--ms-font-size-table);
   --mat-stepper-header-label-text-weight: 400;
   --mat-stepper-header-selected-state-label-text-color: var(--lp-text);
-  --mat-stepper-header-selected-state-label-text-size: 0.9375rem;
+  --mat-stepper-header-selected-state-label-text-size: var(--ms-font-size-table);
   --mat-stepper-header-selected-state-label-text-weight: 600;
   --mat-stepper-header-optional-label-text-color: var(--lp-text-muted);
-  --mat-stepper-header-hover-state-layer-color: color-mix(in srgb, var(--lp-accent) 8%, transparent);
-  --mat-stepper-header-focus-state-layer-color: color-mix(in srgb, var(--lp-accent) 12%, transparent);
+  --mat-stepper-header-hover-state-layer-color: var(--ms-color-surface-hover);
+  --mat-stepper-header-focus-state-layer-color: var(--ms-color-brand-primary-subtle);
   --mat-stepper-header-focus-state-layer-shape: var(--lp-radius-sm);
   --mat-stepper-header-hover-state-layer-shape: var(--lp-radius-sm);
 
   /* ---- Outlined form fields ---- */
   --mat-form-field-outlined-outline-color: var(--lp-outline-strong);
-  --mat-form-field-outlined-hover-outline-color: var(--lp-text);
+  --mat-form-field-outlined-hover-outline-color: var(--ms-color-text-disabled);
   --mat-form-field-outlined-focus-outline-color: var(--lp-accent);
   --mat-form-field-outlined-caret-color: var(--lp-accent);
   --mat-form-field-outlined-focus-label-text-color: var(--lp-accent);
@@ -210,7 +162,7 @@
   --mat-table-row-item-label-text-color: var(--lp-text);
   --mat-table-header-headline-color: var(--lp-text-muted);
   --mat-table-header-headline-weight: 600;
-  --mat-table-header-headline-size: 0.8125rem;
+  --mat-table-header-headline-size: var(--ms-font-size-label);
 
   /* ---- Dividers ---- */
   --mat-divider-color: var(--lp-outline);
@@ -221,18 +173,18 @@
   --mat-tab-active-hover-label-text-color: var(--lp-accent);
   --mat-tab-active-indicator-color: var(--lp-accent);
   --mat-tab-inactive-label-text-color: var(--lp-text-muted);
-  --mat-tab-label-text-weight: 600;
+  --mat-tab-label-text-weight: 400;
 
   /* ---- Buttons ----
      Primary raised buttons ("Next", "Create") keep the accent as their fill in
      both themes; the label flips with `--lp-on-accent` so it stays legible. */
   --mat-button-protected-container-shape: var(--lp-radius-sm);
-  --mat-button-outlined-container-shape: var(--lp-radius-sm);
+  --mat-button-outlined-container-shape: var(--ms-radius-control);
   --mat-button-filled-container-shape: var(--lp-radius-sm);
-  --mat-button-protected-label-text-weight: 600;
-  --mat-button-outlined-label-text-weight: 600;
+  --mat-button-protected-label-text-weight: 500;
+  --mat-button-outlined-label-text-weight: 500;
 
-  /* Stroked ("Back", "Cancel") sat at a 12% outline — nearly invisible. */
+  /* Stroked ("Back", "Cancel"): pen secondary button border. */
   --mat-button-outlined-outline-color: var(--lp-outline-strong);
   --mat-button-outlined-label-text-color: var(--lp-text);
 
@@ -283,7 +235,7 @@
   --mat-button-protected-container-color: var(--lp-accent);
   --mat-button-protected-label-text-color: var(--lp-on-accent);
   --mat-button-protected-state-layer-color: var(--lp-on-accent);
-  --mat-button-protected-ripple-color: color-mix(in srgb, var(--lp-on-accent) 16%, transparent);
+  --mat-button-protected-ripple-color: var(--ms-color-brand-primary-hover);
   --mat-button-filled-container-color: var(--lp-accent);
   --mat-button-filled-label-text-color: var(--lp-on-accent);
 }
@@ -296,11 +248,11 @@
  * outline reads on both themes where a bare shadow does not.
  */
 @mixin table-card {
-  margin: var(--lp-space-16, 1rem) 0 var(--lp-space-24, 1.5rem);
-  border: 1px solid var(--lp-outline, var(--mat-card-outlined-outline-color, rgb(0 0 0 / 12%)));
-  border-radius: var(--lp-radius-sm, 0.5rem);
-  background: var(--lp-surface, var(--mat-card-elevated-container-color, #fff));
-  box-shadow: var(--lp-shadow-rest, none);
+  margin: var(--ms-space-4) 0 var(--ms-space-6);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-panel);
+  background: var(--ms-color-surface);
+  box-shadow: none;
   overflow: hidden;
 }
 
@@ -308,8 +260,8 @@
 @mixin eyebrow {
   margin: 0 0 var(--lp-space-8);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  font-size: var(--ms-font-size-label);
   font-weight: 600;
   line-height: 1.2;
   color: var(--lp-text-muted);
@@ -317,6 +269,6 @@
 
 /* One keyboard-focus treatment for every custom (non-Material) control. */
 @mixin focus-ring {
-  outline: 2px solid var(--lp-accent);
+  outline: 2px solid var(--ms-color-focus-ring);
   outline-offset: 2px;
 }

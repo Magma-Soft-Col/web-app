@@ -6,69 +6,50 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <span *mifosxHasPermission="'ACTIVATE_HOLIDAY'">
-    @if (holidayData.status.value !== 'Active') {
-      <button mat-raised-button color="accent" (click)="activateHoliday()">
-        <fa-icon icon="lock-open" class="m-r-10"></fa-icon>
-        {{ 'labels.buttons.Activate' | translate }}
-      </button>
-    }
-  </span>
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_HOLIDAY'">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-  <button mat-raised-button color="warn" (click)="deleteHoliday()" *mifosxHasPermission="'DELETE_HOLIDAY'">
-    <fa-icon icon="trash" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Delete' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Name' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ holidayData.name }}
-        </div>
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.From Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ holidayData.fromDate | dateFormat }}
-        </div>
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.To Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ holidayData.toDate | dateFormat }}
-        </div>
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Repayments Scheduled To' | translate }}
-        </div>
-
-        @if (holidayData.repaymentsRescheduledTo !== undefined && holidayData.repaymentsRescheduledTo !== null) {
-          <div class="flex-50">
-            {{ holidayData.repaymentsRescheduledTo | dateFormat }}
-          </div>
+  <div class="ms-page">
+    <div class="ms-actions page-actions">
+      <span *mifosxHasPermission="'ACTIVATE_HOLIDAY'">
+        @if (holidayData.status.value !== 'Active') {
+          <button mat-stroked-button color="accent" (click)="activateHoliday()">
+            <fa-icon icon="lock-open" class="m-r-10"></fa-icon>
+            {{ 'labels.buttons.Activate' | translate }}
+          </button>
         }
+      </span>
+      <button mat-stroked-button color="warn" (click)="deleteHoliday()" *mifosxHasPermission="'DELETE_HOLIDAY'">
+        <fa-icon icon="trash" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Delete' | translate }}
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_HOLIDAY'">
+        <fa-icon icon="edit" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
 
-        @if (holidayData.repaymentsRescheduledTo === undefined || holidayData.repaymentsRescheduledTo === null) {
-          <div class="flex-50">
-            {{ 'labels.inputs.Next Repayment Date' | translate }}
-          </div>
-        }
+    <section class="ms-panel ms-panel--padded">
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Name' | translate }}</span>
+        <span class="ms-value">{{ holidayData.name }}</span>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.From Date' | translate }}</span>
+        <span class="ms-value">{{ holidayData.fromDate | dateFormat }}</span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.To Date' | translate }}</span>
+        <span class="ms-value">{{ holidayData.toDate | dateFormat }}</span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Repayments Scheduled To' | translate }}</span>
+        <span class="ms-value">
+          @if (holidayData.repaymentsRescheduledTo !== undefined && holidayData.repaymentsRescheduledTo !== null) {
+            {{ holidayData.repaymentsRescheduledTo | dateFormat }}
+          } @else {
+            {{ 'labels.inputs.Next Repayment Date' | translate }}
+          }
+        </span>
+      </div>
+    </section>
+  </div>
 </div>

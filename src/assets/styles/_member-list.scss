@@ -21,8 +21,10 @@
       align-items: center;
       justify-content: space-between;
       min-height: 48px;
-      padding: 0 8px;
-      border-bottom: 1px solid var(--mdc-outlined-text-field-outline-color, #e0e0e0);
+      padding: 0 var(--ms-space-2);
+      border-bottom: 1px solid var(--ms-color-border-subtle);
+      font-size: var(--ms-font-size-table);
+      color: var(--ms-color-text-primary);
 
       .member-name {
         overflow: hidden;

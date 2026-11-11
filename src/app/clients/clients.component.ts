@@ -17,7 +17,22 @@ import {
   inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatTableDataSource,
+  MatTable,
+  MatColumnDef,
+  MatHeaderCellDef,
+  MatHeaderCell,
+  MatCellDef,
+  MatCell,
+  MatHeaderRowDef,
+  MatHeaderRow,
+  MatRowDef,
+  MatRow
+} from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 /** rxjs Imports */
 import { Subject, Subscription } from 'rxjs';
@@ -47,7 +62,21 @@ type Severity = 'active' | 'pending' | 'closed' | 'rejected' | 'neutral';
     PageLoaderComponent,
     AccountNumberComponent,
     ExternalIdentifierComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    FaIconComponent,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatSort,
+    MatSortHeader,
+    MatPaginator
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -99,6 +128,20 @@ export class ClientsComponent implements OnInit, OnDestroy {
     if (code === 'clientStatusType.closed' || code === 'clientStatusType.withdraw') return 'closed';
     if (code === 'clientStatusType.rejected') return 'rejected';
     return 'neutral';
+  }
+
+  /** Status modifier class (dot + text) for a row, from its severity. */
+  statusClass(row: any): string {
+    switch (this.severity(row)) {
+      case 'active':
+        return 'ms-status--success';
+      case 'pending':
+        return 'ms-status--warning';
+      case 'rejected':
+        return 'ms-status--danger';
+      default:
+        return 'ms-status--neutral';
+    }
   }
 
   /** Person/Entity label. Falls back to Person when legalForm is absent. */

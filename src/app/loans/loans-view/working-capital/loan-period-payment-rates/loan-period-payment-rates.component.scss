@@ -5,19 +5,32 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-@use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
+.payment-rates {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
+}
 
-.container {
-  padding-bottom: 2%;
-  max-width: 100%;
+.payment-rates__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
 
-  table {
-    width: 100%;
+.payment-rates__table {
+  width: 100%;
 
-    .reversed {
-      text-decoration: line-through;
-      color: $status-active-overdue;
-    }
+  .ms-num {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  // A reversed rate stays visible but struck through.
+  .reversed {
+    text-decoration: line-through;
+    color: var(--ms-color-text-disabled);
   }
 }

@@ -16,10 +16,10 @@ html {
 }
 
 body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: var(--ms-font-family);
   font-weight: 400;
-  font-size: 14px;
-  color: rgb(0 0 0 / 87%);
+  font-size: var(--ms-font-size-body);
+  color: var(--ms-color-text-primary);
   line-height: 1.5;
   letter-spacing: normal;
 }
@@ -29,11 +29,9 @@ body {
 .mat-typography .mat-h1,
 .mat-typography .mat-headline,
 .mat-typography h1 {
-  font:
-    400 24px/32px Roboto,
-    'Helvetica Neue',
-    sans-serif;
-  letter-spacing: normal;
+  font: 600 var(--ms-font-size-page-title) / 32px var(--ms-font-family);
+  letter-spacing: -0.01em;
+  color: var(--ms-color-text-primary);
   margin: 0 0 16px;
 }
 
@@ -215,23 +213,23 @@ body {
 }
 
 .text-shadow {
-  text-shadow: 1px 1px 1px rgb(0 0 0 / 40%);
+  text-shadow: none;
 }
 
 .text-rgb-2 {
-  color: rgb(0 0 0 / 20%);
+  color: var(--ms-color-text-disabled);
 }
 
 .text-rgb-3 {
-  color: rgb(0 0 0 / 30%);
+  color: var(--ms-color-text-disabled);
 }
 
 .text-rgb-4 {
-  color: rgb(0 0 0 / 40%);
+  color: var(--ms-color-text-secondary);
 }
 
 .text-rgb-5 {
-  color: rgb(0 0 0 / 50%);
+  color: var(--ms-color-text-secondary);
 }
 
 .no-ul,

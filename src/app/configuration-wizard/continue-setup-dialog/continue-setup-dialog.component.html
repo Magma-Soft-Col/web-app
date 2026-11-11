@@ -16,13 +16,13 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-raised-button color="warn" [mat-dialog-close]="{ step: 1 }">
+  <button mat-stroked-button [mat-dialog-close]="{ step: 1 }">
     {{ 'labels.buttons.Close Configuration Wizard' | translate }}
   </button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{ step: 2 }">
+  <button mat-stroked-button [mat-dialog-close]="{ step: 2 }">
     {{ 'labels.buttons.Create more' | translate }} {{ stepName }}
   </button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{ step: 3 }">
+  <button mat-flat-button color="primary" [mat-dialog-close]="{ step: 3 }">
     {{ 'labels.buttons.Go to next step' | translate }}
   </button>
 </mat-dialog-actions>

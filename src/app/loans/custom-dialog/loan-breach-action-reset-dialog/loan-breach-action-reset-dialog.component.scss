@@ -6,9 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Contextual help under the "restart period from reset date" checkbox
+// Contextual help under the checkbox.
 .hint-text {
-  margin: 0.25rem 0 0;
-  font-size: 0.85em;
-  opacity: 0.7;
+  margin: var(--ms-space-1) 0 0;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

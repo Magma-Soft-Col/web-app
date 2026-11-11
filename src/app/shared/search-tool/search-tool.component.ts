@@ -19,10 +19,8 @@ import {
 import { style, animate, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
 import { UntypedFormControl } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -54,10 +52,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   ],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatIconButton,
     MatIcon,
-    FaIconComponent,
-    MatTooltip
+    FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

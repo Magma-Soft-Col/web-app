@@ -7,5 +7,7 @@
  */
 
 .dialog-context {
-  margin-bottom: 1rem;
+  margin: 0 0 var(--ms-space-4);
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
 }

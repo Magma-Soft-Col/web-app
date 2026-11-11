@@ -21,7 +21,7 @@
   gap: 8px;
   margin: 20px 0 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
 
   mat-icon {
     font-size: 20px;
@@ -72,7 +72,7 @@
   margin: 16px 0;
   padding: 16px;
   border-radius: 8px;
-  background-color: var(--mdc-theme-surface, rgb(0 0 0 / 4%));
+  background-color: var(--ms-color-surface-subtle);
 
   .search-instruction {
     margin: 0 0 12px;
@@ -90,9 +90,9 @@
     gap: 8px;
     margin-top: 8px;
     padding: 8px 12px;
-    background-color: var(--mdc-theme-error-container, #ffebee);
+    background-color: var(--ms-color-danger-bg);
     border-radius: 4px;
-    color: var(--mdc-theme-on-error-container, #c62828);
+    color: var(--ms-color-danger);
     font-size: 13px;
 
     mat-icon {
@@ -108,15 +108,15 @@
     gap: 12px;
     margin-top: 12px;
     padding: 12px;
-    background-color: var(--mdc-theme-primary-container, rgb(76 175 80 / 12%));
+    background-color: var(--ms-color-success-bg);
     border-radius: 4px;
-    border: 1px solid var(--mdc-theme-primary, rgb(76 175 80 / 30%));
+    border: 1px solid var(--ms-color-success);
 
     mat-icon {
       font-size: 24px;
       width: 24px;
       height: 24px;
-      color: var(--mdc-theme-primary, #4caf50);
+      color: var(--ms-color-success);
     }
 
     .client-info {
@@ -151,7 +151,7 @@
     flex-wrap: wrap;
     gap: 12px;
     font-size: 12px;
-    color: #666;
+    color: var(--ms-color-text-secondary);
 
     .account-no,
     .external-id {

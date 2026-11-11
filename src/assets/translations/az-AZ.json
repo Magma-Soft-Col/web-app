@@ -361,7 +361,7 @@
       "reason": "Səbəb"
     }
   },
-  "APP_NAME": "Mifos® X veb tətbiqi",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "Daxil olan istifadəçi",
   "Remember me": "Məni xatırla",
   "error.resource.notImplemented.type": "Reallaşdırılmamış funksiya xətası",
@@ -865,7 +865,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Eclipse Birt üçün Mifos hesabat əlavəsi",
     "version": {
       "Tenant": "Təşkilat mühiti",
-      "Mifos WebApp": "Mifos® veb tətbiqi",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Server",
       "Username": "İstifadəçi adı",
@@ -5363,6 +5363,11 @@
       "Please select a delivery method": "Çatdırılma üsulunu seç",
       "Please select a screen report.": "Ekran hesabatı seç.",
       "Please update your password": "Parolunu yenilə",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "Texnoloji təminat",
       "Precedes of": "Əvvəl gəlir",
       "Preferences for generating account numbers for client": "Müştəri, kredit və əmanət hesabları üçün hesab nömrələrinin yaradılması tərcihləri",

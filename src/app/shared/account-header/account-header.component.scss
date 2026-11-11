@@ -6,29 +6,79 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.header {
-  background-color: var(--md-sys-color-primary, #1074b9) !important;
-  color: var(--md-sys-color-on-primary, #fff) !important;
+/*
+ * The header sits at the top of the entity card (`mat-card.account-card`),
+ * which already draws the panel border, so it only keeps a bottom hairline.
+ */
+:host {
+  display: block;
+}
 
-  .mat-mdc-card-title,
-  .mat-mdc-card-subtitle {
-    color: var(--md-sys-color-on-primary, #fff) !important;
+.account-header {
+  align-items: flex-start;
+  border: 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  border-radius: 0;
+}
+
+.account-header__identity {
+  align-items: flex-start;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+
+  @media (width < 768px) {
+    flex-wrap: wrap;
   }
 }
 
-.status-dot {
+.account-header__media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ms-space-2);
+  flex-shrink: 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.account-header__main {
+  flex: 1 1 auto;
+  gap: var(--ms-space-3);
+}
+
+.account-header__title {
+  flex-wrap: wrap;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ms-color-text-primary);
+}
+
+.account-header__dot {
   display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  vertical-align: middle;
+  flex-shrink: 0;
   background-color: currentcolor;
 }
 
-.make-flex {
-  display: flex;
+.account-header__meta {
+  min-width: 0;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-secondary);
 }
 
-.mat-card-title-group {
-  width: 100%;
+.account-header__menu {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--ms-color-text-secondary);
+
+  &:empty {
+    display: none;
+  }
 }

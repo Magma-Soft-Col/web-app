@@ -400,7 +400,7 @@
       "reason": "Grund"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "Angemeldet als",
   "Remember me": "Erinnere dich an mich",
   "error.resource.notImplemented.type": "Nicht implementierter Fehler",
@@ -904,7 +904,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Mieter",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Server",
       "Username": "Benutzername",
@@ -5231,6 +5231,11 @@
       "Please select a delivery method": "Bitte wählen Sie eine Versandart aus",
       "Please select a screen report.": "Bitte wählen Sie einen Bildschirmbericht aus.",
       "Please update your password": "Bitte aktualisieren Sie Ihr Passwort",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "Unterstützt von",
       "Precedes of": "Präzedenzfälle von",
       "Preferences for generating account numbers for client": "Einstellungen zur Generierung von Kontonummern für Kunden-, Kredit- und Sparkonten",

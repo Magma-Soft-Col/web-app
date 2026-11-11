@@ -6,65 +6,54 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<nav class="breadcrumb-wrapper" aria-label="Page navigation">
-  <div class="page-header">
-    <div class="title-row">
-      <span #breadcrumb class="breadcrumb-title">
-        {{ getTranslate(breadcrumbs[breadcrumbs?.length - 1].label) }}
-      </span>
-    </div>
-
-    @if (breadcrumbs.length - 1 !== 0) {
-      <ol class="breadcrumb-trail" aria-label="breadcrumb">
-        @for (breadcrumb of breadcrumbs; track breadcrumb; let first = $first; let last = $last) {
-          <li class="breadcrumb-item" [class.breadcrumb-item--active]="last">
-            @if (first && breadcrumb.label === 'Home') {
-              @if (breadcrumb.url) {
-                <a
-                  class="breadcrumb-link breadcrumb-link--home"
-                  [routerLink]="breadcrumb.url"
-                  [queryParams]="breadcrumb.queryParams"
-                  aria-label="Home"
-                >
-                  <mat-icon>home</mat-icon>
-                </a>
-              } @else {
-                <span class="breadcrumb-link breadcrumb-link--home">
-                  <mat-icon>home</mat-icon>
-                </span>
-              }
+@if (variant === 'trail') {
+  <!-- Location trail for the shell top bar. "Home" is implied by the sidebar, so it is not repeated. -->
+  <nav class="breadcrumb-trail-nav" [attr.aria-label]="'labels.menus.Breadcrumbs' | translate">
+    <ol class="breadcrumb-trail">
+      @for (breadcrumb of breadcrumbs; track $index; let first = $first; let last = $last) {
+        @if (!(first && breadcrumb.label === 'Home')) {
+          <li class="breadcrumb-item">
+            @if (!last && breadcrumb.url) {
+              <a class="breadcrumb-link" [routerLink]="breadcrumb.url" [queryParams]="breadcrumb.queryParams">
+                {{ getTranslate(breadcrumb.label) }}
+              </a>
+              <span class="breadcrumb-separator" aria-hidden="true">/</span>
             } @else if (!last) {
-              @if (breadcrumb.url) {
-                <a class="breadcrumb-link" [routerLink]="breadcrumb.url" [queryParams]="breadcrumb.queryParams">
-                  {{ getTranslate(breadcrumb.label) }}
-                </a>
-              } @else {
-                <span class="breadcrumb-text">{{ getTranslate(breadcrumb.label) }}</span>
-              }
+              <span class="breadcrumb-text">{{ getTranslate(breadcrumb.label) }}</span>
+              <span class="breadcrumb-separator" aria-hidden="true">/</span>
             } @else {
-              <span class="breadcrumb-current">{{ getTranslate(breadcrumb.label) }}</span>
-            }
-            @if (!last) {
-              <span class="breadcrumb-chevron" aria-hidden="true">›</span>
+              <span class="breadcrumb-current" aria-current="page">{{ getTranslate(breadcrumb.label) }}</span>
             }
           </li>
         }
-      </ol>
+      }
+    </ol>
+  </nav>
+} @else {
+  <!-- Page title and optional subtitle (route data `pageSubtitle`) above the content. -->
+  <div class="page-header">
+    <h1 #breadcrumb class="page-title">
+      @if (breadcrumbs.length) {
+        {{ getTranslate(breadcrumbs[breadcrumbs.length - 1].label) }}
+      }
+    </h1>
+    @if (subtitle) {
+      <p class="page-subtitle">{{ subtitle | translate }}</p>
     }
   </div>
-</nav>
+}
 
 <ng-template #templateBreadcrumb let-popover="popover">
   <h2>{{ 'labels.menus.Breadcrumbs' | translate }}</h2>
   <p class="mw300">{{ "labels.text.User's current location" | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

@@ -7,45 +7,47 @@
 -->
 
 <div class="container">
-  <mat-card>
-    @if (serviceColumns.length) {
-      <div class="layout-row responsive-column gap-20px">
-        @for (column of serviceColumns; track $index) {
-          <div class="flex-50">
-            <mat-nav-list>
-              @for (service of column; track service.id) {
-                <mat-list-item [routerLink]="service.route">
-                  <mat-icon matListIcon [routerLink]="service.route">
-                    <fa-icon [icon]="service.icon" size="sm"></fa-icon>
-                  </mat-icon>
-                  <h4 matLine [routerLink]="service.route">{{ service.label | translate }}</h4>
-                  <button
-                    mat-icon-button
-                    type="button"
-                    [attr.aria-expanded]="isServiceDescriptionVisible(service.id)"
-                    [attr.aria-label]="service.label | translate"
-                    (click)="toggleServiceDescription(service.id); $event.stopPropagation()"
-                  >
-                    @if (!isServiceDescriptionVisible(service.id)) {
-                      <fa-icon icon="arrow-down" size="lg"></fa-icon>
-                    }
-                    @if (isServiceDescriptionVisible(service.id)) {
-                      <fa-icon icon="arrow-up" size="lg"></fa-icon>
-                    }
-                  </button>
+  @if (serviceColumns.length) {
+    <div class="ms-settings-grid">
+      @for (column of serviceColumns; track $index) {
+        <nav class="ms-panel ms-settings-list">
+          @for (service of column; track service.id) {
+            <div class="layout-row align-items-center">
+              <a class="ms-settings-row flex-fill" [routerLink]="service.route">
+                <span class="ms-icon-wrap" aria-hidden="true"><fa-icon [icon]="service.icon"></fa-icon></span>
+                <span class="ms-settings-row__text">
+                  <span class="ms-settings-row__title">{{ service.label | translate }}</span>
                   @if (isServiceDescriptionVisible(service.id)) {
-                    <p matLine [routerLink]="service.route">
-                      {{ service.description | translate }}
-                    </p>
+                    <span class="ms-settings-row__desc">{{ service.description | translate }}</span>
                   }
-                </mat-list-item>
-              }
-            </mat-nav-list>
-          </div>
-        }
+                </span>
+                <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+              </a>
+              <button
+                mat-icon-button
+                type="button"
+                class="m-r-5"
+                [attr.aria-expanded]="isServiceDescriptionVisible(service.id)"
+                [attr.aria-label]="service.label | translate"
+                (click)="toggleServiceDescription(service.id); $event.stopPropagation()"
+              >
+                @if (!isServiceDescriptionVisible(service.id)) {
+                  <fa-icon icon="chevron-down" size="sm"></fa-icon>
+                }
+                @if (isServiceDescriptionVisible(service.id)) {
+                  <fa-icon icon="chevron-down" size="sm" [rotate]="180"></fa-icon>
+                }
+              </button>
+            </div>
+          }
+        </nav>
+      }
+    </div>
+  } @else {
+    <div class="ms-panel">
+      <div class="ms-empty">
+        <strong>{{ 'labels.text.No data found' | translate }}</strong>
       </div>
-    } @else {
-      <p>{{ 'labels.text.No data found' | translate }}</p>
-    }
-  </mat-card>
+    </div>
+  }
 </div>

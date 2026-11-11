@@ -6,13 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '../../../../../assets/styles/colours' as colors;
-
 .capture-video {
   width: 100%;
   max-width: 640px;
   height: auto;
   object-fit: contain;
-  border-radius: 4px;
-  background-color: colors.$black;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background-color: var(--ms-color-brand-navy);
 }

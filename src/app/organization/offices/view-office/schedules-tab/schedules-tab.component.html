@@ -6,11 +6,9 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="layout-row align-start">
-    <div class="m-b-10">
-      <h3>{{ 'labels.heading.Schedules' | translate }}</h3>
-    </div>
+<div class="tab-container">
+  <div class="tab-header">
+    <h3 class="ms-section-title">{{ 'labels.heading.Schedules' | translate }}</h3>
   </div>
 
   @if (isLoading) {
@@ -64,7 +62,7 @@
               (change)="setDayEnabled(dayControl, $event.checked)"
               [attr.aria-label]="'labels.inputs.Enabled' | translate"
             ></mat-checkbox>
-            <mat-form-field appearance="outline" class="time-column">
+            <mat-form-field class="time-column">
               <mat-label>{{ 'labels.inputs.Opening Time' | translate }}</mat-label>
               <input
                 matInput
@@ -79,7 +77,7 @@
                 }}</mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="time-column">
+            <mat-form-field class="time-column">
               <mat-label>{{ 'labels.inputs.Closing Time' | translate }}</mat-label>
               <input matInput type="time" formControlName="closingTime" [readonly]="isSaving" />
               @if (hasTimeRequiredError(dayControl, 'closingTime')) {
@@ -95,9 +93,9 @@
         }
       </div>
 
-      <div class="schedule-actions">
+      <div class="ms-form-actions">
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           type="submit"
           [disabled]="schedulesForm.invalid || isSaving"

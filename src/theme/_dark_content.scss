@@ -6,39 +6,36 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
+// Dark-theme (Obsidian) overrides for legacy screens.
+// The colours of the dark theme are the pen tokens that `_ms-tokens.scss`
+// redefines for `body.dark-theme`; nothing here hard-codes a colour any more,
+// it only re-points legacy selectors that used to paint fixed greys, white
+// text or the old dark link blue. `$theme` is kept for the existing include
+// in `mifosx-theme.scss`.
 @mixin account-view-component-dark-theme($theme) {
-  $primary: map.get($theme, primary);
-
   mifosx-login {
     .login-container {
-      background-color: #424242;
-      box-shadow: 1px 1px 50px white;
+      background-color: var(--ms-color-surface);
+      box-shadow: none;
 
       .img-container {
         max-width: 20rem;
         padding: 0;
         margin: 0;
-        content: url('../assets/images/white-mifos.png');
-      }
-
-      .logo-section {
-        margin: 4rem 0 3rem !important;
+        content: url('../assets/images/magma/logo-horizontal-oscuro.png');
       }
     }
 
     .cover {
       .cover-content {
-        color: white;
+        color: var(--ms-color-text-primary);
 
         .cover-description {
           .cover-link {
-            color: white !important;
+            color: var(--ms-color-text-link) !important;
 
             &:hover {
-              color: #d3d3d3;
+              color: var(--ms-color-text-primary);
             }
           }
         }
@@ -47,19 +44,18 @@
   }
 
   mifosx-login-form {
-    color: white;
+    color: var(--ms-color-text-primary);
   }
 
   mifosx-view-bulk-import {
     .cover {
-      background-color: #424242;
-      margin-top: 1%;
+      background-color: var(--ms-color-surface);
     }
   }
 
   mifosx-clients {
     .status {
-      color: white;
+      color: var(--ms-color-text-primary);
     }
   }
 
@@ -72,85 +68,17 @@
   mifosx-recurring-deposits-account-view,
   mifosx-savings-account-view {
     .account-card {
-      margin: 0 auto;
-      max-width: 90rem;
-      width: 90%;
-      padding: 0;
-
-      i,
-      img:hover {
-        cursor: pointer;
-      }
-
-      .header {
-        background-color: mat.m2-get-color-from-palette($primary, 500);
-        padding: 1%;
-      }
-
       .header-title-group {
-        .account-card-title {
-          color: white;
-          width: 90%;
-        }
-
-        p {
-          color: white;
-        }
-
         .account-overview {
-          border: none;
-          max-width: 240px;
-          font-size: 14px;
-
           tr:nth-child(even) {
             background-color: transparent !important;
           }
         }
       }
 
-      .profile-image-container {
-        margin: 1%;
-
-        .profile-image {
-          object-fit: cover;
-          border-radius: 20px;
-        }
-
-        .signature {
-          background-color: mat.m2-get-color-from-palette($primary, 500);
-        }
-      }
-
-      .account-actions {
-        align-self: flex-end;
-        margin: 0 1%;
-
-        i {
-          margin-bottom: 2px;
-          margin-right: 4px;
-        }
-      }
-
       .navigation-tabs {
-        background-color: #303135;
-        color: white;
-        overflow: auto;
-      }
-
-      .content {
-        .savings-account-tables {
-          padding: 1%;
-          margin: 1%;
-
-          .table-headers {
-            margin: 0;
-            padding: 6px;
-          }
-
-          td {
-            padding: 3px;
-          }
-        }
+        background-color: transparent;
+        color: var(--ms-color-text-primary);
       }
     }
   }
@@ -166,7 +94,7 @@ body.dark-theme {
   table {
     tbody {
       tr:nth-child(even) {
-        background-color: #303135 !important;
+        background-color: var(--ms-color-surface-zebra) !important;
       }
     }
   }
@@ -174,272 +102,143 @@ body.dark-theme {
 
 .dark-theme {
   .sticky {
-    background-color: #303135 !important;
+    background-color: var(--ms-color-surface) !important;
   }
 
-  // Override the background color of the label text for dark theme
+  // Legacy (pre-MDC) Material class names still found in a few templates.
   .mat-option-text,
   .mat-input-element,
   .mat-form-field-label {
-    color: white !important;
+    color: var(--ms-color-text-primary) !important;
   }
 
-  // A focused field is painted with the primary hue, and the dark palette carries the same dark
-  // blue as the light one, so against the dark field surface the label and the underline fall to
-  // about 1.6:1. Lighten the brand hue the way the loan product tokens do for their accent, using
-  // Material's own tokens so the label, the underline and the outlined border all follow.
   // The tokens have to sit on the field itself: `mat.all-component-colors` emits the same ones on
   // `.dark-theme`, and being included later it would win a tie there. Screens that supply their own
   // accent do so through `--lp-accent` on their host, so read that first and fall back to ours.
   .mat-mdc-form-field {
-    --mifosx-field-focus: #{color-mix(in srgb, var(--brand-primary-100, #5ba2ec) 50%, var(--mat-app-text-color, #fff))};
+    --mifosx-field-focus: var(--ms-color-brand-primary);
     --mat-form-field-filled-focus-label-text-color: var(--lp-accent, var(--mifosx-field-focus));
     --mat-form-field-filled-focus-active-indicator-color: var(--lp-accent, var(--mifosx-field-focus));
     --mat-form-field-outlined-focus-label-text-color: var(--lp-accent, var(--mifosx-field-focus));
     --mat-form-field-outlined-focus-outline-color: var(--lp-accent, var(--mifosx-field-focus));
   }
 
-  // Override Material typography heading colors for dark theme
   h2.mat-h2,
   h3.mat-h3,
   h4.mat-h4 {
-    color: rgb(255 255 255 / 87%) !important;
+    color: var(--ms-color-text-primary) !important;
   }
 
   mifosx-popover,
   .mat-menu-content,
   .mat-dialog-container {
-    background-color: #303135;
-    color: white;
+    background-color: var(--ms-color-surface);
+    color: var(--ms-color-text-primary);
   }
 
-  // Override the background color of the calendar for dark theme
   .mat-calendar,
   .mat-calendar-body-cell,
   .mat-calendar-body-label,
   .mat-calendar-table,
   .mat-list-item.active {
-    background-color: #303135;
+    background-color: var(--ms-color-surface);
     border: none;
   }
 
-  .mat-tab-label-active {
-    border-bottom: lightgray;
-  }
-
-  // Changing the logo color for dark mode
+  // Placeholder artwork (logo, account and user placeholders) is drawn dark on light.
   .img-button,
   .app-user-photo,
   .profile-image {
     filter: invert(100%);
   }
 
-  a:any-link {
-    color: #0098ff !important;
+  // Plain links take the dark link token. Design System anchors (`ms-*`), the
+  // shell breadcrumbs and anchors styled as buttons, tabs or menu items keep
+  // the colour of their own component.
+  a:any-link:not(
+      [class*='ms-'],
+      .breadcrumb-link,
+      .mat-mdc-button-base,
+      .mat-mdc-tab-link,
+      .mat-mdc-menu-item,
+      .btn-primary,
+      .btn-ghost
+    ) {
+    color: var(--ms-color-text-link) !important;
   }
 
   span.breadcrumb-link {
     a {
-      color: #0098ff !important;
+      color: var(--ms-color-text-link) !important;
     }
   }
 
   div.alert {
-    color: #303135;
+    color: var(--ms-color-text-primary);
   }
 
-  a.mat-tab-link,
   a.tab-link {
-    color: white !important;
+    color: var(--ms-color-text-secondary) !important;
   }
 
-  // Related-entity links (member groups, parent center) inside the blue
-  // account header; the global dark link blue is unreadable there. Links
-  // with .entity-link on regular surfaces keep the global dark link blue.
   mifosx-account-header a.entity-link {
-    color: #e3f2fd !important;
+    color: var(--ms-color-text-link) !important;
   }
 
-  // Entity-list toolbar buttons are anchors; keep their own colors instead
-  // of the global dark link blue.
   a.btn-primary {
-    color: #fff !important;
+    color: var(--ms-color-on-primary) !important;
   }
 
   a.btn-ghost {
-    color: var(--loan-text-2, rgb(255 255 255 / 60%)) !important;
-  }
-
-  a.btn-ghost:hover {
-    color: var(--loan-blue-700, #90caf9) !important;
+    color: var(--ms-color-text-primary) !important;
   }
 
   .cdk-drag-preview {
     box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow:
-      0 5px 5px -3px rgb(0 0 0 / 20%),
-      0 8px 10px 1px rgb(0 0 0 / 14%),
-      0 3px 14px 2px rgb(0 0 0 / 12%);
+    border-radius: var(--ms-radius-md);
+    border: 1px solid var(--ms-color-border);
+    box-shadow: var(--ms-shadow-float);
     display: table;
-    background-color: white;
-    color: #303135;
+    background-color: var(--ms-color-surface);
+    color: var(--ms-color-text-primary);
   }
 
   #footer {
-    color: white;
+    color: var(--ms-color-text-secondary);
 
-    .mat-checkbox {
-      color: white !important;
-    }
-
+    .mat-checkbox,
     .versions {
-      color: white !important;
+      color: var(--ms-color-text-secondary) !important;
     }
 
     .business-date {
-      color: #0098ff;
+      color: var(--ms-color-text-link);
     }
   }
 
   .copy-label {
-    color: var(--md-sys-color-on-surface-variant, #c4c6d0);
+    color: var(--ms-color-text-secondary);
 
     p {
-      color: white !important;
+      color: var(--ms-color-text-primary) !important;
     }
   }
 
   .external-asset-owner-status {
-    color: white;
+    color: var(--ms-color-text-primary);
   }
 
-  // Home page logo styling for dark mode
-  mifosx-home {
-    [src*='mifos_lg-logo.jpg'],
-    [src$='_home.png'] {
-      content: url('../assets/images/white-mifos.png');
-    }
-  }
-
-  // Table row hover effect for dark mode
   .mat-mdc-row:hover,
   tr.select-row:hover,
   .select-row:hover {
-    background-color: rgb(255 255 255 / 8%) !important;
+    background-color: var(--ms-color-surface-hover) !important;
   }
 
-  // Documents section dark theme styling
-  mifosx-entity-documents-tab {
-    .document-card {
-      background: #2d2d2d;
-      border-color: #444;
-      box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
-
-      &:hover {
-        box-shadow: 0 4px 12px rgb(0 0 0 / 50%);
-      }
-    }
-
-    .thumb {
-      background: #1a1a1a;
-    }
-
-    .preview-overlay {
-      background: rgb(45 45 45 / 95%);
-      color: #0098ff;
-    }
-
-    .placeholder {
-      color: #b0b0b0;
-
-      fa-icon {
-        color: #888;
-      }
-    }
-
-    .card-body {
-      .title {
-        color: rgb(255 255 255 / 87%);
-      }
-
-      .meta {
-        color: #aaa;
-      }
-
-      .description {
-        color: rgb(255 255 255 / 70%);
-      }
-    }
-
-    .empty-state {
-      background: #2d2d2d;
-      border-color: #555;
-      color: rgb(255 255 255 / 70%);
-
-      .muted {
-        color: #888;
-      }
-    }
-  }
-
-  // Notes section dark theme styling
-  mifosx-entity-notes-tab {
-    .tab-container {
-      h3 {
-        color: rgb(255 255 255 / 87%);
-      }
-    }
-
-    .note-card {
-      background-color: #2d2d2d;
-      border-color: #444;
-      box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
-
-      &:hover {
-        box-shadow: 0 4px 8px rgb(0 0 0 / 50%);
-        border-color: #555;
-      }
-    }
-
-    .note-content {
-      color: rgb(255 255 255 / 87%);
-    }
-
-    .note-footer {
-      border-top-color: #444;
-    }
-
-    .note-meta {
-      color: #aaa;
-    }
-
-    .created-by {
-      color: #0098ff;
-    }
-
-    .created-date {
-      color: #bbb;
-    }
-
-    .empty-state {
-      background-color: #2d2d2d;
-      color: rgb(255 255 255 / 70%);
-      border-color: #555;
-    }
-  }
-
-  // Configuration wizard dark theme styling
   mifosx-configuration-wizard {
     .config-wizard-content {
-      .description {
-        color: white !important;
-      }
-
-      .progress-section {
-        .progress-label {
-          color: white !important;
-        }
+      .description,
+      .progress-section .progress-label {
+        color: var(--ms-color-text-primary) !important;
       }
     }
   }

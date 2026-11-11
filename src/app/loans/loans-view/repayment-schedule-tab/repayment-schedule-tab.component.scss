@@ -7,20 +7,70 @@
  */
 
 @use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
 
-table {
+// Repayment schedule (pen "Calendario de Pagos"): compact, scannable, amounts right aligned.
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
+}
+
+.schedule__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.schedule__table {
   width: 100%;
-  margin: 2% 0%;
+  font-variant-numeric: tabular-nums;
+
+  --mat-table-header-container-height: 34px;
+  --mat-table-row-item-container-height: 34px;
+  --mat-table-footer-container-height: 38px;
+  --mat-table-row-item-label-text-size: var(--ms-font-size-label);
+  --mat-table-header-headline-size: var(--ms-font-size-caption);
+
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell,
+  td.mat-mdc-footer-cell {
+    padding: 0 var(--ms-space-2);
+    white-space: nowrap;
+  }
+
+  th.mat-mdc-header-cell {
+    color: var(--ms-color-text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  td.mat-mdc-footer-cell {
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
+  }
+
+  .r-amount {
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
 }
 
-.table-row {
-  font-size: small;
+// Installments not yet due read as secondary information.
+.schedule__row--future td.mat-mdc-cell {
+  color: var(--ms-color-text-secondary);
 }
 
-.container {
-  padding-bottom: 2%;
-  width: 98%;
+.schedule__state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ms-space-1);
+}
+
+.schedule__state--paid {
+  color: var(--ms-color-success);
 }
 
 .check {
@@ -28,11 +78,11 @@ table {
 }
 
 .amount-changed {
-  color: $status-approved;
+  color: var(--ms-color-info);
 }
 
 .principal-mismatch {
-  color: $msg-danger;
+  color: var(--ms-color-danger);
   font-weight: 600;
 }
 
@@ -41,46 +91,23 @@ table {
   opacity: 0.55;
 }
 
-#repaymentScheduleEdit td.mat-mdc-footer-cell {
-  font-weight: 600;
-}
-
 .additional {
-  color: $status-approved;
+  color: var(--ms-color-info);
 }
 
 .downpayment {
-  color: $status-downpayment;
+  color: var(--ms-color-warning);
 }
 
 .paid {
-  color: $status-paid;
+  color: var(--ms-color-success);
 }
 
 .current {
-  color: $status-active;
-}
-
-.overdued {
-  color: $status-matured;
-}
-
-#repaymentSchedule,
-#repaymentScheduleEdit {
-  width: 100%;
-}
-
-.mat-header-cell {
-  color: rgb(0 0 0 / 54%);
-  font-size: 12px;
+  color: var(--ms-color-brand-primary);
   font-weight: 500;
 }
 
-:host-context(.dark-theme) .mat-header-cell {
-  color: rgb(255 255 255 / 70%);
-}
-
-div.container {
-  overflow: auto;
-  max-width: 100%;
+.overdued {
+  color: var(--ms-color-danger);
 }

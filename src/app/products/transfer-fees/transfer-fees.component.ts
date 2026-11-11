@@ -23,7 +23,6 @@ import {
   MatRowDef,
   MatRow
 } from '@angular/material/table';
-import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /** Custom Imports */
@@ -56,7 +55,6 @@ import {
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

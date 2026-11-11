@@ -27,7 +27,6 @@ import {
   MatExpansionPanelTitle,
   MatExpansionPanelDescription
 } from '@angular/material/expansion';
-import { MatDivider } from '@angular/material/divider';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -49,7 +48,6 @@ import { environment } from 'environments/environment';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    MatDivider,
     MatSlideToggle,
     MatStepperPrevious,
     MatStepperNext

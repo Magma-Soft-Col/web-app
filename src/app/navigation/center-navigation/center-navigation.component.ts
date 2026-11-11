@@ -20,7 +20,6 @@ import {
   MatCardContent
 } from '@angular/material/card';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { AccountNumberComponent } from '../../shared/account-number/account-number.component';
 import { ExternalIdentifierComponent } from '../../shared/external-identifier/external-identifier.component';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
@@ -38,7 +37,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     FaIconComponent,
     MatCardTitleGroup,
     MatCardTitle,
-    MatTooltip,
     MatCardSubtitle,
     AccountNumberComponent,
     ExternalIdentifierComponent,

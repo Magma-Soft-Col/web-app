@@ -10,7 +10,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Accounting } from 'app/core/utils/accounting';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatDivider } from '@angular/material/divider';
 import {
   MatTable,
   MatColumnDef,
@@ -36,7 +35,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

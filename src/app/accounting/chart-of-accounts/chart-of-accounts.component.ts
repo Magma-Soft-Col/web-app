@@ -30,7 +30,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import {
   MatTreeNestedDataSource,
@@ -56,9 +57,9 @@ import { GlAccountTreeService } from './gl-account-tree.service';
 import { PopoverService } from '../../configuration-wizard/popover/popover.service';
 import { ConfigurationWizardService } from '../../configuration-wizard/configuration-wizard.service';
 import { TreeControlService } from 'app/shared/common-logic/tree-control.service';
-import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
+import { TranslateService } from '@ngx-translate/core';
 import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -71,8 +72,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./chart-of-accounts.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatButtonToggleGroup,
-    MatButtonToggle,
     FaIconComponent,
     MatTable,
     MatSort,
@@ -87,6 +86,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRow,
     MatRowDef,
     MatRow,
+    MatNoDataRow,
     MatPaginator,
     MatTree,
     MatTreeNodeDef,
@@ -105,6 +105,7 @@ export class ChartOfAccountsComponent implements AfterViewInit, OnInit {
   private treeControlService = inject(TreeControlService);
   private configurationWizardService = inject(ConfigurationWizardService);
   private popoverService = inject(PopoverService);
+  private translateService = inject(TranslateService);
 
   /** Button toggle group form control for type of view. (list/tree) */
   viewGroup = new UntypedFormControl('listView');
@@ -129,6 +130,13 @@ export class ChartOfAccountsComponent implements AfterViewInit, OnInit {
   glAccount: GLAccountNode;
   /** Flag to check if tree is expanded or collapsed. */
   isTreeExpanded = true;
+
+  /** Client-side filters over the already loaded accounts; combined with AND. */
+  searchText = '';
+  typeFilter = '';
+  statusFilter: '' | 'enabled' | 'disabled' = '';
+  /** Account types present in the loaded data, in accounting order. */
+  accountTypes: string[] = [];
 
   /** Paginator for chart of accounts table. */
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -168,6 +176,8 @@ export class ChartOfAccountsComponent implements AfterViewInit, OnInit {
    */
   ngOnInit() {
     this.tableDataSource = new MatTableDataSource(this.glAccountData);
+    this.tableDataSource.filterPredicate = (glAccount: any) => this.matchesFilters(glAccount);
+    this.accountTypes = this.collectAccountTypes(this.glAccountData);
     this.glAccountTreeService.treeDataChange.subscribe((glAccountTreeData: GLAccountNode[]) => {
       this.nestedTreeDataSource.data = glAccountTreeData;
       this.nestedTreeControl.expand(this.nestedTreeDataSource.data[0]);
@@ -209,7 +219,110 @@ export class ChartOfAccountsComponent implements AfterViewInit, OnInit {
    * @param {string} filterValue Value to filter data.
    */
   applyFilter(filterValue: string) {
-    this.tableDataSource.filter = filterValue.trim().toLowerCase();
+    this.searchText = filterValue;
+    this.refreshFilter();
+  }
+
+  applyTypeFilter(type: string) {
+    this.typeFilter = type;
+    this.refreshFilter();
+  }
+
+  applyStatusFilter(status: '' | 'enabled' | 'disabled') {
+    this.statusFilter = status;
+    this.refreshFilter();
+  }
+
+  clearFilters() {
+    this.searchText = '';
+    this.typeFilter = '';
+    this.statusFilter = '';
+    this.refreshFilter();
+  }
+
+  get hasActiveFilters(): boolean {
+    return !!(this.searchText.trim() || this.typeFilter || this.statusFilter);
+  }
+
+  /** Human readable criteria, shown when no account matches. */
+  activeFilterSummary(): string {
+    const parts: string[] = [];
+    if (this.searchText.trim()) {
+      parts.push(`"${this.searchText.trim()}"`);
+    }
+    if (this.typeFilter) {
+      parts.push(this.translateService.instant(`labels.inputs.accounting.${this.typeFilter}`));
+    }
+    if (this.statusFilter) {
+      parts.push(
+        this.translateService.instant(
+          this.statusFilter === 'enabled' ? 'labels.inputs.Enabled' : 'labels.inputs.Disabled'
+        )
+      );
+    }
+    return parts.join(' · ');
+  }
+
+  /** Badge variant per account type; the label is always shown as text too. */
+  typeBadgeClass(type: string): string {
+    switch (type) {
+      case 'ASSET':
+        return 'ms-badge--info';
+      case 'LIABILITY':
+        return 'ms-badge--warning';
+      case 'INCOME':
+        return 'ms-badge--success';
+      case 'EXPENSE':
+        return 'ms-badge--danger';
+      default:
+        return '';
+    }
+  }
+
+  private refreshFilter() {
+    // MatTableDataSource only re-runs the predicate when `filter` changes and is non-empty.
+    this.tableDataSource.filter = this.hasActiveFilters ? [
+          this.searchText.trim().toLowerCase(),
+          this.typeFilter,
+          this.statusFilter
+        ].join('|') : '';
+    this.paginator?.firstPage();
+  }
+
+  private matchesFilters(glAccount: any): boolean {
+    if (this.typeFilter && glAccount.type?.value !== this.typeFilter) {
+      return false;
+    }
+    if (this.statusFilter && (this.statusFilter === 'disabled') !== !!glAccount.disabled) {
+      return false;
+    }
+    const term = this.searchText.trim().toLowerCase();
+    if (!term) {
+      return true;
+    }
+    return [
+      glAccount.name,
+      glAccount.glCode,
+      glAccount.usage?.value,
+      glAccount.type?.value
+    ]
+      .filter((value) => value !== undefined && value !== null)
+      .some((value) => String(value).toLowerCase().includes(term));
+  }
+
+  private collectAccountTypes(glAccounts: any[]): string[] {
+    const order = [
+      'ASSET',
+      'LIABILITY',
+      'EQUITY',
+      'INCOME',
+      'EXPENSE'
+    ];
+    const present = new Set<string>((glAccounts ?? []).map((glAccount: any) => glAccount.type?.value).filter(Boolean));
+    return [
+      ...order.filter((type) => present.has(type)),
+      ...[...present].filter((type) => !order.includes(type))
+    ];
   }
 
   /**

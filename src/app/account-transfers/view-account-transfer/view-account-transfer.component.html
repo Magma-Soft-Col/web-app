@@ -10,7 +10,12 @@
   <div class="container m-b-20 align-end gap-2px">
     @if (!viewAccountTransferData.reversed) {
       <span>
-        <button mat-raised-button color="warn" *mifosxHasPermission="'ADJUST_ACCOUNTTRANSFER'" (click)="undoTransfer()">
+        <button
+          mat-stroked-button
+          color="warn"
+          *mifosxHasPermission="'ADJUST_ACCOUNTTRANSFER'"
+          (click)="undoTransfer()"
+        >
           <fa-icon icon="undo" class="m-r-10"></fa-icon>{{ 'labels.buttons.undo_account_transfer' | translate }}
         </button>
       </span>
@@ -118,8 +123,8 @@
       </div>
     </mat-card-content>
 
-    <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-      <button type="button" color="primary" mat-raised-button (click)="goBack()">
+    <mat-card-actions class="ms-actions align-end">
+      <button type="button" color="primary" mat-flat-button (click)="goBack()">
         {{ 'labels.buttons.Back' | translate }}
       </button>
     </mat-card-actions>

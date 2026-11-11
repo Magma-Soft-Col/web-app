@@ -6,11 +6,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.headingContent {
-  margin-bottom: 1%;
-  margin-top: 1%;
+/* Survey list (pen list pattern). */
+.survey-table {
+  width: 100%;
+
+  .ms-num {
+    text-align: right;
+  }
 }
 
-.headingName {
-  display: block;
+.survey-name {
+  font-weight: 500;
 }

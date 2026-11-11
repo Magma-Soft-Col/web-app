@@ -11,7 +11,7 @@
     <mat-stepper
       orientation="vertical"
       [linear]="false"
-      class="mat-elevation-z8"
+      class="loan-stepper"
       labelPosition="bottom"
       #loansAccountStepper
     >
@@ -121,11 +121,9 @@
   }
 
   @if (loanProductsBasicDetails.length === 0) {
-    <div class="alert">
-      <div class="message">
-        <i class="fa fa-exclamation-circle alert-check"></i>
-        {{ 'labels.text.No Loan Product was found' | translate }}
-      </div>
+    <div class="ms-panel ms-empty" role="status">
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      <strong>{{ 'labels.text.No Loan Product was found' | translate }}</strong>
     </div>
   }
 </div>

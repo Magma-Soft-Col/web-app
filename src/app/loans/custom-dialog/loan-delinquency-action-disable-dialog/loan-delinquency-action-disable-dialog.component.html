@@ -22,7 +22,7 @@
     }}
   </p>
   <div class="layout-column">
-    <mat-form-field class="flex-48">
+    <mat-form-field>
       <mat-label>{{ 'labels.inputs.Business Date' | translate }}</mat-label>
       <input matInput [matDatepicker]="businessDatePicker" formControlName="startDate" readonly />
       <mat-datepicker-toggle matSuffix [for]="businessDatePicker" disabled></mat-datepicker-toggle>
@@ -31,9 +31,9 @@
   </div>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{ confirm: true }">
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="{ confirm: true }">
     {{ 'labels.buttons.Confirm' | translate }}
   </button>
 </mat-dialog-actions>

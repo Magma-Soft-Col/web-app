@@ -6,14 +6,16 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<!-- Toolbar icon — always visible -->
+<!-- Toolbar trigger: a search field look-alike that opens the spotlight -->
 <button
-  mat-icon-button
+  type="button"
   class="search-toggle hide-lt-sm"
   (click)="toggleSearchVisibility()"
-  [matTooltip]="'labels.text.Search' | translate"
+  [attr.aria-label]="'labels.text.Search' | translate"
+  aria-haspopup="dialog"
 >
-  <fa-icon icon="search" size="lg"></fa-icon>
+  <fa-icon icon="search" class="search-toggle__icon"></fa-icon>
+  <span class="search-toggle__label">{{ 'labels.text.Search' | translate }}…</span>
 </button>
 
 <!-- Spotlight modal -->
@@ -30,6 +32,7 @@
           type="text"
           [formControl]="query"
           [placeholder]="'labels.text.Search' | translate"
+          [attr.aria-label]="'labels.text.Search' | translate"
           (keydown.enter)="search()"
           autocomplete="off"
           spellcheck="false"

@@ -6,37 +6,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+table {
+  width: 100%;
+}
+
 .client-link {
-  align-items: center;
   display: inline-flex;
-  margin-right: 0.5rem;
+  align-items: center;
+  margin-right: var(--ms-space-2);
 }
 
 .actions {
   white-space: nowrap;
 }
 
-.gap-16px {
-  gap: 16px;
-}
-
-.m-b-16 {
-  margin-bottom: 16px;
-}
-
-.self-service-indicator {
-  margin-right: 0.25rem;
-}
-
-.self-service-true {
-  color: #32cd32;
-}
-
-.self-service-false {
-  color: #f44336;
-}
-
-.empty-state {
-  padding: 1rem;
-  text-align: center;
+.link-client-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
 }

@@ -40,7 +40,6 @@ import { DeleteDialogComponent } from 'app/shared/delete-dialog/delete-dialog.co
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import { MatFormField, MatLabel, MatError, MatHint } from '@angular/material/form-field';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatDivider } from '@angular/material/divider';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -57,7 +56,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatCheckbox,
     MatHint,
-    MatDivider,
     FaIconComponent,
     MatTable,
     MatSort,

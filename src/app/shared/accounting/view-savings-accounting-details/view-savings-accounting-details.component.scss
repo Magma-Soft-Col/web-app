@@ -6,11 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/colours' as *;
-
 .container {
-  padding: 1%;
-  margin: 1%;
+  padding: 0;
+  margin: 0;
   width: 100%;
 }
 
@@ -18,7 +16,8 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
 }
 
 table {
@@ -47,9 +46,9 @@ table {
 }
 
 .mat-h4 {
-  margin-top: 10px !important;
-  font-weight: 200;
-  color: $status-approved;
+  margin-top: var(--ms-space-3) !important;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
 }
 
 .mat-elevation-z1 {

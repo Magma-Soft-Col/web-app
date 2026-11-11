@@ -47,12 +47,14 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'mifosx-global-configurations-tab',
   templateUrl: './global-configurations-tab.component.html',
   styleUrls: ['./global-configurations-tab.component.scss'],
   imports: [
+    MatIconButton,
     ...STANDALONE_SHARED_IMPORTS,
     MatTable,
     MatSort,

@@ -6,47 +6,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
 @use '../../loan-tab-shared' as shared;
 
-/* ── Design tokens: --ch-* and --tx-* come from loan-tab-shared ── */
+/* ── Transaction-type tokens (shared with transactions-tab) ── */
 @include shared.transaction-type-tokens;
 
-:host {
-  --ch-shadow-sm: 0 2px 8px rgb(13 43 94 / 10%);
-}
-
-.container {
-  max-width: 37rem;
-
-  .card-content {
-    div {
-      margin: 0.5rem 0;
-      overflow-wrap: break-word;
-    }
-
-    mifosx-transaction-payment-detail {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-  }
-}
-
+// Transaction detail (pen): actions on the right, then one panel with the
+// type badge, label/value pairs, linked transactions and payment details.
 .transaction-buttons {
-  margin-top: 3%;
+  justify-content: flex-end;
+  margin-bottom: var(--ms-space-4);
 }
 
-.loan-relation {
-  background-color: $mid-grey;
-}
-
-/* ── Card: shadow + border-left per transaction type ─────────── */
+/* ── Panel: left marker per transaction type ─────────────────── */
 .transaction-card {
-  box-shadow: var(--ch-shadow-sm) !important;
-  border-radius: 12px !important;
-  overflow: hidden;
-
   &.card-tx--repayment {
     border-left: 4px solid var(--tx-repayment);
   }
@@ -86,6 +59,12 @@
   &.card-tx--discount {
     border-left: 4px solid var(--tx-discount);
   }
+
+  mifosx-transaction-payment-detail {
+    display: block;
+    width: 100%;
+    margin-top: var(--ms-space-4);
+  }
 }
 
 /* ── Transaction header ──────────────────────────────────────── */
@@ -93,49 +72,63 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0 1rem;
-  border-bottom: 1px solid var(--ch-border);
-  margin-bottom: 0.25rem;
+  gap: var(--ms-space-3);
+  padding-bottom: var(--ms-space-4);
+  margin-bottom: var(--ms-space-4);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+/* ── Label/value pairs ───────────────────────────────────────── */
+.txn-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(160px, 1fr) minmax(0, 2fr);
+  gap: var(--ms-space-3) var(--ms-space-6);
+  align-items: baseline;
+  margin: 0;
+
+  dt,
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+
+    dd {
+      margin-bottom: var(--ms-space-3);
+    }
+  }
+}
+
+.txn-divider {
+  margin: var(--ms-space-5) 0;
+}
+
+.txn-subtitle {
+  margin-bottom: var(--ms-space-3);
+}
+
+.txn-relations {
+  width: 100%;
+
+  .ms-num {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+.txn-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ms-space-3);
+  margin-top: var(--ms-space-5);
+  padding-top: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }
 
 /* ── Badge system (shared with transactions-tab) ─────────────── */
 @include shared.transaction-badges;
-
-/* ── Status pill (reversed / linked state override) ──────────── */
-.txn-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 500;
-  border: 1px solid transparent;
-}
-
-.txn-status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.txn-status-pill--reversed {
-  background: var(--tx-reversed-bg);
-  color: var(--tx-reversed);
-  border-color: var(--tx-reversed);
-
-  .txn-status-dot {
-    background: var(--tx-reversed);
-  }
-}
-
-.txn-status-pill--linked {
-  background: var(--tx-linked-bg);
-  color: var(--tx-linked);
-  border-color: var(--tx-linked);
-
-  .txn-status-dot {
-    background: var(--tx-linked);
-  }
-}

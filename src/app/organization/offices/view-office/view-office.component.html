@@ -6,22 +6,16 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container narrow-container extra-small">
-  <div class="action-bar">
-    <button
-      mat-raised-button
-      color="primary"
-      class="edit-button"
-      [routerLink]="['./edit']"
-      *mifosxHasPermission="'UPDATE_OFFICE'"
-    >
-      <fa-icon icon="edit" class="m-r-10"></fa-icon>
-      {{ 'labels.buttons.Edit' | translate }}
-    </button>
-  </div>
+<div class="container">
+  <div class="ms-page">
+    <div class="ms-actions page-actions">
+      <button mat-flat-button color="primary" [routerLink]="['./edit']" *mifosxHasPermission="'UPDATE_OFFICE'">
+        <fa-icon icon="edit" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
 
-  <mat-card class="office-card">
-    <mat-card-content class="card-content">
+    <div class="office-tabs">
       <nav mat-tab-nav-bar class="navigation-tabs" [tabPanel]="tabPanel">
         <a
           mat-tab-link
@@ -29,7 +23,6 @@
           routerLinkActive
           #general="routerLinkActive"
           [active]="general.isActive"
-          class="compact-tab"
         >
           {{ 'labels.inputs.General' | translate }}
         </a>
@@ -39,7 +32,6 @@
           routerLinkActive
           #address="routerLinkActive"
           [active]="address.isActive"
-          class="compact-tab"
           *mifosxHasPermission="'READ_OFFICE'"
         >
           {{ 'labels.heading.Address' | translate }}
@@ -50,7 +42,6 @@
           routerLinkActive
           #services="routerLinkActive"
           [active]="services.isActive"
-          class="compact-tab"
           *mifosxHasPermission="'READ_OFFICE'"
         >
           {{ 'labels.heading.Services' | translate }}
@@ -61,7 +52,6 @@
           routerLinkActive
           #schedules="routerLinkActive"
           [active]="schedules.isActive"
-          class="compact-tab"
           *mifosxHasPermission="'READ_OFFICE'"
         >
           {{ 'labels.heading.Schedules' | translate }}
@@ -75,7 +65,6 @@
               routerLinkActive
               #datatable="routerLinkActive"
               [active]="datatable.isActive"
-              class="compact-tab"
             >
               {{ officeDatatable.registeredTableName }}
             </a>
@@ -83,9 +72,9 @@
         }
       </nav>
 
-      <mat-tab-nav-panel #tabPanel class="tab-panel">
+      <mat-tab-nav-panel #tabPanel class="ms-panel ms-panel--padded office-tab-panel">
         <router-outlet></router-outlet>
       </mat-tab-nav-panel>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

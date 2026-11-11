@@ -6,41 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.currency-conversion-form-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 24px;
-  max-width: 820px;
-  margin: 0 auto;
-
-  .exchange-rate-field {
-    flex: 1 1 320px;
-    min-width: 260px;
-  }
-
-  .field-label {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--md-sys-color-on-surface-variant, #44474e);
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  mat-form-field {
-    width: 100%;
-  }
-}
-
 .form-error,
-.conversion-error,
-.conversion-message {
-  margin-bottom: 4px;
-}
-
-.form-error {
-  flex-basis: 100%;
+.conversion-error {
+  margin-bottom: var(--ms-space-1);
 }
 
 .conversion-error {
-  color: var(--warn-color, #b00020);
+  color: var(--ms-color-danger);
+}
+
+.container + .container {
+  margin-top: var(--ms-space-5);
+}
+
+.ms-detail-row .ms-label {
+  flex: 0 0 40%;
 }

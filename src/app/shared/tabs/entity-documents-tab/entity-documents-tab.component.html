@@ -11,7 +11,7 @@
     <h3 class="flex-90">{{ 'labels.heading.Documents' | translate }}</h3>
 
     <div class="flex-10" *mifosxHasPermission="'CREATE_DOCUMENT'">
-      <button mat-raised-button class="f-right" color="primary" (click)="uploadDocument()">
+      <button mat-flat-button class="f-right" color="primary" (click)="uploadDocument()">
         <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
       </button>
     </div>

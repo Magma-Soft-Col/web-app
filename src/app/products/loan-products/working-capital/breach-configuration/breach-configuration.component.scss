@@ -6,23 +6,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-list-table {
   width: 100%;
-
-  .select-row:hover {
-    cursor: pointer;
-  }
 }
 
-.form-container {
-  display: flex;
-  flex-direction: row;
-  gap: 2%;
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
 }
 
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-num {
+  text-align: right;
+}
+
+/* Right-align the header of numeric sortable columns with their figures. */
+th.ms-num ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
+}
+
+/* Compact icon-only delete action inside a table row. */
 .account-action-button {
-  min-width: 1.625rem;
-  padding: 0 0.375rem;
-  margin: 0.25rem;
-  line-height: 1.5625rem;
+  min-width: var(--ms-control-height);
+  padding: 0 var(--ms-space-2);
 }

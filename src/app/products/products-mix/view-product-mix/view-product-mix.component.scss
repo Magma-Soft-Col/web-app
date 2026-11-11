@@ -6,6 +6,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.detail-header {
+  justify-content: flex-end;
+}
+
+.ms-list-table {
   width: 100%;
+}
+
+.ms-cell-name {
+  font-weight: 500;
 }

@@ -25,7 +25,6 @@ import {
   MatExpansionPanelTitle,
   MatExpansionPanelDescription
 } from '@angular/material/expansion';
-import { MatDivider } from '@angular/material/divider';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { YesnoPipe } from '../../../pipes/yesno.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -46,7 +45,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    MatDivider,
     DateFormatPipe,
     YesnoPipe
   ],

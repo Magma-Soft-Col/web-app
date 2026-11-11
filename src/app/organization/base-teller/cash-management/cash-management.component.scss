@@ -62,12 +62,12 @@
 
     div {
       padding: 16px;
-      border: 1px solid var(--mat-sys-outline-variant);
-      border-radius: 8px;
+      border: 1px solid var(--ms-color-border-subtle);
+      border-radius: var(--ms-radius-md);
     }
 
     dt {
-      color: var(--mat-sys-on-surface-variant);
+      color: var(--ms-color-text-secondary);
       margin-bottom: 8px;
     }
 
@@ -78,28 +78,28 @@
   }
 
   .difference[data-type='OVERAGE'] {
-    border-inline-start: 4px solid var(--mat-sys-primary);
+    border-inline-start: 4px solid var(--ms-color-brand-primary);
   }
 
   .difference[data-type='SHORTAGE'] {
-    border-inline-start: 4px solid var(--mat-sys-error);
+    border-inline-start: 4px solid var(--ms-color-danger);
   }
 
   .message,
   .loading-state {
     padding: 16px;
-    border-radius: 8px;
+    border-radius: var(--ms-radius-md);
   }
 
   .error {
-    color: var(--mat-sys-error);
-    background: var(--mat-sys-error-container);
+    color: var(--ms-color-danger);
+    background: var(--ms-color-danger-bg);
   }
 
   .warning,
   .empty-state,
   .hint {
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--ms-color-text-secondary);
   }
 
   .loading-state {

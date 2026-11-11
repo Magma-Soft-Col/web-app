@@ -22,6 +22,7 @@ import {
   MatRowDef,
   MatRow
 } from '@angular/material/table';
+import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { StatusLookupPipe } from '../../../pipes/status-lookup.pipe';
 import { AccountsFilterPipe } from '../../../pipes/accounts-filter.pipe';
@@ -46,6 +47,7 @@ import { GroupsService } from '../../groups.service';
     MatCell,
     NgClass,
     MatTooltip,
+    MatIconButton,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

@@ -9,7 +9,7 @@
 <h1 mat-dialog-title>{{ 'labels.menus.Undo Charge-Off' | translate }}</h1>
 <div mat-dialog-content>
   <p>{{ 'labels.dialogContext.Are you sure you want to undo the charge-off' | translate }} ?</p>
-  <form [formGroup]="undoForm" class="layout-column">
+  <form [formGroup]="undoForm" class="layout-column undo-charge-off-form">
     <mat-form-field>
       <mat-label>{{ 'labels.inputs.Reversal External Id' | translate }}</mat-label>
       <input matInput formControlName="reversalExternalId" />
@@ -21,8 +21,8 @@
   </form>
 </div>
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="warn" (click)="confirm()">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="warn" (click)="confirm()">
     {{ 'labels.buttons.Confirm' | translate }}
   </button>
 </mat-dialog-actions>

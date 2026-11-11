@@ -7,12 +7,12 @@
 -->
 
 <div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['../', 'edit']">
+  <button mat-flat-button color="primary" [routerLink]="['../', 'edit']">
     <fa-icon icon="edit" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Edit' | translate }}
   </button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [routerLink]="['../', 'list-account-transactions']"
     *mifosxHasPermission="'READ_ACCOUNTTRANSFER'"

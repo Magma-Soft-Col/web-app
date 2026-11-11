@@ -7,14 +7,14 @@
  */
 
 :host button {
-  color: rgb(255 255 255 / 72%);
+  color: var(--ms-color-text-secondary);
   border-radius: 50%;
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background-color var(--ms-duration-fast) var(--ms-easing),
+    color var(--ms-duration-fast) var(--ms-easing);
 
   &:hover {
-    background-color: rgb(255 255 255 / 15%);
-    color: #fff;
+    background-color: var(--ms-color-surface-hover);
+    color: var(--ms-color-text-primary);
   }
 }

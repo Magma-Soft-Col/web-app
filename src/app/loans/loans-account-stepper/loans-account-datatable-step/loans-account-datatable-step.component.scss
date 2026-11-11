@@ -6,10 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.datatable-step__field {
+  width: 100%;
+}
+
 .date-picker {
   width: 92%;
 }
 
-mat-checkbox {
-  margin-top: 30px;
+.datatable-step__checkbox {
+  display: block;
+  margin: var(--ms-space-3) 0;
 }

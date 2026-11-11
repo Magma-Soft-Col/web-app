@@ -7,42 +7,27 @@
  */
 
 .display-permissions {
-  padding-top: 15px;
-}
-
-span {
-  font-size: 1rem;
+  padding-top: var(--ms-space-3);
 }
 
 mat-list-item {
   cursor: pointer;
 }
 
-.mat-list-base .mat-list-item .mat-list-item-content {
-  cursor: pointer;
+.grouping-name {
+  padding: 0 var(--ms-space-2);
+  font-size: var(--ms-font-size-table);
 }
 
 .active {
-  background-color: #f2f2f2;
-}
-
-.grouping-name {
-  padding: 0 10px;
-}
-
-.list-permission {
-  padding-left: 20px;
-}
-
-.permission-selected {
-  margin-top: 10px;
-  height: 40px;
-}
-
-.inactive {
-  transition: all 0.2s ease-in-out;
+  background-color: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
 }
 
 .inactive:hover {
-  transform: scale(1.1);
+  background-color: var(--ms-color-surface-hover);
+}
+
+.list-permission {
+  padding-left: var(--ms-space-5);
 }

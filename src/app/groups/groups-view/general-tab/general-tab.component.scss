@@ -6,59 +6,76 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+/* Group general tab (pen detail content): summary panel and account tables in panels. */
+.group-general {
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
+}
 
-  h3 {
-    margin: 1% auto;
+.group-general__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
+
+.group-general__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-4) var(--ms-space-8);
+  margin: 0;
+
+  dd {
+    margin: 0;
   }
+}
 
-  .group-details-container {
-    border: 1px solid;
-    padding: 1%;
+.group-general__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 140px;
+}
 
-    /* Distribute the summary columns across the full card width */
-    p {
-      flex: 1 1 0;
-      margin: 0;
-    }
+.group-general__link {
+  color: var(--ms-color-text-link);
+  text-decoration: none;
 
-    a.entity-link {
-      color: var(--md-sys-color-primary, #1074b9);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-
-      &:hover {
-        opacity: 0.85;
-      }
-    }
+  &:hover {
+    text-decoration: underline;
   }
+}
 
-  .action-button {
-    margin-left: auto;
-  }
+.group-general__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
 
-  table {
-    width: 100%;
+.group-general__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
 
-    .account-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
+.group-general__table {
+  width: 100%;
+}
 
-    tr.select-row:hover {
-      cursor: pointer;
-    }
-  }
+.group-general__name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
 
-  i:hover {
-    cursor: pointer;
-  }
+.group-general__num {
+  text-align: right;
+  white-space: nowrap;
+}
 
-  tr:hover {
-    cursor: pointer;
+.account-action-button {
+  color: var(--ms-color-text-secondary);
+
+  &:hover {
+    color: var(--ms-color-brand-primary);
   }
 }

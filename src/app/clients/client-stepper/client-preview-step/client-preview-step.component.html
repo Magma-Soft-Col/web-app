@@ -7,7 +7,7 @@
 -->
 
 <div class="container p-b-20">
-  <h3>{{ 'labels.heading.General' | translate }}</h3>
+  <h3 class="ms-section-title">{{ 'labels.heading.General' | translate }}</h3>
 
   <mat-divider [inset]="true"></mat-divider>
 
@@ -167,7 +167,7 @@
 
   @if (client.familyMembers.length) {
     <div class="layout-column flex-100 m-b-20">
-      <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Family Members' | translate }}</h3>
+      <h3 class="ms-section-title">{{ 'labels.heading.Family Members' | translate }}</h3>
       <mat-divider class="flex-fill"></mat-divider>
       <mat-accordion class="flex-fill m-t-5">
         @for (member of client.familyMembers; track member) {
@@ -212,7 +212,7 @@
 
   @if (clientTemplate.isAddressEnabled && client.address && client.address.length) {
     <div class="flex-fill layout-row-wrap responsive-column">
-      <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Address' | translate }}</h3>
+      <h3 class="ms-section-title">{{ 'labels.heading.Address' | translate }}</h3>
       <mat-divider class="flex-fill"></mat-divider>
       <mat-accordion class="flex-fill m-t-5">
         @for (address of client.address; track address) {
@@ -288,15 +288,15 @@
   }
 </div>
 
-<div class="layout-row responsive-column align-center gap-2px margin-t">
-  <button mat-raised-button matStepperPrevious>
+<div class="step-actions">
+  <button mat-stroked-button matStepperPrevious>
     <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Previous' | translate }}
   </button>
-  <button mat-raised-button [routerLink]="['../']">
+  <button mat-stroked-button [routerLink]="['../']">
     {{ 'labels.buttons.Cancel' | translate }}
   </button>
-  <button mat-raised-button color="primary" [disabled]="submitting" (click)="submitEvent.emit()">
+  <button mat-flat-button color="primary" [disabled]="submitting" (click)="submitEvent.emit()">
     {{ 'labels.buttons.Submit' | translate }}
   </button>
 </div>

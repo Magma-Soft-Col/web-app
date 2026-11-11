@@ -6,30 +6,46 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Component-specific styles - minimal overrides to global styles
-// Follows existing patterns from general-tab components
-
+/* Entity summary (approved design): icon tile, name with text status, label/value grid. */
 mat-card-header {
-  padding: 1.5rem 1.5rem 1rem;
+  align-items: center;
+  padding: var(--ms-space-5) var(--ms-space-5) var(--ms-space-3);
 
   h2 {
-    font-weight: 500;
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: var(--ms-space-3);
+    flex-wrap: wrap;
     margin: 0;
-    line-height: 1.4;
+    font-size: var(--ms-font-size-section-title);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ms-color-text-primary);
   }
 
-  @media (width <= 480px) {
-    padding: 1rem;
-
-    h2 {
-      font-size: 1.25rem;
-    }
+  mat-card-subtitle p {
+    margin: var(--ms-space-1) 0 0;
+    font-size: 13px;
+    color: var(--ms-color-text-secondary);
   }
 }
 
+.main-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  flex-shrink: 0;
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
+  font-size: 16px;
+}
+
 mat-card-content {
-  padding: 1.5rem;
+  padding: 0 var(--ms-space-5) var(--ms-space-5);
 
   .layout-row-wrap {
     display: grid;
@@ -41,23 +57,18 @@ mat-card-content {
   }
 
   .flex-50 {
-    padding: 0.625rem 0;
     display: flex;
     align-items: center;
-    font-size: 0.875rem;
-    overflow-wrap: break-word;
-    line-height: 1.6;
+    padding: var(--ms-space-2) 0;
+    border-bottom: 1px solid var(--ms-color-border-subtle);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ms-color-text-primary);
+    overflow-wrap: anywhere;
 
     &.mat-body-strong {
-      font-weight: 600;
+      font-weight: 500;
+      color: var(--ms-color-text-secondary);
     }
-
-    &:not(:last-child, :nth-last-child(2)) {
-      border-bottom: 1px solid #ddd;
-    }
-  }
-
-  @media (width <= 480px) {
-    padding: 1rem;
   }
 }

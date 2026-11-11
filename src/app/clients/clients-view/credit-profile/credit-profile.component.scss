@@ -40,15 +40,15 @@
 }
 
 .cbild-alert-warning {
-  background: var(--cbild-alert-warning-bg, #fef9c3);
-  color: var(--cbild-alert-warning-fg, #d97706);
-  border: 1px solid var(--cbild-alert-warning-border, #fde68a);
+  background: var(--ms-color-warning-bg);
+  color: var(--ms-color-warning);
+  border: 1px solid var(--ms-color-warning);
 }
 
 .cbild-alert-danger {
-  background: var(--cbild-alert-danger-bg, #fee2e2);
-  color: var(--cbild-alert-danger-fg, #dc2626);
-  border: 1px solid var(--cbild-alert-danger-border, #fca5a5);
+  background: var(--ms-color-danger-bg);
+  color: var(--ms-color-danger);
+  border: 1px solid var(--ms-color-danger);
 }
 
 .cbild-scores-row {
@@ -89,43 +89,43 @@
 }
 
 .cbild-fico-good {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--ms-color-success-bg);
+  color: var(--ms-color-success);
 }
 
 .cbild-fico-medium {
-  background: #fef9c3;
-  color: #d97706;
+  background: var(--ms-color-warning-bg);
+  color: var(--ms-color-warning);
 }
 
 .cbild-fico-poor {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--ms-color-danger-bg);
+  color: var(--ms-color-danger);
 }
 
 .cbild-fico-unknown {
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--ms-color-neutral-bg);
+  color: var(--ms-color-neutral);
 }
 
 .cbild-risk-low {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--ms-color-success-bg);
+  color: var(--ms-color-success);
 }
 
 .cbild-risk-medium {
-  background: #fef9c3;
-  color: #d97706;
+  background: var(--ms-color-warning-bg);
+  color: var(--ms-color-warning);
 }
 
 .cbild-risk-high {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--ms-color-danger-bg);
+  color: var(--ms-color-danger);
 }
 
 .cbild-risk-very-high {
-  background: #fce7f3;
-  color: #9d174d;
+  background: var(--ms-color-danger-bg);
+  color: var(--ms-color-danger);
 }
 
 .cbild-divider {
@@ -146,7 +146,7 @@
 
 .cbild-detail-label {
   font-size: 13px;
-  color: var(--mdc-theme-text-secondary-on-background, rgb(0 0 0 / 54%));
+  color: var(--ms-color-text-secondary);
   min-width: 160px;
 }
 
@@ -159,11 +159,11 @@
 }
 
 .cbild-text-success {
-  color: #16a34a;
+  color: var(--ms-color-success);
 }
 
 .cbild-text-danger {
-  color: #dc2626;
+  color: var(--ms-color-danger);
 }
 
 .cbild-inline-icon {
@@ -182,8 +182,8 @@
 }
 
 .cbild-tradeline-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--ms-color-surface-subtle);
+  border: 1px solid var(--ms-color-border-subtle);
   border-radius: 6px;
   padding: 12px 16px;
   margin-bottom: 8px;
@@ -199,13 +199,13 @@
 
 .cbild-tradeline-detail {
   font-size: 12px;
-  color: var(--mdc-theme-text-secondary-on-background, rgb(0 0 0 / 54%));
+  color: var(--ms-color-text-secondary);
 }
 
 .cbild-empty-sub {
   padding: 16px;
   text-align: center;
-  color: var(--mdc-theme-text-disabled-on-background, rgb(0 0 0 / 38%));
+  color: var(--ms-color-text-disabled);
   font-size: 13px;
 }
 
@@ -219,7 +219,7 @@
   align-items: center;
   padding: 32px;
   gap: 16px;
-  color: var(--mdc-theme-text-disabled-on-background, rgb(0 0 0 / 38%));
+  color: var(--ms-color-text-disabled);
 
   mat-icon {
     font-size: 48px;
@@ -230,5 +230,5 @@
 
 .cbild-empty-hint {
   font-size: 12px;
-  color: var(--mdc-theme-text-disabled-on-background, rgb(0 0 0 / 38%));
+  color: var(--ms-color-text-disabled);
 }

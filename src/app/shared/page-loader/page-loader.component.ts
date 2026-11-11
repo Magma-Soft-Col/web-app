@@ -7,24 +7,18 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'mifosx-page-loader',
   template: `
-    <div class="page-loader">
-      <ng-lottie [options]="options" width="150px" height="150px"></ng-lottie>
+    <div class="page-loader" role="status">
+      <div class="magma-spinner" aria-hidden="true"></div>
       <span class="page-loader-text">{{ message }}</span>
     </div>
   `,
   styleUrls: ['./page-loader.component.scss'],
-  imports: [LottieComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLoaderComponent {
   @Input({ required: true }) message!: string;
-
-  options: AnimationOptions = {
-    path: '/assets/loading_animation.json'
-  };
 }

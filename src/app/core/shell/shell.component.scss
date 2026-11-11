@@ -9,89 +9,39 @@
 #mifosx-shell-container {
   max-width: 100%;
   height: 100vh;
+  background: var(--ms-color-background);
 
   .sidebar-panel {
     min-height: 100vh;
-    overflow: auto;
-    box-shadow:
-      0 3px 1px -2px rgb(0 0 0 / 20%),
-      0 2px 2px 0 rgb(0 0 0 / 14%),
-      0 1px 5px 0 rgb(0 0 0 / 12%);
+    overflow: hidden;
+    border-right: 0;
+    background: var(--ms-sidebar-bg);
+    box-shadow: none;
+    transition: width var(--ms-duration) var(--ms-easing);
   }
 
   .sidebar-full {
-    width: 15rem;
+    width: var(--ms-sidebar-width);
   }
 
   .sidebar-compact {
-    width: 4rem;
+    width: var(--ms-sidebar-width-compact);
   }
 }
-
-$bar: 190px;
-$foo: $bar * 8;
-$color: #e2e4ec;
 
 .sidenav {
   overflow-x: hidden;
 }
 
-@keyframes move {
-  0% {
-    left: 0;
-  }
+.ms-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-6);
+  padding: var(--ms-space-7) var(--ms-space-8);
+  min-width: 0;
 
-  16.7% {
-    left: 0;
-  }
-
-  33.3% {
-    left: calc($foo / 2);
-  }
-
-  50% {
-    left: $foo - $bar;
-  }
-
-  66.7% {
-    left: calc($foo / 2);
-  }
-
-  83.3% {
-    left: 0;
-  }
-
-  100% {
-    left: 0;
-  }
-}
-
-@keyframes grow {
-  0% {
-    width: $bar;
-  }
-
-  16.7% {
-    width: calc($foo / 2);
-  }
-
-  33.3% {
-    width: calc($foo / 2);
-  }
-
-  50% {
-    width: $bar;
-  }
-
-  66.7% {
-    width: calc($foo / 2);
-  }
-
-  83.3% {
-    width: calc($foo / 2);
-  }
-
-  100% {
-    width: $bar;
+  @media (width < 768px) {
+    gap: var(--ms-space-4);
+    padding: var(--ms-space-5) var(--ms-space-4);
   }
 }

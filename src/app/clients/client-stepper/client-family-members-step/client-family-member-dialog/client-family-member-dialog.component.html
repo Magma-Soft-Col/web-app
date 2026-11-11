@@ -121,11 +121,11 @@
     </mat-form-field>
   </div>
 
-  <mat-dialog-actions align="center">
-    <button type="button" mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-flat-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
     <button
       type="button"
-      mat-raised-button
+      mat-flat-button
       color="primary"
       [disabled]="!familyMemberForm.valid"
       [mat-dialog-close]="{ member: familyMember }"

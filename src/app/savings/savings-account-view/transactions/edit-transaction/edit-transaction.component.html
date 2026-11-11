@@ -94,11 +94,11 @@
           </mat-form-field>
         }
 
-        <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-          <button type="button" mat-raised-button [routerLink]="['../']">
+        <mat-card-actions class="ms-actions align-end">
+          <button type="button" mat-stroked-button [routerLink]="['../']">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
-          <button mat-raised-button color="primary" [disabled]="!editTransactionForm.valid">
+          <button mat-flat-button color="primary" [disabled]="!editTransactionForm.valid">
             {{ 'labels.buttons.Submit' | translate }}
           </button>
         </mat-card-actions>

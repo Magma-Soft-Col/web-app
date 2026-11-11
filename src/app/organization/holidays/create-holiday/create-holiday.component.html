@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="holidayForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="ms-form-grid">
           <mat-form-field>
             <mat-label>{{ 'labels.inputs.name' | translate }}</mat-label>
             <input matInput required autofocus formControlName="name" />
@@ -106,9 +106,11 @@
             <input matInput formControlName="description" />
           </mat-form-field>
 
-          <label>{{ 'labels.inputs.Select applicable offices' | translate }}</label>
+          <label class="ms-form-full ms-subsection-title">{{
+            'labels.inputs.Select applicable offices' | translate
+          }}</label>
 
-          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <mat-tree class="ms-form-full" [dataSource]="dataSource" [treeControl]="treeControl">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
               <button mat-icon-button disabled></button>
               <mat-checkbox
@@ -133,16 +135,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button
-          mat-raised-button
-          color="primary"
-          [disabled]="!holidayForm.valid"
-          *mifosxHasPermission="'CREATE_HOLIDAY'"
-        >
+        <button mat-flat-button color="primary" [disabled]="!holidayForm.valid" *mifosxHasPermission="'CREATE_HOLIDAY'">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>

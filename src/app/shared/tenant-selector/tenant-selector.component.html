@@ -1,18 +1,45 @@
-﻿<!--
+<!--
   Copyright since 2025 Mifos Initiative
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
-<mat-form-field class="flex-fill align-center" id="tenant-selector" appearance="fill">
-  <mat-label>{{ 'labels.inputs.Tenant' | translate }}</mat-label>
-  <mat-select [formControl]="tenantSelector" (selectionChange)="setTenantIdentifier()" class="tenantselector">
-    @for (tenant of tenants; track tenant) {
-      <mat-option [value]="tenant">
-        {{ tenant | titlecase }}
-      </mat-option>
-    }
-  </mat-select>
-  <mifosx-m3-icon matIconPrefix name="domain"></mifosx-m3-icon>
-</mat-form-field>
+@if (variant === 'auth') {
+  <!-- Sign-in variant: ms-auth-field pattern (assets/styles/_ms-auth.scss) -->
+  <div class="ms-auth-field" id="tenant-selector">
+    <span class="ms-auth-field__label" id="tenant-select-label">{{ 'labels.inputs.Tenant' | translate }}</span>
+    <!-- The select fills the whole control so its dropdown lines up with the field. -->
+    <div class="ms-auth-field__control ms-auth-field__control--select">
+      <mat-select
+        id="tenant-select"
+        class="ms-auth-field__select tenantselector"
+        panelClass="ms-auth-select-panel"
+        [formControl]="tenantSelector"
+        (selectionChange)="setTenantIdentifier()"
+        aria-labelledby="tenant-select-label"
+      >
+        <mat-select-trigger class="ms-auth-field__select-trigger">
+          <mifosx-m3-icon class="ms-auth-field__icon" name="domain" [size]="20"></mifosx-m3-icon>
+          <span>{{ (tenantSelector.value ?? '').trim() | titlecase }}</span>
+        </mat-select-trigger>
+        @for (tenant of tenants; track tenant) {
+          <mat-option [value]="tenant">{{ tenant.trim() | titlecase }}</mat-option>
+        }
+      </mat-select>
+      <mifosx-m3-icon class="ms-auth-field__chevron" name="expand_more" [size]="20"></mifosx-m3-icon>
+    </div>
+  </div>
+} @else {
+  <mat-form-field class="flex-fill align-center" id="tenant-selector">
+    <mat-label>{{ 'labels.inputs.Tenant' | translate }}</mat-label>
+    <mat-select [formControl]="tenantSelector" (selectionChange)="setTenantIdentifier()" class="tenantselector">
+      @for (tenant of tenants; track tenant) {
+        <mat-option [value]="tenant">
+          {{ tenant | titlecase }}
+        </mat-option>
+      }
+    </mat-select>
+    <mifosx-m3-icon matIconPrefix name="domain"></mifosx-m3-icon>
+  </mat-form-field>
+}

@@ -6,18 +6,105 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/entity-header' as entity;
+/* Group detail (pen detail pattern): entity header, secondary data strip and tabs. */
+.entity-view__avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: 50%;
+  background: var(--ms-color-surface-subtle);
+  cursor: pointer;
 
-/* Shared entity-header system: tokens, projected header content and tabs. */
-@include entity.tokens;
-@include entity.header-content;
-@include entity.tabs;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.account-overview {
-  min-width: 85%;
-  margin-left: 10px;
+  &:hover {
+    border-color: var(--ms-color-brand-primary);
+  }
 }
 
-.make-flex {
+.entity-view__sub {
+  font-variant-numeric: tabular-nums;
+}
+
+.entity-view__muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.entity-view__facts {
   display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2) var(--ms-space-6);
+  margin: 0;
+  padding: var(--ms-space-3) var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  font-size: var(--ms-font-size-label);
+}
+
+.entity-view__fact {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+  min-width: 0;
+
+  dt {
+    color: var(--ms-color-text-secondary);
+    font-weight: 500;
+  }
+
+  dd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ms-space-2);
+    margin: 0;
+    color: var(--ms-color-text-primary);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+}
+
+.entity-view__link {
+  color: var(--ms-color-text-link);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.entity-view__tabs {
+  min-width: 0;
+}
+
+/* Menus render in an overlay; their empty hosts must not take a flex gap. */
+.entity-view > mat-menu {
+  display: none;
+}
+
+.entity-view__inline-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ms-radius-control);
+  background: transparent;
+  color: var(--ms-color-text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ms-color-surface-hover);
+    color: var(--ms-color-brand-primary);
+  }
 }

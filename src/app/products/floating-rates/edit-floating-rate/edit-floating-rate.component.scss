@@ -6,27 +6,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@media (width >= 992px) {
-  .checkbox-wrapper {
-    position: relative;
-
-    .checkbox {
-      padding: 0 0 17.5px;
-      position: absolute;
-      bottom: 0;
-    }
-  }
+/* Checkboxes sit on the baseline of the neighbouring outline field. */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
 }
 
-// TODO: CONFIGURE THESE CLASSES GLOBALLY
-.is-differential {
-  color: #32cd32;
+.section-header {
+  gap: var(--ms-space-3);
+  margin: var(--ms-space-4) 0 var(--ms-space-3);
 }
 
-.not-is-differential {
-  color: #f44366;
-}
-
-table {
+.periods-table {
   width: 100%;
+}
+
+.ms-num {
+  text-align: right;
+}
+
+th.ms-num ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
+}
+
+.row-actions {
+  white-space: nowrap;
 }

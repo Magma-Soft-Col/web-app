@@ -7,18 +7,21 @@
  */
 
 .reset-info {
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--ms-space-3);
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
 }
 
-// Contextual help under the "start new period" checkbox
+// Contextual help under the checkbox.
 .hint-text {
-  margin: 0.25rem 0 0;
-  font-size: 0.85em;
-  opacity: 0.7;
+  margin: var(--ms-space-1) 0 0;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }
 
-// Highlighted note shown only when "start new period" is checked
+// Highlighted note shown only when "start new period" is checked.
 .reset-info-emphasis {
-  margin: 0.5rem 0 0;
+  margin: var(--ms-space-2) 0 0;
   font-weight: 500;
+  color: var(--ms-color-text-primary);
 }

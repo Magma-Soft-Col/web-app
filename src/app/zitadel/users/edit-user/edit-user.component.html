@@ -11,8 +11,8 @@
     @if (editUserForm) {
       <form [formGroup]="editUserForm" (ngSubmit)="submit()">
         <mat-card-content>
-          <div class="layout-row-wrap gap-2px responsive-column">
-            <mat-form-field class="flex-48">
+          <div class="ms-form-grid">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Username' | translate }}</mat-label>
               <input matInput required formControlName="username" readonline />
               @if (editUserForm.controls.username.hasError('required')) {
@@ -22,7 +22,7 @@
                 </mat-error>
               }
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Email' | translate }}</mat-label>
               <input matInput required formControlName="email" />
               @if (editUserForm.controls.email.hasError('email')) {
@@ -38,7 +38,7 @@
                 </mat-error>
               }
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.First Name' | translate }}</mat-label>
               <input matInput required formControlName="firstname" />
               @if (editUserForm.controls.firstname.hasError('pattern')) {
@@ -54,7 +54,7 @@
                 </mat-error>
               }
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Last Name' | translate }}</mat-label>
               <input matInput required formControlName="lastname" />
               @if (editUserForm.controls.lastname.hasError('pattern')) {
@@ -70,7 +70,7 @@
                 </mat-error>
               }
             </mat-form-field>
-            <mat-form-field class="flex-20">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Code' | translate }}</mat-label>
               <mat-select formControlName="countryCode" required>
                 @for (country of countryCodes; track country) {
@@ -80,11 +80,11 @@
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="flex-75">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Phone Number' | translate }}</mat-label>
               <input matInput formControlName="phoneNumber" required maxlength="12" minlength="4" />
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Gender' | translate }}</mat-label>
               <mat-select formControlName="gender" required>
                 <mat-option value="GENDER_MALE">{{ 'labels.catalogs.male' | translate }}</mat-option>
@@ -92,7 +92,7 @@
                 <mat-option value="GENDER_OTHER">{{ 'labels.catalogs.other' | translate }}</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Language' | translate }}</mat-label>
               <mat-select formControlName="preferredLanguage" required>
                 @for (lang of languageCodes; track lang) {
@@ -102,7 +102,7 @@
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
               <mat-select required formControlName="officeId" (selectionChange)="officeChanged($event.value)">
                 @for (office of officesData; track office) {
@@ -112,7 +112,7 @@
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Staff' | translate }}</mat-label>
               <mat-select formControlName="staffId">
                 @for (staff of staffData; track staff) {
@@ -122,7 +122,7 @@
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Roles' | translate }}</mat-label>
               <mat-select formControlName="roles" multiple>
                 @for (rol of rolesData; track rol) {
@@ -132,11 +132,11 @@
                 }
               </mat-select>
             </mat-form-field>
-            <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-              <button type="button" mat-raised-button [routerLink]="['../']">
+            <mat-card-actions class="ms-form-actions">
+              <button type="button" mat-stroked-button [routerLink]="['../']">
                 {{ 'labels.buttons.Cancel' | translate }}
               </button>
-              <button mat-raised-button color="primary">
+              <button mat-flat-button color="primary">
                 {{ 'labels.buttons.Submit' | translate }}
               </button>
             </mat-card-actions>

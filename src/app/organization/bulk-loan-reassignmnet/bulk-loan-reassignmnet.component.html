@@ -10,8 +10,8 @@
   <mat-card>
     <form [formGroup]="bulkLoanForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-row-wrap gap-2px responsive-column">
-          <mat-form-field class="flex-48">
+        <div class="ms-form-grid">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="officeId" (selectionChange)="getOffice($event.value)">
               @for (office of offices; track office) {
@@ -27,10 +27,7 @@
               </mat-error>
             }
           </mat-form-field>
-        </div>
-
-        <div class="layout-row-wrap gap-2px responsive-column">
-          <mat-form-field class="flex-48" (click)="assignmentDatePicker.open()">
+          <mat-form-field (click)="assignmentDatePicker.open()">
             <mat-label>{{ 'labels.inputs.Assignment Date' | translate }}</mat-label>
             <input
               matInput
@@ -50,11 +47,8 @@
               </mat-error>
             }
           </mat-form-field>
-        </div>
-
-        <div class="layout-row-wrap gap-2px responsive-column">
           @if (fromLoanOfficers !== undefined) {
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.From loan officer' | translate }}</mat-label>
               <mat-select
                 required
@@ -75,10 +69,7 @@
               }
             </mat-form-field>
           }
-        </div>
-
-        <div class="layout-row-wrap gap-2px responsive-column">
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.To loan officer' | translate }}</mat-label>
             <mat-select required formControlName="toLoanOfficerId">
               @for (toOfficers of toLoanOfficers; track toOfficers) {
@@ -95,10 +86,9 @@
             }
           </mat-form-field>
         </div>
-
-        <div class="layout-row-wrap gap-2px responsive-column">
+        <div class="assignment-lists">
           @if (officerTemplate !== undefined) {
-            <table class="flex-48">
+            <table class="ms-table assignment-table">
               <thead>
                 <th>{{ 'labels.inputs.Clients' | translate }}</th>
               </thead>
@@ -128,7 +118,7 @@
           }
 
           @if (officerTemplate !== undefined) {
-            <table class="flex-48">
+            <table class="ms-table assignment-table">
               <thead>
                 <th>{{ 'labels.inputs.Groups' | translate }}</th>
               </thead>
@@ -159,13 +149,13 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
           type="submit"
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!bulkLoanForm.valid"
           *mifosxHasPermission="'BULKREASSIGN_LOAN'"

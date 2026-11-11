@@ -7,7 +7,7 @@
 -->
 
 <div class="container">
-  <mat-stepper orientation="vertical" [linear]="true" class="mat-elevation-z8" labelPosition="bottom" #transferStepper>
+  <mat-stepper orientation="vertical" [linear]="true" labelPosition="bottom" #transferStepper>
     <!-- Custom Step Icons -->
     <ng-template matStepperIcon="number">
       <fa-icon icon="pencil-alt" size="sm"></fa-icon>
@@ -86,7 +86,7 @@
               <div class="action-buttons step-actions">
                 <ng-container *mifosxHasPermission="'CREATE_ACCOUNTTRANSFER'">
                   <button
-                    mat-raised-button
+                    mat-flat-button
                     type="button"
                     color="primary"
                     [disabled]="isLoading || beneficiaryForm.get('phoneNumber')?.value?.length !== 10"
@@ -209,20 +209,21 @@
       }
 
       <!-- Step 1 Navigation -->
-      <div class="layout-row align-center gap-2percent margin-t responsive-column">
-        <button mat-raised-button matStepperPrevious disabled>
+      <div class="ms-actions align-end margin-t">
+        <button mat-stroked-button matStepperPrevious disabled>
           <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
           {{ 'labels.buttons.Previous' | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-flat-button
+          color="primary"
           matStepperNext
           [disabled]="interbank ? !interbankTransferForm : !beneficiaryForm.valid"
         >
           {{ 'labels.buttons.Next' | translate }}
           <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
         </button>
-        <button mat-raised-button [routerLink]="['../..']">
+        <button mat-stroked-button [routerLink]="['../..']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
       </div>
@@ -350,14 +351,14 @@
         </form>
 
         <!-- Step 2 Navigation -->
-        <div class="layout-row align-center gap-2percent margin-t responsive-column">
-          <button mat-raised-button matStepperPrevious>
+        <div class="ms-actions align-end margin-t">
+          <button mat-stroked-button matStepperPrevious>
             <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
             {{ 'labels.buttons.Previous' | translate }}
           </button>
           <ng-container *mifosxHasPermission="'CREATE_ACCOUNTTRANSFER'">
             <button
-              mat-raised-button
+              mat-flat-button
               color="primary"
               [disabled]="isLoading || !transferDetailsForm.valid"
               (click)="submit()"
@@ -365,7 +366,7 @@
               {{ 'labels.buttons.Submit' | translate }}
             </button>
           </ng-container>
-          <button mat-raised-button [routerLink]="['../..']">
+          <button mat-stroked-button [routerLink]="['../..']">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
         </div>
@@ -465,12 +466,12 @@
           </div>
 
           <!-- Step 3 Navigation -->
-          <div class="layout-row align-center gap-2percent margin-t responsive-column">
-            <button mat-raised-button [routerLink]="['../../transactions']">
+          <div class="ms-actions align-end margin-t">
+            <button mat-stroked-button [routerLink]="['../../transactions']">
               <fa-icon icon="list" class="m-r-10"></fa-icon>
               {{ 'labels.buttons.View Transactions' | translate }}
             </button>
-            <button mat-raised-button [routerLink]="['../..']">
+            <button mat-stroked-button [routerLink]="['../..']">
               {{ 'labels.buttons.Back to Account' | translate }}
             </button>
           </div>

@@ -170,7 +170,7 @@
         {{ 'labels.text.Search and assign this beneficiary to an existing Mifos client account' | translate }}
       </p>
 
-      <mat-form-field appearance="outline" class="client-search-field">
+      <mat-form-field class="client-search-field">
         <mat-label>{{ 'labels.inputs.Search Client' | translate }}</mat-label>
         <input
           matInput
@@ -225,7 +225,7 @@
     </div>
 
     <div class="step-actions">
-      <button mat-raised-button color="primary" (click)="onNext()" [disabled]="!selectedClient">
+      <button mat-flat-button color="primary" (click)="onNext()" [disabled]="!selectedClient">
         {{ 'labels.buttons.Next' | translate }}
         <mat-icon>arrow_forward</mat-icon>
       </button>

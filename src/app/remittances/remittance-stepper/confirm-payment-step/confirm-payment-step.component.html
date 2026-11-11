@@ -96,7 +96,7 @@
   }
 
   <div class="step-actions">
-    <button mat-raised-button color="warn" (click)="confirmPayout()" [disabled]="isLoading || !vendor">
+    <button mat-stroked-button color="warn" (click)="confirmPayout()" [disabled]="isLoading || !vendor">
       @if (isLoading) {
         <mat-spinner diameter="20"></mat-spinner>
       } @else {

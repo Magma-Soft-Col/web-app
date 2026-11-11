@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { SettingsService } from 'app/settings/settings.service';
 import { AlertService } from 'app/core/alert/alert.service';
@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatFormField, MatPrefix, MatLabel } from '@angular/material/form-field';
 import { M3IconComponent } from 'app/shared/m3-ui/m3-icon/m3-icon.component';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatSelectTrigger } from '@angular/material/select';
 
 @Component({
   selector: 'mifosx-tenant-selector',
@@ -21,6 +22,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./tenant-selector.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    MatSelectTrigger,
     MatPrefix,
     M3IconComponent
   ],
@@ -30,6 +32,9 @@ export class TenantSelectorComponent implements OnInit {
   private settingsService = inject(SettingsService);
   private alertService = inject(AlertService);
   private translateService = inject(TranslateService);
+
+  /** `auth` renders the sign-in field style; `field` the Material form field. */
+  @Input() variant: 'field' | 'auth' = 'field';
 
   /** Tenant selector form control. */
   tenantSelector = new UntypedFormControl();

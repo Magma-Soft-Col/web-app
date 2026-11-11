@@ -35,6 +35,7 @@ import { DeleteDialogComponent } from 'app/shared/delete-dialog/delete-dialog.co
 import { MatTooltip } from '@angular/material/tooltip';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatIconButton } from '@angular/material/button';
 
 /**
  * Loans Standing Instructions Tab
@@ -45,6 +46,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./standing-instructions-tab.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    MatIconButton,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

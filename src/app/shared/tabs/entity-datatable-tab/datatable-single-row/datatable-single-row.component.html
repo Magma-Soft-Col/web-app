@@ -10,17 +10,17 @@
   <h3>{{ formatTabLabel(datatableName) }}</h3>
   <div class="layout-row align-end m-b-20">
     @if (!dataObject.data[0]) {
-      <button mat-raised-button color="primary" (click)="add()">
+      <button mat-flat-button color="primary" (click)="add()">
         <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
       </button>
     }
     @if (dataObject.data[0]) {
-      <button mat-raised-button color="primary" (click)="edit()">
+      <button mat-flat-button color="primary" (click)="edit()">
         <fa-icon icon="edit" class="m-r-10"></fa-icon>{{ 'labels.buttons.Edit' | translate }}
       </button>
     }
     @if (dataObject.data[0]) {
-      <button class="delete-button" mat-raised-button color="warn" (click)="delete()">
+      <button class="delete-button" mat-flat-button color="warn" (click)="delete()">
         <fa-icon icon="trash" class="m-r-10"></fa-icon>{{ 'labels.buttons.Delete' | translate }}
       </button>
     }

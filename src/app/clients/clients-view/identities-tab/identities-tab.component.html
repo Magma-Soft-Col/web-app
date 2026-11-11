@@ -6,25 +6,24 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="layout-row align-start">
-    <div class="m-b-10">
-      <h3>{{ 'labels.heading.Identities' | translate }}</h3>
-    </div>
-    <div class="action-button m-b-10 gap-25px">
+<div class="tab-container">
+  <div class="tab-header">
+    <h3 class="ms-section-title">{{ 'labels.heading.Identities' | translate }}</h3>
+    <div class="ms-actions">
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
+        type="button"
         (click)="addIdentifier()"
         *mifosxHasPermission="'CREATE_CLIENTIDENTIFIER'"
       >
-        <fa-icon icon="plus" class="m-r-10"></fa-icon>
+        <fa-icon icon="plus" class="m-r-10" aria-hidden="true"></fa-icon>
         {{ 'labels.buttons.Add' | translate }}
       </button>
     </div>
   </div>
 
-  <div class="table-container">
+  <div class="ms-panel ms-table-wrap">
     <table mat-table #identifiersTable [dataSource]="clientIdentities">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
@@ -128,7 +127,7 @@
                     <div class="actions">
                       <button
                         mat-icon-button
-                        color="primary"
+                        type="button"
                         (click)="downloadDocument(identity, document)"
                         [title]="'labels.buttons.Download' | translate"
                         [attr.aria-label]="('labels.buttons.Download' | translate) + ': ' + document.name"
@@ -149,17 +148,22 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Status' | translate }}</th>
         <td mat-cell *matCellDef="let identity">
-          {{ identity.status === 'clientIdentifierStatusType.active' ? 'active' : 'inactive' }}
+          <span
+            class="ms-status"
+            [class.ms-status--success]="identity.status === 'clientIdentifierStatusType.active'"
+            [class.ms-status--neutral]="identity.status !== 'clientIdentifierStatusType.active'"
+          >
+            {{ identity.status === 'clientIdentifierStatusType.active' ? 'active' : 'inactive' }}
+          </span>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
-        <td mat-cell *matCellDef="let identity; let i = index">
+        <td mat-cell *matCellDef="let identity; let i = index" class="row-actions">
           <button
-            class="identity-action-button"
-            mat-raised-button
-            color="primary"
+            mat-icon-button
+            type="button"
             [title]="'labels.buttons.Edit' | translate"
             [attr.aria-label]="'labels.buttons.Edit' | translate"
             (click)="editIdentifier(identity)"
@@ -168,9 +172,8 @@
             <fa-icon icon="edit"></fa-icon>
           </button>
           <button
-            class="identity-action-button"
-            mat-raised-button
-            color="warn"
+            mat-icon-button
+            type="button"
             [title]="'labels.buttons.Delete' | translate"
             [attr.aria-label]="'labels.buttons.Delete' | translate"
             (click)="deleteIdentifier(identity.clientId, identity.id, i)"
@@ -183,8 +186,8 @@
 
       <ng-container matColumnDef="no-data">
         <td mat-footer-cell *matFooterCellDef [attr.colspan]="identitiesColumns.length">
-          <div class="table-empty-state">
-            <p>{{ 'labels.messages.No Identities Found' | translate }}</p>
+          <div class="ms-empty">
+            <strong>{{ 'labels.messages.No Identities Found' | translate }}</strong>
           </div>
         </td>
       </ng-container>

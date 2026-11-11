@@ -37,7 +37,6 @@ import { Dates } from 'app/core/utils/dates';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatDivider } from '@angular/material/divider';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { FormatNumberPipe } from '../../../pipes/format-number.pipe';
@@ -66,7 +65,6 @@ import { LoanCharge } from 'app/loans/models/loan-charge.model';
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatDivider,
     MatStepperPrevious,
     MatStepperNext,
     DateFormatPipe,

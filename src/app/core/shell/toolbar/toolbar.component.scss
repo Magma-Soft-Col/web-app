@@ -6,135 +6,138 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#mifosx-toolbar {
-  position: relative;
-  box-shadow:
-    0 3px 1px -2px rgb(0 0 0 / 20%),
-    0 2px 2px 0 rgb(0 0 0 / 14%),
-    0 1px 5px 0 rgb(0 0 0 / 12%);
+/* Values follow the approved design: white bar, 14px/24px padding, 16px gaps. */
 
-  .tab-nav-bar {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-  }
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: block;
+}
 
-  .tab-link {
-    min-width: auto;
-    padding: 15px 1rem;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    color: rgb(255 255 255 / 70%);
+.ms-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-4);
+  min-height: 60px;
+  padding: 14px var(--ms-space-6);
+  box-sizing: border-box;
+  background: var(--ms-color-surface);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  color: var(--ms-color-text-primary);
 
-    &:hover {
-      color: #fff;
-    }
-
-    cursor: pointer;
-  }
-
-  .search-bar {
-    .search {
-      max-width: 400px;
-      width: 100%;
-      font-size: 1rem;
-    }
-  }
-
-  .language {
-    font-size: 0.875rem;
-  }
-
-  .img-button {
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-    }
-  }
-
-  .ml-1 {
-    margin-left: 1rem;
-  }
-
-  .mr-1 {
-    margin-right: 1rem;
+  @media (width < 768px) {
+    padding: var(--ms-space-2) var(--ms-space-3);
+    gap: var(--ms-space-2);
   }
 }
 
-// Show language icon button only on small screens (when full selector is hidden)
-.show-lt-md {
-  display: none;
+.ms-topbar__start {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+  min-width: 0;
 }
 
-@media (width <= 768px) {
-  .show-lt-md {
-    display: inline-flex;
+.ms-topbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-4);
+  flex-shrink: 0;
+}
+
+.ms-topbar__icon-btn {
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-topbar__slot {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ms-topbar__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ms-color-brand-primary);
+  color: var(--ms-color-on-primary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ms-color-brand-primary-hover);
   }
 }
 
-.toolbar-spacer {
-  flex: 1 1 auto;
+/* Profile menu: declared in this template, so emulated encapsulation still applies in the overlay. */
+.ms-profile-menu__header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--ms-space-3) var(--ms-space-4);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  margin-bottom: var(--ms-space-1);
 }
 
-.white-text-language ::ng-deep mifosx-language-selector {
-  color: white !important;
-
-  // Target only Material form-field internals — leave custom elements free to set their own backgrounds
-  /* stylelint-disable selector-class-pattern */
-  .mat-mdc-form-field {
-    // Cancel the global form-field bottom margin so the toolbar can centre the
-    // control instead of it being nudged into place.
-    margin-bottom: 0;
-  }
-
-  // Material reserves a fixed-width infix that overflows the space the toolbar
-  // gives the selector, so the control is sized from the infix outwards.
-  .mat-mdc-form-field-infix {
-    width: 100px;
-  }
-
-  .mat-mdc-text-field-wrapper,
-  .mat-mdc-form-field-flex,
-  .mat-mdc-form-field-infix {
-    background-color: transparent !important;
-  }
-
-  .mat-mdc-floating-label,
-  .mdc-floating-label,
-  mat-label,
-  .mat-mdc-select,
-  .mat-mdc-select-value,
-  .mat-mdc-select-min-line,
-  .mat-mdc-select-arrow,
-  .mat-mdc-select-trigger {
-    color: white !important;
-  }
-  /* stylelint-enable selector-class-pattern */
+.ms-profile-menu__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
 }
 
-.white-text-search ::ng-deep mifosx-search-tool {
-  color: white !important;
+.ms-profile-menu__tenant {
+  font-size: var(--ms-font-size-caption);
+  color: var(--ms-color-text-secondary);
+}
 
-  // Target only Material form-field internals — leave custom elements free to set their own backgrounds
-  /* stylelint-disable selector-class-pattern */
-  .mat-mdc-text-field-wrapper,
-  .mat-mdc-form-field-flex,
-  .mat-mdc-form-field-infix,
-  .mat-mdc-floating-label,
-  .mdc-text-field,
-  mat-label,
-  input {
-    background-color: transparent !important;
-    color: white !important;
-    margin-bottom: 0;
-  }
+.ms-profile-menu__icon {
+  width: 18px;
+  margin-right: var(--ms-space-3);
+  color: var(--ms-color-text-secondary);
+  font-size: 15px;
+  text-align: center;
+}
 
-  .mat-mdc-select-value,
-  .mat-mdc-select-arrow,
-  .mat-mdc-select-trigger {
-    color: white !important;
+mat-icon.ms-profile-menu__icon {
+  height: 18px;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.ms-profile-menu__language {
+  padding: var(--ms-space-2) var(--ms-space-4) 0;
+  min-width: 200px;
+}
+
+/* Theme picker entries: three-colour swatch, name and a check on the active one. */
+.ms-theme-swatch {
+  display: inline-flex;
+  overflow: hidden;
+  width: 36px;
+  height: 18px;
+  margin-right: var(--ms-space-3);
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-sm);
+  vertical-align: middle;
+
+  span {
+    flex: 1 1 0;
   }
-  /* stylelint-enable selector-class-pattern */
+}
+
+.ms-theme-name {
+  vertical-align: middle;
+}
+
+.ms-theme-check {
+  margin-left: var(--ms-space-3);
+  color: var(--ms-color-brand-primary);
 }

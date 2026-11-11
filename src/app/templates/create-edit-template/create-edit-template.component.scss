@@ -6,35 +6,38 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Advanced Options button wrapper - aligns with Name field above
 .advanced-options-wrapper {
-  margin-bottom: 16px;
+  margin-bottom: var(--ms-space-4);
 }
 
-// Mapper row styling - adds space between Advanced Options button and Mapper Key field
 .mapper-row {
-  margin-top: 16px;
-  margin-bottom: 8px;
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 0 var(--ms-space-4);
+  align-items: start;
+  margin-top: var(--ms-space-2);
 
-  // Ensure buttons don't touch the right border
   .mapper-button {
-    margin-left: 8px;
+    margin-top: var(--ms-space-2);
+  }
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-// Editor wrapper - prevents CKEditor from touching borders on left and right
 .editor-wrapper {
-  margin-top: 16px;
-
   .required-label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
+    font-size: var(--ms-font-size-table);
     font-weight: 500;
+    color: var(--ms-color-text-primary);
   }
 
   .required-asterisk {
-    color: #f44336;
+    color: var(--ms-color-danger);
   }
 
   // Header row: Text label on the left, plain text / HTML toggle on the right
@@ -43,16 +46,12 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
-
-    .required-label {
-      margin-bottom: 0;
-    }
+    gap: var(--ms-space-2);
+    margin-bottom: var(--ms-space-2);
 
     .text-format-toggle {
       display: inline-flex;
-      gap: 8px;
+      gap: var(--ms-space-2);
     }
   }
 
@@ -79,7 +78,8 @@
   }
 }
 
-// Ensure mat-card-content has consistent padding
-mat-card-content {
-  padding: 16px;
+.parameter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2);
 }

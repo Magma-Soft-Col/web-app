@@ -31,10 +31,8 @@
 .cbild-section-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 12px;
+  gap: var(--ms-space-2);
+  margin-bottom: var(--ms-space-3);
 }
 
 .cbild-form {
@@ -61,11 +59,11 @@
 }
 
 .cbild-dispute-card {
-  border: 1px solid var(--cbild-card-border, #e2e8f0);
+  border: 1px solid var(--ms-color-border-subtle);
   border-radius: 8px;
   padding: 16px;
   margin-top: 16px;
-  background: var(--cbild-card-bg, #f8fafc);
+  background: var(--ms-color-surface-subtle);
 }
 
 .cbild-dispute-header {
@@ -98,7 +96,7 @@
 
 .cbild-label {
   font-size: 12px;
-  color: var(--mdc-theme-text-secondary-on-background, rgb(0 0 0 / 54%));
+  color: var(--ms-color-text-secondary);
   min-width: 140px;
 }
 
@@ -123,16 +121,16 @@
 }
 
 .cbild-status-open {
-  background: var(--cbild-status-open-bg, #dbeafe);
-  color: var(--cbild-status-open-fg, #1d4ed8);
+  background: var(--ms-color-info-bg);
+  color: var(--ms-color-info);
 }
 
 .cbild-status-pending {
-  background: var(--cbild-status-pending-bg, #fef9c3);
-  color: var(--cbild-status-pending-fg, #d97706);
+  background: var(--ms-color-warning-bg);
+  color: var(--ms-color-warning);
 }
 
 .cbild-status-accepted {
-  background: var(--cbild-status-accepted-bg, #dcfce7);
-  color: var(--cbild-status-accepted-fg, #16a34a);
+  background: var(--ms-color-success-bg);
+  color: var(--ms-color-success);
 }

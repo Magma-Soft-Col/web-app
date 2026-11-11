@@ -6,48 +6,48 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="charges-container">
+<div class="charges ms-panel">
   <!-- ── Summary strip ───────────────────────────────────────── -->
   <div class="summary-strip">
     <div class="summary-item">
-      <span class="summary-label">
+      <span class="summary-label ms-label">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <line x1="12" y1="1" x2="12" y2="23" />
           <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
         {{ 'labels.inputs.Total Due' | translate }}
       </span>
-      <span class="summary-value">
+      <span class="summary-value ms-amount">
         {{ totalDue | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
       </span>
     </div>
 
     <div class="summary-item">
-      <span class="summary-label">
+      <span class="summary-label ms-label">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="20 6 9 17 4 12" />
         </svg>
         {{ 'labels.inputs.Total Paid' | translate }}
       </span>
-      <span class="summary-value c-paid">
+      <span class="summary-value ms-amount c-paid">
         {{ totalPaid | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
       </span>
     </div>
 
     <div class="summary-item">
-      <span class="summary-label">
+      <span class="summary-label ms-label">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M18 6L6 18M6 6l12 12" />
         </svg>
         {{ 'labels.inputs.Waived' | translate }}
       </span>
-      <span class="summary-value">
+      <span class="summary-value ms-amount">
         {{ totalWaived | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
       </span>
     </div>
 
     <div class="summary-item">
-      <span class="summary-label">
+      <span class="summary-label ms-label">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="12" />
@@ -55,7 +55,7 @@
         </svg>
         {{ 'labels.inputs.Outstanding' | translate }}
       </span>
-      <span class="summary-value" [class.c-outstanding]="totalOutstanding > 0">
+      <span class="summary-value ms-amount" [class.c-outstanding]="totalOutstanding > 0">
         {{ totalOutstanding | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
       </span>
     </div>
@@ -70,19 +70,19 @@
       </svg>
       <span class="bulk-count">{{ selection.selected.length }} {{ 'labels.inputs.Selected' | translate }}</span>
       <div class="bulk-actions">
-        <button mat-button class="bulk-waive-btn" (click)="bulkWaiveSelected()">
-          {{ 'labels.buttons.Waive Selected' | translate }}
-        </button>
-        <button mat-button class="bulk-clear-btn" (click)="selection.clear()">
+        <button mat-stroked-button type="button" (click)="selection.clear()">
           {{ 'labels.buttons.Clear' | translate }}
+        </button>
+        <button mat-flat-button color="primary" type="button" (click)="bulkWaiveSelected()">
+          {{ 'labels.buttons.Waive Selected' | translate }}
         </button>
       </div>
     </div>
   }
 
   <!-- ── Table ───────────────────────────────────────────────── -->
-  <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" matSort>
+  <div class="ms-table-wrap">
+    <table mat-table [dataSource]="dataSource" matSort class="charges__table">
       <!-- ── Group header columns ──────────────────────────── -->
       <ng-container matColumnDef="group-select">
         <th mat-header-cell *matHeaderCellDef class="group-cell group-spacer"></th>
@@ -151,7 +151,7 @@
         </th>
         <td mat-cell *matCellDef="let charge">
           @if (charge.penalty) {
-            <span class="badge badge-penalty">
+            <span class="ms-badge ms-badge--danger">
               <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
               </svg>
@@ -159,7 +159,7 @@
             </span>
           }
           @if (!charge.penalty) {
-            <span class="badge badge-fee">
+            <span class="ms-badge ms-badge--info">
               <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
@@ -205,7 +205,7 @@
           {{ 'labels.inputs.Due' | translate }}
         </th>
         <td mat-cell *matCellDef="let charge" class="col-r">
-          <span class="mono amt-due">
+          <span class="ms-num amt-due">
             {{ charge.amount | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
           </span>
         </td>
@@ -217,7 +217,7 @@
           {{ 'labels.inputs.Paid' | translate }}
         </th>
         <td mat-cell *matCellDef="let charge" class="col-r">
-          <span class="mono" [class.amt-paid]="charge.amountPaid > 0" [class.amt-zero]="charge.amountPaid === 0">
+          <span class="ms-num" [class.amt-paid]="charge.amountPaid > 0" [class.amt-zero]="charge.amountPaid === 0">
             {{ charge.amountPaid | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
           </span>
         </td>
@@ -229,7 +229,11 @@
           {{ 'labels.inputs.Waived' | translate }}
         </th>
         <td mat-cell *matCellDef="let charge" class="col-r">
-          <span class="mono" [class.amt-zero]="charge.amountWaived === 0" [class.amt-waived]="charge.amountWaived > 0">
+          <span
+            class="ms-num"
+            [class.amt-zero]="charge.amountWaived === 0"
+            [class.amt-waived]="charge.amountWaived > 0"
+          >
             {{ charge.amountWaived | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
           </span>
         </td>
@@ -243,7 +247,7 @@
         <td mat-cell *matCellDef="let charge" class="col-r">
           <div class="out-cell">
             <span
-              class="mono"
+              class="ms-num"
               [class.amt-outstanding-zero]="charge.amountOutstanding === 0"
               [class.amt-outstanding-partial]="charge.amountOutstanding > 0 && charge.amountPaid > 0"
               [class.amt-outstanding-alert]="charge.amountOutstanding > 0 && charge.amountPaid === 0"

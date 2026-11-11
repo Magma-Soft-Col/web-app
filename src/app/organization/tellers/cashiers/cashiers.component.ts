@@ -22,7 +22,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -56,7 +57,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatRow,
     MatPaginator,
     DateFormatPipe,
-    YesnoPipe
+    YesnoPipe,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -6,37 +6,30 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="run-report-host">
-  <header class="page-head">
-    <div class="head-text">
-      <h1>
-        <span class="ico"><fa-icon icon="file-export"></fa-icon></span>
-        {{ report.name }}
-        <span class="type-pill">{{ report.type }}</span>
-      </h1>
+<div class="ms-page run-report-host">
+  <div class="ms-list-toolbar run-report-toolbar">
+    <div class="stepper" role="tablist">
+      <button
+        type="button"
+        class="step"
+        [class.active]="!isCollapsed"
+        [class.done]="isCollapsed"
+        (click)="isCollapsed = false"
+      >
+        <span class="num">1</span>
+        {{ 'labels.buttons.Parameters' | translate }}
+      </button>
+      <span class="sep"></span>
+      <button type="button" class="step" [class.active]="isCollapsed" [disabled]="!isCollapsed">
+        <span class="num">2</span>
+        {{ 'labels.inputs.Results' | translate }}
+      </button>
     </div>
-  </header>
-
-  <div class="stepper" role="tablist">
-    <button
-      type="button"
-      class="step"
-      [class.active]="!isCollapsed"
-      [class.done]="isCollapsed"
-      (click)="isCollapsed = false"
-    >
-      <span class="num">1</span>
-      {{ 'labels.buttons.Parameters' | translate }}
-    </button>
-    <span class="sep"></span>
-    <button type="button" class="step" [class.active]="isCollapsed" [disabled]="!isCollapsed">
-      <span class="num">2</span>
-      {{ 'labels.inputs.Results' | translate }}
-    </button>
+    <span class="ms-badge ms-badge--info">{{ report.type }}</span>
   </div>
 
   @if (!isCollapsed) {
-    <form [formGroup]="reportForm" class="card">
+    <form [formGroup]="reportForm" class="card ms-panel">
       <div class="card-head">
         <h2>
           <fa-icon icon="filter"></fa-icon>
@@ -59,7 +52,7 @@
                     <label class="field-label">
                       {{ param.label | translateKey: 'inputs' }}<span class="required" aria-hidden="true">*</span>
                     </label>
-                    <mat-form-field appearance="outline" class="rr-field">
+                    <mat-form-field class="rr-field">
                       <input matInput required [formControlName]="param.name" />
                       @if (reportForm.controls[param.name].hasError('required')) {
                         <mat-error>
@@ -75,11 +68,7 @@
                     <label class="field-label">
                       {{ param.label }}<span class="required" aria-hidden="true">*</span>
                     </label>
-                    <mat-form-field
-                      appearance="outline"
-                      class="rr-field rr-field--date"
-                      (click)="runReportDatePicker.open()"
-                    >
+                    <mat-form-field class="rr-field rr-field--date" (click)="runReportDatePicker.open()">
                       <input
                         matInput
                         [min]="minDate"
@@ -110,7 +99,7 @@
                     <label class="field-label">
                       {{ param.label | translateKey: 'inputs' }}<span class="required" aria-hidden="true">*</span>
                     </label>
-                    <mat-form-field appearance="outline" class="rr-field">
+                    <mat-form-field class="rr-field">
                       <mat-select required [formControlName]="param.name">
                         @for (option of param.selectOptions; track option.id) {
                           <mat-option [value]="option">{{ option.name }}</mat-option>
@@ -205,28 +194,29 @@
 
       <div class="card-foot">
         <div class="right">
-          <button type="button" class="btn btn-ghost" [routerLink]="['/reports']">
+          <button type="button" mat-stroked-button [routerLink]="['/reports']">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
           @if (isTableReport()) {
             <button
               type="button"
-              class="btn btn-outline"
+              mat-stroked-button
               [disabled]="!reportForm.valid || isProcessing"
               (click)="runReportAndExport($event)"
             >
-              <fa-icon icon="download"></fa-icon>
+              <fa-icon icon="download" class="m-r-10"></fa-icon>
               {{ 'labels.buttons.Run and Download Report' | translate }}
             </button>
           }
           <button
             type="button"
-            class="btn btn-primary"
+            mat-flat-button
+            color="primary"
             [disabled]="!reportForm.valid || isProcessing"
             id="runreport"
             (click)="run()"
           >
-            <fa-icon icon="play"></fa-icon>
+            <fa-icon icon="play" class="m-r-10"></fa-icon>
             {{ 'labels.buttons.Run Report' | translate }}
           </button>
         </div>

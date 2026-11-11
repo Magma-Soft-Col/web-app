@@ -10,35 +10,35 @@ body {
   table {
     tbody {
       tr:nth-child(even) {
-        background-color: #f2f2f2;
+        background-color: var(--ms-color-surface-zebra);
       }
     }
   }
 }
 
 .bg-black {
-  background-color: #000;
+  background-color: var(--ms-color-brand-navy);
 }
 
 .bg-light-grey {
-  background-color: #e5e5e5;
+  background-color: var(--ms-color-surface-subtle);
 }
 
 .bg-medium-grey {
-  background-color: #ccc;
+  background-color: var(--ms-color-border);
 }
 
 .bg-grey {
-  background-color: #999;
+  background-color: var(--ms-color-text-disabled);
 }
 
 .bg-dark-grey {
-  background-color: #222;
+  background-color: var(--ms-color-text-primary);
 }
 
 .bg-white,
 .bg-fff {
-  background-color: white;
+  background-color: var(--ms-color-surface);
 }
 
 .bg-none,

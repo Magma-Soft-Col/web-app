@@ -34,10 +34,11 @@
       </div>
     }
 
-    <!-- Breadcrumb -->
-    <mifosx-breadcrumb></mifosx-breadcrumb>
-    <!-- Content -->
-    <mifosx-content></mifosx-content>
+    <!-- Work area: page title above the routed content -->
+    <main class="ms-main" id="main-content">
+      <mifosx-breadcrumb variant="title"></mifosx-breadcrumb>
+      <mifosx-content></mifosx-content>
+    </main>
     <!-- Footer -->
     <mifosx-footer [styleClass]="'main-page'"></mifosx-footer>
   </mat-sidenav-content>

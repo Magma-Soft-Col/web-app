@@ -6,78 +6,82 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<mat-card class="container">
-  <mat-card-content>
-    <div class="investor-filter-section">
-      <div class="filter-row">
-        <mat-form-field class="filter-field">
-          <mat-label>{{ 'labels.text.Search by Text' | translate }}</mat-label>
-          <input matInput [formControl]="searchText" />
-        </mat-form-field>
+<div class="container">
+  <div class="ms-page">
+    <mat-card>
+      <mat-card-content>
+        <div class="investor-filter-section">
+          <div class="filter-row">
+            <mat-form-field class="filter-field">
+              <mat-label>{{ 'labels.text.Search by Text' | translate }}</mat-label>
+              <input matInput [formControl]="searchText" />
+            </mat-form-field>
 
-        <mat-form-field class="filter-field" (click)="effectiveFromDatePicker.open()">
-          <mat-label>{{ 'labels.text.Effective Date From' | translate }}</mat-label>
-          <input
-            matInput
-            [min]="minDate"
-            [max]="maxDate"
-            [matDatepicker]="effectiveFromDatePicker"
-            [formControl]="effectiveFromDate"
-          />
-          <mat-datepicker-toggle matSuffix [for]="effectiveFromDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #effectiveFromDatePicker></mat-datepicker>
-        </mat-form-field>
+            <mat-form-field class="filter-field" (click)="effectiveFromDatePicker.open()">
+              <mat-label>{{ 'labels.text.Effective Date From' | translate }}</mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [max]="maxDate"
+                [matDatepicker]="effectiveFromDatePicker"
+                [formControl]="effectiveFromDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="effectiveFromDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #effectiveFromDatePicker></mat-datepicker>
+            </mat-form-field>
 
-        <mat-form-field class="filter-field" (click)="effectiveToDatePicker.open()">
-          <mat-label>{{ 'labels.text.Effective Date To' | translate }}</mat-label>
-          <input
-            matInput
-            [min]="minDate"
-            [max]="maxDate"
-            [matDatepicker]="effectiveToDatePicker"
-            [formControl]="effectiveToDate"
-          />
-          <mat-datepicker-toggle matSuffix [for]="effectiveToDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #effectiveToDatePicker></mat-datepicker>
-        </mat-form-field>
-      </div>
+            <mat-form-field class="filter-field" (click)="effectiveToDatePicker.open()">
+              <mat-label>{{ 'labels.text.Effective Date To' | translate }}</mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [max]="maxDate"
+                [matDatepicker]="effectiveToDatePicker"
+                [formControl]="effectiveToDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="effectiveToDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #effectiveToDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
 
-      <div class="filter-row">
-        <mat-form-field class="filter-field" (click)="settlementFromDatePicker.open()">
-          <mat-label>{{ 'labels.text.Settlement Date From' | translate }}</mat-label>
-          <input
-            matInput
-            [min]="minDate"
-            [max]="maxDate"
-            [matDatepicker]="settlementFromDatePicker"
-            [formControl]="settlementFromDate"
-          />
-          <mat-datepicker-toggle matSuffix [for]="settlementFromDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #settlementFromDatePicker></mat-datepicker>
-        </mat-form-field>
+          <div class="filter-row">
+            <mat-form-field class="filter-field" (click)="settlementFromDatePicker.open()">
+              <mat-label>{{ 'labels.text.Settlement Date From' | translate }}</mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [max]="maxDate"
+                [matDatepicker]="settlementFromDatePicker"
+                [formControl]="settlementFromDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="settlementFromDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #settlementFromDatePicker></mat-datepicker>
+            </mat-form-field>
 
-        <mat-form-field class="filter-field" (click)="settlementToDatePicker.open()">
-          <mat-label>{{ 'labels.text.Settlement Date To' | translate }}</mat-label>
-          <input
-            matInput
-            [min]="minDate"
-            [max]="maxDate"
-            [matDatepicker]="settlementToDatePicker"
-            [formControl]="settlementToDate"
-          />
-          <mat-datepicker-toggle matSuffix [for]="settlementToDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #settlementToDatePicker></mat-datepicker>
-        </mat-form-field>
+            <mat-form-field class="filter-field" (click)="settlementToDatePicker.open()">
+              <mat-label>{{ 'labels.text.Settlement Date To' | translate }}</mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [max]="maxDate"
+                [matDatepicker]="settlementToDatePicker"
+                [formControl]="settlementToDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="settlementToDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #settlementToDatePicker></mat-datepicker>
+            </mat-form-field>
 
-        <div class="filter-button-container">
-          <button mat-raised-button color="primary" (click)="searchEAO()" class="search-button">
-            <fa-icon icon="search" class="m-r-10"></fa-icon> {{ 'labels.buttons.Search' | translate }}
-          </button>
+            <div class="filter-button-container">
+              <button mat-flat-button color="primary" (click)="searchEAO()">
+                <fa-icon icon="search" class="m-r-10"></fa-icon> {{ 'labels.buttons.Search' | translate }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
 
-    <div class="mat-elevation-z8 container m-t-20">
+    <div class="ms-panel">
       @if (isLoading) {
         <div class="loader">
           <div class="loading"></div>
@@ -164,7 +168,7 @@
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Principal Outstanding' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">
+                                <td class="flex-50 r-amount ms-num">
                                   {{ record.details.totalPrincipalOutstanding | formatNumber }}
                                 </td>
                               </tr>
@@ -172,7 +176,7 @@
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Interest Outstanding' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">
+                                <td class="flex-50 r-amount ms-num">
                                   {{ record.details.totalInterestOutstanding | formatNumber }}
                                 </td>
                               </tr>
@@ -180,7 +184,7 @@
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Fees Outstanding' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">
+                                <td class="flex-50 r-amount ms-num">
                                   {{ record.details.totalFeeChargesOutstanding | formatNumber }}
                                 </td>
                               </tr>
@@ -188,7 +192,7 @@
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Penalties Outstanding' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">
+                                <td class="flex-50 r-amount ms-num">
                                   {{ record.details.totalPenaltyChargesOutstanding | formatNumber }}
                                 </td>
                               </tr>
@@ -196,13 +200,17 @@
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Outstanding' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">{{ record.details.totalOutstanding | formatNumber }}</td>
+                                <td class="flex-50 r-amount ms-num">
+                                  {{ record.details.totalOutstanding | formatNumber }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="flex-50 m-l-5">
                                   <b>{{ 'labels.inputs.Overpaid' | translate }} :</b>
                                 </td>
-                                <td class="flex-50 r-amount">{{ record.details.totalOverpaid | formatNumber }}</td>
+                                <td class="flex-50 r-amount ms-num">
+                                  {{ record.details.totalOverpaid | formatNumber }}
+                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -214,12 +222,13 @@
               </div>
               <mat-divider [inset]="true"></mat-divider>
               @if (canBeCancelled(record)) {
-                <div class="record-actions layout-row align-flex-end">
+                <div class="record-actions">
                   <button
                     mat-button
                     color="warn"
                     (click)="cancelPendingSale(record)"
                     matTooltip="{{ 'labels.text.Cancel Pending Sale' | translate }}"
+                    [attr.aria-label]="'labels.text.Cancel Pending Sale' | translate"
                   >
                     <fa-icon icon="trash"></fa-icon>
                   </button>
@@ -242,12 +251,11 @@
     </div>
 
     @if (!existsDataToFilter) {
-      <div class="alert">
-        <div class="message">
-          <i class="fa fa-exclamation-circle alert-check"></i>
-          {{ 'labels.text.No data found' | translate }}
+      <div class="ms-panel">
+        <div class="ms-empty">
+          <strong>{{ 'labels.text.No data found' | translate }}</strong>
         </div>
       </div>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -64,17 +64,37 @@
       </mat-expansion-panel-header>
 
       <div class="layout-column">
-        <span class="header">{{ 'labels.inputs.Favicon' | translate }}</span>
-        <mifosx-file-upload></mifosx-file-upload>
-
-        <span class="header">{{ 'labels.inputs.Cover Image' | translate }}</span>
-        <mifosx-file-upload></mifosx-file-upload>
-
-        <span class="header">{{ 'labels.inputs.Logo' | translate }}</span>
-        <mifosx-file-upload></mifosx-file-upload>
-
-        <span class="header">{{ 'labels.inputs.Logo with Organization Name' | translate }}</span>
-        <mifosx-file-upload></mifosx-file-upload>
+        @for (asset of brandAssetFields; track asset.key) {
+          <div class="brand-asset">
+            <span class="header">{{ asset.label | translate }}</span>
+            <div class="brand-asset__row">
+              <div
+                class="brand-asset__preview"
+                [class.brand-asset__preview--wide]="asset.key === 'logoWithName' || asset.key === 'cover'"
+              >
+                @if (assetPreview(asset.key); as src) {
+                  <img [src]="src" [alt]="asset.label | translate" />
+                } @else {
+                  <span class="brand-asset__empty">{{ 'labels.catalogs.Default' | translate }}</span>
+                }
+              </div>
+              <mifosx-file-upload
+                class="brand-asset__upload"
+                [acceptFilter]="brandAssetAccept"
+                (fileSelected)="onBrandAssetSelected(asset.key, $event)"
+              ></mifosx-file-upload>
+              @if (assetPreview(asset.key)) {
+                <button mat-stroked-button type="button" (click)="removeBrandAsset(asset.key)">
+                  {{ 'labels.buttons.Remove' | translate }}
+                </button>
+              }
+            </div>
+            @if (assetErrors[asset.key]; as error) {
+              <span class="brand-asset__error" role="alert">{{ error | translate }}</span>
+            }
+          </div>
+        }
+        <p class="brand-asset__note">{{ 'labels.text.Brand images are stored in this browser' | translate }}</p>
       </div>
     </mat-expansion-panel>
 
@@ -86,16 +106,27 @@
       </mat-expansion-panel-header>
 
       <div class="layout-column">
-        <mat-form-field>
-          <mat-label>{{ 'labels.inputs.Default Font' | translate }}</mat-label>
-          <mat-select>
-            @for (font of fonts; track font) {
-              <mat-option [value]="font">
-                {{ font }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
+        <span class="header">{{ 'labels.inputs.Theme' | translate }}</span>
+        <div class="theme-grid" role="radiogroup" [attr.aria-label]="'labels.inputs.Theme' | translate">
+          @for (theme of uiThemes.themes; track theme.id) {
+            <button
+              type="button"
+              class="theme-card"
+              role="radio"
+              [class.theme-card--active]="uiThemes.current() === theme.id"
+              [attr.aria-checked]="uiThemes.current() === theme.id"
+              (click)="uiThemes.select(theme.id)"
+            >
+              <span class="theme-card__preview" aria-hidden="true">
+                <span class="theme-card__sidebar" [style.background]="theme.swatch[0]"></span>
+                <span class="theme-card__body" [style.background]="theme.swatch[2]">
+                  <span class="theme-card__accent" [style.background]="theme.swatch[1]"></span>
+                </span>
+              </span>
+              <span class="theme-card__name">{{ theme.label | translate }}</span>
+            </button>
+          }
+        </div>
       </div>
     </mat-expansion-panel>
 
@@ -109,25 +140,34 @@
       <div class="layout-column">
         <mat-form-field>
           <mat-label>{{ 'labels.inputs.Website' | translate }}</mat-label>
-          <input type="url" matInput />
+          <input type="url" matInput [formControl]="website" placeholder="https://" autocomplete="url" />
+          @if (website.invalid) {
+            <mat-error>{{ 'labels.inputs.Website' | translate }} {{ 'labels.commons.invalid' | translate }}</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{ 'labels.inputs.Email' | translate }}</mat-label>
-          <input type="email" matInput />
+          <input type="email" matInput [formControl]="email" autocomplete="email" />
+          @if (email.invalid) {
+            <mat-error>{{ 'labels.inputs.Email' | translate }} {{ 'labels.commons.invalid' | translate }}</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{ 'labels.inputs.Contact No' | translate }}</mat-label>
-          <input type="tel" matInput />
+          <input type="tel" matInput [formControl]="phone" autocomplete="tel" />
+          @if (phone.invalid) {
+            <mat-error>{{ 'labels.inputs.Contact No' | translate }} {{ 'labels.commons.invalid' | translate }}</mat-error>
+          }
         </mat-form-field>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
 
   <div class="submit-actions">
-    <button mat-raised-button color="primary" [disabled]="!hasChanges" (click)="submit()">
-      {{ 'labels.buttons.Submit' | translate }}
+    <button mat-flat-button color="primary" [disabled]="!hasChanges || !contactValid" (click)="submit()">
+      {{ 'labels.buttons.Save' | translate }}
     </button>
   </div>
 </div>

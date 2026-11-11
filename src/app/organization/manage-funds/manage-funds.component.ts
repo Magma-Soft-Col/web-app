@@ -50,7 +50,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -80,7 +81,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

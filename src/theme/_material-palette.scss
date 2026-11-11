@@ -16,9 +16,9 @@
 /* ############ Light mode palettes ################ */
 
 $primary-palette: (
-  100: var(--brand-primary-100, #5ba2ec),
-  500: var(--brand-primary-500, #1074b9),
-  700: var(--brand-primary-700, #004989),
+  100: var(--brand-primary-100, #7fa3d6),
+  500: var(--brand-primary-500, #315e9e),
+  700: var(--brand-primary-700, #1e3a5f),
   contrast: (
     100: rgb(0 0 0 / 87%),
     500: white,
@@ -26,23 +26,25 @@ $primary-palette: (
   )
 );
 
+/* Accent (checkboxes, radios, toggles) follows the active theme's primary,
+   replacing the Mifos lime green, so selection controls match the palette. */
 $accent-palette: (
-  100: #e7ffa5,
-  500: #b4d575,
-  700: #83a447,
+  100: var(--brand-primary-100, #7fa3d6),
+  500: var(--brand-primary-500, #315e9e),
+  700: var(--brand-primary-700, #1e3a5f),
   contrast: (
     100: rgb(0 0 0 / 87%),
-    500: rgb(0 0 0 / 87%),
-    700: rgb(0 0 0 / 87%)
+    500: white,
+    700: white
   )
 );
 
 /* ############ Dark mode palettes ################ */
 
 $dark-primary-palette: (
-  100: var(--brand-primary-100, #5ba2ec),
-  500: var(--brand-primary-500, #1074b9),
-  700: var(--brand-primary-700, #004989),
+  100: var(--brand-primary-100, #7fa3d6),
+  500: var(--brand-primary-500, #315e9e),
+  700: var(--brand-primary-700, #1e3a5f),
   contrast: (
     100: white,
     500: rgb(255 255 255 / 87%),
@@ -51,9 +53,9 @@ $dark-primary-palette: (
 );
 
 $dark-accent-palette: (
-  100: #e7ffa5,
-  500: #b4d575,
-  700: #83a447,
+  100: var(--brand-primary-100, #7fa3d6),
+  500: var(--brand-primary-500, #315e9e),
+  700: var(--brand-primary-700, #1e3a5f),
   contrast: (
     100: white,
     500: white,

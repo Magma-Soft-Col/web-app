@@ -6,12 +6,10 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="m-b-10">
-    <h3>{{ 'labels.heading.All Standing Instructions' | translate }}</h3>
-  </div>
+<div class="loan-tab">
+  <h3 class="ms-section-title">{{ 'labels.heading.All Standing Instructions' | translate }}</h3>
 
-  <div class="mat-elevation-z1 m-b-25">
+  <div class="ms-panel ms-table-wrap">
     <table mat-table #instructionsTable [dataSource]="dataSource">
       <ng-container matColumnDef="client">
         <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Client' | translate }}</th>
@@ -49,8 +47,10 @@
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
-        <td mat-cell *matCellDef="let instruction">{{ instruction.instructionType.value }}/{{ instruction.amount }}</td>
+        <th mat-header-cell *matHeaderCellDef class="ms-num">{{ 'labels.inputs.Amount' | translate }}</th>
+        <td mat-cell *matCellDef="let instruction" class="ms-num">
+          {{ instruction.instructionType.value }}/{{ instruction.amount }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="validity">
@@ -66,9 +66,9 @@
           @if (instruction.status.value !== 'Deleted') {
             <span>
               <button
-                class="account-action-button"
-                mat-raised-button
-                color="primary"
+                type="button"
+                mat-icon-button
+                [attr.aria-label]="'tooltips.Edit Standing Instruction' | translate"
                 matTooltip="{{ 'tooltips.Edit Standing Instruction' | translate }}"
                 *mifosxHasPermission="'UPDATE_STANDINGINSTRUCTION'"
               >
@@ -79,9 +79,10 @@
           @if (instruction.status.value !== 'Deleted') {
             <span>
               <button
-                class="account-action-button"
-                mat-raised-button
+                type="button"
+                mat-icon-button
                 color="warn"
+                [attr.aria-label]="'tooltips.Delete Standing Instruction' | translate"
                 matTooltip="{{ 'tooltips.Delete Standing Instruction' | translate }}"
                 *mifosxHasPermission="'DELETE_STANDINGINSTRUCTION'"
                 (click)="deleteStandingInstruction(instruction.id)"
@@ -91,9 +92,9 @@
             </span>
           }
           <button
-            class="account-action-button"
-            mat-raised-button
-            color="primary"
+            type="button"
+            mat-icon-button
+            [attr.aria-label]="'tooltips.View Standing Instruction' | translate"
             matTooltip="{{ 'tooltips.View Standing Instruction' | translate }}"
             *mifosxHasPermission="'READ_STANDINGINSTRUCTION'"
           >

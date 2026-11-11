@@ -6,23 +6,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-h4 {
-  font-weight: 500;
-  margin: 1em 0;
+/* Step navigation: secondary + primary actions aligned to the right. */
+.margin-t {
+  margin-top: var(--ms-space-5);
 }
 
-mat-divider {
-  margin: 1em 0 2em;
+.ms-section-title {
+  margin: var(--ms-space-4) 0 var(--ms-space-2);
+}
+
+.ms-section-title--sub {
+  font-size: var(--ms-font-size-body);
 }
 
 .margin-v {
-  margin: 1em 0;
+  margin: var(--ms-space-4) 0;
 }
 
 .margin-b {
-  margin: 0 0 1em;
-}
-
-.margin-t {
-  margin-top: 1em;
+  margin: 0 0 var(--ms-space-4);
 }

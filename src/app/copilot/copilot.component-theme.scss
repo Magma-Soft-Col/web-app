@@ -6,272 +6,201 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
-// Fixed semantic status colors - NOT part of the Material palette (success / warning).
-// These intentionally stay constant so cards keep their success/warning meaning.
-$copilot-success: #10b981;
-$copilot-warning: #f59e0b;
-
 /**
- * Colors for the Mifos Copilot panel, driven entirely by the active Material
- * theme. Called once for light and once for dark (under `.dark-theme`) from
- * src/theme/mifosx-theme.scss - dark mode is derived automatically, so there is
- * no hand-rolled dark block. Structure lives in copilot-panel.component.scss.
- *
- * Hybrid theming: brand (primary/accent) is identical in both palettes, so the
- * AI's blue identity stays fixed while surfaces/text/borders follow light/dark.
+ * Colors for the Mifos Copilot panel. Every value reads a Magma Soft semantic
+ * token (`--ms-*`), so the same output serves the light theme and Obsidian
+ * (`body.dark-theme` redefines the tokens). The mixin keeps its `$theme`
+ * parameter because src/theme/mifosx-theme.scss calls it once per theme.
+ * Structure lives in copilot-panel.component.scss.
  */
 @mixin copilot-component-theme($theme) {
-  $primary: map.get($theme, primary);
-  $accent: map.get($theme, accent);
-  $warn: map.get($theme, warn);
-  $foreground: map.get($theme, foreground);
-  $background: map.get($theme, background);
-  $is-dark: map.get($theme, is-dark);
-
-  // Brand
-  $p100: mat.m2-get-color-from-palette($primary, 100);
-  $p500: mat.m2-get-color-from-palette($primary, 500);
-  $p700: mat.m2-get-color-from-palette($primary, 700);
-  $on-primary: mat.m2-get-contrast-color-from-palette($primary, 500);
-  $a500: mat.m2-get-color-from-palette($accent, 500);
-  $warn500: mat.m2-get-color-from-palette($warn, 500);
-  $warn700: mat.m2-get-color-from-palette($warn, 700);
-  $on-warn: mat.m2-get-contrast-color-from-palette($warn, 500);
-
-  // Brand text/tint that reads well in both modes (lighter blue on dark).
-  $brand-text: if($is-dark, $p100, $p500);
-  $brand-tint: mat.m2-get-color-from-palette($primary, 500, 0.1);
-  $brand-ring: mat.m2-get-color-from-palette($primary, 500, 0.5);
-
-  // Surfaces & text from the theme (flip automatically in dark).
-  $surface: map.get($background, card);
-  $muted: map.get($background, hover);
-  $border: mat.m2-get-color-from-palette($foreground, divider);
-  $text-1: mat.m2-get-color-from-palette($foreground, text);
-  $text-2: mat.m2-get-color-from-palette($foreground, secondary-text);
-  $text-3: mat.m2-get-color-from-palette($foreground, hint-text);
-
-  // Semantic (status) - fixed hues, mode-aware text/bg.
-  $success-text: if($is-dark, #6ee7b7, #047857);
-  $success-bg: rgba($copilot-success, 0.12);
-  $warning-text: if($is-dark, #fbbf24, $copilot-warning);
-  $warning-bg: rgba($copilot-warning, 0.12);
-  $danger-bg: rgba($warn500, 0.12);
-  $danger-text: if($is-dark, #fca5a5, $warn700);
-  $scroll-thumb: rgba(if($is-dark, #fff, #000), 0.08);
-  $disabled-send: if($is-dark, #555, #c7cdd4);
-
-  // Glassmorphic panel backdrop (translucent, branches on mode).
-  $glass-bg: if($is-dark, rgb(15 23 42 / 60%), rgb(255 255 255 / 70%));
-  $glass-border: if($is-dark, rgb(255 255 255 / 10%), rgb(255 255 255 / 30%));
-
-  // Structural separators: the rule under the topbar, above the bottom nav, and between
-  // preference rows. Material's divider is 12% of the foreground, which is the right answer
-  // on an opaque surface and the wrong one here: this panel is 70% white over a blurred page,
-  // so at that alpha whatever is behind shows through the line and the topbar looks as though
-  // it has no rule at all. Solid in light mode so the blur cannot wash it out; left as an
-  // alpha in dark, where a faint light edge on a dark ground reads perfectly well.
-  $divider: if($is-dark, rgb(255 255 255 / 12%), #dbdfe6);
-
-  // The track of a switch that is off. It is a control rather than a separator, so it has to
-  // read as present at a glance, which the divider is deliberately too quiet to do.
-  $switch-off: if($is-dark, rgb(255 255 255 / 26%), #c3c9d4);
-
   .mifos-copilot {
     /* FAB */
     .ai-fab {
-      /* A light from above over the brand gradient, so the launcher reads as a raised object
-         rather than a flat disc. The highlight is the only thing added; the blue underneath is
-         the same brand ramp it has always been. */
-      background:
-        radial-gradient(circle at 50% 0%, rgb(255 255 255 / 22%), rgb(255 255 255 / 0%) 62%),
-        linear-gradient(135deg, $p500, $p700);
-      color: $on-primary;
-      box-shadow: 0 6px 20px mat.m2-get-color-from-palette($primary, 500, 0.4);
+      /* Flat brand primary; the launcher floats, so it carries the floating elevation. */
+      background: var(--ms-color-brand-primary);
+      color: var(--ms-color-on-primary);
+      box-shadow: var(--ms-shadow-float);
 
-      /* The idle halo, kept fainter in dark mode: the same alpha that reads as a soft glow on
-         a light page reads as a hard rim on a dark one. */
-      --copilot-fab-aura: #{mat.m2-get-color-from-palette($primary, 500, if($is-dark, 0.38, 0.45))};
+      /* The idle halo uses the primary tint, which each theme already tunes. */
+      --copilot-fab-aura: var(--ms-color-brand-primary-subtle);
 
       &:hover {
-        box-shadow: 0 8px 28px mat.m2-get-color-from-palette($primary, 500, 0.5);
+        box-shadow: var(--ms-shadow-float);
       }
     }
 
-    /* Glass panel - translucent backdrop, mode-aware via $glass-* */
+    /* Panel: flat surface with a hairline border */
     .chat-page {
-      background: $glass-bg;
-      border-color: $glass-border;
+      background: var(--ms-color-surface);
+      border-color: var(--ms-color-border-subtle);
     }
 
     /* Topbar */
     .topbar {
-      border-bottom-color: $divider;
+      border-bottom-color: var(--ms-color-border-subtle);
 
       &__brand {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__session-label {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
 
       &__session-value {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__btn {
-        background: $surface;
-        border-color: $divider;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
 
         svg {
-          fill: $text-2;
+          fill: var(--ms-color-text-secondary);
         }
 
         &:hover {
-          background: $muted;
+          background: var(--ms-color-surface-hover);
         }
       }
 
       &__new-chat {
-        color: $brand-text;
-        border-color: $brand-ring;
+        color: var(--ms-color-brand-primary);
+        border-color: var(--ms-color-focus-ring);
 
         svg {
-          fill: $brand-text;
+          fill: var(--ms-color-brand-primary);
         }
 
         &:hover {
-          background: $brand-tint;
-          border-color: $brand-text;
+          background: var(--ms-color-brand-primary-subtle);
+          border-color: var(--ms-color-brand-primary);
         }
       }
     }
 
     /* Scrollbars */
     .chat-body::-webkit-scrollbar-thumb {
-      background: $scroll-thumb;
+      background: var(--ms-color-border);
     }
 
     /* Welcome */
     .welcome {
       &__badge {
-        background: $brand-tint;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
       }
 
       &__heading {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
     }
 
     /* Messages */
     .msg {
       &--user .msg__bubble {
-        background: linear-gradient(135deg, $p500, $p700);
-        color: $on-primary;
-        box-shadow: 0 2px 8px mat.m2-get-color-from-palette($primary, 500, 0.2);
+        background: var(--ms-color-brand-primary);
+        color: var(--ms-color-on-primary);
+        box-shadow: none;
       }
 
       &--ai .msg__bubble {
-        background: $surface;
-        color: $text-1;
-        border: 1px solid $border;
+        background: var(--ms-color-surface);
+        color: var(--ms-color-text-primary);
+        border: 1px solid var(--ms-color-border-subtle);
       }
 
       &__bubble .md-inline-code {
-        background: rgba(if($is-dark, #fff, #000), 0.06);
+        background: var(--ms-color-surface-subtle);
       }
 
       &__bubble .md-code {
-        background: rgba(if($is-dark, #fff, #000), 0.06);
+        background: var(--ms-color-surface-subtle);
       }
 
       /* The border lives on the wrapper now, so the bar and the code read as one object. */
       &__bubble .md-code-wrap {
-        border: 1px solid $border;
+        border: 1px solid var(--ms-color-border-subtle);
       }
 
       &__bubble .md-code__bar {
-        background: rgba(if($is-dark, #fff, #000), 0.1);
-        border-bottom: 1px solid $border;
-        color: $text-3;
+        background: var(--ms-color-surface-subtle);
+        border-bottom: 1px solid var(--ms-color-border-subtle);
+        color: var(--ms-color-text-secondary);
       }
 
       &__bubble .md-code__copy {
-        color: $text-2;
+        color: var(--ms-color-text-secondary);
 
         svg {
           fill: currentcolor;
         }
 
         &:hover {
-          background: rgba(if($is-dark, #fff, #000), 0.08);
+          background: var(--ms-color-surface-hover);
         }
 
         &:focus-visible {
-          outline: 2px solid $brand-ring;
+          outline: 2px solid var(--ms-color-focus-ring);
           outline-offset: -2px;
         }
       }
 
       &__bubble .md-code__copy--done svg {
-        fill: $success-text;
+        fill: var(--ms-color-success);
       }
 
       &__text--streaming::after {
-        border-left: 2px solid $brand-text;
+        border-left: 2px solid var(--ms-color-brand-primary);
       }
 
       /* Syntax colour. Held to four roles: more than that in a chat bubble reads as noise,
          and these four are what make a payload skimmable. Both sets are checked for contrast
          against the code block's own ground, which is a tint of the bubble rather than white. */
       &__bubble .hl-keyword {
-        color: if($is-dark, #c4a7fb, #6d28d9);
+        color: var(--ms-color-brand-primary);
       }
 
       &__bubble .hl-string {
-        color: if($is-dark, #86efac, #047857);
+        color: var(--ms-color-success);
       }
 
       &__bubble .hl-number {
-        color: if($is-dark, #fbbf24, #b45309);
+        color: var(--ms-color-warning);
       }
 
       &__bubble .hl-comment {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
         font-style: italic;
       }
 
       &__bubble .md-heading {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__bubble .md-quote {
-        border-left-color: $border;
-        color: $text-2;
+        border-left-color: var(--ms-color-border-subtle);
+        color: var(--ms-color-text-secondary);
       }
 
       &__bubble .md-link {
-        color: $brand-text;
+        color: var(--ms-color-brand-primary);
 
         &:focus-visible {
-          outline: 2px solid $brand-ring;
+          outline: 2px solid var(--ms-color-focus-ring);
           outline-offset: 2px;
         }
       }
 
       &__bubble .md-table {
         th {
-          background: rgba(if($is-dark, #fff, #000), 0.08);
-          border-bottom: 2px solid $border;
+          background: var(--ms-color-surface-hover);
+          border-bottom: 2px solid var(--ms-color-border-subtle);
         }
 
         td {
-          border-bottom: 1px solid $border;
+          border-bottom: 1px solid var(--ms-color-border-subtle);
         }
 
         tr:last-child td {
@@ -280,16 +209,16 @@ $copilot-warning: #f59e0b;
       }
 
       &__bubble .md-table-wrap {
-        border: 1px solid $border;
+        border: 1px solid var(--ms-color-border-subtle);
       }
 
       &__avatar {
-        background: $surface;
-        border-color: $border;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
       }
 
       &__time {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
     }
 
@@ -300,157 +229,157 @@ $copilot-warning: #f59e0b;
     .msg__avatar--thinking,
     .msg__avatar--streaming,
     .ai-fab {
-      --copilot-thinking-ring: #{$brand-ring};
-      --copilot-fab-focus: #{$brand-ring};
+      --copilot-thinking-ring: var(--ms-color-focus-ring);
+      --copilot-fab-focus: var(--ms-color-focus-ring);
 
       /* The disc the X is cut out of, following the mode rather than opposing it: dark on a
          dark page, light on a light one, so the launcher sits in its surroundings instead of
          punching a bright hole in them. The wedges stay brand blue in both. */
-      --copilot-mark-disc: #{if($is-dark, #14304a, #f6f9fb)};
+      --copilot-mark-disc: var(--ms-color-surface);
     }
 
     /* Action cards */
     .card {
-      background: $surface;
-      border-color: $border;
+      background: var(--ms-color-surface);
+      border-color: var(--ms-color-border-subtle);
 
       &::before {
-        background: linear-gradient(90deg, $p500, $p100);
+        background: var(--ms-color-brand-primary);
       }
 
       &--confirm::before {
-        background: linear-gradient(90deg, $warn500, $warn700);
+        background: var(--ms-color-danger);
       }
 
       &--insight::before {
-        background: linear-gradient(90deg, $copilot-success, $a500);
+        background: var(--ms-color-success);
       }
 
       &__icon-wrap {
-        background: $brand-tint;
+        background: var(--ms-color-brand-primary-subtle);
 
         &--client {
-          background: $brand-tint;
+          background: var(--ms-color-brand-primary-subtle);
         }
 
         &--loan {
-          background: $warning-bg;
+          background: var(--ms-color-warning-bg);
         }
 
         &--savings,
         &--insight {
-          background: $success-bg;
+          background: var(--ms-color-success-bg);
         }
 
         &--confirmation {
-          background: $danger-bg;
+          background: var(--ms-color-danger-bg);
         }
       }
 
       &__type-icon {
-        fill: $brand-text;
+        fill: var(--ms-color-brand-primary);
       }
 
       &__icon-wrap--loan &__type-icon {
-        fill: $warning-text;
+        fill: var(--ms-color-warning);
       }
 
       &__icon-wrap--savings &__type-icon,
       &__icon-wrap--insight &__type-icon {
-        fill: $copilot-success;
+        fill: var(--ms-color-success);
       }
 
       &__icon-wrap--confirmation &__type-icon {
-        fill: $warn500;
+        fill: var(--ms-color-danger);
       }
 
       &__badge {
-        color: $brand-text;
+        color: var(--ms-color-brand-primary);
 
         &--loan {
-          color: $warning-text;
+          color: var(--ms-color-warning);
         }
 
         &--savings,
         &--insight {
-          color: $success-text;
+          color: var(--ms-color-success);
         }
 
         &--confirmation {
-          color: $danger-text;
+          color: var(--ms-color-danger);
         }
       }
 
       &__title {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__row {
-        border-bottom-color: $border;
+        border-bottom-color: var(--ms-color-border-subtle);
       }
 
       &__label {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
 
       &__value {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__warn-stripe {
-        background: $danger-bg;
-        color: $danger-text;
+        background: var(--ms-color-danger-bg);
+        color: var(--ms-color-danger);
 
         svg {
-          fill: $warn500;
+          fill: var(--ms-color-danger);
         }
       }
 
       &__actions {
-        border-top-color: $border;
+        border-top-color: var(--ms-color-border-subtle);
       }
 
       &__btn--primary {
-        background: linear-gradient(135deg, $p500, $p700);
-        color: $on-primary;
-        box-shadow: 0 2px 8px mat.m2-get-color-from-palette($primary, 500, 0.25);
+        background: var(--ms-color-brand-primary);
+        color: var(--ms-color-on-primary);
+        box-shadow: none;
       }
 
       &__btn--warn {
-        background: linear-gradient(135deg, $warn500, $warn700);
-        color: $on-warn;
-        box-shadow: 0 2px 8px mat.m2-get-color-from-palette($warn, 500, 0.25);
+        background: var(--ms-color-danger);
+        color: var(--ms-color-on-primary);
+        box-shadow: none;
       }
 
       &__btn--accent {
-        background: $muted;
-        color: $text-1;
-        border-color: $border;
+        background: var(--ms-color-surface-hover);
+        color: var(--ms-color-text-primary);
+        border-color: var(--ms-color-border-subtle);
       }
     }
 
     /* Try again, offered when the gateway said waiting would help */
     .retry-button {
-      background: $surface;
-      color: $text-2;
-      border-color: $divider;
+      background: var(--ms-color-surface);
+      color: var(--ms-color-text-secondary);
+      border-color: var(--ms-color-border-subtle);
 
       svg {
-        fill: $text-3;
+        fill: var(--ms-color-text-secondary);
       }
 
       &:hover {
-        background: $brand-tint;
-        border-color: $p100;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        border-color: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
 
         svg {
-          fill: $brand-text;
+          fill: var(--ms-color-brand-primary);
         }
       }
 
       &:focus-visible {
-        outline: 2px solid $brand-ring;
+        outline: 2px solid var(--ms-color-focus-ring);
         outline-offset: 2px;
       }
     }
@@ -460,16 +389,16 @@ $copilot-warning: #f59e0b;
        than opacity, which compounds unpredictably with the theme. */
 
     .show-earlier {
-      background: $muted;
-      color: $text-2;
+      background: var(--ms-color-surface-hover);
+      color: var(--ms-color-text-secondary);
 
       &:hover {
-        background: $brand-tint;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
       }
 
       &:focus-visible {
-        outline: 2px solid $brand-ring;
+        outline: 2px solid var(--ms-color-focus-ring);
         outline-offset: 2px;
       }
     }
@@ -477,320 +406,320 @@ $copilot-warning: #f59e0b;
     /* The questions asked this session. Reads as a quiet overlay: it sits above the
        conversation, so it needs its own ground to stay legible over text. */
     .prompt-nav {
-      background: $surface;
-      border: 1px solid $border;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, if($is-dark, 0.4, 0.08));
+      background: var(--ms-color-surface);
+      border: 1px solid var(--ms-color-border-subtle);
+      box-shadow: var(--ms-shadow-float);
     }
 
     .prompt-nav__toggle {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
 
       svg {
         fill: currentcolor;
       }
 
       &:focus-visible {
-        outline: 2px solid $brand-ring;
+        outline: 2px solid var(--ms-color-focus-ring);
         outline-offset: -2px;
       }
     }
 
     .prompt-nav__item {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
 
       .prompt-nav__rule {
-        background: $border;
+        background: var(--ms-color-border-subtle);
       }
 
       &:hover {
-        background: $brand-tint;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
       }
 
       &:focus-visible {
-        outline: 2px solid $brand-ring;
+        outline: 2px solid var(--ms-color-focus-ring);
         outline-offset: -2px;
       }
     }
 
     .prompt-nav__item--active {
-      color: $brand-text;
+      color: var(--ms-color-brand-primary);
       font-weight: 600;
 
       .prompt-nav__rule {
-        background: $brand-text;
+        background: var(--ms-color-brand-primary);
       }
     }
 
     .trail__live {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__live-dot {
-      background: $brand-text;
+      background: var(--ms-color-brand-primary);
     }
 
     .trail__live-time {
-      color: $text-3;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__section {
-      background: $muted;
+      background: var(--ms-color-surface-hover);
     }
 
     .trail__summary {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
 
       &:hover {
-        background: $brand-tint;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
       }
 
       &:focus-visible {
-        outline: 2px solid $brand-ring;
+        outline: 2px solid var(--ms-color-focus-ring);
         outline-offset: -2px;
       }
     }
 
     .trail__chevron {
-      fill: $text-3;
+      fill: var(--ms-color-text-secondary);
     }
 
     .trail__count {
-      color: $text-3;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__step {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__tick svg {
-      fill: $success-text;
+      fill: var(--ms-color-success);
     }
 
     .trail__step-time {
-      color: $text-3;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__note,
     .trail__caution {
-      color: $text-3;
+      color: var(--ms-color-text-secondary);
     }
 
     .trail__notes {
-      color: $text-2;
+      color: var(--ms-color-text-secondary);
     }
 
     /* Copy / repeat / rate, under a finished reply */
     .msg-actions {
       &__button {
         svg {
-          fill: $text-3;
+          fill: var(--ms-color-text-secondary);
         }
 
         &:hover {
-          background: $muted;
+          background: var(--ms-color-surface-hover);
 
           svg {
-            fill: $brand-text;
+            fill: var(--ms-color-brand-primary);
           }
         }
 
         &:focus-visible {
-          outline: 2px solid $brand-ring;
+          outline: 2px solid var(--ms-color-focus-ring);
           outline-offset: 1px;
         }
 
         /* The rating the officer chose, held visibly. */
         &--on svg {
-          fill: $brand-text;
+          fill: var(--ms-color-brand-primary);
         }
 
         /* A copy that landed, confirmed in the colour that means it worked. */
         &--done svg {
-          fill: $success-text;
+          fill: var(--ms-color-success);
         }
       }
 
       &__divider {
-        background: $divider;
+        background: var(--ms-color-border-subtle);
       }
     }
 
     /* Preferences */
     .prefs {
       &__section-title {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
 
       &__row {
-        border-bottom-color: $divider;
+        border-bottom-color: var(--ms-color-border-subtle);
       }
 
       &__label-title {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__label-hint {
-        color: $text-2;
+        color: var(--ms-color-text-secondary);
       }
 
       &__switch {
-        background: $switch-off;
+        background: var(--ms-color-text-disabled);
 
         &:focus-visible {
-          outline: 2px solid $brand-ring;
+          outline: 2px solid var(--ms-color-focus-ring);
         }
 
         &--on {
-          background: $p500;
+          background: var(--ms-color-brand-primary);
         }
       }
 
       &__switch-thumb {
-        background: $surface;
-        box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+        background: var(--ms-color-surface);
+        box-shadow: var(--ms-shadow-xs);
       }
 
       &__button {
-        background: $surface;
-        color: $text-1;
-        border-color: $divider;
+        background: var(--ms-color-surface);
+        color: var(--ms-color-text-primary);
+        border-color: var(--ms-color-border-subtle);
 
         &:hover:not(:disabled) {
-          background: $muted;
+          background: var(--ms-color-surface-hover);
         }
 
         /* Erasing saved conversations cannot be undone, and should not look routine. */
         &--danger {
-          color: $warn500;
-          border-color: $warn500;
+          color: var(--ms-color-danger);
+          border-color: var(--ms-color-danger);
 
           &:hover:not(:disabled) {
-            background: $warn500;
-            color: $on-warn;
+            background: var(--ms-color-danger);
+            color: var(--ms-color-on-primary);
           }
         }
       }
 
       &__facts {
-        color: $text-2;
+        color: var(--ms-color-text-secondary);
       }
     }
 
     /* Prompt chips */
     .prompt-chip {
-      background: $surface;
-      color: $text-1;
-      border-color: $border;
+      background: var(--ms-color-surface);
+      color: var(--ms-color-text-primary);
+      border-color: var(--ms-color-border-subtle);
 
       &:hover {
-        background: $brand-tint;
-        border-color: $p100;
-        color: $brand-text;
+        background: var(--ms-color-brand-primary-subtle);
+        border-color: var(--ms-color-brand-primary-subtle);
+        color: var(--ms-color-brand-primary);
       }
     }
 
     /* Footer / input bar */
     .chat-footer {
       &__input-bar {
-        background: $surface;
-        border-color: $border;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
 
         &:focus-within {
-          border-color: $brand-ring;
-          box-shadow: 0 0 0 4px mat.m2-get-color-from-palette($primary, 500, 0.08);
+          border-color: var(--ms-color-focus-ring);
+          box-shadow: 0 0 0 3px var(--ms-color-brand-primary-subtle);
         }
       }
 
       &__icon-btn {
         svg {
-          fill: $text-3;
+          fill: var(--ms-color-text-secondary);
         }
 
         &:hover:not(:disabled) {
-          background: $muted;
+          background: var(--ms-color-surface-hover);
 
           svg {
-            fill: $brand-text;
+            fill: var(--ms-color-brand-primary);
           }
         }
       }
 
       &__input {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
 
         &::placeholder {
-          color: $text-3;
+          color: var(--ms-color-text-secondary);
         }
       }
 
       &__send {
-        background: linear-gradient(135deg, $p500, $p700);
-        box-shadow: 0 4px 14px mat.m2-get-color-from-palette($primary, 500, 0.3);
+        background: var(--ms-color-brand-primary);
+        box-shadow: none;
 
         svg {
-          fill: $on-primary;
+          fill: var(--ms-color-on-primary);
         }
 
         &:hover:not(:disabled) {
-          box-shadow: 0 6px 20px mat.m2-get-color-from-palette($primary, 500, 0.4);
+          box-shadow: var(--ms-shadow-float);
         }
 
         &:disabled {
-          background: $disabled-send;
+          background: var(--ms-color-border);
         }
       }
 
       &__stop {
-        background: linear-gradient(135deg, $warn500, $warn700);
-        box-shadow: 0 4px 14px mat.m2-get-color-from-palette($warn, 500, 0.3);
+        background: var(--ms-color-danger);
+        box-shadow: none;
 
         svg {
-          fill: $on-warn;
+          fill: var(--ms-color-on-primary);
         }
       }
 
       &__disclaimer {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
     }
 
     /* Bottom nav */
     .bottom-nav {
-      background: $surface;
-      border-top-color: $divider;
+      background: var(--ms-color-surface);
+      border-top-color: var(--ms-color-border-subtle);
 
       &__item {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
 
         svg {
-          fill: $text-3;
+          fill: var(--ms-color-text-secondary);
         }
 
         &:hover {
-          color: $text-2;
-          background: $muted;
+          color: var(--ms-color-text-secondary);
+          background: var(--ms-color-surface-hover);
 
           svg {
-            fill: $text-2;
+            fill: var(--ms-color-text-secondary);
           }
         }
 
         &--active {
-          color: $brand-text;
-          background: $brand-tint;
+          color: var(--ms-color-brand-primary);
+          background: var(--ms-color-brand-primary-subtle);
 
           svg {
-            fill: $brand-text;
+            fill: var(--ms-color-brand-primary);
           }
 
           &:hover {
-            color: $brand-text;
-            background: $brand-tint;
+            color: var(--ms-color-brand-primary);
+            background: var(--ms-color-brand-primary-subtle);
 
             svg {
-              fill: $brand-text;
+              fill: var(--ms-color-brand-primary);
             }
           }
         }
@@ -800,56 +729,56 @@ $copilot-warning: #f59e0b;
     /* Recent chats */
     .recent-chats {
       &__empty-icon {
-        fill: $text-3;
+        fill: var(--ms-color-text-secondary);
       }
 
       &__empty-title {
-        color: $text-2;
+        color: var(--ms-color-text-secondary);
       }
 
       &__empty-subtitle {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
 
       &__item {
-        background: $surface;
-        border-color: $border;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
 
         &:hover {
-          border-color: $p100;
+          border-color: var(--ms-color-brand-primary-subtle);
         }
       }
 
       &__item-icon {
-        background: $brand-tint;
+        background: var(--ms-color-brand-primary-subtle);
 
         svg {
-          fill: $brand-text;
+          fill: var(--ms-color-brand-primary);
         }
       }
 
       &__item-title {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__item-preview {
-        color: $text-2;
+        color: var(--ms-color-text-secondary);
       }
 
       &__item-meta {
-        color: $text-3;
+        color: var(--ms-color-text-secondary);
       }
 
       &__item-delete {
         svg {
-          fill: $text-3;
+          fill: var(--ms-color-text-secondary);
         }
 
         &:hover {
-          background: $danger-bg;
+          background: var(--ms-color-danger-bg);
 
           svg {
-            fill: $danger-text;
+            fill: var(--ms-color-danger);
           }
         }
       }
@@ -858,42 +787,42 @@ $copilot-warning: #f59e0b;
     /* Help center */
     .help-center {
       &__section-icon svg {
-        fill: $text-2;
+        fill: var(--ms-color-text-secondary);
       }
 
       &__section-title {
-        color: $text-1;
+        color: var(--ms-color-text-primary);
       }
 
       &__item {
-        background: $surface;
-        border-color: $border;
-        color: $text-1;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
+        color: var(--ms-color-text-primary);
 
         svg {
-          fill: $copilot-success;
+          fill: var(--ms-color-success);
         }
 
         &--muted {
-          color: $text-2;
+          color: var(--ms-color-text-secondary);
 
           svg {
-            fill: $text-3;
+            fill: var(--ms-color-text-secondary);
           }
         }
       }
 
       &__prompt {
-        background: $surface;
-        border-color: $border;
-        color: $brand-text;
+        background: var(--ms-color-surface);
+        border-color: var(--ms-color-border-subtle);
+        color: var(--ms-color-brand-primary);
 
         svg {
-          fill: $brand-text;
+          fill: var(--ms-color-brand-primary);
         }
 
         &:hover {
-          border-color: $p100;
+          border-color: var(--ms-color-brand-primary-subtle);
         }
       }
     }

@@ -11,17 +11,18 @@
     <mat-card-content>
       <div class="page-heading">
         <div>
-          <h2>{{ 'transactionHistory.title' | translate }}</h2>
           <p>{{ 'transactionHistory.description' | translate }}</p>
         </div>
-        <button mat-raised-button type="button" [disabled]="reportLoading || searchLoading" (click)="printResults()">
+        <button mat-stroked-button type="button" [disabled]="reportLoading || searchLoading" (click)="printResults()">
           <mat-icon aria-hidden="true">print</mat-icon>
           {{ 'transactionHistory.actions.printResults' | translate }}
         </button>
       </div>
 
       <section aria-labelledby="search-filters-heading">
-        <h3 id="search-filters-heading">{{ 'transactionHistory.sections.searchFilters' | translate }}</h3>
+        <h3 class="ms-subsection-title" id="search-filters-heading">
+          {{ 'transactionHistory.sections.searchFilters' | translate }}
+        </h3>
 
         @if (contextLoading) {
           <div class="loading-state" role="status" aria-live="polite">
@@ -125,7 +126,7 @@
           </mat-form-field>
 
           <div class="filter-actions">
-            <button mat-raised-button color="primary" type="submit" [disabled]="searchLoading">
+            <button mat-flat-button color="primary" type="submit" [disabled]="searchLoading">
               {{ 'transactionHistory.actions.search' | translate }}
             </button>
             <button mat-button type="button" [disabled]="searchLoading" (click)="clearFilters()">
@@ -138,7 +139,9 @@
       <mat-divider></mat-divider>
 
       <section aria-labelledby="transaction-results-heading">
-        <h3 id="transaction-results-heading">{{ 'transactionHistory.sections.results' | translate }}</h3>
+        <h3 class="ms-subsection-title" id="transaction-results-heading">
+          {{ 'transactionHistory.sections.results' | translate }}
+        </h3>
 
         @if (searchLoading) {
           <div class="loading-state" role="status" aria-live="polite">
@@ -256,12 +259,14 @@
 
       @if (totals.length) {
         <section aria-labelledby="totals-heading">
-          <h3 id="totals-heading">{{ 'transactionHistory.sections.totals' | translate }}</h3>
+          <h3 class="ms-subsection-title" id="totals-heading">
+            {{ 'transactionHistory.sections.totals' | translate }}
+          </h3>
           <div class="totals-grid">
             @for (total of totals; track total.currencyCode) {
               <mat-card class="total-card">
                 <mat-card-content>
-                  <h4>{{ total.currencyCode }}</h4>
+                  <h4 class="ms-subsection-title">{{ total.currencyCode }}</h4>
                   <dl>
                     <div>
                       <dt>{{ 'transactionHistory.fields.totalInflows' | translate }}</dt>
@@ -288,7 +293,9 @@
       }
 
       <section aria-labelledby="transaction-detail-heading">
-        <h3 id="transaction-detail-heading">{{ 'transactionHistory.sections.details' | translate }}</h3>
+        <h3 class="ms-subsection-title" id="transaction-detail-heading">
+          {{ 'transactionHistory.sections.details' | translate }}
+        </h3>
         @if (detailLoading) {
           <div class="loading-state" role="status" aria-live="polite">
             <mat-spinner diameter="32"></mat-spinner>
@@ -383,7 +390,7 @@
             </dl>
 
             @if (detail.cancellation) {
-              <h4>{{ 'transactionHistory.sections.cancellation' | translate }}</h4>
+              <h4 class="ms-subsection-title">{{ 'transactionHistory.sections.cancellation' | translate }}</h4>
               <dl class="detail-grid">
                 <div>
                   <dt>{{ 'transactionHistory.fields.reason' | translate }}</dt>
@@ -401,11 +408,11 @@
             }
 
             <div class="detail-actions">
-              <button mat-raised-button type="button" [disabled]="denominationLoading" (click)="loadDenominations()">
+              <button mat-stroked-button type="button" [disabled]="denominationLoading" (click)="loadDenominations()">
                 {{ 'transactionHistory.actions.denominationDetails' | translate }}
               </button>
               @if (detail.receiptSupported) {
-                <button mat-raised-button type="button" [disabled]="receiptLoading" (click)="reprintReceipt()">
+                <button mat-stroked-button type="button" [disabled]="receiptLoading" (click)="reprintReceipt()">
                   <mat-icon aria-hidden="true">print</mat-icon>
                   {{ 'transactionHistory.actions.reprintReceipt' | translate }}
                 </button>
@@ -423,7 +430,9 @@
 
       @if (detail && (denominationLoading || denominations || denominationError)) {
         <section aria-labelledby="denomination-details-heading">
-          <h3 id="denomination-details-heading">{{ 'transactionHistory.sections.denominations' | translate }}</h3>
+          <h3 class="ms-subsection-title" id="denomination-details-heading">
+            {{ 'transactionHistory.sections.denominations' | translate }}
+          </h3>
           @if (denominationLoading) {
             <div class="loading-state" role="status" aria-live="polite">
               <mat-spinner diameter="32"></mat-spinner>
@@ -439,7 +448,7 @@
             </div>
           }
           @if (denominations) {
-            <h4>{{ 'transactionHistory.sections.operationDenominations' | translate }}</h4>
+            <h4 class="ms-subsection-title">{{ 'transactionHistory.sections.operationDenominations' | translate }}</h4>
             @if (!denominationLines('operation').length) {
               <div class="message empty-state">{{ 'transactionHistory.states.noDenominations' | translate }}</div>
             }
@@ -486,7 +495,7 @@
             }
           }
           @if (denominations) {
-            <h4>{{ 'transactionHistory.sections.changeGiven' | translate }}</h4>
+            <h4 class="ms-subsection-title">{{ 'transactionHistory.sections.changeGiven' | translate }}</h4>
             @if (!denominationLines('change').length) {
               <div class="message empty-state">{{ 'transactionHistory.states.noDenominations' | translate }}</div>
             }
@@ -544,7 +553,7 @@
 
 @if (receipt && printMode === 'receipt') {
   <section class="print-only receipt-print" aria-label="{{ 'transactionHistory.sections.receipt' | translate }}">
-    <h1>{{ 'transactionHistory.sections.receipt' | translate }}</h1>
+    <h2 class="ms-section-title">{{ 'transactionHistory.sections.receipt' | translate }}</h2>
     <p>{{ receipt.sourceType }} · {{ receipt.historyId }}</p>
     <pre>{{ receipt.receipt | json }}</pre>
   </section>
@@ -552,7 +561,7 @@
 
 @if (report && printMode === 'report') {
   <section class="print-only report-print" aria-label="{{ 'transactionHistory.sections.report' | translate }}">
-    <h1>{{ 'transactionHistory.title' | translate }}</h1>
+    <h2 class="ms-section-title">{{ 'transactionHistory.title' | translate }}</h2>
     <p>{{ 'transactionHistory.fields.generatedAt' | translate }}: {{ report.generatedAt | date: 'medium' }}</p>
     <p>{{ 'transactionHistory.fields.totalRecords' | translate }}: {{ report.totalFilteredRecords }}</p>
     <table>

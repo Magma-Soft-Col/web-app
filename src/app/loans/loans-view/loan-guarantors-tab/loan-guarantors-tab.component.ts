@@ -33,6 +33,7 @@ import { EditGuarantorDialogComponent } from 'app/loans/custom-dialog/edit-guara
 import { AccountsFilterPipe } from '../../../pipes/accounts-filter.pipe';
 import { FormatNumberPipe } from '../../../pipes/format-number.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatIconButton } from '@angular/material/button';
 
 /**
  * Guarantors tab of the loan account view.
@@ -43,6 +44,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./loan-guarantors-tab.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    MatIconButton,
     RouterLink,
     FaIconComponent,
     MatTable,

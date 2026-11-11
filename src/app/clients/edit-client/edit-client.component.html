@@ -11,7 +11,9 @@
     <form [formGroup]="editClientForm" (ngSubmit)="submit()">
       <mat-card-content>
         @if (productionMode) {
-          <h3 class="form-section-title">{{ 'labels.heading.' + productionGeneralHeading | translate }}</h3>
+          <h3 class="ms-section-title form-section-title">
+            {{ 'labels.heading.' + productionGeneralHeading | translate }}
+          </h3>
         }
 
         <!-- First Row: Office, Legal Form, Account No, External ID -->
@@ -401,7 +403,9 @@
           }
 
           <mat-divider class="section-divider"></mat-divider>
-          <h3 class="form-section-title">{{ 'labels.heading.' + productionAddressHeading | translate }}</h3>
+          <h3 class="ms-section-title form-section-title">
+            {{ 'labels.heading.' + productionAddressHeading | translate }}
+          </h3>
 
           @if (personalDataAddressForm) {
             <div [formGroup]="personalDataAddressForm" class="responsive-row">
@@ -544,7 +548,9 @@
 
           @for (sectionConfig of productionDatatableSectionConfigs; track sectionConfig.key) {
             <mat-divider class="section-divider"></mat-divider>
-            <h3 class="form-section-title">{{ translationKey(sectionConfig.title, 'labels.heading') | translate }}</h3>
+            <h3 class="ms-section-title form-section-title">
+              {{ translationKey(sectionConfig.title, 'labels.heading') | translate }}
+            </h3>
 
             @if (hasDatatableSchema(sectionConfig.key)) {
               @for (section of datatableSections(sectionConfig.key); track section.sourceName) {
@@ -661,10 +667,10 @@
       </mat-card-content>
 
       <mat-card-actions class="button-container">
-        <button type="button" mat-raised-button [routerLink]="['../general']">
+        <button type="button" mat-stroked-button [routerLink]="['../general']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="isSubmitDisabled">
+        <button type="submit" mat-flat-button color="primary" [disabled]="isSubmitDisabled">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>

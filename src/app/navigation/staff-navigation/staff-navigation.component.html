@@ -7,20 +7,18 @@
 -->
 
 <mat-card-header class="layout-row gap-5percent header">
-  <fa-icon class="main-icon" icon="user" size="3x"></fa-icon>
+  <fa-icon class="main-icon" icon="user"></fa-icon>
   <mat-card-title-group>
     <div class="mat-typography">
       <mat-card-title>
         <h2>
           {{ employeeData.displayName }}
-          <span [className]="employeeData.isActive === true ? 'true' : 'false'">
-            <fa-icon
-              matTooltip="{{ employeeData.isActive === true ? 'Active' : 'Inactive' }}"
-              matTooltipPosition="right"
-              icon="circle"
-              size="lg"
-            ></fa-icon>
-          </span>
+          <span
+            [className]="'ms-status ' + (employeeData.isActive === true ? 'ms-status--success' : 'ms-status--neutral')"
+            >{{
+              (employeeData.isActive === true ? 'labels.catalogs.Active' : 'labels.catalogs.Inactive') | translate
+            }}</span
+          >
         </h2>
       </mat-card-title>
       <mat-card-subtitle>

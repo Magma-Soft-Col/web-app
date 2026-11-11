@@ -6,12 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_TELLER'">
+<div class="container ms-actions page-actions m-b-20">
+  <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_TELLER'">
     <fa-icon icon="edit" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Edit' | translate }}
   </button>
-  <button mat-raised-button color="warn" (click)="deleteTeller()" *mifosxHasPermission="'DELETE_TELLER'">
+  <button mat-stroked-button color="warn" (click)="deleteTeller()" *mifosxHasPermission="'DELETE_TELLER'">
     <fa-icon icon="trash" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Delete' | translate }}
   </button>
@@ -20,61 +20,39 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Teller Name' | translate }}
+      <div class="detail-list">
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Teller Name' | translate }}</span>
+          <span class="ms-value">{{ tellerData.name }}</span>
         </div>
 
-        <div class="flex-50">
-          {{ tellerData.name }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Office' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ tellerData.officeName }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Office' | translate }}</span>
+          <span class="ms-value">{{ tellerData.officeName }}</span>
         </div>
 
         @if (tellerData.description) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Description' | translate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Description' | translate }}</span>
+            <span class="ms-value">{{ tellerData.description }}</span>
           </div>
         }
 
-        @if (tellerData.description) {
-          <div class="flex-50">
-            {{ tellerData.description }}
-          </div>
-        }
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Start Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ tellerData.startDate | dateFormat }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Start Date' | translate }}</span>
+          <span class="ms-value">{{ tellerData.startDate | dateFormat }}</span>
         </div>
 
         @if (tellerData.endDate) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.End Date' | translate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.End Date' | translate }}</span>
+            <span class="ms-value">{{ tellerData.endDate | dateFormat }}</span>
           </div>
         }
 
-        @if (tellerData.endDate) {
-          <div class="flex-50">
-            {{ tellerData.endDate | dateFormat }}
-          </div>
-        }
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Status' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ tellerData.status | titlecase }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Status' | translate }}</span>
+          <span class="ms-value">{{ tellerData.status | titlecase }}</span>
         </div>
       </div>
     </mat-card-content>

@@ -6,69 +6,53 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.heading.Edit' | translate }}
-  </button>
-  <button mat-raised-button color="warn" (click)="deleteCollateral()">
-    <fa-icon icon="trash" class="m-r-10"></fa-icon>
-    {{ 'labels.heading.Delete' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Collateral Name' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.name }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Type/Quality' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.quality }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Base Price' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.basePrice }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Base Percentage' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.pctToBase }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Unit Type' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.unitType }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.heading.Currency' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ collateralData.currency }}
-        </div>
+  <div class="ms-page">
+    <div class="ms-page-header">
+      <h2 class="ms-section-title">{{ collateralData.name }}</h2>
+      <div class="ms-actions">
+        <button mat-stroked-button color="warn" (click)="deleteCollateral()">
+          <fa-icon icon="trash" class="m-r-10"></fa-icon>
+          {{ 'labels.heading.Delete' | translate }}
+        </button>
+        <button mat-flat-button color="primary" [routerLink]="['edit']">
+          <fa-icon icon="edit" class="m-r-10"></fa-icon>
+          {{ 'labels.heading.Edit' | translate }}
+        </button>
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+
+    <mat-card>
+      <mat-card-content>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Collateral Name' | translate }}</span>
+          <span class="flex-50 ms-value">{{ collateralData.name }}</span>
+        </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Type/Quality' | translate }}</span>
+          <span class="flex-50 ms-value">{{ collateralData.quality }}</span>
+        </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Base Price' | translate }}</span>
+          <span class="flex-50 ms-value"
+            ><span class="ms-num">{{ collateralData.basePrice }}</span></span
+          >
+        </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Base Percentage' | translate }}</span>
+          <span class="flex-50 ms-value"
+            ><span class="ms-num">{{ collateralData.pctToBase }}</span></span
+          >
+        </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Unit Type' | translate }}</span>
+          <span class="flex-50 ms-value">{{ collateralData.unitType }}</span>
+        </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.heading.Currency' | translate }}</span>
+          <span class="flex-50 ms-value">{{ collateralData.currency }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

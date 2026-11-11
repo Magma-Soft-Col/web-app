@@ -1,0 +1,233 @@
+/**
+ * Copyright since 2025 Mifos Initiative
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/*
+ * Sign-in fields (Magma Contable style): persistent label above a 44px control
+ * with a leading icon, an optional trailing action (show password) and the error
+ * below. Used by the login form and the tenant selector's `auth` variant.
+ *
+ *   <div class="ms-auth-field" [class.ms-auth-field--invalid]="…">
+ *     <label class="ms-auth-field__label" for="id">…</label>
+ *     <div class="ms-auth-field__control">
+ *       <mifosx-m3-icon class="ms-auth-field__icon" name="…" [size]="20" />
+ *       <input id="id" class="ms-auth-field__input" />
+ *       <button type="button" class="ms-auth-field__action">…</button>
+ *     </div>
+ *     <span class="ms-auth-field__error" role="alert">…</span>
+ *   </div>
+ */
+
+.ms-auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ms-auth-field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-auth-field__required {
+  margin-left: 2px;
+  color: var(--ms-color-danger);
+}
+
+.ms-auth-field__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 6px 0 13px;
+  box-sizing: border-box;
+  background: var(--ms-color-surface-zebra);
+  border: 1px solid var(--ms-color-border);
+  border-radius: 10px;
+  transition:
+    border-color var(--ms-duration-fast) var(--ms-easing),
+    box-shadow var(--ms-duration-fast) var(--ms-easing);
+
+  &:hover {
+    border-color: var(--ms-color-text-disabled);
+  }
+
+  &:focus-within {
+    border-color: var(--ms-color-brand-accent);
+    box-shadow: 0 0 0 3px rgb(206 88 0 / 18%);
+  }
+}
+
+.ms-auth-field__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--ms-color-text-secondary);
+
+  .ms-auth-field__control:focus-within & {
+    color: var(--ms-color-brand-primary);
+  }
+}
+
+.ms-auth-field__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0 7px 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ms-color-text-primary);
+  font: inherit;
+  font-size: 14px;
+
+  &::placeholder {
+    color: var(--ms-color-text-disabled);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--ms-color-text-disabled);
+  }
+
+}
+
+// Tenant field: a mat-select covering the whole control (so the dropdown is as
+// wide as the field and starts at its left edge); the chevron is ours.
+.ms-auth-field__control--select {
+  padding: 0;
+}
+
+.ms-auth-field__select {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  .mat-mdc-select-trigger {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px 0 13px;
+    box-sizing: border-box;
+  }
+
+  .mat-mdc-select-value {
+    color: var(--ms-color-text-primary);
+    font-size: 14px;
+  }
+
+  .mat-mdc-select-arrow-wrapper {
+    display: none;
+  }
+
+  &.mat-mdc-select-disabled {
+    cursor: not-allowed;
+  }
+}
+
+.ms-auth-field__select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// Open select rotates the chevron.
+.ms-auth-field__control:has(.mat-mdc-select[aria-expanded='true']) .ms-auth-field__chevron {
+  transform: rotate(180deg);
+}
+
+// Dropdown panel of the tenant field (rendered in the overlay).
+.ms-auth-select-panel.mat-mdc-select-panel {
+  margin-top: 6px;
+  padding: 4px;
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border);
+  border-radius: 10px;
+  box-shadow: var(--ms-shadow-float);
+
+  .mat-mdc-option {
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    color: var(--ms-color-text-primary);
+    font-size: 14px;
+
+    &:hover:not(.mdc-list-item--disabled),
+    &.mat-mdc-option-active {
+      background: var(--ms-color-surface-hover);
+    }
+
+    &.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+      background: var(--ms-color-brand-primary-subtle);
+
+      .mdc-list-item__primary-text {
+        color: var(--ms-color-brand-primary);
+        font-weight: 600;
+      }
+    }
+
+    // Selection is shown by colour and weight; no extra checkmark.
+    .mat-pseudo-checkbox {
+      display: none;
+    }
+  }
+}
+
+// mifosx-m3-icon colours its inner span; inside a field it follows the field state.
+.ms-auth-field .m3-icon {
+  color: inherit;
+}
+
+// Chevron for the native select.
+.ms-auth-field__chevron {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  color: var(--ms-color-text-secondary);
+  transition: transform var(--ms-duration-fast) var(--ms-easing);
+}
+
+.ms-auth-field__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ms-color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--ms-duration-fast) var(--ms-easing);
+
+  &:hover {
+    background: var(--ms-color-surface-hover);
+    color: var(--ms-color-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: 1px;
+  }
+}
+
+.ms-auth-field--invalid .ms-auth-field__control {
+  border-color: var(--ms-color-danger);
+
+  &:focus-within {
+    box-shadow: 0 0 0 3px rgb(180 35 24 / 15%);
+  }
+}
+
+.ms-auth-field__error {
+  font-size: 12px;
+  color: var(--ms-color-danger);
+}

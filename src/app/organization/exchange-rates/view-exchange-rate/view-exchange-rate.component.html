@@ -6,12 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_EXCHANGERATE'">
+<div class="container ms-actions page-actions m-b-20">
+  <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_EXCHANGERATE'">
     <fa-icon icon="edit" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Edit' | translate }}
   </button>
-  <button mat-raised-button color="warn" (click)="deleteExchangeRate()" *mifosxHasPermission="'DELETE_EXCHANGERATE'">
+  <button mat-stroked-button color="warn" (click)="deleteExchangeRate()" *mifosxHasPermission="'DELETE_EXCHANGERATE'">
     <fa-icon icon="trash" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Delete' | translate }}
   </button>
@@ -20,39 +20,55 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Source Currency' | translate }}</div>
-        <div class="flex-50">{{ sourceCurrencyCode }}</div>
+      <div class="detail-list">
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Source Currency' | translate }}</span>
+          <span class="ms-value">{{ sourceCurrencyCode }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Target Currency' | translate }}</div>
-        <div class="flex-50">{{ targetCurrencyCode }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Target Currency' | translate }}</span>
+          <span class="ms-value">{{ targetCurrencyCode }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Buy Indicator' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.buyIndicatorCode }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Buy Indicator' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.buyIndicatorCode }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Sell Indicator' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.sellIndicatorCode }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Sell Indicator' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.sellIndicatorCode }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Buy Rate' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.buyRate }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Buy Rate' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.buyRate }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Sell Rate' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.sellRate }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Sell Rate' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.sellRate }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Reference Rate' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.referenceRate }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Reference Rate' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.referenceRate }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Rate Date' | translate }}</div>
-        <div class="flex-50">{{ exchangeRateData.rateDate | dateFormat }}</div>
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Rate Date' | translate }}</span>
+          <span class="ms-value">{{ exchangeRateData.rateDate | dateFormat }}</span>
+        </div>
 
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Latest' | translate }}</div>
-        <div class="flex-50">
-          {{ (exchangeRateData.latest ? 'tooltips.Yes' : 'tooltips.No') | translate }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Latest' | translate }}</span>
+          <span class="ms-value">{{ (exchangeRateData.latest ? 'tooltips.Yes' : 'tooltips.No') | translate }}</span>
         </div>
       </div>
 
-      <div class="layout-row layout-align-center gap-2percent column-on-mobile">
-        <button type="button" mat-raised-button color="primary" [routerLink]="['../../']">
+      <div class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Back' | translate }}
         </button>
       </div>

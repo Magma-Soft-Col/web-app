@@ -6,41 +6,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.criteria-title {
-  margin-bottom: 0;
-  display: inline;
-  vertical-align: middle;
+.criteria-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  margin-bottom: var(--ms-space-4);
 }
 
-.loan-product-label {
-  margin-left: 24px;
-  font-size: 1.1em;
-  vertical-align: middle;
+.ms-detail-row .ms-label {
+  flex: 0 0 160px;
+}
+
+.page-actions {
+  justify-content: flex-end;
 }
 
 table {
   width: 100%;
-}
-
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-h2,
-h3,
-h4 {
-  margin: 0;
-  font-weight: 500;
-}
-
-span {
-  margin: 0.5em 0;
-}
-
-mat-divider {
-  margin: 0 0 0.5em;
-}
-
-.loanProduct {
-  padding: 10px 0;
 }

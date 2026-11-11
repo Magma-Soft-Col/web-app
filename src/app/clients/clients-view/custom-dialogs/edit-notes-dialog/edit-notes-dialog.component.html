@@ -13,9 +13,9 @@
       <textarea formControlName="note" matInput placeholder="{{ 'labels.text.Write a note' | translate }}"></textarea>
     </mat-form-field>
     <mat-dialog-actions align="end">
-      <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+      <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         [disabled]="noteForm.pristine"
         [mat-dialog-close]="{ editForm: noteForm }"

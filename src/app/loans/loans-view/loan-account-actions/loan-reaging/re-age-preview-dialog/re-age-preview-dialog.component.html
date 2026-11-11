@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<h1 class="m-l-30">{{ 'labels.heading.Repayment Schedule Preview' | translate }}</h1>
+<h1 mat-dialog-title>{{ 'labels.heading.Repayment Schedule Preview' | translate }}</h1>
 
 <mat-dialog-content class="mat-typography">
   <mifosx-repayment-schedule-tab
@@ -17,8 +17,8 @@
   </mifosx-repayment-schedule-tab>
 </mat-dialog-content>
 
-<mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" type="button" (click)="close()">
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" type="button" (click)="close()">
     {{ 'labels.buttons.Back' | translate }}
   </button>
 </mat-dialog-actions>

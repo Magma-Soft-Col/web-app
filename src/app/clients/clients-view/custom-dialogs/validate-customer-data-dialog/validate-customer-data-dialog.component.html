@@ -51,13 +51,13 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="dialog-actions">
-  <button mat-raised-button color="primary" mat-dialog-close class="btn-cancel">
+  <button mat-stroked-button mat-dialog-close class="btn-cancel">
     {{ 'labels.buttons.Cancel' | translate }}
   </button>
-  <button mat-raised-button color="warn" class="btn-incomplete" (click)="submit('INCOMPLETE')">
+  <button mat-flat-button color="warn" class="btn-incomplete" (click)="submit('INCOMPLETE')">
     {{ 'labels.buttons.INCOMPLETE' | translate }}
   </button>
-  <button mat-raised-button color="primary" class="btn-complete" (click)="submit('COMPLETE')">
+  <button mat-flat-button color="primary" class="btn-complete" (click)="submit('COMPLETE')">
     {{ 'labels.buttons.COMPLETE' | translate }}
   </button>
 </mat-dialog-actions>

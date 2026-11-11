@@ -30,7 +30,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -71,7 +72,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatRowDef,
     MatRow,
     MatPaginator,
-    AsyncPipe
+    AsyncPipe,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

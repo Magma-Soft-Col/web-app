@@ -15,8 +15,8 @@
 </h1>
 <div mat-dialog-content class="breach-toggle-content">
   <div class="effective-date">
-    <span class="effective-date-label">{{ 'labels.inputs.Effective Date' | translate }}</span>
-    <span class="effective-date-value">{{ businessDate | dateFormat }}</span>
+    <span class="ms-label">{{ 'labels.inputs.Effective Date' | translate }}</span>
+    <span class="ms-value">{{ businessDate | dateFormat }}</span>
   </div>
   <p class="breach-toggle-warning">
     @if (isDisabling) {
@@ -27,8 +27,8 @@
   </p>
 </div>
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="warn" (click)="confirm()">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="warn" (click)="confirm()">
     {{ 'labels.buttons.Confirm' | translate }}
   </button>
 </mat-dialog-actions>

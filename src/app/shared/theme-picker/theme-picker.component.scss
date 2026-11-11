@@ -11,8 +11,8 @@ $theme-picker-swatch-size: 36px;
 .mifosx-theme-picker {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--ms-space-3);
+  margin-bottom: var(--ms-space-4);
 }
 
 .mifosx-theme-picker-swatch {
@@ -24,12 +24,12 @@ $theme-picker-swatch-size: 36px;
   width: $theme-picker-swatch-size;
   height: $theme-picker-swatch-size;
   padding: 0;
-  border: 1px solid rgb(0 0 0 / 20%);
+  border: 1px solid var(--ms-color-border);
   border-radius: 50%;
   cursor: pointer;
   transition:
-    transform 150ms ease,
-    box-shadow 150ms ease;
+    transform var(--ms-duration-fast) var(--ms-easing),
+    box-shadow var(--ms-duration-fast) var(--ms-easing);
 
   &:hover {
     transform: scale(1.08);
@@ -37,25 +37,24 @@ $theme-picker-swatch-size: 36px;
 
   /* Keep the keyboard focus ring visible against any swatch colour. */
   &:focus-visible {
-    outline: 2px solid var(--md-sys-color-primary, #1074b9);
+    outline: 2px solid var(--ms-color-focus-ring);
     outline-offset: 3px;
   }
 
   &.is-selected {
-    box-shadow: 0 0 0 2px var(--md-sys-color-primary, #1074b9);
+    box-shadow:
+      0 0 0 2px var(--ms-color-surface),
+      0 0 0 4px var(--ms-color-text-primary);
     border-color: transparent;
   }
 
-  /* White check reads >= 4.5:1 on every preset hue. */
+  /* The swatch is painted with the preset hue itself, never a theme token,
+     so its check mark stays white: it reads >= 4.5:1 on every preset hue. */
   .mifosx-theme-chosen-icon {
     color: #fff;
     font-size: 16px;
     line-height: 1;
   }
-}
-
-.dark-theme .mifosx-theme-picker-swatch {
-  border-color: rgb(255 255 255 / 30%);
 }
 
 /* Free colour choice, alongside the presets rather than inside the radio
@@ -64,19 +63,20 @@ $theme-picker-swatch-size: 36px;
 .mifosx-theme-picker-custom {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--ms-space-3);
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: var(--ms-space-1);
 }
 
 .mifosx-theme-picker-custom-swatch {
-  /* The spectrum reads as "any colour" until one has actually been picked. */
+  /* The spectrum reads as "any colour" until one has actually been picked.
+     It is the colour-picker affordance itself, not decoration, so it keeps its hues. */
   background: conic-gradient(#f44336, #ffeb3b, #4caf50, #00bcd4, #3f51b5, #9c27b0, #f44336);
   cursor: pointer;
   overflow: hidden;
 
   &:focus-within {
-    outline: 2px solid var(--md-sys-color-primary, #1074b9);
+    outline: 2px solid var(--ms-color-focus-ring);
     outline-offset: 3px;
   }
 }
@@ -100,7 +100,7 @@ $theme-picker-swatch-size: 36px;
 }
 
 .mifosx-theme-picker-note {
-  margin: 0 0 12px;
-  font-size: 12px;
-  opacity: 0.75;
+  margin: 0 0 var(--ms-space-3);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

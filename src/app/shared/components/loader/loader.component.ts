@@ -7,14 +7,12 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'mifosx-loader',
-  imports: [LottieComponent],
   template: `
     <div class="mifosx-loader-container">
-      <ng-lottie [options]="options" width="250px" height="250px"></ng-lottie>
+      <div class="magma-spinner" role="status" aria-label="Loading"></div>
     </div>
   `,
   styles: [
@@ -31,8 +29,4 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoaderComponent {
-  options: AnimationOptions = {
-    path: '/assets/loading_animation.json'
-  };
-}
+export class LoaderComponent {}

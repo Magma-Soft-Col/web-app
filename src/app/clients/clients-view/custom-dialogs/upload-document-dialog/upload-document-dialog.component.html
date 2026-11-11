@@ -118,9 +118,9 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [disabled]="!uploadDocumentForm.valid"
     [mat-dialog-close]="uploadDocumentForm.value"

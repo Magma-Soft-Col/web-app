@@ -7,7 +7,6 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
-import { MatDivider } from '@angular/material/divider';
 import {
   MatTable,
   MatColumnDef,
@@ -34,7 +33,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./share-product-preview-step.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

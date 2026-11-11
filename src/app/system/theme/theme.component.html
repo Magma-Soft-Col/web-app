@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container space">
+<div class="container">
   <mat-card>
     <mat-card-content>
       <p class="theme-explanation">
@@ -18,7 +18,7 @@
           {{ 'labels.text.Tenant theme unavailable' | translate }}
         </p>
       } @else {
-        <span class="header">{{ 'labels.inputs.Primary Color' | translate }}</span>
+        <span class="ms-subsection-title header">{{ 'labels.inputs.Primary Color' | translate }}</span>
         <mifosx-theme-picker [selected]="selectedTheme" (themeSelected)="onThemeSelected($event)"></mifosx-theme-picker>
 
         <p class="theme-selection">
@@ -33,13 +33,13 @@
     </mat-card-content>
 
     @if (!unavailable) {
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [disabled]="!hasChanges || saving" (click)="reset()">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [disabled]="!hasChanges || saving" (click)="reset()">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
           type="button"
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!hasChanges || saving"
           (click)="submit()"

@@ -12,7 +12,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnIn
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
-import { MatChip } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
@@ -33,7 +32,6 @@ type CreditOriginationError = 'unauthorized' | 'forbidden' | 'not-found' | 'gene
     MatButton,
     MatCard,
     MatCardContent,
-    MatChip,
     MatIcon,
     MatProgressSpinner,
     NgClass

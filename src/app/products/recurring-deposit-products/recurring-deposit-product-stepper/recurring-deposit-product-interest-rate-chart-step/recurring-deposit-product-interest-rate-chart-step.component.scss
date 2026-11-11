@@ -6,13 +6,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-h3,
-h4 {
-  font-weight: 500;
-  margin: 1em 0;
+/* Step navigation: secondary + primary actions aligned to the right. */
+.margin-t {
+  margin-top: var(--ms-space-5);
 }
 
-table {
+.ms-section-title {
+  margin: var(--ms-space-4) 0 var(--ms-space-2);
+}
+
+.ms-section-title--sub {
+  font-size: var(--ms-font-size-body);
+}
+
+.ms-detail-panel {
+  margin: var(--ms-space-3) 0 var(--ms-space-4);
+}
+
+.margin-v {
+  margin: var(--ms-space-4) 0;
+}
+
+.ms-detail-table {
   width: 100%;
 
   tr.incentives-row {
@@ -26,28 +41,11 @@ table {
       overflow: hidden;
     }
 
-    .mat-card {
+    .mat-mdc-card {
+      padding: var(--ms-space-3) var(--ms-space-4);
+      border: 0;
       border-radius: 0;
-
-      > h4 {
-        margin: 0.5em 0 0;
-      }
+      background: var(--ms-color-surface-zebra);
     }
   }
-}
-
-mat-divider {
-  margin: 1em 0;
-}
-
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-.margin-t {
-  margin-top: 1em;
-}
-
-.margin-v {
-  margin: 1em 0;
 }

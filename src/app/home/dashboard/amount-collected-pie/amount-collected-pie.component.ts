@@ -125,9 +125,10 @@ export class AmountCollectedPieComponent implements OnInit {
           ],
           datasets: [
             {
+              // System palette: neutral for pending, primary for the settled share.
               backgroundColor: [
-                'dodgerblue',
-                'red'
+                '#DCE3EB',
+                '#315E9E'
               ],
               data: data
             }
@@ -159,7 +160,7 @@ export class AmountCollectedPieComponent implements OnInit {
    * Gets the legend color based on the current theme.
    */
   private getLegendColor(): string {
-    return this.currentTheme === 'dark-theme' ? 'white' : '#666';
+    return this.currentTheme === 'dark-theme' ? '#9FADBF' : '#596779';
   }
 
   /**

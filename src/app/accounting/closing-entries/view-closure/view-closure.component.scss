@@ -6,17 +6,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+.page-actions {
+  justify-content: flex-end;
+}
 
-  .content {
-    div {
-      margin: 1rem 0;
-      overflow-wrap: break-word;
+.ms-detail-row .ms-label {
+  flex: 0 0 40%;
+}
 
-      &.header {
-        font-weight: 500;
-      }
-    }
-  }
+.ms-detail-row .ms-value {
+  overflow-wrap: anywhere;
 }

@@ -12,8 +12,8 @@
   <mifosx-file-upload flex="60%" (change)="onFileSelect($event)" acceptFilter=".png,.jpeg,.jpg"></mifosx-file-upload>
 
   <mat-dialog-actions align="end">
-    <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-    <button mat-raised-button color="primary" [disabled]="!image" [mat-dialog-close]="image">
+    <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+    <button mat-flat-button color="primary" [disabled]="!image" [mat-dialog-close]="image">
       {{ 'labels.buttons.Confirm' | translate }}
     </button>
   </mat-dialog-actions>

@@ -6,40 +6,39 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-section-title {
+  margin: var(--ms-space-5) 0 var(--ms-space-2);
+}
+
+.ms-subsection-title {
+  font-size: var(--ms-font-size-body);
+}
+
+.ms-table-panel {
+  margin: var(--ms-space-3) 0 var(--ms-space-5);
+}
+
+.ms-detail-table {
   width: 100%;
-}
-
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-h3,
-h4 {
-  font-weight: 500;
-}
-
-mat-radio-group,
-h4 {
-  margin: 1em 0;
-}
-
-mat-divider {
-  margin: 1em 0 2em;
-}
-
-.margin-t {
-  margin-top: 1em;
 }
 
 .radio-group-spacing {
   display: flex;
-  gap: 2rem;
+  gap: var(--ms-space-8);
   flex-direction: row;
+}
+
+mat-radio-group {
+  margin: var(--ms-space-4) 0;
 }
 
 @media (width <= 768px) {
   .radio-group-spacing {
     flex-direction: column;
   }
+}
+
+/* Step footer: secondary + primary aligned right (pen). */
+.margin-t {
+  margin-top: var(--ms-space-5);
 }

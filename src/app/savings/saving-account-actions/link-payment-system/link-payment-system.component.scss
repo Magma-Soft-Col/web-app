@@ -9,20 +9,10 @@
 .link-payment-system-wrapper {
   display: flex;
   justify-content: center;
-  padding: 4rem 1rem;
 }
 
 .link-payment-system-card {
   width: min(680px, 100%);
-
-  h2 {
-    border: 1px solid #d5d5d5;
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin: 0;
-    padding: 1.25rem;
-    text-align: center;
-  }
 }
 
 .link-payment-system-header {
@@ -41,7 +31,7 @@ table {
 }
 
 .payment-system-empty {
-  color: #666;
+  color: var(--ms-color-text-secondary);
   margin: 2rem 0;
   text-align: center;
 }
@@ -61,26 +51,26 @@ table {
 }
 
 .mail-unavailable {
-  color: #666;
+  color: var(--ms-color-text-secondary);
   font-size: 0.8rem;
   margin: 0 0 1.5rem 1.75rem;
 }
 
 .payment-system-status {
-  background-color: #edf4ff;
-  border-left: 4px solid #3f7cc5;
+  background-color: var(--ms-color-brand-primary-subtle);
+  border-left: 4px solid var(--ms-color-brand-primary);
   margin: 1rem auto;
   max-width: 420px;
   padding: 0.75rem 1rem;
 
   &.success {
-    background-color: #edf8ef;
-    border-left-color: #2e7d32;
+    background-color: var(--ms-color-success-bg);
+    border-left-color: var(--ms-color-success);
   }
 
   &.error {
-    background-color: #fdeeee;
-    border-left-color: #c62828;
+    background-color: var(--ms-color-danger-bg);
+    border-left-color: var(--ms-color-danger);
   }
 
   span {
@@ -91,10 +81,6 @@ table {
 }
 
 @media (width <= 600px) {
-  .link-payment-system-wrapper {
-    padding: 1rem;
-  }
-
   .link-payment-system-header {
     align-items: stretch;
     flex-direction: column;

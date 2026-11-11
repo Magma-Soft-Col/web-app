@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="closeClientForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="action-form__grid">
           <mat-form-field (click)="closureDatePicker.open()">
             <mat-label>{{ 'labels.inputs.Closed On Date' | translate }}</mat-label>
             <input
@@ -31,7 +31,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Closure Reason' | translate }}</mat-label>
             <mat-select formControlName="closureReasonId">
               @for (reason of closureData; track reason) {
@@ -50,11 +50,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../../']">
+      <mat-card-actions class="action-form__actions">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="warn" [disabled]="!closeClientForm.valid">
+        <button mat-flat-button color="warn" [disabled]="!closeClientForm.valid">
           {{ 'labels.buttons.Confirm' | translate }}
         </button>
       </mat-card-actions>

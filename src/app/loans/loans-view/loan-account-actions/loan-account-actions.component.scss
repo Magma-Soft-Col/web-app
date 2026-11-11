@@ -1,0 +1,19 @@
+/**
+ * Copyright since 2025 Mifos Initiative
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/* Same centred column as the savings account actions. */
+:host {
+  display: block;
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+:host(.loan-actions--wide) {
+  max-width: none;
+}

@@ -7,20 +7,25 @@
 -->
 
 <div class="flex-fill layout-row-wrap gap-2percent layout-lt-md-column m-b-10">
-  <h4 class="m-b-15 right flex-90">
+  <h4 class="allocation-hint m-b-15 right flex-90">
     {{ 'labels.heading.You can drag and drop the rows to set a Payment Allocations order' | translate }}
   </h4>
 
   @if (!isDefault()) {
     <div class="right flex-4">
-      <button mat-button color="warn" (click)="removeTransaction()">
-        <fa-icon icon="trash" class="m-r-10"></fa-icon>
+      <button
+        mat-stroked-button
+        color="warn"
+        [attr.aria-label]="'labels.buttons.Remove' | translate"
+        (click)="removeTransaction()"
+      >
+        <fa-icon icon="trash"></fa-icon>
       </button>
     </div>
   }
 
   @if (paymentAllocationsData) {
-    <div class="mat-elevation-z8 container m-t-15">
+    <div class="ms-panel ms-table-wrap allocation-table m-t-15">
       <table
         mat-table
         [dataSource]="paymentAllocationsData"
@@ -50,7 +55,7 @@
   }
 
   @if (creditAllocationsData) {
-    <div class="mat-elevation-z8 container m-t-15 m-b-15">
+    <div class="ms-panel ms-table-wrap allocation-table m-t-15 m-b-15">
       <table
         mat-table
         [dataSource]="creditAllocationsData"

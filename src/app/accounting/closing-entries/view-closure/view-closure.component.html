@@ -6,12 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']">
+<div class="container ms-actions page-actions m-b-20">
+  <button mat-flat-button color="primary" [routerLink]="['edit']">
     <fa-icon icon="edit" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Edit' | translate }}
   </button>
-  <button mat-raised-button color="warn" (click)="deleteAccountingClosure()" *mifosxHasPermission="'DELETE_GLCLOSURE'">
+  <button mat-stroked-button color="warn" (click)="deleteAccountingClosure()" *mifosxHasPermission="'DELETE_GLCLOSURE'">
     <fa-icon icon="trash" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Delete' | translate }}
   </button>
@@ -21,48 +21,34 @@
   <div class="container">
     <mat-card>
       <mat-card-content>
-        <div class="layout-row-wrap">
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Office' | translate }}
+        <div class="detail-list">
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Office' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.officeName }}</span>
           </div>
-          <div class="flex-50">
-            {{ glAccountClosure.officeName }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Closure Date' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.closingDate }}</span>
           </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Closure Date' | translate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Closed By' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.createdByUsername }}</span>
           </div>
-          <div class="flex-50">
-            {{ glAccountClosure.closingDate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Updated By' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.lastUpdatedByUsername }}</span>
           </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Closed By' | translate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Updated on' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.lastUpdatedDate }}</span>
           </div>
-          <div class="flex-50">
-            {{ glAccountClosure.createdByUsername }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Closure Creation Date' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.createdDate }}</span>
           </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Updated By' | translate }}
-          </div>
-          <div class="flex-50">
-            {{ glAccountClosure.lastUpdatedByUsername }}
-          </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Updated on' | translate }}
-          </div>
-          <div class="flex-50">
-            {{ glAccountClosure.lastUpdatedDate }}
-          </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Closure Creation Date' | translate }}
-          </div>
-          <div class="flex-50">
-            {{ glAccountClosure.createdDate }}
-          </div>
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Comments' | translate }}
-          </div>
-          <div class="flex-50">
-            {{ glAccountClosure.comments }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Comments' | translate }}</span>
+            <span class="ms-value">{{ glAccountClosure.comments }}</span>
           </div>
         </div>
       </mat-card-content>

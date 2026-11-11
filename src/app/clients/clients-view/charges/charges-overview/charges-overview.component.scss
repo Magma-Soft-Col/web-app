@@ -6,18 +6,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+/* Charges overview (pen list pattern): table panel with paginator. */
+.charges-table {
   width: 100%;
-  margin-top: 3%;
 }
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+.charges-table__name {
+  margin-right: var(--ms-space-2);
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
 }
 
-.charges-card {
-  margin: 0 auto;
-  max-width: 80rem;
-  width: 90%;
+.charges-table__right {
+  text-align: right;
+}
+
+.charges-table__muted {
+  color: var(--ms-color-text-secondary);
 }

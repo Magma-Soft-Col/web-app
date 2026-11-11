@@ -7,7 +7,6 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardTitleGroup } from '@angular/material/card';
 import { MatTooltip } from '@angular/material/tooltip';
 import { StatusLookupPipe } from '@pipes/status-lookup.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -20,10 +19,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     StatusLookupPipe,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardSubtitle,
-    MatCardTitleGroup,
     MatTooltip
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

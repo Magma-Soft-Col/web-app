@@ -6,28 +6,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.mat-mdc-table {
-  width: 100%;
-  overflow-x: auto;
-  display: block;
+.section-toolbar {
+  margin: var(--ms-space-4) 0 var(--ms-space-3);
 }
 
-.mat-mdc-header-row,
-.mat-mdc-row {
-  display: table;
+table {
   width: 100%;
-  table-layout: fixed;
   min-width: 800px;
 }
 
 .actions-column {
-  width: 100px !important;
-  min-width: 100px !important;
-  max-width: 100px !important;
+  width: 100px;
   text-align: center;
   position: sticky;
   right: 0;
-  background: var(--card-background, #fff);
+  background: var(--ms-color-surface);
   z-index: 1;
 }
 
@@ -35,17 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-}
-
-.actions-wrapper .mat-mdc-icon-button {
-  width: 36px;
-  height: 36px;
-  padding: 6px;
-}
-
-.actions-wrapper fa-icon {
-  font-size: 14px;
+  gap: var(--ms-space-1);
 }
 
 th.mat-mdc-header-cell:first-child,
@@ -53,16 +36,4 @@ td.mat-mdc-cell:first-child {
   max-width: 300px;
   overflow-wrap: anywhere;
   white-space: normal;
-}
-
-th.mat-mdc-header-cell:not(.actions-column, :first-child),
-td.mat-mdc-cell:not(.actions-column, :first-child) {
-  width: 80px;
-  min-width: 80px;
-}
-
-:host-context(.dark-theme) {
-  .actions-column {
-    background: #424242 !important;
-  }
 }

@@ -16,6 +16,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  Input,
   inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,7 +33,6 @@ import { Breadcrumb } from './breadcrumb.model';
 import { PopoverService } from '../../../configuration-wizard/popover/popover.service';
 import { ConfigurationWizardService } from '../../../configuration-wizard/configuration-wizard.service';
 import { TranslateService } from '@ngx-translate/core';
-import { MatIcon } from '@angular/material/icon';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { formatTabLabel } from 'app/shared/utils/format-tab-label.util';
 
@@ -64,6 +64,7 @@ const routeResolveBreadcrumb = 'routeResolveBreadcrumb';
  * Example- addBreadcrumbLink: false
  */
 const routeAddBreadcrumbLink = 'addBreadcrumbLink';
+const routePageSubtitle = 'pageSubtitle';
 
 /**
  * Generate breadcrumbs dynamically via route configuration.
@@ -73,8 +74,7 @@ const routeAddBreadcrumbLink = 'addBreadcrumbLink';
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   imports: [
-    ...STANDALONE_SHARED_IMPORTS,
-    MatIcon
+    ...STANDALONE_SHARED_IMPORTS
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -88,7 +88,15 @@ export class BreadcrumbComponent implements AfterViewInit {
   private destroyRef = inject(DestroyRef);
 
   /** Array of breadcrumbs. */
-  breadcrumbs: Breadcrumb[];
+  /**
+   * `trail` renders the location links (shell top bar); `title` renders the page
+   * title and optional subtitle above the content. Both read the same route tree.
+   */
+  @Input() variant: 'trail' | 'title' = 'title';
+
+  breadcrumbs: Breadcrumb[] = [];
+  /** Translation key of the deepest route's `pageSubtitle` data, if any. */
+  subtitle: string | null = null;
   /* Reference of breadcrumb */
   @ViewChild('breadcrumb') breadcrumb: ElementRef<any>;
   /* Template for popover on breadcrumb */
@@ -116,6 +124,7 @@ export class BreadcrumbComponent implements AfterViewInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.breadcrumbs = [];
+        this.subtitle = null;
         let currentRoute = this.activatedRoute.root;
         let currentUrl = '';
 
@@ -140,6 +149,9 @@ export class BreadcrumbComponent implements AfterViewInit {
             }
 
             const hasData = route.routeConfig && route.routeConfig.data;
+            if (route.snapshot.data?.[routePageSubtitle]) {
+              this.subtitle = route.snapshot.data[routePageSubtitle];
+            }
 
             if (hasData) {
               if (
@@ -288,7 +300,8 @@ export class BreadcrumbComponent implements AfterViewInit {
    * To show popover.
    */
   ngAfterViewInit() {
-    if (this.configurationWizardService.showBreadcrumbs) {
+    // Only the title instance hosts the tour step, so it is not shown twice.
+    if (this.variant === 'title' && this.configurationWizardService.showBreadcrumbs) {
       setTimeout(() => {
         this.showPopover(this.templateBreadcrumb, this.breadcrumb.nativeElement, 'bottom', true);
       });

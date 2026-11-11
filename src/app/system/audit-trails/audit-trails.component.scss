@@ -8,24 +8,15 @@
 
 table {
   width: 100%;
-
-  .select-row:hover {
-    cursor: pointer;
-  }
 }
 
-.flex-38 {
-  .time-input {
-    font-size: 14px;
-    width: 100%;
-  }
+.date-time {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 0 var(--ms-space-2);
 }
 
-.gap-8px {
-  gap: 8px;
-}
-
-.audit-filters-card {
-  margin-bottom: 1.5rem;
-  padding: 0.75rem 1rem;
+.time-input {
+  width: 100%;
 }

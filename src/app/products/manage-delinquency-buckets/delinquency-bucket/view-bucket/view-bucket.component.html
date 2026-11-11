@@ -6,123 +6,105 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row layout-lt-md-column align-end gap-2percent">
-  <button
-    mat-raised-button
-    color="primary"
-    [routerLink]="['edit']"
-    [queryParams]="{ bucketType: delinquencyBucketType.value }"
-    *mifosxHasPermission="'UPDATE_DELINQUENCY_BUCKET'"
-  >
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-  <button
-    mat-raised-button
-    color="warn"
-    (click)="deleteDelinquencyBucket()"
-    *mifosxHasPermission="'DELETE_DELINQUENCY_BUCKET'"
-  >
-    <fa-icon icon="trash" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Delete' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-100 layout-row m-b-10">
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Type' | translate }}
-          </div>
+  <div class="ms-page">
+    <div class="ms-page-header">
+      <h2 class="ms-section-title">{{ delinquencyBucketData.name }}</h2>
+      <div class="ms-actions">
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="deleteDelinquencyBucket()"
+          *mifosxHasPermission="'DELETE_DELINQUENCY_BUCKET'"
+        >
+          <fa-icon icon="trash" class="m-r-10"></fa-icon>
+          {{ 'labels.buttons.Delete' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          [routerLink]="['edit']"
+          [queryParams]="{ bucketType: delinquencyBucketType.value }"
+          *mifosxHasPermission="'UPDATE_DELINQUENCY_BUCKET'"
+        >
+          <fa-icon icon="edit" class="m-r-10"></fa-icon>
+          {{ 'labels.buttons.Edit' | translate }}
+        </button>
+      </div>
+    </div>
 
-          <div class="flex-50">
+    <mat-card>
+      <mat-card-content>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Type' | translate }}</span>
+          <span class="flex-50 ms-value">
             {{ bucketTypeLabel(delinquencyBucketData.bucketType.id) | translateKey: 'catalogs' }}
-          </div>
+          </span>
         </div>
-        <div class="flex-100 layout-row m-b-10">
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Name' | translate }}
-          </div>
-
-          <div class="flex-50">
-            {{ delinquencyBucketData.name }}
-          </div>
+        <div class="layout-row detail-row">
+          <span class="flex-50 ms-label">{{ 'labels.inputs.Name' | translate }}</span>
+          <span class="flex-50 ms-value">{{ delinquencyBucketData.name }}</span>
         </div>
 
         @if (delinquencyBucketData.minimumPaymentPeriodAndRule) {
-          <div class="flex-100 layout-row m-b-10">
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Frequency' | translate }}
-            </div>
-
-            <div class="flex-50">
-              {{ delinquencyBucketData.minimumPaymentPeriodAndRule.frequency }}
-            </div>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Frequency' | translate }}</span>
+            <span class="flex-50 ms-value">{{ delinquencyBucketData.minimumPaymentPeriodAndRule.frequency }}</span>
           </div>
-          <div class="flex-100 layout-row m-b-10">
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Frequency Type' | translate }}
-            </div>
-
-            <div class="flex-50">
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Frequency Type' | translate }}</span>
+            <span class="flex-50 ms-value">
               {{
                 getCatalogLabel(delinquencyBucketData.minimumPaymentPeriodAndRule.frequencyType.code)
                   | translateKey: 'catalogs'
               }}
-            </div>
+            </span>
           </div>
-          <div class="flex-100 layout-row m-b-10">
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Minimum Payment' | translate }}
-            </div>
-
-            <div class="flex-50">
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Minimum Payment' | translate }}</span>
+            <span class="flex-50 ms-value ms-num">
               {{ delinquencyBucketData.minimumPaymentPeriodAndRule.minimumPayment | formatNumber }}
-            </div>
+            </span>
           </div>
-          <div class="flex-100 layout-row m-b-10">
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Minimum Payment Type' | translate }}
-            </div>
-
-            <div class="flex-50">
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Minimum Payment Type' | translate }}</span>
+            <span class="flex-50 ms-value">
               {{
                 getCatalogLabel(delinquencyBucketData.minimumPaymentPeriodAndRule.minimumPaymentType.code)
                   | translateKey: 'catalogs'
               }}
-            </div>
+            </span>
           </div>
         }
+      </mat-card-content>
+    </mat-card>
 
-        <div class="flex-60 mat-body-strong">
-          {{ 'labels.inputs.Classification' | translate }}
-          {{ 'labels.inputs.Name' | translate }}
-        </div>
+    <h3 class="ms-section-title">{{ 'labels.heading.Delinquency Ranges' | translate }}</h3>
 
-        <div class="mat-body-strong flex-20">
-          {{ 'labels.inputs.Days From' | translate }}
-        </div>
-
-        <div class="mat-body-strong flex-20">
-          {{ 'labels.inputs.Days Till' | translate }}
-        </div>
+    <div class="ms-panel">
+      <div class="ms-table-wrap">
+        <table class="ms-table">
+          <thead>
+            <tr>
+              <th scope="col">
+                {{ 'labels.inputs.Classification' | translate }}
+                {{ 'labels.inputs.Name' | translate }}
+              </th>
+              <th scope="col" class="ms-num">{{ 'labels.inputs.Days From' | translate }}</th>
+              <th scope="col" class="ms-num">{{ 'labels.inputs.Days Till' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (range of delinquencyBucketData.ranges; track range) {
+              <tr>
+                <td class="bucket-range__name">{{ range.classification }}</td>
+                <td class="ms-num">{{ range.minimumAgeDays }}</td>
+                <td class="ms-num">{{ range.maximumAgeDays }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
-
-      @for (range of delinquencyBucketData.ranges; track range) {
-        <div class="layout-row-wrap bucket-range">
-          <div class="flex-60">
-            {{ range.classification }}
-          </div>
-          <div class="flex-20 r-value">
-            {{ range.minimumAgeDays }}
-          </div>
-          <div class="flex-20 r-value">
-            {{ range.maximumAgeDays }}
-          </div>
-        </div>
-      }
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

@@ -12,29 +12,89 @@
 // Charged-off and fraud pills shown in the account header.
 @include shared.account-flag-badges;
 
-.loans-overview {
-  font-size: 14px;
+// Loan view layout: entity header, secondary facts and tabbed content.
+.loan-view {
+  padding-top: 0;
 }
 
-// The loan status pill (.account-status-pill) is defined globally in
-// assets/styles/_status.scss and shared with the client/group/center headers.
-
-.account-overview {
-  min-width: 80%;
+.loan-view__product {
+  font-size: var(--ms-font-size-label);
   font-weight: 400;
+}
+
+.loan-view__muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.loan-view__aside {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-6);
+  flex-wrap: wrap;
+}
+
+.loan-view__stats {
+  margin: 0;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.loan-view__amount--danger {
+  color: var(--ms-color-danger);
+}
+
+.loan-view__amount--success {
+  color: var(--ms-color-success);
+}
+
+.loan-view__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2) var(--ms-space-6);
+  margin: 0;
+  padding: var(--ms-space-3) var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  font-size: var(--ms-font-size-label);
+}
+
+.loan-view__fact {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+
+  dt {
+    color: var(--ms-color-text-secondary);
+    font-weight: 500;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ms-color-text-primary);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.loan-view__tabs {
+  min-width: 0;
 }
 
 // Written-off pill shown in the write-off banner for Working Capital loans.
 .written-off-badge {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: #fff;
-  background-color: var(--md-sys-color-error, #b3261e);
+  letter-spacing: 0.2px;
+  color: var(--ms-color-danger);
+  background-color: var(--ms-color-danger-bg);
 }
 
 // Banner marking a written-off account. A written-off loan is closed with a
@@ -45,12 +105,13 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px 16px;
-  margin: 0 16px 8px;
   padding: 10px 16px;
-  border-radius: 8px;
-  border-left: 4px solid var(--md-sys-color-error, #b3261e);
-  background-color: rgb(179 38 30 / 8%);
-  font-size: 14px;
+  border-radius: var(--ms-radius-md);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-left: 4px solid var(--ms-color-danger);
+  background-color: var(--ms-color-surface);
+  color: var(--ms-color-text-primary);
+  font-size: 13px;
 }
 
 .banner-item {
@@ -81,45 +142,4 @@
 .datatable-scroll-x {
   width: 100%;
   overflow-x: auto;
-}
-
-.loan-information-table {
-  margin-bottom: 10px;
-
-  table {
-    width: 100%;
-
-    td {
-      padding: 4px 0;
-      vertical-align: middle;
-
-      &:first-child {
-        font-weight: 500;
-        width: 180px;
-      }
-
-      i.fa-stop {
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-// White text and icons for all content projected into the account header.
-// Works for both light (#1074b9) and dark (#5ba2ec) theme primary backgrounds.
-mifosx-account-header {
-  td,
-  th,
-  b,
-  span:not(.status-dot),
-  h3,
-  p,
-  a {
-    color: var(--md-sys-color-on-primary, #fff);
-  }
-
-  // Action button (hamburger menu) and its icon
-  button.mat-mdc-icon-button {
-    color: var(--md-sys-color-on-primary, #fff);
-  }
 }

@@ -91,11 +91,11 @@
   }
 
   <div class="step-actions">
-    <button mat-raised-button (click)="printReceipt()">
+    <button mat-stroked-button (click)="printReceipt()">
       <mat-icon>print</mat-icon>
       {{ 'labels.buttons.Print Receipt' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="onNewRemittance()">
+    <button mat-flat-button color="primary" (click)="onNewRemittance()">
       <mat-icon>add</mat-icon>
       {{ 'labels.buttons.New Remittance' | translate }}
     </button>

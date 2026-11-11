@@ -6,10 +6,40 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
-  width: 100%;
+// Balances of the working capital loan: label on the left, amount on the right.
+.balances {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  margin-top: var(--ms-space-5);
 }
 
-span {
-  margin: 0.5em 0;
+.balances__list {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+  margin: 0;
+}
+
+.balances__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  .ms-label {
+    font-size: 13px;
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+  }
 }

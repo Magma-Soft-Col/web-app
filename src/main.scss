@@ -14,6 +14,10 @@
 @use 'theme/deeppurple-amber' as *;
 @use 'theme/purple-green.scss' as *;
 @use 'assets/styles/design-tokens';
+@use 'assets/styles/ms-tokens';
+@use 'theme/ms-material';
+@use 'assets/styles/ms-components';
+@use 'assets/styles/ms-auth';
 @use 'assets/styles/helper';
 @use 'assets/styles/loader';
 @use 'lightgallery/scss/lightgallery' as *;
@@ -38,7 +42,7 @@
  * The value is unchanged by default, so existing appearance is preserved.
  */
 :root {
-  --md-sys-color-primary: var(--brand-primary-500, #1074b9);
+  --md-sys-color-primary: var(--brand-primary-500, #315e9e);
 }
 
 /**
@@ -47,7 +51,7 @@
  */
 .mat-mdc-progress-bar,
 .dark-theme .mat-mdc-progress-bar {
-  --mat-progress-bar-track-color: color-mix(in srgb, var(--brand-primary-500, #1074b9) 25%, transparent);
+  --mat-progress-bar-track-color: color-mix(in srgb, var(--brand-primary-500, #315e9e) 25%, transparent);
 }
 
 .custom-snackbar-top-right {
@@ -61,31 +65,29 @@
 
 // ===== Material Select Panel Styles (Material Design 3) =====
 .mat-mdc-select-panel {
-  background: var(--md-sys-color-surface-container, #fff);
-  border-radius: 8px;
-  box-shadow:
-    0 2px 4px #00000014,
-    0 4px 12px #0000000f,
-    0 8px 24px #00000014;
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  box-shadow: var(--ms-shadow-float);
 
   .mat-mdc-option {
-    font-size: 0.875rem;
-    min-height: 48px;
-    padding: 0 16px;
-    color: var(--md-sys-color-on-surface, #1a1c1e);
+    font-size: 13px;
+    min-height: 40px;
+    padding: 0 var(--ms-space-4);
+    color: var(--ms-color-text-primary);
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #1074b914;
+      background-color: var(--ms-color-surface-hover);
     }
 
     &.mat-mdc-option-active {
-      background-color: #1074b91f;
+      background-color: var(--ms-color-surface-hover);
     }
 
     &.mdc-list-item--selected {
-      background-color: #1074b91f;
-      color: var(--md-sys-color-primary, #1074b9);
+      background-color: var(--ms-color-brand-primary-subtle);
+      color: var(--ms-color-brand-primary);
       font-weight: 500;
     }
 
@@ -95,47 +97,26 @@
   }
 }
 
-// Dark theme select panel
-.dark-theme .mat-mdc-select-panel {
-  background: var(--md-sys-color-surface-container, #2c2f36);
-
-  .mat-mdc-option {
-    color: var(--md-sys-color-on-surface, #e2e2e5);
-
-    &:hover {
-      background-color: #5ba2ec14;
-    }
-
-    &.mat-mdc-option-active {
-      background-color: #5ba2ec1f;
-    }
-
-    &.mdc-list-item--selected {
-      background-color: #5ba2ec1f;
-      color: var(--md-sys-color-primary, #5ba2ec);
-      font-weight: 500;
-    }
-  }
-}
-
 .scrollbar-styling {
   scrollbar-width: thin;
-  scrollbar-color: #889 #f1f1f1;
+  scrollbar-color: var(--ms-color-border) transparent;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #889;
+  background: var(--ms-color-border);
+  border-radius: var(--ms-radius-pill);
 
   &:hover {
-    background: #555;
+    background: var(--ms-color-text-disabled);
   }
 }
 
@@ -633,15 +614,15 @@
 }
 
 .mat-mdc-form-field {
-  margin-bottom: 16px;
+  margin-bottom: var(--ms-space-4);
 
   .mat-mdc-input-element::placeholder {
-    font-size: 14px !important;
-    color: #999 !important;
+    font-size: 13px !important;
+    color: var(--ms-color-text-secondary) !important;
   }
 
   .mdc-floating-label {
-    font-size: 14px !important;
+    font-size: 13px !important;
   }
 }
 
@@ -671,40 +652,6 @@ mat-stepper {
   .layout-column-xs {
     flex-direction: column !important;
   }
-}
-
-.menu-explanation {
-  font-size: 14px;
-  margin: 0;
-  overflow-wrap: break-word;
-}
-
-.menu-list-item-content {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-}
-
-.menu-left-section {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-}
-
-.menu-right-section fa-icon {
-  z-index: 1000;
-}
-
-.menu-right-section {
-  margin-left: auto;
-  display: flex;
-  gap: 4px;
-  margin-right: 10px;
-  flex-shrink: 0;
 }
 
 mat-nav-list {
@@ -784,6 +731,22 @@ mifosx-notifications-page td {
 
 .mat-mdc-raised-button.mat-reject {
   --mat-button-protected-container-color: var(--ds-action-reject);
+}
+
+// Same semantic fills for flat buttons, the Design System's filled variant.
+.mat-mdc-unelevated-button.mat-success,
+.mat-mdc-unelevated-button.mat-reject {
+  --mat-button-filled-label-text-color: var(--ds-action-on-fill);
+  --mat-button-filled-state-layer-color: var(--ds-action-on-fill);
+  --mat-button-filled-ripple-color: color-mix(in srgb, var(--ds-action-on-fill) 12%, transparent);
+}
+
+.mat-mdc-unelevated-button.mat-success {
+  --mat-button-filled-container-color: var(--ds-action-approve);
+}
+
+.mat-mdc-unelevated-button.mat-reject {
+  --mat-button-filled-container-color: var(--ds-action-reject);
 }
 
 .full-width-flex {

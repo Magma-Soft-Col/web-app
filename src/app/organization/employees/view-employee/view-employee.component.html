@@ -6,77 +6,52 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row align-end gap-20px">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_STAFF'">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.First Name' | translate }}
-        </div>
+  <div class="ms-page">
+    <div class="ms-actions page-actions">
+      <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_STAFF'">
+        <fa-icon icon="edit" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
 
-        <div class="flex-50">
-          {{ employeeData.firstname }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Last Name' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ employeeData.lastname }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Office' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ employeeData.officeName }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Is Loan Officer' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ employeeData.isLoanOfficer === true | yesNo }}
-        </div>
-
-        @if (employeeData.mobileNo) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Mobile Number for SMS' | translate }}
-          </div>
-        }
-
-        @if (employeeData.mobileNo) {
-          <div class="flex-50">
-            {{ employeeData.mobileNo }}
-          </div>
-        }
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Status' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ employeeData.isActive === true ? 'Active' : 'Inactive' }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Joining Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ employeeData.joiningDate | dateFormat }}
-        </div>
+    <section class="ms-panel ms-panel--padded">
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.First Name' | translate }}</span>
+        <span class="ms-value">{{ employeeData.firstname }}</span>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Last Name' | translate }}</span>
+        <span class="ms-value">{{ employeeData.lastname }}</span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Office' | translate }}</span>
+        <span class="ms-value">{{ employeeData.officeName }}</span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Is Loan Officer' | translate }}</span>
+        <span class="ms-value">{{ employeeData.isLoanOfficer === true | yesNo }}</span>
+      </div>
+      @if (employeeData.mobileNo) {
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Mobile Number for SMS' | translate }}</span>
+          <span class="ms-value">{{ employeeData.mobileNo }}</span>
+        </div>
+      }
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Status' | translate }}</span>
+        <span class="ms-value">
+          @if (employeeData.isActive === true) {
+            <span class="ms-status ms-status--success">Active</span>
+          } @else {
+            <span class="ms-status ms-status--neutral">Inactive</span>
+          }
+        </span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.Joining Date' | translate }}</span>
+        <span class="ms-value">{{ employeeData.joiningDate | dateFormat }}</span>
+      </div>
+    </section>
+  </div>
 </div>

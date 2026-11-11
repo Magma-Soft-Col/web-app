@@ -11,9 +11,14 @@
   margin: 0 auto;
 }
 
+.master-login-subtitle {
+  margin-bottom: var(--ms-space-5);
+}
+
 .master-login-error {
   display: flex;
   align-items: center;
-  margin-top: 16px;
-  color: var(--md-sys-color-error, #ba1a1a);
+  margin-top: var(--ms-space-4);
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-danger);
 }

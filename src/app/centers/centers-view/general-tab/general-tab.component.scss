@@ -6,43 +6,71 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+/* Tab content (pen detail pattern): summary panel and tables in panels. */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-6);
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
+}
 
-  h3 {
-    margin: 1% auto;
-  }
+.tab-content__notice {
+  display: flex;
+}
 
-  .summary-details-container {
-    border: 1px solid;
-    padding: 1%;
+.tab-content__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
 
-    /* Distribute the summary columns across the full card width */
-    p {
-      flex: 1 1 0;
-      margin: 0;
-    }
-  }
+.tab-content__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
 
-  table {
-    width: 100%;
+.summary-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--ms-space-4) var(--ms-space-6);
+  margin: 0;
+}
 
-    .account-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
+.summary-grid__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 
-    tr.select-row:hover {
-      cursor: pointer;
-    }
+  dt,
+  dd {
+    margin: 0;
   }
 }
 
-.closedCenter {
-  text-align: center;
-  color: red;
-  font-size: 2rem;
+.tab-content__table {
+  width: 100%;
+}
+
+.tab-content__name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
+
+.tab-content__status {
+  margin-left: var(--ms-space-2);
+}
+
+.tab-content__muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.tab-content__right {
+  text-align: right;
+}
+
+.tab-content__actions {
+  white-space: nowrap;
+  color: var(--ms-color-text-secondary);
 }

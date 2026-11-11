@@ -6,11 +6,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
-  width: 100%;
-  margin: 3% 0%;
+// Tab content: table in a white panel (pen), amounts right aligned.
+.tab-panel {
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 }
 
-.container {
-  padding-bottom: 2%;
+table {
+  width: 100%;
+}
+
+.ms-num {
+  text-align: right;
+  white-space: nowrap;
 }

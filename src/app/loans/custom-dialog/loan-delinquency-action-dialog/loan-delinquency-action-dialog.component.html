@@ -10,7 +10,7 @@
 
 <div mat-dialog-content [formGroup]="delinquencyActionForm">
   <div class="layout-column">
-    <mat-form-field class="flex-48" (click)="validFromDatePicker.open()">
+    <mat-form-field (click)="validFromDatePicker.open()">
       <mat-label>{{ 'labels.inputs.Start Date' | translate }}</mat-label>
       <input
         matInput
@@ -30,7 +30,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="flex-48" (click)="validTillDatePicker.open()">
+    <mat-form-field (click)="validTillDatePicker.open()">
       <mat-label>{{ 'labels.inputs.End Date' | translate }}</mat-label>
       <input
         matInput
@@ -52,10 +52,10 @@
   </div>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [mat-dialog-close]="{ data: delinquencyActionForm }"
     [disabled]="!delinquencyActionForm.valid || delinquencyActionForm.pristine"

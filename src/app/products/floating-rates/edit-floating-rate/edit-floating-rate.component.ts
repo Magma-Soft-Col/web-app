@@ -38,8 +38,7 @@ import { DeleteDialogComponent } from 'app/shared/delete-dialog/delete-dialog.co
 import { FloatingRatePeriodDialogComponent } from '../floating-rate-period-dialog/floating-rate-period-dialog.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatDivider } from '@angular/material/divider';
-import { MatMiniFabButton, MatIconButton, MatButton } from '@angular/material/button';
+import { MatIconButton, MatButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -55,8 +54,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatTooltip,
     MatCheckbox,
-    MatDivider,
-    MatMiniFabButton,
     FaIconComponent,
     MatTable,
     MatSort,

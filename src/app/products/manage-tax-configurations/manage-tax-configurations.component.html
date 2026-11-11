@@ -7,51 +7,25 @@
 -->
 
 <div class="container">
-  <mat-card>
-    <div class="layout-row responsive-column gap-20px">
-      <div class="flex-50">
-        <mat-nav-list>
-          <mat-list-item [routerLink]="['tax-components']" *mifosxHasPermission="'READ_TAXCOMPONENT'">
-            <mat-icon matListIcon [routerLink]="['tax-components']">
-              <fa-icon icon="building" size="sm"></fa-icon>
-            </mat-icon>
-            <h4 matLine [routerLink]="['tax-components']">{{ 'labels.heading.Manage Tax Components' | translate }}</h4>
-            @if (!arrowBooleans[0]) {
-              <fa-icon (click)="arrowBooleansToggle(0); $event.stopPropagation()" icon="arrow-down" size="md"></fa-icon>
-            }
-            @if (arrowBooleans[0]) {
-              <fa-icon (click)="arrowBooleansToggle(0); $event.stopPropagation()" icon="arrow-up" size="md"></fa-icon>
-            }
-            @if (arrowBooleans[0]) {
-              <p matLine [routerLink]="['tax-components']">
-                {{ 'labels.heading.Define Tax Components' | translate }}
-              </p>
-            }
-          </mat-list-item>
-        </mat-nav-list>
-      </div>
+  <div class="ms-settings-grid">
+    <nav class="ms-panel ms-settings-list">
+      <a class="ms-settings-row" [routerLink]="['tax-components']" *mifosxHasPermission="'READ_TAXCOMPONENT'">
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="building"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Manage Tax Components' | translate }}</span>
+          <span class="ms-settings-row__desc">{{ 'labels.heading.Define Tax Components' | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
 
-      <div class="flex-50">
-        <mat-nav-list>
-          <mat-list-item [routerLink]="['tax-groups']" *mifosxHasPermission="'READ_TAXGROUP'">
-            <mat-icon matListIcon [routerLink]="['tax-groups']">
-              <fa-icon icon="building" size="sm"></fa-icon>
-            </mat-icon>
-            <h4 matLine [routerLink]="['tax-groups']">{{ 'labels.heading.Manage Tax Groups' | translate }}</h4>
-            @if (!arrowBooleans[1]) {
-              <fa-icon (click)="arrowBooleansToggle(1); $event.stopPropagation()" icon="arrow-down" size="md"></fa-icon>
-            }
-            @if (arrowBooleans[1]) {
-              <fa-icon (click)="arrowBooleansToggle(1); $event.stopPropagation()" icon="arrow-up" size="md"></fa-icon>
-            }
-            @if (arrowBooleans[1]) {
-              <p matLine [routerLink]="['tax-groups']">
-                {{ 'labels.heading.Define Tax Groups' | translate }}
-              </p>
-            }
-          </mat-list-item>
-        </mat-nav-list>
-      </div>
-    </div>
-  </mat-card>
+      <a class="ms-settings-row" [routerLink]="['tax-groups']" *mifosxHasPermission="'READ_TAXGROUP'">
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="building"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Manage Tax Groups' | translate }}</span>
+          <span class="ms-settings-row__desc">{{ 'labels.heading.Define Tax Groups' | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
+    </nav>
+  </div>
 </div>

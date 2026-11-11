@@ -23,6 +23,10 @@
   <div class="widget-content">
     @if (state?.loading) {
       <div class="widget-placeholder"></div>
+    } @else if (state?.error) {
+      <div class="widget-empty widget-error" role="alert">
+        {{ 'errors.report.loadFailed' | translate }}
+      </div>
     } @else if (state?.empty) {
       <div class="widget-empty">
         {{ 'labels.text.No Data' | translate }}

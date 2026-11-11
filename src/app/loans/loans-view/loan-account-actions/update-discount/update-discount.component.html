@@ -6,11 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     <form [formGroup]="updateDiscountForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="loan-form__grid">
           <mifosx-input-amount
             [currency]="currency"
             [isRequired]="true"
@@ -35,7 +35,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="loan-form__full">
             <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
             <textarea matInput formControlName="note" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
             <mat-hint align="end">
@@ -51,12 +51,12 @@
           }
         </div>
 
-        <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-          <button type="button" mat-raised-button (click)="gotoLoanDefaultView()">
+        <mat-card-actions class="loan-form__actions">
+          <button type="button" mat-stroked-button (click)="gotoLoanDefaultView()">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
           <button
-            mat-raised-button
+            mat-flat-button
             color="primary"
             [disabled]="!updateDiscountForm.valid || isSubmitting || disbursementTransactionId <= 0"
             *mifosxHasPermission="'UPDATEDISCOUNT_WORKINGCAPITALLOAN'"

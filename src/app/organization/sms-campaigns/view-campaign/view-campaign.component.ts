@@ -42,7 +42,6 @@ import { Dates } from 'app/core/utils/dates';
 import { DataReloadService } from 'app/core/services/data-reload.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatList, MatListItem } from '@angular/material/list';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -58,8 +57,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     FaIconComponent,
     MatTabGroup,
     MatTab,
-    MatList,
-    MatListItem,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

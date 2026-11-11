@@ -5,3 +5,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+
+// Stepper as a pen panel: white surface, hairline border, no elevation.
+.loan-stepper {
+  --mat-stepper-container-color: var(--ms-color-surface);
+
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  overflow: hidden;
+}

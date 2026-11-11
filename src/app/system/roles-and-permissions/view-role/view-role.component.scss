@@ -6,34 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '../../../../assets/styles/colours' as *;
-
-.container {
-  padding: 1rem;
-
-  mat-card {
-    margin-bottom: 0.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba($black, 0.1);
-    border: 1px solid var(--border-color, $mid-grey);
-    border-radius: 8px;
-    transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease;
-
-    mat-card-content {
-      padding: 0;
-    }
-
-    .layout-row {
-      margin: 0;
-      padding: 0;
-    }
-
-    &.role-details-card {
-      padding: 0.5rem;
-    }
-  }
+.role-label {
+  flex: 0 0 200px;
 }
 
 .permission-toolbar {
@@ -41,40 +15,26 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-
-  .permission-toolbar-left {
-    h3 {
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: 500;
-    }
-  }
-
-  .permission-toolbar-right {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  gap: var(--ms-space-2);
+  margin-bottom: var(--ms-space-4);
 }
 
 .search-count {
   font-weight: 400;
-  font-size: 0.875rem;
-  color: $concrete;
-  margin-left: 8px;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-secondary);
+  margin-left: var(--ms-space-2);
 }
 
 .search-field-container {
-  margin-bottom: 16px;
+  margin-bottom: var(--ms-space-4);
 
   .search-field {
     width: 100%;
   }
 
   .search-icon {
-    color: $concrete;
+    color: var(--ms-color-text-secondary);
   }
 }
 
@@ -88,22 +48,13 @@
 }
 
 .display-permissions {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-span {
-  font-size: 1rem;
+  padding-top: var(--ms-space-2);
+  padding-bottom: var(--ms-space-2);
 }
 
 mat-list-item {
   cursor: pointer;
-  padding: 8px 0;
-}
-
-.mat-list-base .mat-list-item .mat-list-item-content {
-  cursor: pointer;
-  padding: 0 16px;
+  padding: var(--ms-space-2) 0;
 }
 
 .grouping-name {
@@ -111,7 +62,8 @@ mat-list-item {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 8px;
+  padding: 0 var(--ms-space-2);
+  font-size: var(--ms-font-size-table);
 }
 
 .match-count-badge {
@@ -120,41 +72,29 @@ mat-list-item {
   justify-content: center;
   min-width: 24px;
   height: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: var(--ms-font-size-caption);
+  font-weight: 600;
   padding: 0 6px;
-  margin-left: 8px;
-  border-radius: 10px;
-  background-color: $accent;
-  color: $white;
+  margin-left: var(--ms-space-2);
+  border-radius: var(--ms-radius-pill);
+  background-color: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
 }
 
 .list-permission {
-  padding-left: 24px;
-  padding-right: 16px;
+  padding-left: var(--ms-space-6);
+  padding-right: var(--ms-space-4);
   max-height: 480px;
   overflow-y: auto;
 }
 
-.inactive {
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.01);
-    background-color: $light-grey;
-  }
+.active {
+  background-color: var(--ms-color-brand-primary-subtle);
+  color: var(--ms-color-brand-primary);
 }
 
-.content {
-  div {
-    line-height: 2.5rem;
-    margin-bottom: 0.5rem;
-
-    &.header {
-      font-weight: 500;
-      padding: 0.5rem 0;
-    }
-  }
+.inactive:hover {
+  background-color: var(--ms-color-surface-hover);
 }
 
 .no-results {
@@ -162,35 +102,18 @@ mat-list-item {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 48px 0;
-  color: $concrete;
+  padding: var(--ms-space-8) 0;
+  color: var(--ms-color-text-secondary);
 
   mat-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: var(--ms-space-4);
   }
 
   p {
-    font-size: 1rem;
+    font-size: 13px;
     margin: 0;
-  }
-}
-
-.submit-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 16px 0 0;
-  margin: 0;
-  border-top: 1px solid $light-grey;
-
-  button {
-    margin-right: 8px;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 }

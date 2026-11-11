@@ -70,42 +70,38 @@ export class HasPermissionDirective {
    * - No value was passed to the has permission directive.
    */
   private hasPermission(permission: string | string[]): boolean {
-    // If RBAC is disabled, show all menus/buttons (backward compatibility)
-    if (!this.rbacEnabled) {
-      return true;
-    }
-
-    if (this.userPermissions.includes('ALL_FUNCTIONS')) {
-      return true;
-    }
-
-    if (typeof permission === 'string') {
-      return this.checkSinglePermission(permission);
-    } else if (Array.isArray(permission)) {
-      // Return true if at least one permission in the array is granted
-      return permission.some((p) => this.checkSinglePermission(p));
-    }
-
-    return false;
+    return hasAnyPermission(this.userPermissions, permission, this.rbacEnabled);
   }
+}
 
-  /**
-   * Checks if user has a single specific permission.
-   * @param {string} permission Single permission string
-   * @returns {boolean} True if permitted, false otherwise
-   */
-  private checkSinglePermission(permission: string): boolean {
-    permission = permission.trim();
-    if (permission !== '') {
-      if (permission.substring(0, 5) === 'READ_' && this.userPermissions.includes('ALL_FUNCTIONS_READ')) {
-        return true;
-      } else if (this.userPermissions.includes(permission)) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+/**
+ * Whether `permission` (or at least one of an array) is granted. Shared by the
+ * directive and by code that builds permission-aware UI from data (the sidenav).
+ * Visibility only: the backend still authorises every request.
+ * @param userPermissions Permissions of the signed-in user.
+ * @param permission Permission code or codes; one match is enough.
+ * @param rbacEnabled When false every permission is treated as granted.
+ */
+export function hasAnyPermission(
+  userPermissions: string[],
+  permission: string | string[],
+  rbacEnabled: boolean
+): boolean {
+  if (!rbacEnabled) {
+    return true;
+  }
+  if (userPermissions.includes('ALL_FUNCTIONS')) {
+    return true;
+  }
+  const required = typeof permission === 'string' ? [permission] : permission;
+  return required.some((code) => {
+    const trimmed = code.trim();
+    if (trimmed === '') {
       return false;
     }
-  }
+    if (trimmed.substring(0, 5) === 'READ_' && userPermissions.includes('ALL_FUNCTIONS_READ')) {
+      return true;
+    }
+    return userPermissions.includes(trimmed);
+  });
 }

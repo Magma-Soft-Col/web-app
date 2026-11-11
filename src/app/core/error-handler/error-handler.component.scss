@@ -29,63 +29,63 @@
 
 /**
  * Error notification snackbar styling
- * - Red background for errors
- * - White text for contrast
+ * - Danger token background for errors
+ * - Surface-coloured text for contrast
  * - Displayed at top-center for 5 seconds
  */
 .error-snackbar {
-  background-color: #f44336 !important;
-  color: white !important;
+  background-color: var(--ms-color-danger) !important;
+  color: var(--ms-color-surface) !important;
 
   .mat-mdc-snack-bar-label,
   .mdc-snackbar__label,
   .mat-simple-snackbar-action {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 
   .mat-mdc-button {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 }
 
 /**
  * Success notification snackbar styling
- * - Green background for success messages
- * - White text for contrast
+ * - Success token background for success messages
+ * - Surface-coloured text for contrast
  * - Displayed at bottom-center for 3 seconds
  */
 .success-snackbar {
-  background-color: #4caf50 !important;
-  color: white !important;
+  background-color: var(--ms-color-success) !important;
+  color: var(--ms-color-surface) !important;
 
   .mat-mdc-snack-bar-label,
   .mdc-snackbar__label,
   .mat-simple-snackbar-action {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 
   .mat-mdc-button {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 }
 
 /**
  * Info notification snackbar styling
- * - Blue background for informational messages
- * - White text for contrast
+ * - Primary token background for informational messages
+ * - Surface-coloured text for contrast
  * - Displayed at bottom-center for 4 seconds
  */
 .info-snackbar {
-  background-color: #2196f3 !important;
-  color: white !important;
+  background-color: var(--ms-color-brand-primary) !important;
+  color: var(--ms-color-surface) !important;
 
   .mat-mdc-snack-bar-label,
   .mdc-snackbar__label,
   .mat-simple-snackbar-action {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 
   .mat-mdc-button {
-    color: white !important;
+    color: var(--ms-color-surface) !important;
   }
 }

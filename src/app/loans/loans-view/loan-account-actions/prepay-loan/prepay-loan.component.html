@@ -6,11 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     <form [formGroup]="prepayLoanForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="loan-form__grid">
           <mat-form-field (click)="transactionDatePicker.open()">
             <mat-label>{{ 'labels.inputs.Transaction Date' | translate }}</mat-label>
             <input
@@ -31,39 +31,24 @@
             }
           </mat-form-field>
 
-          <div class="layout-row-wrap">
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Principal' | translate }}
+          <dl class="prepay-summary loan-form__full">
+            <div class="prepay-summary__row">
+              <dt class="ms-label">{{ 'labels.inputs.Principal' | translate }}</dt>
+              <dd class="ms-value ms-num">{{ prepayData.principalPortion | formatNumber }}</dd>
             </div>
-
-            <div class="flex-50 r-amount right-label">
-              {{ prepayData.principalPortion | formatNumber }}
+            <div class="prepay-summary__row">
+              <dt class="ms-label">{{ 'labels.inputs.Interest' | translate }}</dt>
+              <dd class="ms-value ms-num">{{ prepayData.interestPortion | formatNumber }}</dd>
             </div>
-
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Interest' | translate }}
+            <div class="prepay-summary__row">
+              <dt class="ms-label">{{ 'labels.inputs.Fees' | translate }}</dt>
+              <dd class="ms-value ms-num">{{ prepayData.feeChargesPortion | formatNumber }}</dd>
             </div>
-
-            <div class="flex-50 r-amount right-label">
-              {{ prepayData.interestPortion | formatNumber }}
+            <div class="prepay-summary__row">
+              <dt class="ms-label">{{ 'labels.inputs.Penalties' | translate }}</dt>
+              <dd class="ms-value ms-num">{{ prepayData.penaltyChargesPortion | formatNumber }}</dd>
             </div>
-
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Fees' | translate }}
-            </div>
-
-            <div class="flex-50 r-amount right-label">
-              {{ prepayData.feeChargesPortion | formatNumber }}
-            </div>
-
-            <div class="flex-50 mat-body-strong">
-              {{ 'labels.inputs.Penalties' | translate }}
-            </div>
-
-            <div class="flex-50 r-amount right-label">
-              {{ prepayData.penaltyChargesPortion | formatNumber }}
-            </div>
-          </div>
+          </dl>
 
           @if (!contractTermination) {
             <mifosx-input-amount
@@ -94,8 +79,8 @@
           }
 
           @if (!contractTermination) {
-            <div class="flex-fill">
-              <span class="expandcollapsebutton m-l-10 m-t-40 flex-75" (click)="addPaymentDetails()">
+            <div class="loan-form__full loan-form__toggle">
+              <span class="expandcollapsebutton" (click)="addPaymentDetails()">
                 <mat-slide-toggle>
                   <div [className]="showPaymentDetails ? 'enabled' : 'disabled'">
                     <span class="m-l-10">{{ 'labels.inputs.Show Payment Details' | translate }}</span>
@@ -128,18 +113,18 @@
             </mat-form-field>
           }
 
-          <mat-form-field>
+          <mat-form-field class="loan-form__full">
             <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
             <textarea matInput formControlName="note" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
           </mat-form-field>
         </div>
 
-        <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-          <button type="button" mat-raised-button (click)="gotoLoanDefaultView()">
+        <mat-card-actions class="loan-form__actions">
+          <button type="button" mat-stroked-button (click)="gotoLoanDefaultView()">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
           <button
-            mat-raised-button
+            mat-flat-button
             color="primary"
             [disabled]="!prepayLoanForm.valid"
             *mifosxHasPermission="'REPAYMENT_LOAN'"

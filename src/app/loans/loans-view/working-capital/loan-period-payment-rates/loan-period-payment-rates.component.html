@@ -6,12 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container">
-  <h3>{{ 'labels.inputs.Period Payment Rates' | translate }}</h3>
-
-  <div class="layout-row transaction-buttons align-end gap-20px">
+<div class="payment-rates">
+  <div class="payment-rates__header">
+    <h3 class="ms-section-title">{{ 'labels.inputs.Period Payment Rates' | translate }}</h3>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="addPaymentRate()"
       *mifosxHasPermission="'UPDATERATE_WORKINGCAPITALLOAN'"
@@ -20,42 +19,44 @@
     </button>
   </div>
 
-  <table mat-table [dataSource]="loanPaymentRatesData">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
-      <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
-        {{ item.id }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="effectiveDate">
-      <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Effective Date' | translate }}</th>
-      <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
-        {{ item.effectiveDate | dateFormat }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="previousRate">
-      <th mat-header-cell *matHeaderCellDef>
-        {{ 'labels.buttons.Previous' | translate }} {{ 'labels.inputs.Rate' | translate }}
-      </th>
-      <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
-        {{ item.previousRate | formatNumber }} %
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="newRate">
-      <th mat-header-cell *matHeaderCellDef>
-        {{ 'labels.catalogs.New' | translate }} {{ 'labels.inputs.Rate' | translate }}
-      </th>
-      <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
-        {{ item.newRate | formatNumber }} %
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="submittedOnDate">
-      <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
-      <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
-        {{ item.submittedOnDate | dateFormat }}
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="loanPaymentRatesColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: loanPaymentRatesColumns"></tr>
-  </table>
+  <div class="ms-panel ms-table-wrap">
+    <table mat-table [dataSource]="loanPaymentRatesData" class="payment-rates__table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
+          {{ item.id }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="effectiveDate">
+        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Effective Date' | translate }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
+          {{ item.effectiveDate | dateFormat }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="previousRate">
+        <th mat-header-cell class="ms-num" *matHeaderCellDef>
+          {{ 'labels.buttons.Previous' | translate }} {{ 'labels.inputs.Rate' | translate }}
+        </th>
+        <td mat-cell class="ms-num" *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
+          {{ item.previousRate | formatNumber }} %
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="newRate">
+        <th mat-header-cell class="ms-num" *matHeaderCellDef>
+          {{ 'labels.catalogs.New' | translate }} {{ 'labels.inputs.Rate' | translate }}
+        </th>
+        <td mat-cell class="ms-num" *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
+          {{ item.newRate | formatNumber }} %
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="submittedOnDate">
+        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="periodPaymentRateStyle(item.reversed)">
+          {{ item.submittedOnDate | dateFormat }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="loanPaymentRatesColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: loanPaymentRatesColumns"></tr>
+    </table>
+  </div>
 </div>

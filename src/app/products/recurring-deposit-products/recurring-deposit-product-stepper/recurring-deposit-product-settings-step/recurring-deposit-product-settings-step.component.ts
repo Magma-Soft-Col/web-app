@@ -16,7 +16,6 @@ import {
 } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MatDivider } from '@angular/material/divider';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -29,7 +28,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatCheckbox,
     MatTooltip,
-    MatDivider,
     MatStepperPrevious,
     FaIconComponent,
     MatStepperNext

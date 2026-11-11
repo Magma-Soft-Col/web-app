@@ -10,7 +10,7 @@
 
 <div mat-dialog-content [formGroup]="delinquencyActionForm">
   <div class="layout-column">
-    <mat-form-field class="flex-98">
+    <mat-form-field>
       <mat-label>{{ 'labels.inputs.Minimum Payment' | translate }}</mat-label>
       <input type="number" matInput formControlName="minimumPayment" [errorStateMatcher]="minimumPaymentMatcher" />
       @if (delinquencyActionForm.controls.minimumPayment.hasError('highAmountValue')) {
@@ -30,7 +30,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="flex-98">
+    <mat-form-field>
       <mat-label>{{ 'labels.inputs.Minimum Payment Type' | translate }}</mat-label>
       <mat-select formControlName="minimumPaymentType" [errorStateMatcher]="minimumPaymentTypeMatcher">
         <mat-option value="">{{ 'None' | translateKey: 'catalogs' }}</mat-option>
@@ -48,7 +48,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="flex-98">
+    <mat-form-field>
       <mat-label>{{ 'labels.inputs.Period Payment Frequency' | translate }}</mat-label>
       <input
         type="number"
@@ -64,7 +64,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="flex-98">
+    <mat-form-field>
       <mat-label>{{ 'labels.inputs.Period Payment Frequency Type' | translate }}</mat-label>
       <mat-select formControlName="frequencyType" [errorStateMatcher]="frequencyTypeMatcher">
         <mat-option value="">{{ 'None' | translateKey: 'catalogs' }}</mat-option>
@@ -84,14 +84,14 @@
   </div>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
   <span
     [matTooltip]="'tooltips.Provide at least a minimum payment or a frequency change' | translate"
     [matTooltipDisabled]="delinquencyActionForm.valid || delinquencyActionForm.pristine"
   >
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       [mat-dialog-close]="{ data: delinquencyActionForm }"
       [disabled]="!delinquencyActionForm.valid || delinquencyActionForm.pristine"

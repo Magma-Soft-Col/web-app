@@ -14,63 +14,27 @@
 @include shared.account-flag-badges;
 
 .tab-container {
-  padding: 4px 0 20px;
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 }
 
-/* ── Card shell (shared card-container, without side margins) ── */
-.general-card {
-  @include shared.card-container;
-
-  margin: 12px 4px;
-}
-
-/* ── Status chip (badge system from charges/transactions) ──── */
-.status-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  white-space: nowrap;
-
-  .st {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentcolor;
-    flex-shrink: 0;
-  }
-}
-
+/* Status badge: `.ms-badge` geometry, tone set by `statusClass()`. */
 .st-active {
-  background: var(--ch-paid-bg);
-  color: var(--ch-paid);
-  border-color: var(--ch-paid);
+  color: var(--ms-color-success);
+  background: var(--ms-color-success-bg);
 }
 
 .st-pending {
-  background: var(--ch-partial-bg);
-  color: var(--ch-partial);
-  border-color: var(--ch-partial);
+  color: var(--ms-color-warning);
+  background: var(--ms-color-warning-bg);
 }
 
-.st-approved {
-  background: var(--ch-blue-50);
-  color: var(--ch-blue-700);
-  border-color: var(--ch-blue-100);
-}
-
+.st-approved,
 .st-overpaid {
-  background: var(--ch-blue-20);
-  color: var(--ch-blue-600);
-  border-color: var(--ch-blue-100);
+  color: var(--ms-color-info);
+  background: var(--ms-color-info-bg);
 }
 
 .st-closed {
-  background: var(--ch-surface-h);
-  color: var(--ch-text-2);
-  border-color: var(--ch-border);
+  color: var(--ms-color-neutral);
+  background: var(--ms-color-neutral-bg);
 }

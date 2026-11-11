@@ -6,46 +6,27 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="reports-catalog">
-  <!-- ── Page header ────────────────────────────────────────── -->
-  <header class="page-head">
-    <div class="page-head-text">
-      <h1 class="page-title">
-        {{ 'labels.heading.Reports Catalog' | translate }}
-        <span class="page-title-mark"> {{ totalCount }}&nbsp;{{ 'labels.text.available' | translate }} </span>
-      </h1>
+<div class="ms-page reports-catalog">
+  <div class="ms-list-toolbar">
+    <div class="ms-filter-bar">
+      <div class="ms-search">
+        <fa-icon icon="search" class="ms-search__icon" aria-hidden="true"></fa-icon>
+        <input
+          type="search"
+          [placeholder]="'labels.inputs.Filter' | translate"
+          [attr.aria-label]="'labels.inputs.Filter' | translate"
+          [value]="searchTerm"
+          (input)="onSearchInput($any($event.target).value)"
+        />
+      </div>
+      <span class="ms-badge ms-badge--info">{{ totalCount }}&nbsp;{{ 'labels.text.available' | translate }}</span>
     </div>
-  </header>
 
-  <!-- ── Toolbar ────────────────────────────────────────────── -->
-  <div class="toolbar">
-    <div class="search">
-      <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </svg>
-      <input
-        type="text"
-        [placeholder]="'labels.inputs.Filter' | translate"
-        [value]="searchTerm"
-        (input)="onSearchInput($any($event.target).value)"
-      />
-      <button
-        type="button"
-        class="search-clear"
-        *ngIf="searchTerm.length > 0"
-        (click)="onSearchInput('')"
-        [attr.aria-label]="'labels.buttons.Clear' | translate"
-      >
-        ×
+    <div class="ms-actions">
+      <button type="button" mat-stroked-button *ngIf="hasActiveFilters()" (click)="clearFilters()">
+        {{ 'labels.buttons.Reset' | translate }}
       </button>
     </div>
-
-    <span class="toolbar-spacer"></span>
-
-    <button type="button" class="btn btn-ghost" *ngIf="hasActiveFilters()" (click)="clearFilters()">
-      {{ 'labels.buttons.Reset' | translate }}
-    </button>
   </div>
 
   <!-- ── Engine chip rail ───────────────────────────────────── -->
@@ -263,7 +244,7 @@
         <path d="m21 21-4.3-4.3"></path>
       </svg>
       <p>{{ 'labels.text.No reports match your filters' | translate }}</p>
-      <button type="button" class="btn btn-ghost" (click)="clearFilters()" *ngIf="hasActiveFilters()">
+      <button type="button" mat-stroked-button (click)="clearFilters()" *ngIf="hasActiveFilters()">
         {{ 'labels.buttons.Reset' | translate }}
       </button>
     </div>

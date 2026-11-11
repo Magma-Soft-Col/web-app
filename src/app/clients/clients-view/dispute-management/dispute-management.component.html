@@ -9,7 +9,7 @@
   <!-- Role selector -->
   <mat-card class="cbild-role-card">
     <mat-card-content>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>{{ 'labels.cbild.dashboard.role' | translate }}</mat-label>
         <mat-select [(ngModel)]="selectedRole" (ngModelChange)="onRoleChange($event)">
           @for (role of roles; track role.value) {
@@ -23,13 +23,13 @@
   <!-- Raise Dispute Form -->
   <mat-card class="cbild-section-card">
     <mat-card-content>
-      <h3 class="cbild-section-title">
+      <h3 class="ms-section-title cbild-section-title">
         <mat-icon>report_problem</mat-icon>
         {{ 'labels.cbild.dispute.raiseTitle' | translate }}
       </h3>
       <mat-divider></mat-divider>
       <form [formGroup]="raiseForm" class="cbild-form">
-        <mat-form-field appearance="outline" class="cbild-full-width">
+        <mat-form-field class="cbild-full-width">
           <mat-label>{{ 'labels.cbild.dispute.submissionRecordId' | translate }}</mat-label>
           <input matInput type="number" formControlName="submissionRecordId" />
           @if (raiseForm.get('submissionRecordId')?.invalid && raiseForm.get('submissionRecordId')?.touched) {
@@ -37,7 +37,7 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="cbild-full-width">
+        <mat-form-field class="cbild-full-width">
           <mat-label>{{ 'labels.cbild.dispute.disputeDetails' | translate }}</mat-label>
           <textarea matInput formControlName="disputeDetails" rows="3"></textarea>
           @if (raiseForm.get('disputeDetails')?.invalid && raiseForm.get('disputeDetails')?.touched) {
@@ -45,7 +45,7 @@
           }
         </mat-form-field>
 
-        <button mat-raised-button color="primary" [disabled]="raiseForm.invalid || isRaising" (click)="raiseDispute()">
+        <button mat-flat-button color="primary" [disabled]="raiseForm.invalid || isRaising" (click)="raiseDispute()">
           @if (isRaising) {
             <mat-icon>hourglass_empty</mat-icon>
           } @else {
@@ -67,17 +67,17 @@
   <!-- Look Up Dispute -->
   <mat-card class="cbild-section-card">
     <mat-card-content>
-      <h3 class="cbild-section-title">
+      <h3 class="ms-section-title cbild-section-title">
         <mat-icon>search</mat-icon>
         {{ 'labels.cbild.dispute.lookupTitle' | translate }}
       </h3>
       <mat-divider></mat-divider>
       <div class="cbild-lookup-row">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>{{ 'labels.cbild.dispute.disputeId' | translate }}</mat-label>
           <input matInput type="number" [(ngModel)]="lookupDisputeId" />
         </mat-form-field>
-        <button mat-raised-button color="accent" [disabled]="!lookupDisputeId || isLooking" (click)="lookupDispute()">
+        <button mat-stroked-button [disabled]="!lookupDisputeId || isLooking" (click)="lookupDispute()">
           @if (isLooking) {
             <mat-icon>hourglass_empty</mat-icon>
           } @else {
@@ -143,19 +143,14 @@
     @if (dispute.status !== 'RESOLVED') {
       <div class="cbild-actions">
         @if (canMoveToUnderReview(dispute)) {
-          <button
-            mat-stroked-button
-            color="primary"
-            [disabled]="isUpdating"
-            (click)="updateStatus(dispute, 'UNDER_REVIEW')"
-          >
+          <button mat-stroked-button [disabled]="isUpdating" (click)="updateStatus(dispute, 'UNDER_REVIEW')">
             <mat-icon>rate_review</mat-icon>
             {{ 'labels.cbild.dispute.markUnderReview' | translate }}
           </button>
         }
 
         @if (canResolve(dispute)) {
-          <mat-form-field appearance="outline" class="cbild-full-width">
+          <mat-form-field class="cbild-full-width">
             <mat-label>{{ 'labels.cbild.dispute.resolutionNotes' | translate }}</mat-label>
             <textarea
               matInput
@@ -165,7 +160,7 @@
             ></textarea>
           </mat-form-field>
           <button
-            mat-raised-button
+            mat-flat-button
             color="warn"
             [disabled]="isUpdating || !resolutionNotesMap.get(dispute.id)"
             (click)="updateStatus(dispute, 'RESOLVED')"

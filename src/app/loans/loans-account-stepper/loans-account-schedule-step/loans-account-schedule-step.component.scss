@@ -5,3 +5,17 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.schedule-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-step__actions {
+  display: flex;
+  justify-content: flex-start;
+}

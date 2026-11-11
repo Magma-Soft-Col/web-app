@@ -7,7 +7,7 @@
  */
 
 /** Angular Imports. */
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoansAccountCloseComponent } from './loans-account-close/loans-account-close.component';
@@ -59,7 +59,7 @@ import { LoanProductService } from 'app/products/loan-products/services/loan-pro
 @Component({
   selector: 'mifosx-loan-account-actions',
   templateUrl: './loan-account-actions.component.html',
-  styleUrls: [],
+  styleUrls: ['./loan-account-actions.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     LoansAccountCloseComponent,
@@ -109,6 +109,19 @@ export class LoanAccountActionsComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private loanProductService = inject(LoanProductService);
+
+  /**
+   * Action screens are centred forms, like the savings ones; the few that show
+   * a table or a report keep the full width of the work area.
+   */
+  @HostBinding('class.loan-actions--wide')
+  get isWideAction(): boolean {
+    return !!(
+      this.actions?.['View Guarantors'] ||
+      this.actions?.['Edit Repayment Schedule'] ||
+      this.actions?.['Loan Screen Reports']
+    );
+  }
 
   /** Whether the current account is a Working Capital loan. */
   get isWorkingCapital(): boolean {

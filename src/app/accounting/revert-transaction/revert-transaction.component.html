@@ -17,8 +17,8 @@
       </mat-form-field>
     </div>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>{{ 'labels.buttons.No' | translate }}</button>
-      <button mat-button [mat-dialog-close]="{ revert: true, comments: comments.value }">
+      <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.No' | translate }}</button>
+      <button mat-flat-button color="primary" [mat-dialog-close]="{ revert: true, comments: comments.value }">
         {{ 'labels.buttons.Yes' | translate }}
       </button>
     </mat-dialog-actions>
@@ -26,13 +26,13 @@
 } @else {
   <h1 mat-dialog-title>{{ 'labels.heading.Transaction Reverted' | translate }}</h1>
   <div mat-dialog-content>
-    <h4>{{ 'labels.heading.Success!' | translate }}</h4>
+    <h4 class="ms-subsection-title">{{ 'labels.heading.Success!' | translate }}</h4>
     <p>{{ 'labels.text.Journal entry reverse transaction' | translate }}</p>
     <p>{{ 'labels.text.Transaction ID' | translate }}: {{ data.transactionId }}</p>
   </div>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{ 'labels.buttons.Close' | translate }}</button>
-    <button mat-button [mat-dialog-close]="{ redirect: true }">
+    <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Close' | translate }}</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="{ redirect: true }">
       {{ 'labels.buttons.Redirect to New Transaction' | translate }}
     </button>
   </mat-dialog-actions>

@@ -6,17 +6,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  .layout-row {
-    gap: 16px;
-  }
-
-  .action-button {
-    margin-left: auto;
-    margin-top: 8px;
-  }
-}
-
-.table-container {
-  padding-bottom: 10px;
+table {
+  width: 100%;
 }

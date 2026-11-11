@@ -8,56 +8,54 @@
 
 <h1 mat-dialog-title>{{ 'labels.heading.Guarantor Detail' | translate }}</h1>
 
-<div mat-dialog-content class="layout-column">
-  <div class="layout-column">
-    <div class="flex-fill">
-      <span class="flex-40">{{ 'labels.inputs.First Name' | translate }}:</span>
-      <span class="flex-60">{{ data.guarantorData.firstname }}</span>
+<div mat-dialog-content>
+  <dl class="guarantor-facts">
+    <div class="guarantor-fact">
+      <dt class="ms-label">{{ 'labels.inputs.First Name' | translate }}</dt>
+      <dd class="ms-value">{{ data.guarantorData.firstname }}</dd>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-40">{{ 'labels.inputs.Last Name' | translate }}:</span>
-      <span class="flex-60">{{ data.guarantorData.lastname }}</span>
+    <div class="guarantor-fact">
+      <dt class="ms-label">{{ 'labels.inputs.Last Name' | translate }}</dt>
+      <dd class="ms-value">{{ data.guarantorData.lastname }}</dd>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-40">{{ 'labels.inputs.Relationship' | translate }}:</span>
-      <span class="flex-60">{{ data.guarantorData.clientRelationshipType?.name }}</span>
+    <div class="guarantor-fact">
+      <dt class="ms-label">{{ 'labels.inputs.Relationship' | translate }}</dt>
+      <dd class="ms-value">{{ data.guarantorData.clientRelationshipType?.name }}</dd>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-40">{{ 'labels.inputs.Guarantor Type' | translate }}:</span>
-      <span class="flex-60">{{ data.guarantorData.guarantorType?.value }}</span>
+    <div class="guarantor-fact">
+      <dt class="ms-label">{{ 'labels.inputs.Guarantor Type' | translate }}</dt>
+      <dd class="ms-value">{{ data.guarantorData.guarantorType?.value }}</dd>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-40">{{ 'labels.inputs.Status' | translate }}:</span>
-      <span class="flex-60">
+    <div class="guarantor-fact">
+      <dt class="ms-label">{{ 'labels.inputs.Status' | translate }}</dt>
+      <dd class="ms-value">
         @if (data.guarantorData.status) {
-          <span>
+          <span class="ms-badge ms-badge--success">
             {{ 'labels.inputs.Active' | translate }}
           </span>
         }
         @if (!data.guarantorData.status) {
-          <span>
+          <span class="ms-badge">
             {{ 'labels.inputs.Deleted' | translate }}
           </span>
         }
-      </span>
+      </dd>
     </div>
     @if (data.loanData?.delinquent?.availableDisbursementAmountWithOverApplied !== undefined) {
-      <div class="flex-fill">
-        <span class="flex-40"
-          >{{ 'labels.inputs.Available Disbursement Amount (with Over Applied)' | translate }}:</span
-        >
-        <span class="flex-60">{{
-          data.loanData?.delinquent?.availableDisbursementAmountWithOverApplied | formatNumber
-        }}</span>
+      <div class="guarantor-fact">
+        <dt class="ms-label">{{ 'labels.inputs.Available Disbursement Amount (with Over Applied)' | translate }}</dt>
+        <dd class="ms-value ms-num">
+          {{ data.loanData?.delinquent?.availableDisbursementAmountWithOverApplied | formatNumber }}
+        </dd>
       </div>
     }
-  </div>
+  </dl>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
 </mat-dialog-actions>

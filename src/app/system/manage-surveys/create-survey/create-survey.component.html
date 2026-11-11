@@ -8,11 +8,11 @@
 
 <div class="container">
   <form [formGroup]="surveyForm" (ngSubmit)="submit()">
-    <div class="layout-column gap-4percent">
+    <div class="ms-page">
       <mat-card>
         <mat-card-content>
-          <div class="layout-row-wrap gap-2px responsive-column">
-            <mat-form-field class="flex-48">
+          <div class="ms-form-grid">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Key' | translate }}</mat-label>
               <input matInput maxlength="32" required formControlName="key" />
               @if (surveyForm.controls.key.hasError('required')) {
@@ -23,7 +23,7 @@
               }
             </mat-form-field>
 
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Name' | translate }}</mat-label>
               <input matInput maxlength="255" required formControlName="name" />
               @if (surveyForm.controls.name.hasError('required')) {
@@ -34,7 +34,7 @@
               }
             </mat-form-field>
 
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Country Code' | translate }}</mat-label>
               <input matInput maxlength="2" required formControlName="countryCode" />
               @if (surveyForm.controls.countryCode.hasError('required')) {
@@ -51,19 +51,19 @@
               }
             </mat-form-field>
 
-            <mat-form-field class="flex-98">
+            <mat-form-field class="ms-form-full">
               <mat-label>{{ 'labels.inputs.Description' | translate }}</mat-label>
               <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
             </mat-form-field>
 
             @if (!questionDatas.length) {
-              <div class="flex-fill layout-row layout-align-center gap-5px layout-xs-column">
-                <button type="button" mat-raised-button [routerLink]="['../']">
+              <div class="ms-form-full ms-form-actions">
+                <button type="button" mat-stroked-button [routerLink]="['../']">
                   {{ 'labels.buttons.Cancel' | translate }}
                 </button>
                 <button
                   type="button"
-                  mat-raised-button
+                  mat-flat-button
                   color="primary"
                   [disabled]="
                     !(
@@ -82,15 +82,15 @@
         </mat-card-content>
       </mat-card>
 
-      <div cdkDropList (cdkDropListDropped)="dropQuestion($event)" class="layout-column gap-4percent">
+      <div cdkDropList (cdkDropListDropped)="dropQuestion($event)" class="ms-page">
         @for (question of questionDatas.controls; track question; let questionIndex = $index; let isLast = $last) {
           <mat-card cdkDrag cdkDragLockAxis="y" formArrayName="questionDatas">
             <mat-card-content>
-              <div class="flex-fill gap-2percent responsive-column layout-row-wrap" [formGroupName]="questionIndex">
-                <div class="flex-98 layout-row-wrap gap-2percent align-between align-items-center">
-                  <h2 class="mat-h2">{{ 'labels.heading.Question' | translate }} {{ questionIndex + 1 }}</h2>
+              <div class="ms-form-grid" [formGroupName]="questionIndex">
+                <div class="ms-form-full ms-list-toolbar">
+                  <h2 class="ms-section-title">{{ 'labels.heading.Question' | translate }} {{ questionIndex + 1 }}</h2>
                   <button
-                    mat-raised-button
+                    mat-stroked-button
                     color="warn"
                     (click)="removeQuestion(questionIndex)"
                     [disabled]="questionDatas.controls.length === 1"
@@ -99,7 +99,7 @@
                     {{ 'labels.buttons.Delete' | translate }} {{ 'labels.heading.Question' | translate }}
                   </button>
                 </div>
-                <mat-form-field class="flex-48">
+                <mat-form-field>
                   <mat-label>{{ 'labels.inputs.Key' | translate }}</mat-label>
                   <input matInput maxlength="32" required formControlName="key" />
                   @if (question.controls.key.hasError('required')) {
@@ -109,7 +109,7 @@
                     </mat-error>
                   }
                 </mat-form-field>
-                <mat-form-field class="flex-48">
+                <mat-form-field>
                   <mat-label>{{ 'labels.inputs.Text' | translate }}</mat-label>
                   <input matInput maxlength="255" required formControlName="text" />
                   @if (question.controls.text.hasError('required')) {
@@ -119,7 +119,7 @@
                     </mat-error>
                   }
                 </mat-form-field>
-                <mat-form-field class="flex-98">
+                <mat-form-field class="ms-form-full">
                   <mat-label>{{ 'labels.inputs.Description' | translate }}</mat-label>
                   <textarea
                     matInput
@@ -128,10 +128,10 @@
                     cdkAutosizeMinRows="2"
                   ></textarea>
                 </mat-form-field>
-                <mat-divider [inset]="true"></mat-divider>
-                <div class="flex-98 layout-row align-between align-items-center">
-                  <h4 class="mat-h4">{{ 'labels.heading.Options' | translate }}</h4>
-                  <button type="button" mat-raised-button color="primary" (click)="addResponse(questionIndex)">
+                <mat-divider class="ms-form-full"></mat-divider>
+                <div class="ms-form-full ms-list-toolbar options-header">
+                  <h3 class="ms-subsection-title">{{ 'labels.heading.Options' | translate }}</h3>
+                  <button type="button" mat-stroked-button (click)="addResponse(questionIndex)">
                     <fa-icon icon="plus" class="m-r-10"></fa-icon>
                     {{ 'labels.buttons.Add' | translate }} {{ 'labels.inputs.Option' | translate }}
                   </button>
@@ -139,21 +139,16 @@
                 <div
                   cdkDropList
                   (cdkDropListDropped)="dropResponse($event, questionIndex)"
-                  class="flex-fill layout-row-wrap gap-2percent"
+                  class="ms-form-full responses"
                 >
                   @for (
                     response of getResponseDatas(questionIndex).controls;
                     track response;
                     let responseIndex = $index
                   ) {
-                    <div
-                      cdkDrag
-                      cdkDragLockAxis="y"
-                      class="flex-fill layout-row-wrap gap-2percent"
-                      formArrayName="responseDatas"
-                    >
-                      <div class="flex-fill layout-row-wrap gap-2percent" [formGroupName]="responseIndex">
-                        <mat-form-field class="flex-43">
+                    <div cdkDrag cdkDragLockAxis="y" class="response-row" formArrayName="responseDatas">
+                      <div class="response-fields" [formGroupName]="responseIndex">
+                        <mat-form-field>
                           <mat-label>{{ 'labels.inputs.Text' | translate }}</mat-label>
                           <input matInput required formControlName="text" />
                           @if (response.controls.text.hasError('required')) {
@@ -163,7 +158,7 @@
                             </mat-error>
                           }
                         </mat-form-field>
-                        <mat-form-field class="flex-43">
+                        <mat-form-field>
                           <mat-label>{{ 'labels.inputs.Value' | translate }}</mat-label>
                           <input matInput required formControlName="value" />
                           @if (response.controls.value.hasError('required')) {
@@ -181,7 +176,7 @@
                             </mat-error>
                           }
                         </mat-form-field>
-                        <div class="flex-8">
+                        <div class="response-delete">
                           <div class="delete-wrapper">
                             <button
                               type="button"
@@ -204,15 +199,15 @@
             </mat-card-content>
             <div>
               @if (isLast) {
-                <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-                  <button type="button" mat-raised-button (click)="cancelSurvey()">
+                <mat-card-actions class="ms-form-actions">
+                  <button type="button" mat-stroked-button (click)="cancelSurvey()">
                     {{ 'labels.buttons.Cancel' | translate }}
                   </button>
-                  <button type="button" mat-raised-button color="primary" (click)="addQuestion()">
+                  <button type="button" mat-stroked-button (click)="addQuestion()">
                     <fa-icon icon="plus" class="m-r-10"></fa-icon>
                     {{ 'labels.buttons.Add' | translate }} {{ 'labels.heading.Question' | translate }}
                   </button>
-                  <button mat-raised-button color="primary" [disabled]="!surveyForm.valid">
+                  <button mat-flat-button color="primary" [disabled]="!surveyForm.valid">
                     {{ 'labels.buttons.Submit' | translate }}
                   </button>
                 </mat-card-actions>

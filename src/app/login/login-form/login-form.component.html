@@ -6,110 +6,111 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<!-- Basic Auth: Username/password form -->
+<!-- Basic Auth: Username/password form (ms-auth-field pattern, assets/styles/_ms-auth.scss) -->
 @if (!oauthEnabled) {
-  <div>
-    <form class="layout-column" [formGroup]="loginForm" (ngSubmit)="login()" id="login-form">
-      <mat-form-field class="login-field flex-align-center" appearance="fill">
-        <mat-label>{{ 'labels.inputs.Username' | translate }}</mat-label>
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()" id="login-form" novalidate>
+    @let username = loginForm.controls.username;
+    <div class="ms-auth-field" [class.ms-auth-field--invalid]="username.invalid && username.touched">
+      <label class="ms-auth-field__label" for="login-username">
+        {{ 'labels.inputs.Username' | translate }}<span class="ms-auth-field__required" aria-hidden="true">*</span>
+      </label>
+      <div class="ms-auth-field__control">
+        <mifosx-m3-icon class="ms-auth-field__icon" name="person" [size]="20"></mifosx-m3-icon>
         <input
-          matInput
+          id="login-username"
+          class="ms-auth-field__input"
           type="text"
           autocomplete="username"
           formControlName="username"
+          required
           [placeholder]="'labels.placeholders.Enter your username' | translate"
+          [attr.aria-invalid]="username.invalid && username.touched"
+          aria-describedby="login-username-error"
         />
-        <mifosx-m3-icon matIconPrefix name="account_circle"></mifosx-m3-icon>
-        @if (loginForm.controls.username.hasError('required')) {
-          <mat-error>
-            {{ 'labels.inputs.Username' | translate }}
-            <strong>{{ 'labels.commons.is required' | translate }}</strong>
-          </mat-error>
-        }
-      </mat-form-field>
+      </div>
+      @if (username.hasError('required') && username.touched) {
+        <span class="ms-auth-field__error" id="login-username-error" role="alert">
+          {{ 'labels.inputs.Username' | translate }} {{ 'labels.commons.is required' | translate }}
+        </span>
+      }
+    </div>
 
-      <!-- Password Field -->
-      <mat-form-field class="login-field" appearance="fill">
-        <mat-label>{{ 'labels.inputs.Password' | translate }}</mat-label>
+    @let password = loginForm.controls.password;
+    <div class="ms-auth-field" [class.ms-auth-field--invalid]="password.invalid && password.touched">
+      <label class="ms-auth-field__label" for="login-password">
+        {{ 'labels.inputs.Password' | translate }}<span class="ms-auth-field__required" aria-hidden="true">*</span>
+      </label>
+      <div class="ms-auth-field__control">
+        <mifosx-m3-icon class="ms-auth-field__icon" name="lock" [size]="20"></mifosx-m3-icon>
         <input
-          matInput
+          id="login-password"
+          class="ms-auth-field__input"
           [type]="passwordInputType"
           autocomplete="current-password"
           formControlName="password"
+          required
           [placeholder]="'labels.placeholders.Enter your password' | translate"
-          (keyup.enter)="onEnter($event)"
+          [attr.aria-invalid]="password.invalid && password.touched"
+          aria-describedby="login-password-error"
         />
-        <mifosx-m3-icon matIconPrefix name="lock"></mifosx-m3-icon>
-        @if (loginForm.controls.password.value && !loading) {
-          <button
-            type="button"
-            matSuffix
-            mat-icon-button
-            (click)="togglePasswordVisibility()"
-            [attr.aria-label]="passwordInputType === 'password' ? 'Show password' : 'Hide password'"
-          >
-            @if (passwordInputType === 'password') {
-              <mifosx-m3-icon name="visibility"></mifosx-m3-icon>
-            } @else {
-              <mifosx-m3-icon name="visibility_off"></mifosx-m3-icon>
-            }
-          </button>
-        }
-        @if (loginForm.controls.password.hasError('required')) {
-          <mat-error>
+        <button
+          type="button"
+          class="ms-auth-field__action"
+          (click)="togglePasswordVisibility()"
+          [disabled]="loading"
+          [attr.aria-label]="passwordInputType === 'password' ? 'Show password' : 'Hide password'"
+          [attr.aria-pressed]="passwordInputType === 'text'"
+        >
+          <mifosx-m3-icon [name]="passwordInputType === 'password' ? 'visibility' : 'visibility_off'" [size]="20">
+          </mifosx-m3-icon>
+        </button>
+      </div>
+      @if (password.touched) {
+        @if (password.hasError('required')) {
+          <span class="ms-auth-field__error" id="login-password-error" role="alert">
+            {{ 'labels.inputs.Password' | translate }} {{ 'labels.commons.is required' | translate }}
+          </span>
+        } @else if (password.hasError('minlength')) {
+          <span class="ms-auth-field__error" id="login-password-error" role="alert">
             {{ 'labels.inputs.Password' | translate }}
-            <strong>
-              {{ 'labels.commons.pass is required' | translate: { min: minPasswordLength } }}
-            </strong>
-          </mat-error>
-        } @else if (loginForm.controls.password.hasError('minlength')) {
-          <mat-error>
-            {{
-              'Password is required'
-                | translate
-                  : {
-                      min: loginForm.controls.password.errors?.minlength?.requiredLength
-                    }
-            }}
-          </mat-error>
+            {{ 'labels.commons.pass is required' | translate: { min: password.errors?.minlength?.requiredLength } }}
+          </span>
         }
-      </mat-form-field>
-
-      <!-- Loading Progress -->
-      @if (loading) {
-        <mat-progress-bar mode="indeterminate" class="login-progress"></mat-progress-bar>
       }
+    </div>
 
-      <!-- Submit Button -->
-      <mifosx-m3-button
-        variant="filled"
-        type="submit"
-        class="login-submit-button"
-        [disabled]="!loginForm.valid || loading"
-        [fullWidth]="true"
-        [label]="(loading ? 'labels.buttons.Signing in...' : 'labels.buttons.Login') | translate"
-      >
-        @if (loading) {
-          <mat-spinner [diameter]="20" class="button-spinner"></mat-spinner>
-        }
-      </mifosx-m3-button>
-    </form>
-  </div>
+    @if (loading) {
+      <mat-progress-bar mode="indeterminate" class="login-progress"></mat-progress-bar>
+    }
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="login-submit-button"
+      [disabled]="!loginForm.valid || loading"
+    >
+      {{ (loading ? 'labels.buttons.Signing in...' : 'labels.buttons.Login') | translate }}
+      @if (loading) {
+        <mat-spinner [diameter]="18" class="button-spinner"></mat-spinner>
+      }
+    </button>
+  </form>
 }
 
 <!-- OAuth/OIDC: Simple login button (no credentials needed) -->
 @if (oauthEnabled) {
   <div class="layout-column">
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
-      class="login-button-first flex-align-center"
+      class="login-submit-button login-button-first flex-align-center"
       (click)="loginOAuth()"
       [disabled]="loading"
     >
       {{ 'labels.buttons.Login' | translate }}
       @if (loading) {
-        <mat-spinner [diameter]="20"></mat-spinner>
+        <mat-spinner [diameter]="18" class="button-spinner"></mat-spinner>
       }
     </button>
   </div>

@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="breach-container">
+<div class="breach-container ms-panel">
   <!-- While breach evaluation is disabled no evaluation (KPIs, timeline or
        periods) is rendered, per the WEB-657 agreement. -->
   @if (breachEvaluationDisabled) {
@@ -17,48 +17,44 @@
   } @else {
     <div class="kpi-strip">
       <div class="kpi">
-        <span class="kpi-label">{{ 'labels.heading.Breach Periods' | translate }}</span>
-        <span class="kpi-value">{{ kpis.count }}</span>
+        <span class="ms-label kpi-label">{{ 'labels.heading.Breach Periods' | translate }}</span>
+        <span class="kpi-value ms-num">{{ kpis.count }}</span>
       </div>
       <div class="kpi">
-        <span class="kpi-label">{{ 'labels.heading.Total Days in Breach' | translate }}</span>
-        <span class="kpi-value">{{ kpis.totalDays }}</span>
+        <span class="ms-label kpi-label">{{ 'labels.heading.Total Days in Breach' | translate }}</span>
+        <span class="kpi-value ms-num">{{ kpis.totalDays }}</span>
       </div>
       <div class="kpi">
-        <span class="kpi-label">{{ 'labels.heading.Peak Outstanding' | translate }}</span>
-        <span class="kpi-value peak">{{ kpis.peakOutstanding | formatNumber }}</span>
+        <span class="ms-label kpi-label">{{ 'labels.heading.Peak Outstanding' | translate }}</span>
+        <span class="kpi-value ms-num peak">{{ kpis.peakOutstanding | formatNumber }}</span>
       </div>
       <div class="kpi">
-        <span class="kpi-label">{{ 'labels.heading.Past Due Amount' | translate }}</span>
-        <span class="kpi-value peak">{{ loanBalances.breachPastDueAmount | formatNumber }}</span>
+        <span class="ms-label kpi-label">{{ 'labels.heading.Past Due Amount' | translate }}</span>
+        <span class="kpi-value ms-num peak">{{ loanBalances.breachPastDueAmount | formatNumber }}</span>
       </div>
       <div class="kpi">
-        <span class="kpi-label">{{ 'labels.heading.Average Gap' | translate }}</span>
-        <span class="kpi-value">{{ kpis.avgGapPercent | formatNumber: '' : '1' }}%</span>
+        <span class="ms-label kpi-label">{{ 'labels.heading.Average Gap' | translate }}</span>
+        <span class="kpi-value ms-num">{{ kpis.avgGapPercent | formatNumber: '' : '1' }}%</span>
       </div>
       <div class="kpi-status">
         @switch (kpis.status) {
           @case ('in-breach') {
-            <span class="status-chip in-breach">
-              <span class="dot"></span>
+            <span class="ms-badge ms-badge--danger">
               {{ 'labels.text.In Breach' | translate }}
             </span>
           }
           @case ('near-breach') {
-            <span class="status-chip near-breach">
-              <span class="dot"></span>
+            <span class="ms-badge ms-badge--warning">
               {{ 'labels.text.Near Breach' | translate }}
             </span>
           }
           @case ('resolved') {
-            <span class="status-chip resolved">
-              <span class="dot"></span>
+            <span class="ms-badge ms-badge--success">
               {{ 'labels.text.Resolved' | translate }}
             </span>
           }
           @default {
-            <span class="status-chip compliant">
-              <span class="dot"></span>
+            <span class="ms-badge ms-badge--success">
               {{ 'labels.text.Compliant' | translate }}
             </span>
           }
@@ -69,7 +65,9 @@
     @if (breachPeriods.length > 0) {
       <div class="timeline-section">
         <div class="section-header">
-          <span class="section-title">{{ 'labels.text.Breach Timeline' | translate }} · {{ timelineYearLabel }}</span>
+          <span class="ms-section-title"
+            >{{ 'labels.text.Breach Timeline' | translate }} · {{ timelineYearLabel }}</span
+          >
           <div class="legend">
             <span class="legend-item">
               <span class="legend-swatch mild"></span>
@@ -163,23 +161,24 @@
         <div class="toolbar-actions" *mifosxHasPermission="'CREATE_WC_BREACH_RESET'">
           <span [matTooltip]="undoDisabledTooltip" [matTooltipDisabled]="hasActiveReset()">
             <button
+              mat-stroked-button
               type="button"
-              class="btn btn-ghost"
               (click)="openUndoResetDialog()"
               [disabled]="actionInFlight() || !hasActiveReset()"
             >
-              <fa-icon icon="undo"></fa-icon>
+              <fa-icon icon="undo" class="m-r-5"></fa-icon>
               {{ 'labels.buttons.Undo Reset' | translate }}
             </button>
           </span>
           <span [matTooltip]="resetDisabledTooltip" [matTooltipDisabled]="!currentPeriodAlreadyReset">
             <button
+              mat-flat-button
+              color="primary"
               type="button"
-              class="btn btn-primary"
               (click)="openResetDialog()"
               [disabled]="actionInFlight() || currentPeriodAlreadyReset"
             >
-              <fa-icon icon="calendar"></fa-icon>
+              <fa-icon icon="calendar" class="m-r-5"></fa-icon>
               {{ 'labels.buttons.Reset' | translate }}
             </button>
           </span>
@@ -196,12 +195,11 @@
           <ng-container matColumnDef="severity">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.text.Severity' | translate }}</th>
             <td mat-cell *matCellDef="let item">
-              <span class="severity-pill" [ngClass]="item.toneClass">
-                <span class="dot"></span>
+              <span class="ms-badge severity-pill" [ngClass]="item.toneClass">
                 {{ item.statusLabelKey | translate }}
               </span>
               @if (item.reset) {
-                <span class="reset-badge">
+                <span class="ms-badge ms-badge--info reset-badge">
                   <fa-icon icon="undo"></fa-icon>
                   {{ 'labels.inputs.Reset' | translate }}
                 </span>
@@ -221,14 +219,14 @@
 
           <ng-container matColumnDef="numberOfDays">
             <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Days' | translate }}</th>
-            <td mat-cell class="col-r" *matCellDef="let item">{{ item.numberOfDays | formatNumber }}</td>
+            <td mat-cell class="col-r ms-num" *matCellDef="let item">{{ item.numberOfDays | formatNumber }}</td>
           </ng-container>
 
           <ng-container matColumnDef="minPaymentAmount">
             <th mat-header-cell class="col-r" *matHeaderCellDef>
               {{ 'labels.inputs.Minimum Payment' | translate }}
             </th>
-            <td mat-cell class="col-r" *matCellDef="let item">
+            <td mat-cell class="col-r ms-num" *matCellDef="let item">
               {{ item.minPaymentAmount | formatNumber }}
             </td>
           </ng-container>
@@ -237,7 +235,7 @@
             <th mat-header-cell class="col-r" *matHeaderCellDef>
               {{ 'labels.inputs.Outstanding Amount' | translate }}
             </th>
-            <td mat-cell class="col-r" *matCellDef="let item">
+            <td mat-cell class="col-r ms-num" *matCellDef="let item">
               {{ item.outstandingAmount | formatNumber }}
             </td>
           </ng-container>
@@ -265,7 +263,7 @@
 
     <div class="history-section">
       <div class="section-header">
-        <span class="section-title">{{ 'labels.heading.Reset History' | translate }}</span>
+        <h3 class="ms-section-title">{{ 'labels.heading.Reset History' | translate }}</h3>
       </div>
 
       @if (resetHistory().length > 0) {
@@ -299,8 +297,7 @@
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Status' | translate }}</th>
               <td mat-cell *matCellDef="let row">
                 @if (row.action === 'RESET') {
-                  <span class="status-pill" [ngClass]="row.undone ? 'status-pill--undone' : 'status-pill--active'">
-                    <span class="dot"></span>
+                  <span class="ms-badge" [class.ms-badge--success]="!row.undone">
                     {{ (row.undone ? 'labels.inputs.Undone' : 'labels.inputs.Active') | translate }}
                   </span>
                 } @else {
@@ -314,7 +311,7 @@
           </table>
         </div>
       } @else {
-        <p class="empty-history">{{ 'labels.text.No resets have been recorded for this loan' | translate }}</p>
+        <p class="ms-empty">{{ 'labels.text.No resets have been recorded for this loan' | translate }}</p>
       }
     </div>
   }

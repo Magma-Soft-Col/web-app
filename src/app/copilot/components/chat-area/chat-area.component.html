@@ -43,7 +43,7 @@
         [class.msg__avatar--thinking]="phaseFor(msg) === 'thinking'"
         [class.msg__avatar--streaming]="phaseFor(msg) === 'streaming'"
       >
-        <img src="assets/images/MifosX_logo.png" [alt]="'copilot.assistantAvatarAlt' | translate" />
+        <img src="assets/images/magma/logo-icon.png" [alt]="'copilot.assistantAvatarAlt' | translate" />
       </div>
       <div class="msg__content">
         <div class="msg__bubble" *ngIf="msg.content?.trim() || msg.role === 'user'">
@@ -132,7 +132,7 @@
     [attr.aria-label]="'copilot.confirm.pendingAnnouncement' | translate"
   >
     <div class="msg__avatar">
-      <img src="assets/images/MifosX_logo.png" [alt]="'copilot.assistantAvatarAlt' | translate" />
+      <img src="assets/images/magma/logo-icon.png" [alt]="'copilot.assistantAvatarAlt' | translate" />
     </div>
     <div class="msg__content">
       <div class="cards">

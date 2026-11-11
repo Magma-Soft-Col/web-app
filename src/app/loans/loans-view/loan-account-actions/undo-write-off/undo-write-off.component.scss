@@ -6,35 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
-}
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
 
-.mat-card {
-  padding: 20px;
-}
+@include shared.action-form;
 
-.layout-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.mat-card-actions {
-  padding-top: 20px;
-}
-
-.gap-5px {
-  gap: 5px;
-}
-
-.responsive-column {
-  @media (width <= 768px) {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-.m-b-20 {
-  margin-bottom: 20px;
+.loan-form__intro {
+  margin: 0 0 var(--ms-space-4);
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-secondary);
 }

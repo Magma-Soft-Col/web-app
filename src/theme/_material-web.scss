@@ -62,7 +62,7 @@ md-filled-tonal-button {
   --md-filled-tonal-button-trailing-space: 24px;
 
   // Apply theme colors using Material Design tokens
-  --md-sys-color-primary: #1074b9;
+  --md-sys-color-primary: #315e9e;
   --md-sys-color-on-primary: #fff;
   --md-sys-color-surface-container-highest: #e1e2ec;
   --md-sys-color-on-surface: #303135;
@@ -70,7 +70,7 @@ md-filled-tonal-button {
 
   // ========== FILLED BUTTON ==========
   // Normal state
-  --md-filled-button-container-color: #1074b9;
+  --md-filled-button-container-color: #315e9e;
   --md-filled-button-label-text-color: #fff;
 
   // Hover state
@@ -93,20 +93,20 @@ md-filled-tonal-button {
 
   // ========== OUTLINED BUTTON ==========
   // Normal state
-  --md-outlined-button-outline-color: #1074b9;
-  --md-outlined-button-label-text-color: #1074b9;
+  --md-outlined-button-outline-color: #315e9e;
+  --md-outlined-button-label-text-color: #315e9e;
   --md-outlined-button-outline-width: 1px;
 
   // Hover state
-  --md-outlined-button-hover-state-layer-color: #1074b9;
+  --md-outlined-button-hover-state-layer-color: #315e9e;
   --md-outlined-button-hover-state-layer-opacity: 8%;
 
   // Focus state
-  --md-outlined-button-focus-state-layer-color: #1074b9;
+  --md-outlined-button-focus-state-layer-color: #315e9e;
   --md-outlined-button-focus-state-layer-opacity: 12%;
 
   // Pressed state
-  --md-outlined-button-pressed-state-layer-color: #1074b9;
+  --md-outlined-button-pressed-state-layer-color: #315e9e;
   --md-outlined-button-pressed-state-layer-opacity: 12%;
 
   // Disabled state
@@ -118,21 +118,21 @@ md-filled-tonal-button {
   // ========== ELEVATED BUTTON ==========
   // Normal state
   --md-elevated-button-container-color: #f5f5f5;
-  --md-elevated-button-label-text-color: #1074b9;
+  --md-elevated-button-label-text-color: #315e9e;
   --md-elevated-button-container-elevation: 1;
 
   // Hover state
-  --md-elevated-button-hover-state-layer-color: #1074b9;
+  --md-elevated-button-hover-state-layer-color: #315e9e;
   --md-elevated-button-hover-state-layer-opacity: 8%;
   --md-elevated-button-hover-container-elevation: 2;
 
   // Focus state
-  --md-elevated-button-focus-state-layer-color: #1074b9;
+  --md-elevated-button-focus-state-layer-color: #315e9e;
   --md-elevated-button-focus-state-layer-opacity: 12%;
   --md-elevated-button-focus-container-elevation: 1;
 
   // Pressed state
-  --md-elevated-button-pressed-state-layer-color: #1074b9;
+  --md-elevated-button-pressed-state-layer-color: #315e9e;
   --md-elevated-button-pressed-state-layer-opacity: 12%;
   --md-elevated-button-pressed-container-elevation: 1;
 
@@ -145,18 +145,18 @@ md-filled-tonal-button {
 
   // ========== TEXT BUTTON ==========
   // Normal state
-  --md-text-button-label-text-color: #1074b9;
+  --md-text-button-label-text-color: #315e9e;
 
   // Hover state
-  --md-text-button-hover-state-layer-color: #1074b9;
+  --md-text-button-hover-state-layer-color: #315e9e;
   --md-text-button-hover-state-layer-opacity: 8%;
 
   // Focus state
-  --md-text-button-focus-state-layer-color: #1074b9;
+  --md-text-button-focus-state-layer-color: #315e9e;
   --md-text-button-focus-state-layer-opacity: 12%;
 
   // Pressed state
-  --md-text-button-pressed-state-layer-color: #1074b9;
+  --md-text-button-pressed-state-layer-color: #315e9e;
   --md-text-button-pressed-state-layer-opacity: 12%;
 
   // Disabled state

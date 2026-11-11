@@ -6,42 +6,32 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_FUND'">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.name' | translate }}
-        </div>
+  <div class="ms-page">
+    <div class="ms-actions page-actions">
+      <button type="button" mat-stroked-button [routerLink]="['../']">
+        {{ 'labels.buttons.Back' | translate }}
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_FUND'">
+        <fa-icon icon="edit" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
 
-        <div class="flex-50">
-          {{ fundData.name }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.External Id' | translate }}
-        </div>
-
-        <div class="flex-50">
+    <section class="ms-panel ms-panel--padded">
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.name' | translate }}</span>
+        <span class="ms-value">{{ fundData.name }}</span>
+      </div>
+      <div class="ms-detail-row">
+        <span class="ms-label">{{ 'labels.inputs.External Id' | translate }}</span>
+        <span class="ms-value">
           <mifosx-external-identifier
             externalId="{{ fundData.externalId }}"
             completed="true"
           ></mifosx-external-identifier>
-        </div>
+        </span>
       </div>
-
-      <div class="layout-row layout-align-center gap-2percent column-on-mobile">
-        <button type="button" mat-raised-button color="primary" [routerLink]="['../']">
-          {{ 'labels.buttons.Back' | translate }}
-        </button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+    </section>
+  </div>
 </div>

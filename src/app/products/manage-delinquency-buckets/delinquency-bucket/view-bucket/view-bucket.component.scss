@@ -6,25 +6,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+.detail-row {
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  align-items: baseline;
+  gap: var(--ms-space-4);
+  overflow-wrap: anywhere;
 
-  .content {
-    div {
-      margin: 0.8rem 0;
-      overflow-wrap: break-word;
-    }
+  &:last-child {
+    border-bottom: 0;
   }
 }
 
-.bucket-range {
-  height: 2rem;
-  vertical-align: middle;
-}
-
-.r-value {
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: right !important;
-  padding-right: 35px !important;
+.bucket-range__name {
+  font-weight: 500;
 }

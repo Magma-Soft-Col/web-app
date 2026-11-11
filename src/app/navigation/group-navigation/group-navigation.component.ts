@@ -20,7 +20,6 @@ import {
   MatCardContent
 } from '@angular/material/card';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { StatusLookupPipe } from '../../pipes/status-lookup.pipe';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
@@ -36,7 +35,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     FaIconComponent,
     MatCardTitleGroup,
     MatCardTitle,
-    MatTooltip,
     MatCardSubtitle,
     MatTabGroup,
     MatTab,

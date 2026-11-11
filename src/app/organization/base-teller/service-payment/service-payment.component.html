@@ -9,8 +9,6 @@
 <div class="container service-payment">
   <mat-card class="workflow-card">
     <mat-card-content>
-      <h2>{{ 'labels.heading.Bill and Service Payment' | translate }}</h2>
-
       @if (errorMessage) {
         <div class="message error-message" role="alert">{{ errorMessage | translate }}</div>
       }
@@ -22,7 +20,7 @@
           <div class="message empty-state" role="status">
             {{ 'servicePayment.text.noServices' | translate }}
           </div>
-          <button type="button" mat-raised-button color="primary" (click)="loadConfiguration()">
+          <button type="button" mat-flat-button color="primary" (click)="loadConfiguration()">
             {{ 'labels.buttons.Retry' | translate }}
           </button>
         } @else {
@@ -56,7 +54,7 @@
                     </mat-form-field>
                     <button
                       type="button"
-                      mat-raised-button
+                      mat-flat-button
                       color="primary"
                       (click)="searchClients()"
                       [disabled]="!detailsForm.controls.clientSearch.value.trim() || isSearchingClients"
@@ -135,7 +133,7 @@
                 <div class="layout-row align-center gap-2percent responsive-column step-actions">
                   <button
                     type="button"
-                    mat-raised-button
+                    mat-flat-button
                     color="primary"
                     (click)="requestQuote()"
                     [disabled]="detailsForm.invalid || !payerIsValid || isQuoting"
@@ -146,7 +144,7 @@
                       {{ 'servicePayment.buttons.calculate' | translate }}
                     }
                   </button>
-                  <button type="button" mat-raised-button matStepperNext [disabled]="!quote">
+                  <button type="button" mat-stroked-button matStepperNext [disabled]="!quote">
                     {{ 'labels.buttons.Next' | translate }}<fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                   </button>
                 </div>
@@ -199,7 +197,7 @@
                   </div>
                 } @else {
                   <section class="cash-panel">
-                    <h3>{{ 'labels.inputs.Denominations' | translate }}</h3>
+                    <h3 class="ms-subsection-title">{{ 'labels.inputs.Denominations' | translate }}</h3>
                     <div formArrayName="denominations" class="layout-column gap-20px">
                       @for (
                         denomination of denominations.controls;
@@ -249,12 +247,12 @@
                 }
 
                 <div class="layout-row align-center gap-2percent responsive-column step-actions">
-                  <button type="button" mat-raised-button matStepperPrevious>
+                  <button type="button" mat-stroked-button matStepperPrevious>
                     <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ 'labels.buttons.Back' | translate }}
                   </button>
                   <button
                     type="button"
-                    mat-raised-button
+                    mat-stroked-button
                     matStepperNext
                     [disabled]="cashForm.invalid || !denominations.length || !cashIsSufficient"
                   >
@@ -309,7 +307,7 @@
                     ><strong>{{ quote.businessDate }}</strong>
                   </div>
                 </section>
-                <h4>{{ 'labels.inputs.Denominations' | translate }}</h4>
+                <h4 class="ms-subsection-title">{{ 'labels.inputs.Denominations' | translate }}</h4>
                 <div class="receipt-denominations">
                   @for (denomination of denominations.controls; track denomination.controls.denominationId.value) {
                     @if ((denomination.controls.quantity.value ?? 0) > 0) {
@@ -322,12 +320,12 @@
                 </div>
               }
               <div class="layout-row align-center gap-2percent responsive-column step-actions">
-                <button type="button" mat-raised-button matStepperPrevious [disabled]="isSubmitting">
+                <button type="button" mat-stroked-button matStepperPrevious [disabled]="isSubmitting">
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ 'labels.buttons.Back' | translate }}
                 </button>
                 <button
                   type="button"
-                  mat-raised-button
+                  mat-flat-button
                   color="primary"
                   (click)="finalizePayment()"
                   [disabled]="isSubmitting || !canCreate || !cashIsSufficient"
@@ -351,7 +349,7 @@
               <ng-template matStepLabel>{{ 'labels.heading.Receipt' | translate }}</ng-template>
               @if (receipt) {
                 <section class="receipt">
-                  <h3>{{ 'servicePayment.text.success' | translate }}</h3>
+                  <h3 class="ms-subsection-title">{{ 'servicePayment.text.success' | translate }}</h3>
                   <section class="summary-grid">
                     <div>
                       <span>{{ 'labels.inputs.Transaction ID' | translate }}</span
@@ -422,7 +420,7 @@
                       ><strong>{{ receipt.officeName }}</strong>
                     </div>
                   </section>
-                  <h4>{{ 'labels.inputs.Denominations' | translate }}</h4>
+                  <h4 class="ms-subsection-title">{{ 'labels.inputs.Denominations' | translate }}</h4>
                   <div class="receipt-denominations">
                     @for (denomination of receipt.denominations; track denomination.denominationId) {
                       <span>{{ denomination.value }} × {{ denomination.quantity }}</span>
@@ -430,13 +428,13 @@
                   </div>
                 </section>
                 <div class="layout-row align-center gap-2percent responsive-column step-actions">
-                  <button type="button" mat-raised-button color="primary" (click)="printReceipt()">
+                  <button type="button" mat-flat-button color="primary" (click)="printReceipt()">
                     {{ 'servicePayment.buttons.printReceipt' | translate }}
                   </button>
-                  <button type="button" mat-raised-button (click)="reprintReceipt()" [disabled]="isReprinting">
+                  <button type="button" mat-stroked-button (click)="reprintReceipt()" [disabled]="isReprinting">
                     {{ 'servicePayment.buttons.reprintReceipt' | translate }}
                   </button>
-                  <button type="button" mat-raised-button (click)="newPayment()">
+                  <button type="button" mat-stroked-button (click)="newPayment()">
                     {{ 'servicePayment.buttons.newPayment' | translate }}
                   </button>
                 </div>

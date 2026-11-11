@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="transactions-container">
+<div class="transactions ms-panel">
   @if (checkStatus()) {
     <div class="toolbar">
       <div class="toggle-group">
@@ -17,15 +17,15 @@
           {{ 'labels.inputs.Hide Accruals' | translate }}
         </mat-slide-toggle>
       </div>
-      <button type="button" class="btn-export" [routerLink]="['export']">
-        <fa-icon icon="download" class="m-r-10"></fa-icon>
+      <button type="button" mat-stroked-button [routerLink]="['export']">
+        <fa-icon icon="download" class="m-r-5"></fa-icon>
         <span>{{ 'labels.buttons.Export' | translate }}</span>
       </button>
     </div>
   }
 
-  <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" matSort>
+  <div class="ms-table-wrap">
+    <table mat-table [dataSource]="dataSource" matSort class="transactions__table">
       <!-- ── Group header columns ──────────────────────────── -->
       <ng-container matColumnDef="group-row">
         <th mat-header-cell *matHeaderCellDef class="group-cell"></th>
@@ -108,7 +108,7 @@
           {{ 'labels.inputs.Amount' | translate }}
         </th>
         <td mat-cell *matCellDef="let transaction" class="col-r breakdown-cell breakdown-start">
-          <span class="mono">
+          <span class="ms-num">
             @if (loanProductService.isLoanProduct) {
               {{ transaction.amount | formatNumber }}
             }
@@ -125,7 +125,7 @@
           {{ 'labels.inputs.Principal' | translate }}
         </th>
         <td mat-cell *matCellDef="let transaction" class="col-r breakdown-cell">
-          <span class="mono">{{ transaction.principalPortion | formatNumber }}</span>
+          <span class="ms-num">{{ transaction.principalPortion | formatNumber }}</span>
         </td>
       </ng-container>
 
@@ -136,7 +136,7 @@
             {{ 'labels.inputs.Interest' | translate }}
           </th>
           <td mat-cell *matCellDef="let transaction" class="col-r breakdown-cell">
-            <span class="mono">{{ transaction.interestPortion | formatNumber }}</span>
+            <span class="ms-num">{{ transaction.interestPortion | formatNumber }}</span>
           </td>
         </ng-container>
       }
@@ -147,7 +147,7 @@
           {{ 'labels.inputs.Fees' | translate }}
         </th>
         <td mat-cell *matCellDef="let transaction" class="col-r breakdown-cell">
-          <span class="mono">{{ transaction.feeChargesPortion | formatNumber }}</span>
+          <span class="ms-num">{{ transaction.feeChargesPortion | formatNumber }}</span>
         </td>
       </ng-container>
 
@@ -157,7 +157,7 @@
           {{ 'labels.inputs.Penalties' | translate }}
         </th>
         <td mat-cell *matCellDef="let transaction" class="col-r breakdown-cell breakdown-end">
-          <span class="mono">{{ transaction.penaltyChargesPortion | formatNumber }}</span>
+          <span class="ms-num">{{ transaction.penaltyChargesPortion | formatNumber }}</span>
         </td>
       </ng-container>
 
@@ -168,7 +168,7 @@
             {{ 'labels.inputs.Loan Balance' | translate }}
           </th>
           <td mat-cell *matCellDef="let transaction" class="col-r">
-            <span class="mono amt-balance">{{ transaction.outstandingLoanBalance | formatNumber }}</span>
+            <span class="ms-num amt-balance">{{ transaction.outstandingLoanBalance | formatNumber }}</span>
           </td>
         </ng-container>
       }
@@ -179,7 +179,12 @@
         <td mat-cell *matCellDef="let transaction" class="col-c no-strike" (click)="$event.stopPropagation()">
           @if (displaySubMenu(transaction)) {
             <div class="act-group">
-              <button type="button" class="act-btn" [matMenuTriggerFor]="transactionMenu">
+              <button
+                type="button"
+                mat-icon-button
+                [matMenuTriggerFor]="transactionMenu"
+                [attr.aria-label]="'labels.inputs.Actions' | translate"
+              >
                 <mat-icon>more_vert</mat-icon>
               </button>
             </div>

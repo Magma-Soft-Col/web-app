@@ -15,6 +15,8 @@ import {
   faArrowDown,
   faArrowUp,
   faBell,
+  faChevronDown,
+  faChevronRight,
   faCloud,
   faCommentAlt,
   faEnvelope,
@@ -50,7 +52,17 @@ describe('ExternalServicesComponent', () => {
       ]
     }).compileComponents();
 
-    TestBed.inject(FaIconLibrary).addIcons(faArrowDown, faArrowUp, faBell, faCloud, faCommentAlt, faEnvelope, faKey);
+    TestBed.inject(FaIconLibrary).addIcons(
+      faArrowDown,
+      faArrowUp,
+      faBell,
+      faChevronDown,
+      faChevronRight,
+      faCloud,
+      faCommentAlt,
+      faEnvelope,
+      faKey
+    );
 
     fixture = TestBed.createComponent(ExternalServicesComponent);
     component = fixture.componentInstance;

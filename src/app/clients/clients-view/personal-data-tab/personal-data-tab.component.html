@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
+<div class="tab-container">
   @if (productionMode && isPerson()) {
     <mifosx-person-production-personal-data
       [clientViewData]="clientViewData"
@@ -29,11 +29,17 @@
     <!-- Action Buttons Header (only shown when KYC is enabled via global configuration) -->
     @if (isKycEnabled) {
       <div class="button-header">
-        <button mat-raised-button class="export-kyc-button" (click)="exportKYC()">
+        <button mat-stroked-button type="button" class="export-kyc-button" (click)="exportKYC()">
           <mat-icon>download</mat-icon>
           {{ 'labels.buttons.Export KYC' | translate }}
         </button>
-        <button mat-raised-button color="primary" class="validate-docs-button" (click)="validateDocumentation()">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          class="validate-docs-button"
+          (click)="validateDocumentation()"
+        >
           <mat-icon>fact_check</mat-icon>
           {{ 'labels.buttons.Validate Documentation' | translate }}
         </button>
@@ -58,8 +64,8 @@
     }
 
     <!-- Personal Information Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Personal Information' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Personal Information' | translate }}</h3>
       <div class="data-grid">
         <!-- Display Name (common for both person and entity) -->
         @if (clientViewData.displayName) {
@@ -130,8 +136,8 @@
     </div>
 
     <!-- Account Information Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Account Information' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Account Information' | translate }}</h3>
       <div class="data-grid">
         <div class="data-item">
           <span class="label">{{ 'labels.inputs.Account No' | translate }}</span>
@@ -160,8 +166,8 @@
 
     <!-- Non-Person Details Section (for Legal Entities) -->
     @if (isLegalEntity() && clientViewData.clientNonPersonDetails) {
-      <div class="section">
-        <h3>{{ 'labels.heading.Entity Details' | translate }}</h3>
+      <div class="ms-panel ms-panel--padded section">
+        <h3 class="ms-section-title">{{ 'labels.heading.Entity Details' | translate }}</h3>
         <div class="data-grid">
           @if (clientViewData.clientNonPersonDetails.constitution) {
             <div class="data-item">
@@ -198,8 +204,8 @@
     }
 
     <!-- Contact Information Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Contact Information' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Contact Information' | translate }}</h3>
       <div class="data-grid">
         <div class="data-item">
           <span class="label">{{ 'labels.inputs.Mobile Number' | translate }}</span>
@@ -213,8 +219,8 @@
     </div>
 
     <!-- Classification Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Classification' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Classification' | translate }}</h3>
       <div class="data-grid">
         @if (clientViewData.clientType) {
           <div class="data-item">
@@ -238,8 +244,8 @@
 
     <!-- Group Membership Section -->
     @if (clientViewData.groups && clientViewData.groups.length > 0) {
-      <div class="section">
-        <h3>{{ 'labels.heading.Group Membership' | translate }}</h3>
+      <div class="ms-panel ms-panel--padded section">
+        <h3 class="ms-section-title">{{ 'labels.heading.Group Membership' | translate }}</h3>
         <div class="data-grid">
           @for (group of clientViewData.groups; track group) {
             <div class="data-item">
@@ -252,8 +258,8 @@
     }
 
     <!-- Important Dates Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Important Dates' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Important Dates' | translate }}</h3>
       <div class="data-grid">
         @if (clientViewData.timeline?.submittedOnDate) {
           <div class="data-item">
@@ -277,8 +283,8 @@
     </div>
 
     <!-- Status Section -->
-    <div class="section">
-      <h3>{{ 'labels.heading.Status' | translate }}</h3>
+    <div class="ms-panel ms-panel--padded section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Status' | translate }}</h3>
       <div class="data-grid">
         @if (clientViewData.status) {
           <div class="data-item">

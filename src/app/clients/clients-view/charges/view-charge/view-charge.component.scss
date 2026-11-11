@@ -6,26 +6,56 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.del-btn {
-  width: 20px !important;
-  height: 25px;
-  min-width: 20px !important;
-  line-height: 0px;
-  padding-left: 10px;
-  padding-right: 25px;
+/* Charge detail (pen detail pattern): actions, summary panel and transactions table. */
+.charge {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
 }
 
+.charge__title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+}
+
+.charge__grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--ms-space-4) var(--ms-space-6);
+  margin: 0;
+}
+
+.charge__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.charge__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
+
+.charge__table {
+  width: 100%;
+}
+
+.charge__right {
+  text-align: right;
+}
+
+/* Reversed transactions stay visible but read as void. */
 .strikeoff {
-  color: red !important;
+  color: var(--ms-color-danger);
   text-decoration: line-through;
   text-decoration-style: double;
-}
-
-.share-account-tables {
-  display: flex;
-  justify-content: space-between;
-}
-
-.content {
-  padding-top: 10px;
 }

@@ -7,11 +7,11 @@
 -->
 
 <form [formGroup]="datatableForm">
-  <div class="layout-row-wrap gap-2px responsive-column">
+  <div class="loan-form__grid">
     @for (datatableInput of datatableInputs; track datatableInput) {
-      <div class="flex-48">
+      <div [class.loan-form__full]="isJson(datatableInput)">
         @if (!isBoolean(datatableInput.columnDisplayType)) {
-          <mat-form-field class="flex-100">
+          <mat-form-field class="datatable-step__field">
             <mat-label>{{ getInputName(datatableInput) }}</mat-label>
             @if (isDropdown(datatableInput.columnDisplayType)) {
               <mat-select formControlName="{{ datatableInput.controlName }}">
@@ -58,7 +58,11 @@
           </mat-form-field>
         }
         @if (isBoolean(datatableInput.columnDisplayType)) {
-          <mat-checkbox formControlName="{{ datatableInput.controlName }}" labelPosition="before" class="margin-v">
+          <mat-checkbox
+            formControlName="{{ datatableInput.controlName }}"
+            labelPosition="before"
+            class="datatable-step__checkbox"
+          >
             {{ getInputName(datatableInput) }}
           </mat-checkbox>
         }
@@ -66,12 +70,12 @@
     }
   </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column stepper-buttons">
-    <button mat-raised-button matStepperPrevious disabled>
+  <div class="loan-form__actions">
+    <button mat-stroked-button matStepperPrevious disabled>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext>
+    <button mat-flat-button color="primary" matStepperNext>
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

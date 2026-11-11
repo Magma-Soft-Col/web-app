@@ -7,7 +7,7 @@
 -->
 
 @if (isRequired) {
-  <mat-form-field appearance="fill" class="flex-100 input-container" floatLabel="always">
+  <mat-form-field class="flex-100 input-container" floatLabel="always">
     <mat-label>{{ 'labels.inputs.' + inputLabel | translate }}</mat-label>
     <input
       [formControl]="inputFormControl"
@@ -44,7 +44,7 @@
   </mat-form-field>
 }
 @if (!isRequired) {
-  <mat-form-field appearance="fill" class="flex-100 input-container" floatLabel="always">
+  <mat-form-field class="flex-100 input-container" floatLabel="always">
     <mat-label>{{ 'labels.inputs.' + inputLabel | translate }}</mat-label>
     <input
       [formControl]="inputFormControl"

@@ -24,9 +24,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-divider class="flex-98"></mat-divider>
-
-    <h3 class="mat-h3 flex-23">{{ 'labels.inputs.Lock-in Period' | translate }}</h3>
+    <h3 class="ms-section-title flex-23">{{ 'labels.inputs.Lock-in Period' | translate }}</h3>
 
     <mat-checkbox
       class="flex-73 margin-b"
@@ -78,8 +76,6 @@
         </mat-form-field>
       </div>
     }
-
-    <mat-divider class="flex-98"></mat-divider>
 
     <mat-checkbox
       class="flex-48 margin-v"
@@ -158,9 +154,7 @@
       </mat-form-field>
     }
 
-    <mat-divider class="flex-98"></mat-divider>
-
-    <h3 class="mat-h3 flex-23">{{ 'labels.inputs.Overdraft' | translate }}</h3>
+    <h3 class="ms-section-title flex-23">{{ 'labels.inputs.Overdraft' | translate }}</h3>
 
     <mat-checkbox
       class="flex-73 margin-b"
@@ -209,9 +203,7 @@
       </div>
     }
 
-    <mat-divider class="flex-98"></mat-divider>
-
-    <h3 class="mat-h3 flex-23">{{ 'labels.inputs.Dormancy Tracking' | translate }}</h3>
+    <h3 class="ms-section-title flex-23">{{ 'labels.inputs.Dormancy Tracking' | translate }}</h3>
 
     <mat-checkbox
       class="flex-73 margin-b"
@@ -277,12 +269,12 @@
     }
   </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious>
+  <div class="layout-row align-end gap-12px margin-t responsive-column">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext>
+    <button mat-flat-button color="primary" matStepperNext>
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

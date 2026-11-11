@@ -31,7 +31,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 
@@ -46,9 +47,7 @@ import { SettingsService } from 'app/settings/settings.service';
 import { ErrorHandlerService } from 'app/core/error-handler/error-handler.service';
 import { ImportLoanProductDialogComponent } from './import-loan-product-dialog/import-loan-product-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
-import { StatusLookupPipe } from '../../pipes/status-lookup.pipe';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { UntypedFormControl } from '@angular/forms';
@@ -71,16 +70,15 @@ import { environment } from '../../../environments/environment';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
     MatRow,
+    MatNoDataRow,
     MatPaginator,
     MatMenu,
     MatMenuTrigger,
     MatMenuItem,
-    StatusLookupPipe,
     DateFormatPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

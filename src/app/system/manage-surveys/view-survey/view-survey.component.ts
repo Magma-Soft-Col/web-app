@@ -14,8 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 /** Custom Services */
 import { SystemService } from 'app/system/system.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MatDivider } from '@angular/material/divider';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { TitleCasePipe } from '@angular/common';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -29,9 +28,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatCardHeader,
-    MatCardTitle,
-    MatDivider,
     TitleCasePipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

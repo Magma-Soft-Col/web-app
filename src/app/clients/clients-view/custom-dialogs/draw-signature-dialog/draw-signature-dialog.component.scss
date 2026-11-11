@@ -7,15 +7,16 @@
  */
 
 .signature-canvas-container {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 0 auto;
   width: 100%;
   max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
 }
 
 .signature-canvas {
+  display: block;
   width: 100%;
   height: 200px;
-  display: block;
 }

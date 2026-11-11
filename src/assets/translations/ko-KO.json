@@ -397,7 +397,7 @@
       "reason": "사유"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "다음 계정으로 로그인됨",
   "Remember me": "날 기억해",
   "errors": {
@@ -899,7 +899,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "임차인",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "서버",
       "Username": "사용자 이름",
@@ -5226,6 +5226,11 @@
       "Please select a delivery method": "배송방법을 선택해주세요",
       "Please select a screen report.": "화면 보고서를 선택하세요.",
       "Please update your password": "비밀번호를 업데이트하세요.",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "제공:",
       "Precedes of": "앞선",
       "Preferences for generating account numbers for client": "고객, 대출 및 저축 계좌에 대한 계좌 번호 생성에 대한 기본 설정",

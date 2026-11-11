@@ -41,7 +41,6 @@ import { ConfigurationWizardService } from '../../../configuration-wizard/config
 /** Custom Components */
 import { ConfigurationWizardComponent } from '../../../configuration-wizard/configuration-wizard.component';
 import { NotificationsTrayComponent } from 'app/shared/notifications-tray/notifications-tray.component';
-import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -50,9 +49,12 @@ import { SearchToolComponent } from '../../../shared/search-tool/search-tool.com
 import { LanguageSelectorComponent } from '../../../shared/language-selector/language-selector.component';
 import { MatIcon } from '@angular/material/icon';
 import { NotificationsTrayComponent as NotificationsTrayComponent_1 } from '../../../shared/notifications-tray/notifications-tray.component';
-import { ThemeToggleComponent } from '../../../shared/theme-toggle/theme-toggle.component';
+import { UiThemeService } from '../../../shared/ui-theme/ui-theme.service';
+import { KeyboardShortcutsDialogComponent } from 'app/shared/keyboard-shortcuts-dialog/keyboard-shortcuts-dialog.component';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { DocumentationLinksService } from 'app/shared/services/documentation-links.service';
+import { SettingsService } from 'app/settings/settings.service';
 
 /**
  * Toolbar component.
@@ -63,7 +65,6 @@ import { DocumentationLinksService } from 'app/shared/services/documentation-lin
   styleUrls: ['./toolbar.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatToolbar,
     MatIconButton,
     MatTooltip,
     FaIconComponent,
@@ -72,7 +73,7 @@ import { DocumentationLinksService } from 'app/shared/services/documentation-lin
     LanguageSelectorComponent,
     MatIcon,
     NotificationsTrayComponent_1,
-    ThemeToggleComponent,
+    BreadcrumbComponent,
     MatMenu,
     MatMenuItem
   ],
@@ -87,7 +88,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChec
   private dialog = inject(MatDialog);
   private changeDetector = inject(ChangeDetectorRef);
   private documentationLinks = inject(DocumentationLinksService);
+  private settingsService = inject(SettingsService);
   private destroyRef = inject(DestroyRef);
+
+  /** Predesigned palettes the user can pick from the profile menu. */
+  readonly uiThemes = inject(UiThemeService);
 
   /* Reference of institution */
   @ViewChild('institution') institution: ElementRef<any>;
@@ -137,7 +142,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChec
     .pipe(map((result) => result.matches));
 
   /** Sets the initial state of sidenav as collapsed. Not collapsed if false. */
-  sidenavCollapsed = true;
+  sidenavCollapsed = false;
+
+  /** Username of the authenticated user, shown in the profile control. */
+  username = '';
 
   /** Instance of sidenav. */
   @Input() sidenav: MatSidenav;
@@ -148,11 +156,24 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChec
    * Subscribes to breakpoint for handset.
    */
   ngOnInit() {
+    this.username = this.authenticationService.getCredentials()?.username ?? '';
     this.isHandset$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isHandset) => {
       if (isHandset && this.sidenavCollapsed) {
         this.toggleSidenavCollapse(false);
       }
     });
+  }
+
+  /** Tenant the user is signed in to. */
+  get tenantIdentifier(): string {
+    return this.settingsService.tenantIdentifier || 'default';
+  }
+
+  /** Up to two initials of the username for the avatar. */
+  get userInitials(): string {
+    const parts = this.username.split(/[\s._-]+/).filter(Boolean);
+    const initials = parts.length > 1 ? parts[0][0] + parts[1][0] : this.username.slice(0, 2);
+    return initials.toUpperCase() || '?';
   }
 
   ngAfterContentChecked(): void {
@@ -170,8 +191,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChec
    * Toggles the current collapsed state of sidenav.
    */
   toggleSidenavCollapse(sidenavCollapsed?: boolean) {
-    this.sidenavCollapsed = sidenavCollapsed || !this.sidenavCollapsed;
+    this.sidenavCollapsed = sidenavCollapsed ?? !this.sidenavCollapsed;
     this.collapse.emit(this.sidenavCollapsed);
+  }
+
+  /** Opens the keyboard shortcuts reference. */
+  showKeyboardShortcuts(): void {
+    this.dialog.open(KeyboardShortcutsDialogComponent);
   }
 
   /**
@@ -340,8 +366,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChec
       });
     }
 
+    // The sidenav tour points at labels, so the rail must be expanded for it.
     if (this.configurationWizardService.showSideNav || this.configurationWizardService.showSideNavChartofAccounts) {
-      this.toggleSidenavCollapse();
+      this.toggleSidenavCollapse(false);
     }
 
     if (this.configurationWizardService.showToolbarAdmin) {

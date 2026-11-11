@@ -6,20 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.card-heading {
-  font-size: 20px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 16px;
-}
-
-:host-context(.dark-theme) .pending-tasks-heading {
-  color: #fff;
-  text-shadow: 0 1px 4px rgb(0 0 0 / 70%);
-}
-
-mat-divider {
-  margin-bottom: 16px;
+.tasks-panel {
+  display: block;
+  padding-top: var(--ms-space-5);
 }
 
 :host ::ng-deep .navigation-tabs {

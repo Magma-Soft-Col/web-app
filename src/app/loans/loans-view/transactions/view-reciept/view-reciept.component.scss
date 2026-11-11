@@ -6,11 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 50rem;
+.receipt {
+  padding: var(--ms-space-5);
+}
 
-  .back-button {
-    max-height: 2%;
-    margin-bottom: 2%;
-  }
+.receipt__actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--ms-space-4);
 }

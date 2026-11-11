@@ -6,101 +6,99 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="content responsive-column">
-  <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Details' | translate }}</h3>
+<div class="preview">
+  <h3 class="ms-section-title preview__section">{{ 'labels.heading.Details' | translate }}</h3>
 
-  <div class="flex-fill">
-    <span class="flex-30">{{ 'labels.inputs.Client' | translate }}:</span>
-    <span class="flex-70">
+  <div class="preview__row">
+    <span class="ms-label preview__label">{{ 'labels.inputs.Client' | translate }}:</span>
+    <span class="ms-value preview__value">
       {{ loansAccountProductTemplate.clientName || loansAccountProductTemplate.client.displayName }}
     </span>
   </div>
 
-  <div class="flex-fill">
-    <span class="flex-30">{{ 'labels.inputs.Product Type' | translate }}:</span>
-    <span class="flex-70">
+  <div class="preview__row">
+    <span class="ms-label preview__label">{{ 'labels.inputs.Product Type' | translate }}:</span>
+    <span class="ms-value preview__value">
       {{ loanProductType() }}
     </span>
   </div>
 
-  <div class="flex-fill">
-    <span class="flex-30">{{ 'labels.inputs.Product' | translate }}:</span>
-    <span class="flex-70">
+  <div class="preview__row">
+    <span class="ms-label preview__label">{{ 'labels.inputs.Product' | translate }}:</span>
+    <span class="ms-value preview__value">
       <mifosx-long-text [chars]="70" [textValue]="loanProductName(loansAccount.productId)"></mifosx-long-text>
     </span>
   </div>
 
   @if (loanProductService.isLoanProduct && loansAccount.loanOfficerId) {
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Loan officer' | translate }}:</span>
-      <span class="flex-70">{{
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Loan officer' | translate }}:</span>
+      <span class="ms-value preview__value">{{
         loansAccount.loanOfficerId | find: loansAccountProductTemplate.loanOfficerOptions : 'id' : 'displayName'
       }}</span>
     </div>
   }
 
   @if (loanProductService.isLoanProduct && loansAccount.loanPurposeId) {
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.heading.Loan Purpose' | translate }}:</span>
-      <span class="flex-70">{{
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.heading.Loan Purpose' | translate }}:</span>
+      <span class="ms-value preview__value">{{
         loansAccount.loanPurposeId | find: loansAccountProductTemplate.loanPurposeOptions : 'id' : 'name'
       }}</span>
     </div>
   }
 
   @if (loansAccount.fundId) {
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Fund' | translate }}:</span>
-      <span class="flex-70">{{ fundName(loansAccount.fundId) }}</span>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Fund' | translate }}:</span>
+      <span class="ms-value preview__value">{{ fundName(loansAccount.fundId) }}</span>
     </div>
   }
 
-  <div class="flex-fill">
-    <span class="flex-30">{{ 'labels.inputs.Submitted on' | translate }}:</span>
-    <span class="flex-70">{{ loansAccount.submittedOnDate | dateFormat }}</span>
+  <div class="preview__row">
+    <span class="ms-label preview__label">{{ 'labels.inputs.Submitted on' | translate }}:</span>
+    <span class="ms-value preview__value">{{ loansAccount.submittedOnDate | dateFormat }}</span>
   </div>
 
-  <div class="flex-fill">
-    <span class="flex-30">{{ 'labels.inputs.Disbursement on' | translate }}:</span>
-    <span class="flex-70">{{ loansAccount.expectedDisbursementDate | dateFormat }}</span>
+  <div class="preview__row">
+    <span class="ms-label preview__label">{{ 'labels.inputs.Disbursement on' | translate }}:</span>
+    <span class="ms-value preview__value">{{ loansAccount.expectedDisbursementDate | dateFormat }}</span>
   </div>
 
   @if (loansAccount.externalId) {
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.External id' | translate }}:</span>
-      <span class="flex-70">
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.External id' | translate }}:</span>
+      <span class="ms-value preview__value">
         <mifosx-external-identifier externalId="{{ loansAccount.externalId }}"></mifosx-external-identifier>
       </span>
     </div>
   }
 
   @if (loansAccount.originators?.length) {
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Loan Originator' | translate }}:</span>
-      <span class="flex-70">
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Loan Originator' | translate }}:</span>
+      <span class="ms-value preview__value">
         {{ originatorsLabel(loansAccount.originators) }}
       </span>
     </div>
   }
 
   @if (loanProductService.isWorkingCapital) {
-    <h3 class="mat-h3 margin-t flex-fill">{{ 'labels.heading.Terms' | translate }}</h3>
-
-    <mat-divider class="flex-fill"></mat-divider>
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Principal' | translate }}:</span>
-      <span class="flex-70">
+    <h3 class="ms-section-title preview__section">{{ 'labels.heading.Terms' | translate }}</h3>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Principal' | translate }}:</span>
+      <span class="ms-value preview__value">
         {{
           loansAccount.principalAmount | currency: loansAccountProductTemplate.currency.code : 'symbol-narrow' : '1.2-2'
         }}
         <span class="m-l-5">{{ loansAccountProductTemplate.currency.code }}</span>
       </span>
     </div>
-    <div class="flex-fill">
-      <span class="flex-30"
+    <div class="preview__row">
+      <span class="ms-label preview__label"
         >{{ 'labels.inputs.Total Payment' | translate }} {{ 'labels.inputs.Volume' | translate }}:</span
       >
-      <span class="flex-70">
+      <span class="ms-value preview__value">
         {{
           loansAccount.totalPaymentVolume
             | currency: loansAccountProductTemplate.currency.code : 'symbol-narrow' : '1.2-2'
@@ -110,9 +108,9 @@
     </div>
 
     @if (loansAccount.discount) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Discount' | translate }}:</span>
-        <span class="flex-70">
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Discount' | translate }}:</span>
+        <span class="ms-value preview__value">
           {{ loansAccount.discount | currency: loansAccountProductTemplate.currency.code : 'symbol-narrow' : '1.2-2' }}
           <span class="m-l-5">{{ loansAccountProductTemplate.currency.code }}</span>
         </span>
@@ -120,52 +118,54 @@
     }
 
     @if (loansAccount.delinquencyGraceDays) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Delinquency Grace Days' | translate }}:</span>
-        <span class="flex-70"> {{ loansAccount.delinquencyGraceDays | formatNumber }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Delinquency Grace Days' | translate }}:</span>
+        <span class="ms-value preview__value"> {{ loansAccount.delinquencyGraceDays | formatNumber }}</span>
       </div>
     }
 
     @if (loansAccount.delinquencyStartType) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Delinquency Start Type' | translate }}:</span>
-        <span class="flex-60">{{ camalize(delinquencyStartTypeOption?.value) | translateKey: 'catalogs' }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Delinquency Start Type' | translate }}:</span>
+        <span class="ms-value preview__value">{{
+          camalize(delinquencyStartTypeOption?.value) | translateKey: 'catalogs'
+        }}</span>
       </div>
     }
 
     @if (loansAccount.delinquencyBucketId) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Delinquency Bucket' | translate }}:</span>
-        <span class="flex-60">{{ getDelinquencyBucket(loansAccount.delinquencyBucketId)?.name }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Delinquency Bucket' | translate }}:</span>
+        <span class="ms-value preview__value">{{ getDelinquencyBucket(loansAccount.delinquencyBucketId)?.name }}</span>
       </div>
     }
 
     @if (loansAccount.breachId) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Breach' | translate }}:</span>
-        <span class="flex-60"
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Breach' | translate }}:</span>
+        <span class="ms-value preview__value"
           ><mifosx-breach-display [singleRow]="false" [breach]="getBreach(loansAccount.breachId)"
         /></span>
       </div>
     }
 
     @if (loansAccount.nearBreachId) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Near Breach' | translate }}:</span>
-        <span class="flex-60"
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Near Breach' | translate }}:</span>
+        <span class="ms-value preview__value"
           ><mifosx-breach-display [singleRow]="false" [nearBreach]="getNearBreach(loansAccount.nearBreachId)"
         /></span>
       </div>
     }
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Period Payment Rate' | translate }}:</span>
-      <span class="flex-70"> {{ loansAccount.periodPaymentRate | formatNumber }} % </span>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Period Payment Rate' | translate }}:</span>
+      <span class="ms-value preview__value"> {{ loansAccount.periodPaymentRate | formatNumber }} % </span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Period Payment Frequency' | translate }}:</span>
-      <span class="flex-60"
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Period Payment Frequency' | translate }}:</span>
+      <span class="ms-value preview__value"
         >{{ loansAccount.repaymentEvery }}
         {{ camalize(repaymentFrequencyTypeOption?.value) | translateKey: 'catalogs' }}</span
       >
@@ -174,9 +174,8 @@
 
   @if (loanProductService.isLoanProduct) {
     @if (activeClientMembers) {
-      <h3 class="mat-h3 margin-t flex-fill">{{ 'labels.heading.Client Members' | translate }}</h3>
-      <mat-divider class="flex-fill"></mat-divider>
-      <div class="flex-60">
+      <h3 class="ms-section-title preview__section">{{ 'labels.heading.Client Members' | translate }}</h3>
+      <div class="ms-panel ms-table-wrap">
         <table mat-table #membersTable [dataSource]="dataSource">
           <!-- ID Column -->
           <ng-container matColumnDef="id">
@@ -195,8 +194,8 @@
           </ng-container>
           <!-- Principal Column -->
           <ng-container matColumnDef="principal">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Original Loan' | translate }}</th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Original Loan' | translate }}</th>
+            <td mat-cell class="ms-num" *matCellDef="let element">
               {{ element.principal | currency: loansAccountProductTemplate.currency.code : 'symbol-narrow' : '1.2-2' }}
             </td>
           </ng-container>
@@ -206,12 +205,10 @@
       </div>
     }
 
-    <h3 class="mat-h3 margin-t flex-fill">{{ 'labels.heading.Terms' | translate }}</h3>
-
-    <mat-divider class="flex-fill"></mat-divider>
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Principal' | translate }}:</span>
-      <span class="flex-70">
+    <h3 class="ms-section-title preview__section">{{ 'labels.heading.Terms' | translate }}</h3>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Principal' | translate }}:</span>
+      <span class="ms-value preview__value">
         {{
           loansAccount.principalAmount | currency: loansAccountProductTemplate.currency.code : 'symbol-narrow' : '1.2-2'
         }}
@@ -219,9 +216,9 @@
       </span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Loan Term' | translate }}:</span>
-      <span class="flex-60"
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Loan Term' | translate }}:</span>
+      <span class="ms-value preview__value"
         >{{ loansAccount.loanTermFrequency }}
         {{
           loansAccount.loanTermFrequencyType
@@ -230,14 +227,14 @@
       >
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Number of repayments' | translate }}:</span>
-      <span class="flex-70">{{ loansAccount.numberOfRepayments }}</span>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Number of repayments' | translate }}:</span>
+      <span class="ms-value preview__value">{{ loansAccount.numberOfRepayments }}</span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Repaid every' | translate }}:</span>
-      <span class="flex-60"
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Repaid every' | translate }}:</span>
+      <span class="ms-value preview__value"
         >{{ loansAccount.repaymentEvery }}
         {{
           loansAccount.repaymentFrequencyType
@@ -255,30 +252,30 @@
     </div>
 
     @if (productEnableDownPayment) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Enable Down Payments' | translate }}:</span>
-        <span class="flex-70">{{ loansAccount.enableDownPayment | yesNo }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Enable Down Payments' | translate }}:</span>
+        <span class="ms-value preview__value">{{ loansAccount.enableDownPayment | yesNo }}</span>
       </div>
     }
 
     @if (loansAccount.repaymentsStartingFromDate) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.First repayment on' | translate }}:</span>
-        <span class="flex-70">{{ loansAccount.repaymentsStartingFromDate | dateFormat }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.First repayment on' | translate }}:</span>
+        <span class="ms-value preview__value">{{ loansAccount.repaymentsStartingFromDate | dateFormat }}</span>
       </div>
     }
 
     @if (loansAccount.interestChargedFromDate) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Interest charged from' | translate }}:</span>
-        <span class="flex-70">{{ loansAccount.interestChargedFromDate | dateFormat }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Interest charged from' | translate }}:</span>
+        <span class="ms-value preview__value">{{ loansAccount.interestChargedFromDate | dateFormat }}</span>
       </div>
     }
 
     @if (loansAccount.interestRatePerPeriod) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Nominal interest rate' | translate }}:</span>
-        <span class="flex-60"
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Nominal interest rate' | translate }}:</span>
+        <span class="ms-value preview__value"
           >{{ loansAccount.interestRatePerPeriod }}&nbsp;&nbsp;{{
             loansAccountProductTemplate.interestRateFrequencyType.value | translateKey: 'catalogs'
           }}</span
@@ -287,31 +284,31 @@
     }
 
     @if (loansAccount.interestType) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Interest method' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.interestType }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Interest method' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.interestType }}</span>
       </div>
     }
 
     @if (loansAccount.isEqualAmortization) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Is Equal Amortization' | translate }}:</span>
-        <span class="flex-70">{{ loansAccount.isEqualAmortization }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Is Equal Amortization' | translate }}:</span>
+        <span class="ms-value preview__value">{{ loansAccount.isEqualAmortization }}</span>
       </div>
     }
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Amortization' | translate }}</span>
-      <span class="flex-70">{{
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Amortization' | translate }}</span>
+      <span class="ms-value preview__value">{{
         loansAccount.amortizationType
           | find: loansAccountProductTemplate.amortizationTypeOptions : 'id' : 'value'
           | translateKey: 'catalogs'
       }}</span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Interest calculation period' | translate }}: </span>
-      <span class="flex-70">{{
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Interest calculation period' | translate }}: </span>
+      <span class="ms-value preview__value">{{
         loansAccount.interestCalculationPeriodType
           | find: loansAccountProductTemplate.interestCalculationPeriodTypeOptions : 'id' : 'value'
           | translateKey: 'catalogs'
@@ -319,199 +316,211 @@
     </div>
 
     @if (loansAccount.allowPartialPeriodInterestCalculation) {
-      <div class="flex-fill">
-        <span class="flex-40"
+      <div class="preview__row">
+        <span class="ms-label preview__label"
           >{{ 'labels.inputs.Calculate interest for exact days in partial period' | translate }}:</span
         >
-        <span class="flex-70">{{ loansAccount.allowPartialPeriodInterestCalculation }}</span>
+        <span class="ms-value preview__value">{{ loansAccount.allowPartialPeriodInterestCalculation }}</span>
       </div>
     }
 
     @if (loansAccount.inArrearsTolerance) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Arrears tolerance' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.inArrearsTolerance }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Arrears tolerance' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.inArrearsTolerance }}</span>
       </div>
     }
 
     @if (loansAccount.graceOnInterestCharged) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Interest free period' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.graceOnInterestCharged }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Interest free period' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.graceOnInterestCharged }}</span>
       </div>
     }
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Repayment strategy' | translate }}: </span>
-      <span class="flex-70">{{
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Repayment strategy' | translate }}: </span>
+      <span class="ms-value preview__value">{{
         loansAccount.transactionProcessingStrategyCode
           | find: loansAccountProductTemplate.transactionProcessingStrategyOptions : 'code' : 'name'
           | translateKey: 'catalogs'
       }}</span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30"> {{ 'labels.inputs.Installment Amount' | translate }} </span>
-      <span class="flex-70"> {{ loansAccount.fixedEmiAmount | formatNumber }} </span>
+    <div class="preview__row">
+      <span class="ms-label preview__label"> {{ 'labels.inputs.Installment Amount' | translate }} </span>
+      <span class="ms-value preview__value"> {{ loansAccount.fixedEmiAmount | formatNumber }} </span>
     </div>
 
-    <div class="flex-fill">
-      <span class="flex-30"> {{ 'labels.inputs.Balloon Repayment Amount' | translate }} </span>
-      <span class="flex-70"> {{ loansAccount.balloonRepaymentAmount | formatNumber }} </span>
+    <div class="preview__row">
+      <span class="ms-label preview__label"> {{ 'labels.inputs.Balloon Repayment Amount' | translate }} </span>
+      <span class="ms-value preview__value"> {{ loansAccount.balloonRepaymentAmount | formatNumber }} </span>
     </div>
 
-    <h3 class="mat-h3 margin-t flex-fill">{{ 'labels.heading.Moratorium' | translate }}</h3>
-
-    <mat-divider class="flex-fill"></mat-divider>
+    <h3 class="ms-section-title preview__section">{{ 'labels.heading.Moratorium' | translate }}</h3>
     @if (loansAccount.graceOnPrincipalPayment) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.On principal payment' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.graceOnPrincipalPayment }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.On principal payment' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.graceOnPrincipalPayment }}</span>
       </div>
     }
 
     @if (loansAccount.graceOnInterestPayment) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.On interest payment' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.graceOnInterestPayment }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.On interest payment' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.graceOnInterestPayment }}</span>
       </div>
     }
 
     @if (loansAccount.graceOnArrearsAgeing) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.On Arrears Aging' | translate }}: </span>
-        <span class="flex-70">{{ loansAccount.graceOnArrearsAgeing }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.On Arrears Aging' | translate }}: </span>
+        <span class="ms-value preview__value">{{ loansAccount.graceOnArrearsAgeing }}</span>
       </div>
     }
 
-    <div class="flex-fill">
-      <span class="flex-30"> {{ 'labels.inputs.Enable installment level Delinquency' | translate }} </span>
-      <span class="flex-70"> {{ loansAccount.enableInstallmentLevelDelinquency | yesNo }} </span>
+    <div class="preview__row">
+      <span class="ms-label preview__label">
+        {{ 'labels.inputs.Enable installment level Delinquency' | translate }}
+      </span>
+      <span class="ms-value preview__value"> {{ loansAccount.enableInstallmentLevelDelinquency | yesNo }} </span>
     </div>
 
     @if (loansAccount.isTopup) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Is Topup Loan' | translate }}? </span>
-        <span class="flex-70">{{ loansAccount.isTopup }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Is Topup Loan' | translate }}? </span>
+        <span class="ms-value preview__value">{{ loansAccount.isTopup }}</span>
       </div>
     }
 
-    <div class="flex-fill">
-      <span class="flex-30">{{ 'labels.inputs.Recalculate Interest' | translate }}: </span>
-      <span class="flex-70">{{ loansAccountProductTemplate?.isInterestRecalculationEnabled | yesNo }}</span>
+    <div class="preview__row">
+      <span class="ms-label preview__label">{{ 'labels.inputs.Recalculate Interest' | translate }}: </span>
+      <span class="ms-value preview__value">{{
+        loansAccountProductTemplate?.isInterestRecalculationEnabled | yesNo
+      }}</span>
     </div>
 
     @if (loansAccountProductTemplate?.daysInMonthType) {
-      <div class="flex-fill">
-        <span class="flex-30">{{ 'labels.inputs.Days in month' | translate }}: </span>
-        <span class="flex-70">{{ loansAccountProductTemplate?.daysInMonthType.value | translateKey: 'catalogs' }}</span>
+      <div class="preview__row">
+        <span class="ms-label preview__label">{{ 'labels.inputs.Days in month' | translate }}: </span>
+        <span class="ms-value preview__value">{{
+          loansAccountProductTemplate?.daysInMonthType.value | translateKey: 'catalogs'
+        }}</span>
       </div>
     }
 
     @if (loansAccount.charges && loansAccount.charges.length) {
-      <div class="layout-row-wrap responsive-column flex-fill margin-t">
-        <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Charges' | translate }}</h3>
-        <mat-divider class="flex-fill"></mat-divider>
-        <table class="mat-elevation-z1" mat-table [dataSource]="loansAccount.charges">
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.name' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              {{ charge.name + ', ' + (charge.currency?.displaySymbol || '') }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="chargeCalculationType">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Type' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              {{ charge.chargeCalculationType.value | translateKey: 'catalogs' }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="amount">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              {{ charge.amount }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="chargeTimeType">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Collected On' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              {{ charge.chargeTimeType.value | translateKey: 'catalogs' }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Date' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              @if (
-                charge.chargeTimeType.value === 'Specified due date' || charge.chargeTimeType.value === 'Weekly Fee'
-              ) {
-                <span>
-                  {{ (charge.dueDate | dateFormat) || 'Unassigned' }}
-                </span>
-              }
-              @if (charge.chargeTimeType.value === 'Monthly Fee' || charge.chargeTimeType.value === 'Annual Fee') {
-                <span>
-                  {{ (charge.feeOnMonthDay | dateFormat) || 'Unassigned' }}
-                </span>
-              }
-              @if (
-                !(
-                  charge.chargeTimeType.value === 'Monthly Fee' ||
-                  charge.chargeTimeType.value === 'Annual Fee' ||
-                  charge.chargeTimeType.value === 'Specified due date' ||
-                  charge.chargeTimeType.value === 'Weekly Fee'
-                )
-              ) {
-                <span>
-                  {{ 'labels.inputs.N/A' | translate }}
-                </span>
-              }
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="chargesDisplayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: chargesDisplayedColumns"></tr>
-        </table>
+      <div class="preview__block">
+        <h3 class="ms-section-title preview__section">{{ 'labels.heading.Charges' | translate }}</h3>
+        <div class="ms-panel ms-table-wrap">
+          <table mat-table [dataSource]="loansAccount.charges">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.name' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                {{ charge.name + ', ' + (charge.currency?.displaySymbol || '') }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="chargeCalculationType">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Type' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                {{ charge.chargeCalculationType.value | translateKey: 'catalogs' }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
+              <td mat-cell class="ms-num" *matCellDef="let charge">
+                {{ charge.amount }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="chargeTimeType">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Collected On' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                {{ charge.chargeTimeType.value | translateKey: 'catalogs' }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Date' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                @if (
+                  charge.chargeTimeType.value === 'Specified due date' || charge.chargeTimeType.value === 'Weekly Fee'
+                ) {
+                  <span>
+                    {{ (charge.dueDate | dateFormat) || 'Unassigned' }}
+                  </span>
+                }
+                @if (charge.chargeTimeType.value === 'Monthly Fee' || charge.chargeTimeType.value === 'Annual Fee') {
+                  <span>
+                    {{ (charge.feeOnMonthDay | dateFormat) || 'Unassigned' }}
+                  </span>
+                }
+                @if (
+                  !(
+                    charge.chargeTimeType.value === 'Monthly Fee' ||
+                    charge.chargeTimeType.value === 'Annual Fee' ||
+                    charge.chargeTimeType.value === 'Specified due date' ||
+                    charge.chargeTimeType.value === 'Weekly Fee'
+                  )
+                ) {
+                  <span>
+                    {{ 'labels.inputs.N/A' | translate }}
+                  </span>
+                }
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="chargesDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: chargesDisplayedColumns"></tr>
+          </table>
+        </div>
       </div>
     }
 
     @if (loansAccountProductTemplate.overdueCharges?.length) {
-      <div class="flex-fill layout-row-wrap layout-xs-column margin-t">
-        <h3 class="mat-h3 flex-98">{{ 'labels.heading.Overdue Charges' | translate }}</h3>
-        <mat-divider class="flex-98"></mat-divider>
-        <table mat-table class="mat-elevation-z1" [dataSource]="loansAccountProductTemplate.overdueCharges">
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.name' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">{{ charge.name + ', ' + (charge.currency?.displaySymbol || '') }}</td>
-          </ng-container>
-          <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Type' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">
-              {{ charge.chargeCalculationType.value | translateKey: 'catalogs' }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="amount">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">{{ charge.amount | formatNumber }}</td>
-          </ng-container>
-          <ng-container matColumnDef="collectedon">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Collected On' | translate }}</th>
-            <td mat-cell *matCellDef="let charge">{{ charge.chargeTimeType.value | translateKey: 'catalogs' }}</td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="overdueChargesDisplayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: overdueChargesDisplayedColumns"></tr>
-        </table>
+      <div class="preview__block">
+        <h3 class="ms-section-title preview__section">{{ 'labels.heading.Overdue Charges' | translate }}</h3>
+        <div class="ms-panel ms-table-wrap">
+          <table mat-table [dataSource]="loansAccountProductTemplate.overdueCharges">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.name' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                {{ charge.name + ', ' + (charge.currency?.displaySymbol || '') }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Type' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">
+                {{ charge.chargeCalculationType.value | translateKey: 'catalogs' }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
+              <td mat-cell class="ms-num" *matCellDef="let charge">{{ charge.amount | formatNumber }}</td>
+            </ng-container>
+            <ng-container matColumnDef="collectedon">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Collected On' | translate }}</th>
+              <td mat-cell *matCellDef="let charge">{{ charge.chargeTimeType.value | translateKey: 'catalogs' }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="overdueChargesDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: overdueChargesDisplayedColumns"></tr>
+          </table>
+        </div>
       </div>
     }
   }
 </div>
 
-<div class="layout-row responsive-column align-center gap-2px margin-t stepper-buttons">
-  <button mat-raised-button matStepperPrevious>
+<div class="loan-form__actions">
+  <button mat-stroked-button matStepperPrevious>
     <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Previous' | translate }}
   </button>
-  <button mat-raised-button [routerLink]="['..']" [queryParams]="{ productType: loanProductService.productType.value }">
+  <button
+    mat-stroked-button
+    [routerLink]="['..']"
+    [queryParams]="{ productType: loanProductService.productType.value }"
+  >
     {{ 'labels.buttons.Cancel' | translate }}
   </button>
-  <button mat-raised-button color="primary" [disabled]="submitting" (click)="submitEvent.emit()">
+  <button mat-flat-button color="primary" [disabled]="submitting" (click)="submitEvent.emit()">
     {{ 'labels.buttons.Submit' | translate }}
   </button>
 </div>

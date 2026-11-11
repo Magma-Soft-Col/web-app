@@ -7,46 +7,32 @@
  */
 
 @use 'assets/styles/helper';
-@use 'assets/styles/loan-product-tokens' as lpt;
 
-/* Accent only — see loan-product-summary.component.scss. */
-:host {
-  @include lpt.accent-tokens;
+h3.ms-section-title {
+  margin: var(--ms-space-6) 0 var(--ms-space-2);
 }
 
-:host-context(.dark-theme) {
-  @include lpt.accent-dark-tokens;
+.step-subtitle {
+  margin: var(--ms-space-4) 0 var(--ms-space-2);
+  font-size: var(--ms-font-size-body);
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
 }
 
-table {
-  width: 100%;
-  table-layout: fixed;
-}
-
-th:first-child,
-td:first-child {
-  width: 50%;
-}
-
-h2,
-h3,
-h4 {
+mat-divider {
   margin: 0;
-  font-weight: 500;
 }
 
-/* Hardcoded #4461e2 → themed accent; `!important` dropped. See the sibling
-   loan-product-summary.component.scss for the full rationale. */
-.mat-h3,
-.mat-h4 {
-  margin-top: var(--lp-space-16, 1rem);
-  color: var(--lp-accent);
-}
+.step-table {
+  margin: var(--ms-space-3) 0 var(--ms-space-4);
 
-.mat-h3 {
-  font-weight: 500;
-}
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
 
-.mat-h4 {
-  font-weight: 400;
+  th:first-child,
+  td:first-child {
+    width: 50%;
+  }
 }

@@ -6,40 +6,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
+/*
+ * Dashboard panels (approved design): flat white headers on a bordered card,
+ * no primary-filled bands. Colours come from the --ms-* tokens, so the same
+ * output serves the light and dark themes; `$theme` is kept for the mixin API.
+ */
 @mixin dashboard-component-theme($theme) {
-  $primary: map.get($theme, primary);
-
   mifosx-dashboard {
     .recent-activities,
     .frequent-activities {
       .header {
-        background-color: mat.m2-get-color-from-palette($primary, 500);
-        color: mat.m2-get-contrast-color-from-palette($primary, 500);
+        background-color: var(--ms-color-surface);
+        color: var(--ms-color-text-primary);
+        border-bottom: 1px solid var(--ms-color-border-subtle);
       }
     }
 
     mifosx-amount-collected-pie,
     mifosx-amount-disbursed-pie,
     mifosx-client-trends-bar {
-      .card {
-        .header {
-          background-color: mat.m2-get-color-from-palette($primary, 500);
-          color: mat.m2-get-contrast-color-from-palette($primary, 500);
-
-          mat-label,
-          .mat-select-value,
-          .mat-select-arrow {
-            color: mat.m2-get-contrast-color-from-palette($primary, 500);
-          }
-
-          .mat-form-field-underline,
-          .mat-form-field-ripple {
-            background-color: mat.m2-get-contrast-color-from-palette($primary, 500);
-          }
-        }
+      .card .header {
+        background-color: var(--ms-color-surface);
+        color: var(--ms-color-text-primary);
       }
     }
   }

@@ -6,67 +6,32 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/**
- * Match the savings account header used by the parent Transactions page.
- */
-.container {
-  max-width: 90rem;
-  width: 92%;
+// Savings transaction detail (pen): same entity header as the account view.
+.svt-view__product {
+  font-size: var(--ms-font-size-label);
+  font-weight: 400;
 }
 
-.account-card {
-  margin: 0 auto;
-  max-width: none;
-  width: 100%;
-  padding: 0;
-
-  i,
-  img:hover {
-    cursor: pointer;
-  }
-
-  .header {
-    background-color: var(--md-sys-color-primary, #1074b9);
-    padding: 1%;
-  }
-
-  .header-title-group {
-    .account-card-title {
-      color: var(--md-sys-color-on-primary, #fff);
-      width: 90%;
-    }
-
-    p {
-      color: var(--md-sys-color-on-primary, #fff);
-    }
-
-    .account-overview {
-      border: none;
-      max-width: 240px;
-      font-size: 14px;
-
-      tr:nth-child(even) {
-        background-color: transparent;
-      }
-    }
-  }
-
-  .profile-image-container {
-    margin: 1%;
-
-    .profile-image {
-      object-fit: cover;
-      border-radius: 20px;
-    }
-  }
+.svt-view__muted {
+  color: var(--ms-color-text-secondary);
 }
 
-mat-card-title {
+.svt-view__aside {
   display: flex;
+  align-items: center;
+  gap: var(--ms-space-6);
+  flex-wrap: wrap;
 }
 
-.product-row,
-.account-number-row,
-.external-id-row {
-  display: block;
+.svt-view__stats {
+  margin: 0;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.svt-view__tabs {
+  min-width: 0;
 }

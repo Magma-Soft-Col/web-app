@@ -6,39 +6,37 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.charges-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
+
+.charges-step__add {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
+.charges-step__field {
+  flex: 0 1 360px;
+  min-width: 0;
+}
+
+.charges-step__add button {
+  margin-top: 2px;
+}
+
 table {
   width: 100%;
 }
 
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-.margin-t {
-  margin-top: 1em;
-}
-
-h4 {
-  font-weight: 500;
-  margin: 1em 0;
-}
-
-h3 {
-  font-weight: 500;
-}
-
-mat-divider {
-  margin: 1em 0;
-}
-
-.margin-v {
-  margin: 1em 0;
-}
-
-.margin-b {
-  margin: 0 0 1em;
-}
-
-.tableName {
-  padding-left: 2%;
+.ms-num {
+  text-align: right;
+  white-space: nowrap;
 }

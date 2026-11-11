@@ -6,26 +6,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+table {
+  width: 100%;
+}
 
-  #search-button {
-    height: 2.5rem;
-    margin-top: 1rem;
-  }
-
-  .view-details {
-    cursor: pointer;
-  }
-
-  table {
-    tr.select-row:hover {
-      cursor: pointer;
-    }
-  }
+.view-details {
+  cursor: pointer;
 }
 
 .error-log {
-  color: #ffa726;
+  color: var(--ms-color-warning);
 }

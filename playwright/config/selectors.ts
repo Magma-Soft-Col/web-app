@@ -39,7 +39,7 @@ export const LOGIN_SELECTORS: LoginSelectors = {
   usernameInput: 'input[formcontrolname="username"]',
   passwordInput: 'input[formcontrolname="password"]',
   loginButton: 'button:has-text("Login")',
-  errorMessage: 'mat-error',
+  errorMessage: 'mat-error, .ms-auth-field__error',
   progressBar: 'mat-progress-bar',
   loginForm: '#login-form'
 };

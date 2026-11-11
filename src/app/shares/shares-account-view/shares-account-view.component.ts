@@ -19,24 +19,13 @@ import { SharesService } from '../shares.service';
 
 /** Custom Buttons Configuration */
 import { SharesButtonsConfiguration } from './shares-buttons.config';
-import {
-  MatCard,
-  MatCardHeader,
-  MatCardTitleGroup,
-  MatCardMdImage,
-  MatCardTitle,
-  MatCardContent
-} from '@angular/material/card';
-import { MatTooltip } from '@angular/material/tooltip';
 import { NgClass } from '@angular/common';
 import { LongTextComponent } from '../../shared/long-text/long-text.component';
 import { AccountNumberComponent } from '../../shared/account-number/account-number.component';
-import { MatIconButton } from '@angular/material/button';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTabNav, MatTabLink, MatTabNavPanel } from '@angular/material/tabs';
-import { StatusLookupPipe } from '../../pipes/status-lookup.pipe';
 import { FormatNumberPipe } from '../../pipes/format-number.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -49,15 +38,9 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./shares-account-view.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatCardHeader,
-    MatCardTitleGroup,
-    MatCardMdImage,
-    MatTooltip,
-    MatCardTitle,
     NgClass,
     LongTextComponent,
     AccountNumberComponent,
-    MatIconButton,
     MatMenuTrigger,
     MatIcon,
     FaIconComponent,
@@ -68,7 +51,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     RouterLinkActive,
     MatTabNavPanel,
     RouterOutlet,
-    StatusLookupPipe,
     FormatNumberPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

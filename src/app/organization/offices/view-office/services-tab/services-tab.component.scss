@@ -7,36 +7,30 @@
  */
 
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
 
-  .action-button {
-    margin-left: auto;
+  .tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ms-space-3);
+    flex-wrap: wrap;
   }
 
   .service-state {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: var(--ms-space-4);
     min-height: 120px;
     text-align: center;
+    color: var(--ms-color-text-secondary);
   }
 
   .error-state {
-    color: var(--warn-color, #b00020);
-  }
-
-  .unavailable-state {
-    color: rgb(78 78 78);
-  }
-
-  .empty-state {
-    flex-direction: column;
-  }
-
-  .table-container {
-    overflow: auto;
+    color: var(--ms-color-danger);
   }
 
   table {

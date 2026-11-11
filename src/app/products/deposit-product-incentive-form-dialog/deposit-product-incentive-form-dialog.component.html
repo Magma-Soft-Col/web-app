@@ -86,10 +86,10 @@
   </mat-form-field>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [mat-dialog-close]="{ data: depositProductIncentiveForm }"
     [disabled]="!depositProductIncentiveForm.valid || depositProductIncentiveForm.pristine"

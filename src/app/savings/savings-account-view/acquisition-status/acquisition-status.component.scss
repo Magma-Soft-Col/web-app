@@ -101,13 +101,13 @@ dd {
 }
 
 .status-completed {
-  background: var(--md-sys-color-tertiary, #2e7d32);
-  color: var(--md-sys-color-on-tertiary, #fff);
+  background: var(--ms-color-success);
+  color: var(--ms-color-on-primary);
 }
 
 .status-current {
-  background: var(--md-sys-color-primary, #1074b9);
-  color: var(--md-sys-color-on-primary, #fff);
+  background: var(--ms-color-brand-primary);
+  color: var(--ms-color-on-primary);
 }
 
 .status-pending,
@@ -118,12 +118,12 @@ dd {
 }
 
 .status-error {
-  background: var(--md-sys-color-error, #ba1a1a);
-  color: var(--md-sys-color-on-error, #fff);
+  background: var(--ms-color-danger);
+  color: var(--ms-color-on-primary);
 }
 
 .connector-completed {
-  background: var(--md-sys-color-tertiary, #2e7d32);
+  background: var(--ms-color-success);
 }
 
 .stage-marker mat-icon {

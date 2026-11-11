@@ -6,14 +6,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-h3 {
-  font-weight: 500;
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
 }
 
-.margin-t {
-  margin-top: 1.75em;
-}
-
-.parameter {
-  margin: 1%;
+.parameter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2);
 }

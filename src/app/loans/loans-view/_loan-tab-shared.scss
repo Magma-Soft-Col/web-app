@@ -6,102 +6,72 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/* ── Design tokens (charges-tab design system) ─────────────── */
-:host {
-  --ch-blue-700: #1565c0;
-  --ch-blue-600: #1976d2;
-  --ch-blue-100: #bbdefb;
-  --ch-blue-50: #e3f2fd;
-  --ch-blue-20: #f0f7ff;
-  --ch-surface: #fff;
-  --ch-surface-alt: #f4f7fb;
-  --ch-surface-h: #ebf2fa;
-  --ch-border: #dde5f0;
-  --ch-text-1: #0d1b2a;
-  --ch-text-2: #4a6785;
-  --ch-text-3: #8fa5bc;
-  --ch-paid: #2e7d32;
-  --ch-paid-bg: #e8f5e9;
-  --ch-partial: #e65100;
-  --ch-partial-bg: #fff3e0;
-  --ch-alert: #c62828;
-  --ch-alert-bg: #ffebee;
-  --ch-zero: #b0bec5;
+/*
+ * Shared patterns of the loan screens, aligned with the approved design (pen).
+ * Every colour comes from the `--ms-*` semantic tokens, so the three themes
+ * (light, dark, ivory) are served by one block and no screen needs overrides.
+ */
 
-  font-family: 'DM Sans', system-ui, sans-serif;
+/* ── Legacy token bridge ───────────────────────────────────── */
+// The loan tabs were built on `--ch-*` tokens. They now point at the semantic
+// `--ms-*` tokens, so any rule still reading them follows the active theme.
+:host {
+  --ch-blue-700: var(--ms-color-brand-primary);
+  --ch-blue-600: var(--ms-color-brand-primary-hover);
+  --ch-blue-100: var(--ms-color-border);
+  --ch-blue-50: var(--ms-color-brand-primary-subtle);
+  --ch-blue-20: var(--ms-color-surface-hover);
+  --ch-surface: var(--ms-color-surface);
+  --ch-surface-alt: var(--ms-color-surface);
+  --ch-surface-h: var(--ms-color-surface-subtle);
+  --ch-border: var(--ms-color-border-subtle);
+  --ch-text-1: var(--ms-color-text-primary);
+  --ch-text-2: var(--ms-color-text-secondary);
+  --ch-text-3: var(--ms-color-text-secondary);
+  --ch-paid: var(--ms-color-success);
+  --ch-paid-bg: var(--ms-color-success-bg);
+  --ch-partial: var(--ms-color-warning);
+  --ch-partial-bg: var(--ms-color-warning-bg);
+  --ch-alert: var(--ms-color-danger);
+  --ch-alert-bg: var(--ms-color-danger-bg);
+  --ch-zero: var(--ms-color-text-disabled);
+
   display: block;
 }
 
-/* ── Dark mode token overrides ─────────────────────────────── */
-:host-context(.dark-theme) {
-  --ch-blue-700: #5b9bd5;
-  --ch-blue-600: #7ab3e0;
-  --ch-blue-100: #1a3a60;
-  --ch-blue-50: #0a2040;
-  --ch-blue-20: #0d1f35;
-  --ch-surface: #1a2535;
-  --ch-surface-alt: #101d2d;
-  --ch-surface-h: #132032;
-  --ch-border: #1e3050;
-  --ch-text-1: #e2ebf6;
-  --ch-text-2: #8baecf;
-  --ch-text-3: #6a8fad;
-  --ch-paid: #66bb6a;
-  --ch-paid-bg: #172b1a;
-  --ch-partial: #ffa726;
-  --ch-partial-bg: #281c0b;
-  --ch-alert: #ef9a9a;
-  --ch-alert-bg: #2b1212;
-  --ch-zero: #6a8fad;
-}
-
 /* ── Transaction-type tokens (transactions list + detail) ──── */
+// Each type maps to a semantic state; the badge always carries the type name,
+// so colour is never the only signal.
 @mixin transaction-type-tokens {
   :host {
-    --tx-repayment: var(--ch-paid);
-    --tx-repayment-bg: var(--ch-paid-bg);
-    --tx-disbursement: var(--ch-blue-700);
-    --tx-disbursement-bg: var(--ch-blue-50);
-    --tx-accrual: var(--ch-text-3);
-    --tx-accrual-bg: var(--ch-surface-h);
-    --tx-reversed: var(--ch-alert);
-    --tx-reversed-bg: var(--ch-alert-bg);
-    --tx-downpayment: #6a1b9a;
-    --tx-downpayment-bg: #f3e5f5;
-    --tx-chargeoff: var(--ch-partial);
-    --tx-chargeoff-bg: var(--ch-partial-bg);
-    --tx-reage: #283593;
-    --tx-reage-bg: #e8eaf6;
-    --tx-reamortize: #00695c;
-    --tx-reamortize-bg: #e0f2f1;
-    --tx-discount: #5d4037;
-    --tx-discount-bg: #efebe9;
-    --tx-linked: var(--ch-paid);
-    --tx-linked-bg: var(--ch-paid-bg);
-    --tx-recovery: #00838f;
-    --tx-recovery-bg: #e0f7fa;
-
-    /* Neutral fallback for transaction types without a dedicated badge class.
-       Built on the secondary text/surface tokens so it follows both themes. */
-    --tx-default: var(--ch-text-2);
-    --tx-default-bg: var(--ch-surface-h);
-  }
-
-  :host-context(.dark-theme) {
-    --tx-downpayment: #ce93d8;
-    --tx-downpayment-bg: #1a0a26;
-    --tx-reage: #9fa8da;
-    --tx-reage-bg: #0d1230;
-    --tx-reamortize: #80cbc4;
-    --tx-reamortize-bg: #002f2b;
-    --tx-discount: #bcaaa4;
-    --tx-discount-bg: #231613;
-    --tx-recovery: #4dd0e1;
-    --tx-recovery-bg: #06282e;
+    --tx-repayment: var(--ms-color-success);
+    --tx-repayment-bg: var(--ms-color-success-bg);
+    --tx-disbursement: var(--ms-color-info);
+    --tx-disbursement-bg: var(--ms-color-info-bg);
+    --tx-accrual: var(--ms-color-neutral);
+    --tx-accrual-bg: var(--ms-color-neutral-bg);
+    --tx-reversed: var(--ms-color-danger);
+    --tx-reversed-bg: var(--ms-color-danger-bg);
+    --tx-downpayment: var(--ms-color-info);
+    --tx-downpayment-bg: var(--ms-color-info-bg);
+    --tx-chargeoff: var(--ms-color-warning);
+    --tx-chargeoff-bg: var(--ms-color-warning-bg);
+    --tx-reage: var(--ms-color-info);
+    --tx-reage-bg: var(--ms-color-info-bg);
+    --tx-reamortize: var(--ms-color-info);
+    --tx-reamortize-bg: var(--ms-color-info-bg);
+    --tx-discount: var(--ms-color-neutral);
+    --tx-discount-bg: var(--ms-color-neutral-bg);
+    --tx-linked: var(--ms-color-success);
+    --tx-linked-bg: var(--ms-color-success-bg);
+    --tx-recovery: var(--ms-color-success);
+    --tx-recovery-bg: var(--ms-color-success-bg);
+    --tx-default: var(--ms-color-neutral);
+    --tx-default-bg: var(--ms-color-neutral-bg);
   }
 }
 
-/* ── Transaction-type badges (same system as charges-tab) ──── */
+/* ── Transaction-type badges (same geometry as .ms-badge) ──── */
 $transaction-type-keys:
   'repayment', 'disbursement', 'accrual', 'reversed', 'downpayment', 'chargeoff', 'reage', 'reamortize', 'discount',
   'linked', 'recovery';
@@ -110,25 +80,22 @@ $transaction-type-keys:
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    font-size: 11px;
+    gap: var(--ms-space-1);
+    padding: 2px var(--ms-space-2);
+    border-radius: var(--ms-radius-sm);
+    font-size: var(--ms-font-size-caption);
     font-weight: 600;
+    line-height: 16px;
     white-space: nowrap;
-
-    /* Neutral default so a type without a generated badge-* class still
-       renders as an intentional pill instead of unstyled text. */
     background: var(--tx-default-bg);
     color: var(--tx-default);
-    border: 1px solid var(--tx-default);
 
     .badge-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       flex-shrink: 0;
-      background: var(--tx-default);
+      background: currentcolor;
     }
   }
 
@@ -136,91 +103,87 @@ $transaction-type-keys:
     .badge-#{$key} {
       background: var(--tx-#{$key}-bg);
       color: var(--tx-#{$key});
-      border-color: var(--tx-#{$key});
-
-      .badge-dot {
-        background: var(--tx-#{$key});
-      }
     }
   }
 }
 
 /* ── Reusable layout mixins ────────────────────────────────── */
+
+// White panel with a hairline border (pen `.ms-panel`).
 @mixin card-container {
-  border: 1px solid var(--ch-border);
-  border-radius: 8px;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
   overflow: hidden;
-  background: var(--ch-surface-alt);
-  box-shadow: 0 1px 3px rgb(13 43 94 / 6%);
-  margin: 16px;
+  background: var(--ms-color-surface);
 }
 
+// Panel toolbar: title or filters on the left, actions on the right.
 @mixin toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--ch-surface-h);
-  border-bottom: 1px solid var(--ch-border);
-  gap: 12px;
+  padding: var(--ms-space-3) var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  gap: var(--ms-space-3);
   flex-wrap: wrap;
 }
 
 @mixin toolbar-toggle-group {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--ms-space-4);
   flex-wrap: wrap;
 }
 
 /* ── Fact-sheet layout (general / account-details tabs) ────── */
+// Label/value pairs read like `.ms-label` / `.ms-value`; sections are split by
+// a hairline and titled like `.ms-section-title`.
 @mixin fact-sheet {
   .section {
-    padding: 18px 20px 22px;
+    padding: var(--ms-space-5);
   }
 
   .section + .section {
-    border-top: 1px solid var(--ch-border);
+    border-top: 1px solid var(--ms-color-border-subtle);
   }
 
   .section-head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: var(--ms-space-3);
+    margin-bottom: var(--ms-space-4);
   }
 
   .section-title {
     margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--ch-text-2);
+    font-size: var(--ms-font-size-section-title);
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
   }
 
   .section-hint {
-    font-size: 11.5px;
-    color: var(--ch-text-3);
+    font-size: var(--ms-font-size-label);
+    color: var(--ms-color-text-secondary);
   }
 
   .fact-grid {
     display: flex;
     flex-wrap: wrap;
-    background: var(--ch-surface);
-    border: 1px solid var(--ch-border);
-    border-radius: 6px;
+    background: var(--ms-color-surface);
+    border: 1px solid var(--ms-color-border-subtle);
+    border-radius: var(--ms-radius-md);
     overflow: hidden;
   }
 
   .fact {
     flex: 1 1 25%;
     min-width: 200px;
-    padding: 12px 16px;
+    padding: var(--ms-space-3) var(--ms-space-4);
     margin: -1px 0 0 -1px;
-    border-top: 1px solid var(--ch-border);
-    border-left: 1px solid var(--ch-border);
+    border-top: 1px solid var(--ms-color-border-subtle);
+    border-left: 1px solid var(--ms-color-border-subtle);
   }
 
   .fact.span-2 {
@@ -229,32 +192,29 @@ $transaction-type-keys:
   }
 
   .fact-label {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ch-text-3);
-    margin-bottom: 4px;
+    margin-bottom: var(--ms-space-1);
+    font-size: var(--ms-font-size-caption);
+    font-weight: 500;
+    color: var(--ms-color-text-secondary);
   }
 
   .fact-value {
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 500;
-    color: var(--ch-text-1);
+    color: var(--ms-color-text-primary);
     overflow-wrap: anywhere;
   }
 
   .fact-value.amount {
-    font-family: 'JetBrains Mono', 'Cascadia Code', monospace;
-    font-size: 13px;
+    font-variant-numeric: tabular-nums;
   }
 
   .fact-value.muted {
-    color: var(--ch-text-3);
+    color: var(--ms-color-text-secondary);
     font-weight: 400;
   }
 
-  @media (width <= 520px) {
+  @media (width < 768px) {
     .fact,
     .fact.span-2 {
       flex-basis: 100%;
@@ -263,22 +223,57 @@ $transaction-type-keys:
   }
 }
 
-/* Toolbar action buttons (charges-tab design system) */
+/* ── Action forms (pen "Formularios") ──────────────────────── */
+// Panel with the fields in a two-column grid on desktop and one column below
+// 768px; the actions sit at the foot, aligned right (secondary + primary).
+@mixin action-form {
+  .loan-form__grid {
+    display: grid;
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--ms-space-4);
+    align-items: start;
+
+    @media (width < 768px) {
+      /* stylelint-disable-next-line unit-allowed-list */
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .loan-form__full {
+    grid-column: 1 / -1;
+  }
+
+  .loan-form__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ms-space-3);
+    flex-wrap: wrap;
+    min-height: 0;
+    margin-top: var(--ms-space-4);
+    padding: var(--ms-space-4) 0 0;
+    border-top: 1px solid var(--ms-color-border-subtle);
+  }
+}
+
+/* Toolbar action buttons: same look as the pen buttons. */
 @mixin btn-action {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border-radius: 4px;
+  gap: var(--ms-space-2);
+  height: var(--ms-control-height);
+  padding: 0 var(--ms-space-4);
+  border-radius: var(--ms-radius-md);
   border: 1px solid transparent;
-  font:
-    600 13px 'DM Sans',
-    sans-serif;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
+    background var(--ms-duration-fast) var(--ms-easing),
+    color var(--ms-duration-fast) var(--ms-easing),
+    border-color var(--ms-duration-fast) var(--ms-easing);
 
   &:disabled {
     opacity: 0.45;
@@ -286,86 +281,58 @@ $transaction-type-keys:
   }
 
   &:focus-visible {
-    outline: 2px solid var(--ch-blue-600);
-    outline-offset: 1px;
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: 2px;
   }
 }
 
 @mixin btn-action-primary {
   @include btn-action;
 
-  background: var(--ch-blue-700);
-  color: #fff;
+  background: var(--ms-color-brand-primary);
+  color: var(--ms-color-on-primary);
 
   &:hover:not(:disabled) {
-    background: var(--ch-blue-600);
+    background: var(--ms-color-brand-primary-hover);
   }
 }
 
 @mixin btn-action-ghost {
   @include btn-action;
 
-  background: var(--ch-surface);
-  color: var(--ch-text-2);
-  border-color: var(--ch-border);
+  border-radius: var(--ms-radius-control);
+  font-size: var(--ms-font-size-label);
+  background: var(--ms-color-surface);
+  color: var(--ms-color-text-primary);
+  border-color: var(--ms-color-border);
 
   &:hover:not(:disabled) {
-    color: var(--ch-text-1);
-    border-color: var(--ch-text-3);
+    background: var(--ms-color-surface-hover);
   }
 }
 
+// Secondary (stroked) button look for native export buttons.
 @mixin btn-export {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border: 1px solid var(--ch-blue-100);
-  border-radius: 4px;
-  background: var(--ch-blue-50);
-  color: var(--ch-blue-700);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    border-color 0.14s ease,
-    color 0.14s ease,
-    background 0.14s ease;
-
-  &:hover {
-    border-color: var(--ch-blue-700);
-    background: var(--ch-blue-100);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ch-blue-600);
-    outline-offset: 1px;
-  }
+  @include btn-action-ghost;
 }
 
 /* ── Account flag badges ───────────────────────────────────── */
 
-// Flag colours are solid fills, so they need a darker tone than the $status-*
-// palette for white label text to stay legible. These are the light variants of
-// the charge-off and alert tokens, used as backgrounds rather than as text.
-$flag-charged-off: #e65100;
-$flag-fraud: #c62828;
-
-// Pill marking an account-level flag. Shared by the account header, where it
-// sits on the dark blue card next to the status pill, and the general tab, so a
-// charged-off account is marked the same way wherever it appears.
-@mixin account-flag-badge($background) {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 0.72rem;
+// Pill marking an account-level flag, with the `.ms-badge` geometry and a
+// tinted semantic background. Shared by the account header and the general tab.
+@mixin account-flag-badge($color, $background) {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
+  line-height: 16px;
+  letter-spacing: 0.2px;
   text-transform: uppercase;
+  white-space: nowrap;
   vertical-align: middle;
-  color: #fff;
+  color: $color;
   background-color: $background;
 }
 
@@ -373,14 +340,14 @@ $flag-fraud: #c62828;
 // one of them; the classes themselves stay identical across components.
 @mixin account-flag-badges {
   .charged-off-badge {
-    @include account-flag-badge($flag-charged-off);
+    @include account-flag-badge(var(--ms-color-warning), var(--ms-color-warning-bg));
   }
 
   // Red separates fraud from the amber charge-off pill so the two flags never
   // blur together when an account carries both.
   .fraud-badge {
-    @include account-flag-badge($flag-fraud);
+    @include account-flag-badge(var(--ms-color-danger), var(--ms-color-danger-bg));
 
-    margin-left: 8px;
+    margin-left: var(--ms-space-2);
   }
 }

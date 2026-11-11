@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #525659;
+    background-color: var(--ms-color-text-secondary);
 
     .pdf-iframe {
       width: 100%;
@@ -33,13 +33,13 @@
   .error-message {
     padding: 2rem;
     text-align: center;
-    background-color: #fff3cd;
-    border: 1px solid #ffc107;
+    background-color: var(--ms-color-warning-bg);
+    border: 1px solid var(--ms-color-warning);
     border-radius: 4px;
     margin: 1rem 0;
 
     h3 {
-      color: #856404;
+      color: var(--ms-color-warning);
       margin-bottom: 1rem;
     }
 
@@ -51,7 +51,7 @@
 
     .console-hint {
       font-size: 0.875rem;
-      color: #6c757d;
+      color: var(--ms-color-text-secondary);
       margin-top: 1rem;
     }
   }

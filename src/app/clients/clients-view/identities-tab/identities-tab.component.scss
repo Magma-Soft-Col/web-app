@@ -6,63 +6,55 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '../../../../assets/styles/colours' as *;
-
+/* Identities tab (pen): section header with the primary action, table in a panel. */
 .tab-container {
-  padding: 1rem;
-  margin: 1rem 0;
-
-  .action-button {
-    margin-left: auto;
-  }
-
-  h3 {
-    margin: 0;
-  }
-
-  .table-container {
-    overflow-x: auto;
-    margin-top: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 
   table {
     width: 100%;
     min-width: 800px;
-    margin-top: 8px;
-
-    .identity-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
   }
+}
+
+.tab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+}
+
+.row-actions {
+  white-space: nowrap;
+  color: var(--ms-color-text-secondary);
 }
 
 .document-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--ms-space-3);
 }
 
 .document-card {
   width: 200px;
-  background: $white;
-  border: 1px solid $silver;
-  border-radius: 4px;
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba($dark-grey, 0.12);
   display: flex;
   flex-direction: column;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba($dark-grey, 0.14);
+    border-color: var(--ms-color-border);
   }
 }
 
 .thumb {
   position: relative;
-  background: $clouds;
+  background: var(--ms-color-surface-subtle);
   min-height: 7.5rem;
   display: flex;
   align-items: center;
@@ -78,7 +70,7 @@
   &.has-pdf {
     height: 7.5rem;
     overflow: hidden;
-    background: $white;
+    background: var(--ms-color-surface);
   }
 
   img {
@@ -109,13 +101,13 @@
   table-layout: fixed;
   width: 100%;
   font-size: 0.5rem;
-  color: $dark-grey;
-  background: $white;
+  color: var(--ms-color-text-primary);
+  background: var(--ms-color-surface);
   // The card owns the click that opens the viewer; the grid must not swallow it.
   pointer-events: none;
 
   td {
-    border: 1px solid $silver;
+    border: 1px solid var(--ms-color-border-subtle);
     padding: 1px 3px;
     max-width: 0;
     overflow: hidden;
@@ -128,10 +120,10 @@
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
-  background: rgba($white, 0.9);
+  background: var(--ms-color-surface);
   border-radius: 50%;
   padding: 0.4rem;
-  color: $peter-river;
+  color: var(--ms-color-brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,9 +137,8 @@
 }
 
 .placeholder {
-  // $light-grey is all but invisible against the $clouds thumbnail background, which is what made
-  // a card without a preview read as broken rather than as a file the browser cannot render.
-  color: $asbestos;
+  // A darker secondary text keeps a card without a preview from reading as broken.
+  color: var(--ms-color-text-secondary);
   text-align: center;
   padding: 0.75rem;
   display: flex;
@@ -167,7 +158,7 @@
 
   .hint {
     font-size: 0.6875rem;
-    color: $concrete;
+    color: var(--ms-color-text-disabled);
   }
 }
 
@@ -175,8 +166,8 @@
   position: absolute;
   right: 0.5rem;
   bottom: 0.5rem;
-  background: rgba($black, 0.65);
-  color: $white;
+  background: var(--ms-color-brand-navy);
+  color: var(--ms-color-on-primary);
 }
 
 .card-body {
@@ -194,17 +185,18 @@
 }
 
 .title {
-  font-weight: 700;
-  color: $dark-grey;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ms-color-text-primary);
 }
 
 .meta {
   font-size: 0.75rem;
-  color: $asbestos;
+  color: var(--ms-color-text-secondary);
 }
 
 .muted {
-  color: $concrete;
+  color: var(--ms-color-text-disabled);
 }
 
 .document-lightbox-host {

@@ -9,11 +9,9 @@
 <div class="container catalog-updates">
   <mat-card class="catalog-updates-card">
     <mat-card-content>
-      <h2>{{ 'labels.heading.Catalog Updates' | translate }}</h2>
-
       @if (loadError) {
         <div class="message error-message" role="alert">{{ loadError | translate }}</div>
-        <button type="button" mat-raised-button color="primary" (click)="loadCatalogUpdates()">
+        <button type="button" mat-flat-button color="primary" (click)="loadCatalogUpdates()">
           {{ 'catalogUpdates.actions.retry' | translate }}
         </button>
       } @else if (isLoading) {
@@ -28,7 +26,7 @@
               <mat-card-content>
                 <div class="catalog-heading">
                   <mat-icon aria-hidden="true">sync</mat-icon>
-                  <h3>{{ categoryKey(catalogUpdate.category) | translate }}</h3>
+                  <h3 class="ms-subsection-title">{{ categoryKey(catalogUpdate.category) | translate }}</h3>
                 </div>
 
                 <dl class="catalog-details">
@@ -74,10 +72,10 @@
                 }
               </mat-card-content>
               @if (canUpdate) {
-                <mat-card-actions align="end">
+                <mat-card-actions class="ms-form-actions">
                   <button
                     type="button"
-                    mat-raised-button
+                    mat-flat-button
                     color="primary"
                     [disabled]="isUpdating(catalogUpdate)"
                     [attr.aria-label]="

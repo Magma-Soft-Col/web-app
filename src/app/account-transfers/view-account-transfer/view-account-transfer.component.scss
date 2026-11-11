@@ -9,9 +9,9 @@
 .transfer-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--ms-space-6);
   position: relative;
-  padding-left: 20px;
+  padding-left: var(--ms-space-5);
 }
 
 .status-indicator {
@@ -26,13 +26,13 @@
 .transfer-section {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--ms-space-3);
 }
 
 .section-title {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: var(--ms-font-size-section-title);
+  font-weight: 600;
 }
 
 mat-divider {
@@ -41,7 +41,7 @@ mat-divider {
 
 .info-grid {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--ms-space-3);
 }
 
 .info-row {
@@ -57,14 +57,13 @@ mat-divider {
 }
 
 .info-label {
+  font-size: var(--ms-font-size-label);
   font-weight: 500;
-
-  @media (width <= 768px) {
-    font-size: 0.875rem;
-  }
 }
 
 .info-value {
+  font-size: 13px;
+  font-weight: 500;
   word-break: break-word;
 
   a {

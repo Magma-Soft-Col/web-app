@@ -6,6 +6,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+/* Action form (pen form pattern): 2 columns on desktop, 1 below 768px, actions at the foot. */
+.action-form__grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.action-form__contents {
+  display: contents;
+}
+
+.action-form__full {
+  grid-column: 1 / -1;
+}
+
+.action-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
 }

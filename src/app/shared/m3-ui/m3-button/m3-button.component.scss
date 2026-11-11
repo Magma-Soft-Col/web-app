@@ -20,7 +20,7 @@
     md-elevated-button,
     md-text-button,
     md-filled-tonal-button {
-      color: var(--md-filled-button-disabled-label-text-color, #44474e);
+      color: var(--md-filled-button-disabled-label-text-color, var(--ms-color-text-disabled));
       width: 100%;
     }
   }

@@ -6,81 +6,64 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-:root {
+/*
+ * Legacy `--ds-*` design tokens. They are aliases of the pen `--ms-*` tokens
+ * (`_ms-tokens.scss`), which already switch between Midnight & Porcelain,
+ * Ivory & Slate and Obsidian, so no per-theme block is needed here. Custom
+ * properties resolve `var()` on the element that declares them, hence the
+ * body selectors: the theme classes live on `body`.
+ */
+:root,
+body,
+body.dark-theme {
   /* Brand blue scale */
-  --ds-blue-900: #0d2b5e;
-  --ds-blue-700: #1565c0;
-  --ds-blue-600: #1976d2;
-  --ds-blue-400: #42a5f5;
-  --ds-blue-100: #bbdefb;
-  --ds-blue-50: #e3f2fd;
-  --ds-blue-20: #f0f7ff;
+  --ds-blue-900: var(--ms-color-brand-navy);
+  --ds-blue-700: var(--ms-color-brand-primary);
+  --ds-blue-600: var(--ms-color-brand-primary);
+  --ds-blue-400: var(--ms-color-brand-primary-hover);
+  --ds-blue-100: var(--ms-color-border);
+  --ds-blue-50: var(--ms-color-brand-primary-subtle);
+  --ds-blue-20: var(--ms-color-surface-hover);
 
   /* Surfaces */
-  --ds-surface: #fff;
-  --ds-surface-alt: #f4f7fb;
-  --ds-surface-head: #ebf2fa;
-  --ds-border: #dde5f0;
-  --ds-border-strong: #c0d0e4;
+  --ds-surface: var(--ms-color-surface);
+  --ds-surface-alt: var(--ms-color-background);
+  --ds-surface-head: var(--ms-color-surface-subtle);
+  --ds-border: var(--ms-color-border-subtle);
+  --ds-border-strong: var(--ms-color-border);
 
   /* Text scale */
-  --ds-text-1: #0d1b2a;
-  --ds-text-2: #4a6785;
-  --ds-text-3: #8fa5bc;
+  --ds-text-1: var(--ms-color-text-primary);
+  --ds-text-2: var(--ms-color-text-secondary);
+  --ds-text-3: var(--ms-color-text-disabled);
 
   /* Financial-status colors */
-  --ds-paid: #2e7d32;
-  --ds-paid-bg: #e8f5e9;
-  --ds-partial: #e65100;
-  --ds-partial-bg: #fff3e0;
-  --ds-alert: #c62828;
-  --ds-alert-bg: #ffebee;
-  --ds-zero: #b0bec5;
+  --ds-paid: var(--ms-color-success);
+  --ds-paid-bg: var(--ms-color-success-bg);
+  --ds-partial: var(--ms-color-warning);
+  --ds-partial-bg: var(--ms-color-warning-bg);
+  --ds-alert: var(--ms-color-danger);
+  --ds-alert-bg: var(--ms-color-danger-bg);
+  --ds-zero: var(--ms-color-text-disabled);
 
   /* Semantic action colours (button fills)
 
      Deliberately identical in light and dark theme: these encode the *meaning*
      of an action, not a surface, so the hue must not shift between themes.
-     Both pass WCAG AA against --ds-action-on-fill (5.13:1 and 5.62:1).
-     Hover and press states come from Material's state layer, so no separate
-     hover fills are needed. Shares hex values with --ds-paid / --ds-alert above
-     by coincidence of palette, not by derivation: those are status *text* that
-     lightens in dark theme, these are action *fills* that must not. Change one
-     without assuming the other follows. */
-  --ds-action-approve: #2e7d32;
-  --ds-action-reject: #c62828;
+     They are the light-theme values of --ms-color-success / --ms-color-danger
+     (pen), which pass WCAG AA against --ds-action-on-fill (5.6:1 and 6.6:1).
+     Hover and press states come from Material's state layer. */
+  --ds-action-approve: #18794e;
+  --ds-action-reject: #b42318;
   --ds-action-on-fill: #fff;
 
-  /* Elevation */
-  --ds-shadow-xs: 0 1px 2px rgb(13 43 94 / 6%);
-  --ds-shadow-sm: 0 2px 8px rgb(13 43 94 / 10%);
-  --ds-shadow-md: 0 6px 20px rgb(13 43 94 / 14%);
+  /* Elevation: reserved for floating surfaces */
+  --ds-shadow-xs: var(--ms-shadow-xs);
+  --ds-shadow-sm: var(--ms-shadow-xs);
+  --ds-shadow-md: var(--ms-shadow-float);
 
   /* Radii */
-  --ds-radius-sm: 4px;
-  --ds-radius: 8px;
-  --ds-radius-lg: 12px;
-}
-
-body.dark-theme {
-  --ds-blue-700: #5b9bd5;
-  --ds-blue-600: #7ab3e0;
-  --ds-blue-100: #1a3a60;
-  --ds-blue-50: #0a2040;
-  --ds-blue-20: #0d1f35;
-  --ds-surface: #1a2535;
-  --ds-surface-alt: #101d2d;
-  --ds-surface-head: #132032;
-  --ds-border: #1e3050;
-  --ds-border-strong: #2a4264;
-  --ds-text-1: #e2ebf6;
-  --ds-text-2: #8baecf;
-  --ds-text-3: #6a8fad;
-  --ds-paid: #66bb6a;
-  --ds-paid-bg: #172b1a;
-  --ds-partial: #ffa726;
-  --ds-partial-bg: #281c0b;
-  --ds-alert: #ef9a9a;
-  --ds-alert-bg: #2b1212;
-  --ds-zero: #6a8fad;
+  --ds-radius-sm: var(--ms-radius-sm);
+  --ds-radius: var(--ms-radius-md);
+  --ds-radius-lg: var(--ms-radius-panel);
 }

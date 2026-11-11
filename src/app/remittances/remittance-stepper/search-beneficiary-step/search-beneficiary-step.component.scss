@@ -23,12 +23,12 @@
   gap: 8px;
   padding: 12px 16px;
   margin: 8px 0;
-  background-color: #fdecea;
+  background-color: var(--ms-color-danger-bg);
   border-radius: 4px;
-  color: #611a15;
+  color: var(--ms-color-danger);
 
   mat-icon {
-    color: #f44336;
+    color: var(--ms-color-danger);
     font-size: 20px;
     width: 20px;
     height: 20px;

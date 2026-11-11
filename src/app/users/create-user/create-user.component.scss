@@ -6,16 +6,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.password-never-expires-wrapper {
-  padding: 17.5px 0;
-}
-
+.checkbox-wrapper,
+.password-never-expires-wrapper,
 .send-password-to-email-wrapper {
-  padding: 17.5px 0;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
 }
 
 .reset-password-error {
-  color: #f44336;
-  font-size: 80%;
   margin: 0;
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-label);
 }

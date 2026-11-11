@@ -36,7 +36,6 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
-import { MatDivider } from '@angular/material/divider';
 import { MatCheckbox } from '@angular/material/checkbox';
 import {
   MatTable,
@@ -74,7 +73,6 @@ import {
     ...STANDALONE_SHARED_IMPORTS,
     MatTooltip,
     FaIconComponent,
-    MatDivider,
     MatIconButton,
     MatCheckbox,
     MatTable,

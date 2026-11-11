@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="centerForm">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="form-grid">
           <mat-form-field>
             <mat-label>{{ 'labels.inputs.name' | translate }}</mat-label>
             <input matInput required formControlName="name" />
@@ -119,52 +119,62 @@
           </mat-form-field>
         </div>
 
-        <div class="layout-row">
+        <div class="member-picker">
           @if (groupChoice.value) {
-            <div class="mat-table">
-              <div class="mat-header-row">
-                <div class="mat-header-cell">{{ 'labels.inputs.Group Details' | translate }}</div>
-                <button mat-icon-button (click)="addGroup()">
-                  <fa-icon icon="plus"></fa-icon>
+            <section class="ms-panel member-picker__panel">
+              <div class="member-picker__head">
+                <h3 class="member-picker__title">{{ 'labels.inputs.Group Details' | translate }}</h3>
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="addGroup()"
+                  [attr.aria-label]="'labels.buttons.Add' | translate"
+                >
+                  <fa-icon icon="plus" aria-hidden="true"></fa-icon>
                 </button>
               </div>
-              <div class="mat-row">
-                <div class="mat-cell">{{ 'labels.inputs.name' | translate }}</div>
-                <div class="mat-cell">{{ groupChoice.value.name }}</div>
-              </div>
-              <div class="mat-row">
-                <div class="mat-cell">{{ 'labels.inputs.Id' | translate }}</div>
-                <div class="mat-cell">{{ groupChoice.value.id }}</div>
-              </div>
-              <div class="mat-row">
-                <div class="mat-cell">{{ 'labels.inputs.Office' | translate }}</div>
-                <div class="mat-cell">{{ groupChoice.value.officeName }}</div>
-              </div>
-            </div>
+              <dl class="member-picker__details">
+                <dt class="ms-label">{{ 'labels.inputs.name' | translate }}</dt>
+                <dd class="ms-value">{{ groupChoice.value.name }}</dd>
+                <dt class="ms-label">{{ 'labels.inputs.Id' | translate }}</dt>
+                <dd class="ms-value ms-num">{{ groupChoice.value.id }}</dd>
+                <dt class="ms-label">{{ 'labels.inputs.Office' | translate }}</dt>
+                <dd class="ms-value">{{ groupChoice.value.officeName }}</dd>
+              </dl>
+            </section>
           }
 
           @if (groupMembers.length) {
-            <mat-nav-list>
-              <h3 matSubheader>{{ 'labels.heading.Selected Groups' | translate }}</h3>
-              @for (group of groupMembers; track group; let i = $index) {
-                <div mat-list-item>
-                  <button mat-icon-button (click)="removeGroup(i)">
-                    <fa-icon icon="trash"></fa-icon>
-                  </button>
-                  <span matLine>{{ group.name }}</span>
-                </div>
-              }
-            </mat-nav-list>
+            <section class="ms-panel member-picker__panel">
+              <div class="member-picker__head">
+                <h3 class="member-picker__title">{{ 'labels.heading.Selected Groups' | translate }}</h3>
+              </div>
+              <div class="member-list">
+                @for (group of groupMembers; track group; let i = $index) {
+                  <div class="member-row">
+                    <span class="member-name">{{ group.name }}</span>
+                    <button
+                      mat-icon-button
+                      type="button"
+                      (click)="removeGroup(i)"
+                      [attr.aria-label]="'labels.buttons.Remove' | translate"
+                    >
+                      <fa-icon icon="trash" aria-hidden="true"></fa-icon>
+                    </button>
+                  </div>
+                }
+              </div>
+            </section>
           }
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!centerForm.valid"
           (click)="submit()"

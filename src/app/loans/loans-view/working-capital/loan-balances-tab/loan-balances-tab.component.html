@@ -6,50 +6,45 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container p-b-20">
-  <h3>{{ 'labels.heading.Working Capital Loan Balances' | translate }}</h3>
+<section class="ms-panel ms-panel--padded balances">
+  <h3 class="ms-section-title">{{ 'labels.heading.Working Capital Loan Balances' | translate }}</h3>
 
   @if (loanBalances) {
-    <div class="responsive-column">
-      <div class="flex-fill layout-row">
-        <span class="flex-30"> {{ 'labels.inputs.Principal Outstanding' | translate }} </span>
-        <span class="flex-30 r-amount">{{
-          loanBalances.principalOutstanding | currency: currencyCode : 'symbol-narrow' : '1.2-2'
-        }}</span>
+    <dl class="balances__list">
+      <div class="balances__row">
+        <dt class="ms-label">{{ 'labels.inputs.Principal Outstanding' | translate }}</dt>
+        <dd class="ms-value ms-num">
+          {{ loanBalances.principalOutstanding | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
+        </dd>
       </div>
-
-      <div class="flex-fill layout-row">
-        <span class="flex-30"> {{ 'labels.inputs.Total Paid Principal' | translate }} </span>
-        <span class="flex-30 r-amount">{{
-          loanBalances.totalPaidPrincipal ?? 0 | currency: currencyCode : 'symbol-narrow' : '1.2-2'
-        }}</span>
+      <div class="balances__row">
+        <dt class="ms-label">{{ 'labels.inputs.Total Paid Principal' | translate }}</dt>
+        <dd class="ms-value ms-num">
+          {{ loanBalances.totalPaidPrincipal ?? 0 | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
+        </dd>
       </div>
-
-      <div class="flex-fill layout-row">
-        <span class="flex-30"> {{ 'labels.inputs.Total Payment' | translate }} </span>
-        <span class="flex-30 r-amount">{{
-          loanBalances.totalPayment ?? 0 | currency: currencyCode : 'symbol-narrow' : '1.2-2'
-        }}</span>
+      <div class="balances__row">
+        <dt class="ms-label">{{ 'labels.inputs.Total Payment' | translate }}</dt>
+        <dd class="ms-value ms-num">
+          {{ loanBalances.totalPayment ?? 0 | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
+        </dd>
       </div>
-
       @if (loanBalances.overpaymentAmount > 0) {
-        <div class="flex-fill layout-row">
-          <span class="flex-30"> {{ 'labels.inputs.Overpayment Amount' | translate }} </span>
-          <span class="flex-30 r-amount">{{
-            loanBalances.overpaymentAmount | currency: currencyCode : 'symbol-narrow' : '1.2-2'
-          }}</span>
+        <div class="balances__row">
+          <dt class="ms-label">{{ 'labels.inputs.Overpayment Amount' | translate }}</dt>
+          <dd class="ms-value ms-num">
+            {{ loanBalances.overpaymentAmount | currency: currencyCode : 'symbol-narrow' : '1.2-2' }}
+          </dd>
         </div>
       }
-
-      <div class="flex-fill layout-row">
-        <span class="flex-30"> {{ 'labels.inputs.Realized Income' | translate }} </span>
-        <span class="flex-30 r-amount">{{ loanBalances.realizedIncomeFromDiscountFee ?? 0 | formatNumber }}</span>
+      <div class="balances__row">
+        <dt class="ms-label">{{ 'labels.inputs.Realized Income' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ loanBalances.realizedIncomeFromDiscountFee ?? 0 | formatNumber }}</dd>
       </div>
-
-      <div class="flex-fill layout-row">
-        <span class="flex-30"> {{ 'labels.inputs.Unrealized Income' | translate }} </span>
-        <span class="flex-30 r-amount">{{ loanBalances.unrealizedIncomeFromDiscountFee ?? 0 | formatNumber }}</span>
+      <div class="balances__row">
+        <dt class="ms-label">{{ 'labels.inputs.Unrealized Income' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ loanBalances.unrealizedIncomeFromDiscountFee ?? 0 | formatNumber }}</dd>
       </div>
-    </div>
+    </dl>
   }
-</div>
+</section>

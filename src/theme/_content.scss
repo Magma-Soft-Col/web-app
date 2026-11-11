@@ -6,22 +6,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
+// Legacy account-view layout, restyled on the pen tokens (`_ms-tokens.scss`).
+// The header is the pen entity header: white surface, hairline border and the
+// regular text colours, so the same rules serve every theme. `$theme` is kept
+// for the existing include in `mifosx-theme.scss`.
 @mixin account-view-component-theme($theme) {
-  $primary: map.get($theme, primary);
-
   mifosx-view-bulk-import {
     .cover {
-      background-color: white;
-      margin-top: 1%;
+      background-color: var(--ms-color-surface);
+      margin-top: var(--ms-space-4);
     }
   }
 
   mifosx-clients {
     .status {
-      color: black;
+      color: var(--ms-color-text-primary);
     }
   }
 
@@ -34,9 +33,7 @@
   mifosx-recurring-deposits-account-view,
   mifosx-savings-account-view {
     .account-card {
-      margin: 0 auto;
-      max-width: 90rem;
-      width: 90%;
+      width: 100%;
       padding: 0;
 
       i,
@@ -45,24 +42,29 @@
       }
 
       .header {
-        background-color: mat.m2-get-color-from-palette($primary, 500);
-        padding: 1%;
+        padding: var(--ms-space-5);
+        background-color: var(--ms-color-surface);
+        border-bottom: 1px solid var(--ms-color-border-subtle);
       }
 
       .header-title-group {
         .account-card-title {
-          color: white;
           width: 90%;
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--ms-color-text-primary);
         }
 
         p {
-          color: white;
+          font-size: var(--ms-font-size-table);
+          color: var(--ms-color-text-secondary);
         }
 
         .account-overview {
           border: none;
           max-width: 240px;
-          font-size: 14px;
+          font-size: var(--ms-font-size-table);
+          color: var(--ms-color-text-primary);
 
           tr:nth-child(even) {
             background-color: transparent;
@@ -71,37 +73,39 @@
       }
 
       .profile-image-container {
-        margin: 1%;
+        margin: var(--ms-space-3);
 
         .profile-image {
           object-fit: cover;
-          border-radius: 20px;
+          border-radius: var(--ms-radius-md);
+          border: 1px solid var(--ms-color-border-subtle);
         }
 
         .signature {
-          background-color: mat.m2-get-color-from-palette($primary, 500);
+          background-color: var(--ms-color-brand-primary);
+          color: var(--ms-color-on-primary);
         }
       }
 
       .account-actions {
         align-self: flex-end;
-        margin: 0 1%;
+        margin: 0 var(--ms-space-3);
 
         i {
           margin-bottom: 2px;
-          margin-right: 4px;
+          margin-right: var(--ms-space-1);
         }
       }
 
       .navigation-tabs {
-        background-color: #f2f2f2;
+        background-color: transparent;
         overflow: auto;
       }
 
       .content {
         .savings-account-tables {
-          padding: 1%;
-          margin: 1%;
+          padding: var(--ms-space-3);
+          margin: var(--ms-space-3);
 
           .table-headers {
             margin: 0;
@@ -109,7 +113,7 @@
           }
 
           td {
-            padding: 3px;
+            padding: var(--ms-space-1);
           }
         }
       }

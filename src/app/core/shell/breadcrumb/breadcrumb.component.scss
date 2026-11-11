@@ -6,129 +6,97 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
-
-.breadcrumb-wrapper {
-  margin: 0 auto;
-  max-width: 84rem;
-  width: 90%;
-  overflow-wrap: break-word;
-  padding: 1.5rem 0 0.625rem;
-}
-
-.page-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-}
-
-.title-row {
-  display: flex;
-  align-items: stretch;
-}
-
-.breadcrumb-title {
+:host {
   display: block;
-  font-size: 1.625rem;
-  font-weight: 700;
-  color: $dark-grey;
-  letter-spacing: -0.022em;
-  line-height: 1.25;
-  padding-left: 0.75rem;
-  border-left: 3px solid $status-approved;
-  animation: bc-slide-in 0.2s ease-out both;
+  min-width: 0;
+}
+
+/* ---- Trail (top bar) ---- */
+
+.breadcrumb-trail-nav {
+  min-width: 0;
 }
 
 .breadcrumb-trail {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: var(--ms-space-2);
   list-style: none;
-  padding: 0 0 0 calc(0.75rem + 3px);
+  padding: 0;
   margin: 0;
-  gap: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .breadcrumb-item {
   display: flex;
   align-items: center;
-  font-size: 0.8125rem;
-  color: $asbestos;
+  gap: var(--ms-space-2);
+  min-width: 0;
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
+  white-space: nowrap;
+
+  &:last-child {
+    overflow: hidden;
+  }
 }
 
 .breadcrumb-link {
-  display: inline-flex;
-  align-items: center;
-  color: $status-approved;
+  color: var(--ms-color-text-link);
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.125rem 0.3rem;
-  border-radius: 4px;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
+  border-radius: var(--ms-radius-sm);
 
   &:hover {
-    background-color: rgb(68 97 226 / 7%);
-    color: #2d4bc8;
-  }
-
-  &--home {
-    mat-icon {
-      font-size: 1rem;
-      width: 1rem;
-      height: 1rem;
-      line-height: 1;
-    }
+    text-decoration: underline;
   }
 }
 
 .breadcrumb-text {
-  color: $asbestos;
-  padding: 0.125rem 0.3rem;
+  color: var(--ms-color-text-secondary);
 }
 
 .breadcrumb-current {
-  color: $concrete;
-  font-weight: 400;
-  padding: 0.125rem 0.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ms-color-text-secondary);
 }
 
-.breadcrumb-chevron {
-  color: $mid-grey;
-  font-size: 1.15rem;
-  line-height: 1;
-  margin: 0 0.05rem;
+.breadcrumb-separator {
+  color: var(--ms-color-text-secondary);
   user-select: none;
 }
 
-:host-context(.dark-theme) {
-  .breadcrumb-title {
-    color: $white;
-  }
-
-  .breadcrumb-current,
-  .breadcrumb-text {
-    color: $silver;
-  }
-
-  .breadcrumb-link {
-    &:hover {
-      background-color: rgb(68 97 226 / 15%);
-      color: #8ca4f5;
-    }
+/* Narrow screens keep only the current location. */
+@media (width < 768px) {
+  .breadcrumb-item:not(:last-child) {
+    display: none;
   }
 }
 
-@keyframes bc-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-3px);
-  }
+/* ---- Page title (content) ---- */
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-1);
+}
+
+.page-title {
+  margin: 0;
+  font-size: var(--ms-font-size-page-title);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ms-color-text-primary);
+
+  @media (width < 768px) {
+    font-size: 20px;
   }
+}
+
+.page-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
 }

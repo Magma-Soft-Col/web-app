@@ -56,11 +56,11 @@
   }
 
   .error-state {
-    color: var(--mat-sys-error);
+    color: var(--ms-color-danger);
   }
 
   .empty-state {
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--ms-color-text-secondary);
   }
 
   .table-wrapper {
@@ -112,8 +112,8 @@
 
   .detail-panel {
     padding: 16px;
-    border: 1px solid var(--mat-sys-outline-variant);
-    border-radius: 4px;
+    border: 1px solid var(--ms-color-border-subtle);
+    border-radius: var(--ms-radius-control);
   }
 
   .detail-grid {
@@ -127,7 +127,7 @@
 
     dt {
       margin-bottom: 4px;
-      color: var(--mat-sys-on-surface-variant);
+      color: var(--ms-color-text-secondary);
       font-size: 0.875rem;
     }
 
@@ -179,7 +179,7 @@
 
   .print-only {
     display: block;
-    color: #000;
+    color: var(--ms-color-text-primary);
 
     table {
       width: 100%;
@@ -189,7 +189,7 @@
     th,
     td {
       padding: 8px;
-      border: 1px solid #000;
+      border: 1px solid var(--ms-color-border);
       text-align: start;
     }
 

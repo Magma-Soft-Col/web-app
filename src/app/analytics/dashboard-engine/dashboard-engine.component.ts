@@ -62,6 +62,11 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
 
   filtersForm!: UntypedFormGroup;
   visibleWidgets: AnalyticsWidgetDefinition[] = [];
+  /** Reports installed on the server; null until known (or when the list cannot be read). */
+  private availableReports: Set<string> | null = null;
+  private reportsSubscription?: Subscription;
+  /** True once the report list has been read (or failed); widgets load only after that. */
+  private reportsChecked = false;
   widgetStateMap: Record<string, AnalyticsWidgetState> = {};
 
   private filtersSubscription?: Subscription;
@@ -96,18 +101,29 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     this.filtersSubscription = this.filtersForm.valueChanges.subscribe(() => {
+      if (!this.reportsChecked) {
+        return;
+      }
       this.reloadDashboard();
       // Immediately mark for check so Branch dropdown and pin active state update before async reload
       this.changeDetectorRef.markForCheck();
     });
 
-    this.reloadDashboard();
+    // Widgets show as loading until the server's report list is known.
+    this.widgetStateMap = this.loadingStates();
+    this.reportsSubscription = this.analyticsDataSourceService.availableReports().subscribe((available) => {
+      this.availableReports = available;
+      this.reportsChecked = true;
+      this.updateVisibleWidgets();
+      this.reloadDashboard();
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['dashboard']) {
       this.updateVisibleWidgets();
-      if (this.filtersForm) {
+      if (this.filtersForm && this.reportsChecked) {
         this.reloadDashboard();
       }
     }
@@ -122,11 +138,14 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
         },
         { emitEvent: false }
       );
-      this.reloadDashboard();
+      if (this.reportsChecked) {
+        this.reloadDashboard();
+      }
     }
   }
 
   ngOnDestroy(): void {
+    this.reportsSubscription?.unsubscribe();
     if (this.filtersSubscription) {
       this.filtersSubscription.unsubscribe();
     }
@@ -169,16 +188,7 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
 
     const filters = this.filtersForm.getRawValue() as AnalyticsFilters;
 
-    this.widgetStateMap = this.visibleWidgets.reduce(
-      (accumulator, widget) => ({
-        ...accumulator,
-        [widget.id]: {
-          loading: true,
-          empty: false
-        }
-      }),
-      {}
-    );
+    this.widgetStateMap = this.loadingStates();
 
     this.loadSubscription = forkJoin(
       this.visibleWidgets.map((widget) =>
@@ -193,7 +203,8 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
               widgetId: widget.id,
               state: {
                 loading: false,
-                empty: true
+                empty: true,
+                error: true
               }
             });
           })
@@ -245,9 +256,26 @@ export class DashboardEngineComponent implements OnInit, OnChanges, OnDestroy {
     return this.offices[0]?.id ?? null;
   }
 
+  private loadingStates(): Record<string, AnalyticsWidgetState> {
+    return this.visibleWidgets.reduce(
+      (accumulator, widget) => ({
+        ...accumulator,
+        [widget.id]: {
+          loading: true,
+          empty: false
+        }
+      }),
+      {}
+    );
+  }
+
   private updateVisibleWidgets(): void {
-    this.visibleWidgets = (this.dashboard?.widgets || []).filter((widget) =>
+    const permitted = (this.dashboard?.widgets || []).filter((widget) =>
       this.analyticsVisibilityService.canView(widget.visibleTo)
     );
+    const available = this.availableReports;
+    this.visibleWidgets = available
+      ? permitted.filter((widget) => this.analyticsDataSourceService.hasReportsFor(widget, available))
+      : permitted;
   }
 }

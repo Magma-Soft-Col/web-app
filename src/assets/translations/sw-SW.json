@@ -397,7 +397,7 @@
       "reason": "Sababu"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "Imeingia kama",
   "Remember me": "Nikumbuke",
   "errors": {
@@ -899,7 +899,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Mpangaji",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Seva",
       "Username": "Jina la mtumiaji",
@@ -5227,6 +5227,11 @@
       "Please select a delivery method": "Tafadhali chagua njia ya kuwasilisha",
       "Please select a screen report.": "Tafadhali chagua ripoti ya skrini.",
       "Please update your password": "Tafadhali sasisha nenosiri lako",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "Imeendeshwa na",
       "Precedes of": "Hutangulia",
       "Preferences for generating account numbers for client": "Mapendeleo ya kutengeneza nambari za akaunti za mteja, mkopo na akaunti za akiba",

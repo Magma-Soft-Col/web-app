@@ -30,9 +30,11 @@ export class FileUploadComponent implements OnInit {
   /** Form field flex dimension */
   @Input() flex: any;
   @Input() acceptFilter: string;
+  /** Emits the file the user picked, so the host can read or upload it. */
+  @Output() fileSelected = new EventEmitter<File>();
 
   /** Selected file name */
-  fileName: File;
+  fileName: string;
 
   constructor() {}
 
@@ -47,6 +49,13 @@ export class FileUploadComponent implements OnInit {
    * @param {any} event File input change event.
    */
   onFileSelect($event: any) {
-    this.fileName = $event.target.files[0].name;
+    const file: File | undefined = $event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+    this.fileName = file.name;
+    this.fileSelected.emit(file);
+    // Allow picking the same file again after the host rejects or clears it.
+    $event.target.value = '';
   }
 }

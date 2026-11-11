@@ -6,32 +6,45 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+/* Action form (pen form pattern): 2 columns on desktop, 1 below 768px, actions at the foot. */
+.action-form__grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
 
-  .print {
-    align-self: flex-end;
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-::ng-deep mat-card {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-  border: 1px solid var(--border-color, #ddd);
-  border-radius: 8px;
-  background-color: var(--card-background, #fff);
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
+.action-form__contents {
+  display: contents;
 }
 
-::ng-deep .container.m-t-20 mat-card p {
-  display: block;
-  margin-top: -1.9rem;
+.action-form__full {
+  grid-column: 1 / -1;
 }
 
-.actions-spacing {
-  margin-top: 1rem;
-  padding: 0 1rem;
+.action-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+}
+
+.report-output {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
+
+.report-output__toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.report-output__body {
+  overflow-x: auto;
 }

@@ -34,7 +34,7 @@ import {
   MatRowDef,
   MatRow
 } from '@angular/material/table';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -86,6 +86,7 @@ import { LoanAccountTabBaseComponent } from '../loan-account-tab-base.component'
     MatRow,
     MatPaginator,
     MatButton,
+    MatIconButton,
     MatIcon,
     MatMenu,
     MatMenuItem,

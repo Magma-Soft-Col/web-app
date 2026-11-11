@@ -6,69 +6,72 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-@if (enableGlobalDashboard) {
-  <div class="layout-row align-end gap-2px responsive-column container m-b-20">
-    <div #buttonDashboard class="in-block">
-      <button mat-raised-button color="primary" [routerLink]="['/dashboard']">
-        <fa-icon icon="tachometer-alt" class="m-r-10"></fa-icon>
-        {{ 'labels.menus.Global Financial Dashboard' | translate }}
-      </button>
-    </div>
-  </div>
-}
-
 <div class="container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title class="title">
-        {{ 'labels.text.Welcome' | translate }} {{ username }} {{ 'labels.text.To' | translate }}
-        {{ tenant | titlecase }}!
-      </mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content #searchActivity>
-      <div class="layout-column">
-        <mat-form-field>
-          <mat-label>{{ 'labels.placeholders.Search Activity' | translate }}</mat-label>
-          <input matInput [matAutocomplete]="activitySearch" [formControl]="searchText" />
-        </mat-form-field>
+  <div class="ms-page home-page">
+    @if (enableGlobalDashboard) {
+      <div class="ms-actions home-actions">
+        <div #buttonDashboard class="in-block">
+          <button mat-flat-button color="primary" [routerLink]="['/dashboard']">
+            <fa-icon icon="tachometer-alt" class="m-r-10"></fa-icon>
+            {{ 'labels.menus.Global Financial Dashboard' | translate }}
+          </button>
+        </div>
       </div>
+    }
 
-      <mat-autocomplete #activitySearch="matAutocomplete">
-        @for (activity of filteredActivities | async; track activity) {
-          <mat-option [routerLink]="activity.path">
-            <span>{{ activity.activity | translate }}</span>
-          </mat-option>
-        }
-      </mat-autocomplete>
-    </mat-card-content>
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title class="title">
+          {{ 'labels.text.Welcome' | translate }} {{ username }} {{ 'labels.text.To' | translate }}
+          {{ tenant | titlecase }}!
+        </mat-card-title>
+      </mat-card-header>
 
-    <img
-      mat-card-image
-      [src]="'assets/images/' + tenant + '_home.png'"
-      (error)="onImageMissing($event)"
-      alt="Mifos X"
-    />
-  </mat-card>
+      <mat-card-content #searchActivity>
+        <div class="layout-column">
+          <mat-form-field>
+            <mat-label>{{ 'labels.placeholders.Search Activity' | translate }}</mat-label>
+            <input matInput [matAutocomplete]="activitySearch" [formControl]="searchText" />
+          </mat-form-field>
+        </div>
+
+        <mat-autocomplete #activitySearch="matAutocomplete">
+          @for (activity of filteredActivities | async; track activity) {
+            <mat-option [routerLink]="activity.path">
+              <span>{{ activity.activity | translate }}</span>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-card-content>
+
+      <!-- Logo chosen in Settings or a tenant image, else the Magma Soft logo for the active theme. -->
+      @if (homeLogo; as logo) {
+        <img class="home-image" [src]="logo" (error)="onImageMissing()" alt="{{ tenant | titlecase }}" />
+      } @else {
+        <img class="home-image logo-claro" src="assets/images/magma/logo-horizontal.png" alt="Magma Soft" />
+        <img
+          class="home-image logo-oscuro"
+          src="assets/images/magma/logo-horizontal-oscuro.png"
+          alt="Magma Soft"
+        />
+      }
+    </mat-card>
+  </div>
 </div>
 
 <ng-template #popoverButtons let-popover="popover" let-prev="prev" let-next="next">
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     @if (prev) {
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="popover.close(); showPopover(prev.template, prev.target, 'bottom', true)"
-      >
+      <button mat-stroked-button (click)="popover.close(); showPopover(prev.template, prev.target, 'bottom', true)">
         {{ 'labels.buttons.Back' | translate }}
       </button>
     }
     @if (next) {
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         (click)="popover.close(); showPopover(next.template, next.target, 'bottom', true)"
       >
@@ -82,14 +85,14 @@
   <h2>{{ 'labels.heading.Dashboard' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.This will navigate the user to the dashboard component.' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-stroked-button (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateSearchActivity, searchActivity, 'top', true)"
     >
@@ -102,13 +105,13 @@
   <h2>{{ 'labels.heading.Search Activity' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.This will navigate the user to the searched activity.' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); searchActivityBack()">
+    <button mat-stroked-button (click)="popover.close(); searchActivityBack()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

@@ -6,12 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_CASHIER'">
+<div class="container ms-actions page-actions m-b-20">
+  <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_CASHIER'">
     <fa-icon icon="edit" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Edit' | translate }}
   </button>
-  <button mat-raised-button color="warn" (click)="deleteCashier()" *mifosxHasPermission="'DELETECASHIER_TELLER'">
+  <button mat-stroked-button color="warn" (click)="deleteCashier()" *mifosxHasPermission="'DELETECASHIER_TELLER'">
     <fa-icon icon="trash" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Delete' | translate }}
   </button>
@@ -20,63 +20,43 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Name' | translate }}
+      <div class="detail-list">
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Name' | translate }}</span>
+          <span class="ms-value">{{ cashierData.staffName }}</span>
         </div>
 
-        <div class="flex-50">
-          {{ cashierData.staffName }}
-        </div>
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Teller' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ cashierData.tellerName }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Teller' | translate }}</span>
+          <span class="ms-value">{{ cashierData.tellerName }}</span>
         </div>
 
         @if (cashierData.description !== '') {
-          <div class="flex-50 header">
-            {{ 'labels.inputs.Description' | translate }}
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Description' | translate }}</span>
+            <span class="ms-value">{{ cashierData.description }}</span>
           </div>
         }
 
-        @if (cashierData.description !== '') {
-          <div class="flex-50">
-            {{ cashierData.description }}
-          </div>
-        }
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Start Date' | translate }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Start Date' | translate }}</span>
+          <span class="ms-value">{{ cashierData.startDate | dateFormat }}</span>
         </div>
 
-        <div class="flex-50">
-          {{ cashierData.startDate | dateFormat }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.End Date' | translate }}</span>
+          <span class="ms-value">{{ cashierData.endDate | dateFormat }}</span>
         </div>
 
-        <div class="flex-50 header">
-          {{ 'labels.inputs.End Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ cashierData.endDate | dateFormat }}
-        </div>
-
-        <div class="flex-50 header">
-          {{ 'labels.inputs.Full Day/Time' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ cashierData.isFullDay }}
+        <div class="ms-detail-row">
+          <span class="ms-label">{{ 'labels.inputs.Full Day/Time' | translate }}</span>
+          <span class="ms-value">{{ cashierData.isFullDay }}</span>
         </div>
       </div>
     </mat-card-content>
 
-    <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-      <button type="button" color="primary" mat-raised-button [routerLink]="['..']">
+    <mat-card-actions class="ms-form-actions">
+      <button type="button" mat-stroked-button [routerLink]="['..']">
         {{ 'labels.buttons.Back' | translate }}
       </button>
     </mat-card-actions>

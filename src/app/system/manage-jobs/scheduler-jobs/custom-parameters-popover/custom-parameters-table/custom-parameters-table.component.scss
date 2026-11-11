@@ -7,15 +7,19 @@
  */
 
 table td {
-  padding-right: 50px;
+  padding-right: var(--ms-space-8);
 }
 
 .jobs-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--ms-space-3);
 }
 
 .jobs-container table td {
-  padding-right: 50px;
+  padding-right: var(--ms-space-8);
+}
+
+.add-parameter {
+  margin-top: var(--ms-space-3);
 }

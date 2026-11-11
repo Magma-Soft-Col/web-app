@@ -7,9 +7,20 @@
  */
 
 .date-picker {
-  width: 92%;
+  width: 100%;
 }
 
 mat-checkbox {
-  margin-top: 30px;
+  margin-top: var(--ms-space-6);
+}
+
+/* Step navigation (pen form pattern): secondary + primary, right aligned. */
+.step-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+  margin-top: var(--ms-space-6);
+  padding-top: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }

@@ -76,6 +76,8 @@ export interface AnalyticsDetailItem {
 export interface AnalyticsWidgetState {
   loading: boolean;
   empty: boolean;
+  /** The report could not be read; nothing is shown in place of its data. */
+  error?: boolean;
   metricValue?: number;
   contextKey?: string;
   trendPercent?: number;

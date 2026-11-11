@@ -7,12 +7,16 @@
 -->
 
 @if (activeClientMembers) {
-  <div class="layout-row-wrap gap-2percent layout-xs-column">
-    <table class="flex-98" mat-table [dataSource]="dataSource">
+  <div class="ms-panel ms-table-wrap">
+    <table mat-table [dataSource]="dataSource">
       <!-- Check Column -->
       <ng-container matColumnDef="check">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="toggleSelects()" [(ngModel)]="selectAllItems"></mat-checkbox>
+          <mat-checkbox
+            (change)="toggleSelects()"
+            [(ngModel)]="selectAllItems"
+            [attr.aria-label]="'labels.buttons.Select All' | translate"
+          ></mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let element">
           <mat-checkbox (change)="toggleSelect()" [(ngModel)]="element.selected"></mat-checkbox>
@@ -32,7 +36,7 @@
       <ng-container matColumnDef="purpose">
         <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Loan Purpose' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <mat-form-field>
+          <mat-form-field subscriptSizing="dynamic">
             <mat-label>{{ 'labels.inputs.Select Purpose' | translate }}</mat-label>
             <mat-select [(ngModel)]="element.loanPurposeId">
               @for (purpose of loanPurposeOptions; track purpose) {
@@ -46,10 +50,10 @@
       </ng-container>
       <!-- Symbol Column -->
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Original Loan' | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          <mat-form-field>
-            <input type="number" matInput [(ngModel)]="element.principal" />
+        <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Original Loan' | translate }}</th>
+        <td mat-cell class="ms-num" *matCellDef="let element">
+          <mat-form-field subscriptSizing="dynamic">
+            <input type="number" matInput class="ms-num" [(ngModel)]="element.principal" />
           </mat-form-field>
         </td>
       </ng-container>
@@ -59,18 +63,18 @@
   </div>
 }
 
-<div class="layout-row responsive-column align-center gap-2px margin-t stepper-buttons">
-  <button mat-raised-button matStepperPrevious>
-    <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Previous' | translate }}
-  </button>
-  <button mat-raised-button matStepperNext [disabled]="!loansAccountFormValid">
-    {{ 'labels.buttons.Next' | translate }}
-    <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
-  </button>
+<div class="loan-form__actions">
   @if (loanId) {
-    <button mat-raised-button [routerLink]="['../', 'general']">
+    <button mat-stroked-button [routerLink]="['../', 'general']">
       {{ 'labels.buttons.Cancel' | translate }}
     </button>
   }
+  <button mat-stroked-button matStepperPrevious>
+    <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
+    {{ 'labels.buttons.Previous' | translate }}
+  </button>
+  <button mat-flat-button color="primary" matStepperNext [disabled]="!loansAccountFormValid">
+    {{ 'labels.buttons.Next' | translate }}
+    <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
+  </button>
 </div>

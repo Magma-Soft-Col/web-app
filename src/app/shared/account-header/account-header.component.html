@@ -6,30 +6,36 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<mat-card-header class="header layout-column">
-  <mat-card-title-group class="header-title-group">
-    <div class="profile-image-container">
+<!-- Entity header (pen): identification, status and key facts of a client, group or center. -->
+<section class="ms-entity-header account-header">
+  <div class="ms-entity-header__identity account-header__identity">
+    <div class="profile-image-container account-header__media">
       <ng-content select="[accountImage]"></ng-content>
       <ng-content select="[accountImageActions]"></ng-content>
       <ng-content select="[accountImageFooter]"></ng-content>
     </div>
 
-    <div class="mat-typography account-card-title">
-      <mat-card-title class="make-flex content">
-        <h3 class="flex-95">
-          @if (statusCode) {
-            <span class="status-dot m-r-10" [ngClass]="statusCode | statusLookup" [matTooltip]="statusTooltip"></span>
-          }
-          <ng-content select="[accountTitle]"></ng-content>
-        </h3>
-        <div class="flex-5 align-end-center">
-          <ng-content select="[accountMenu]"></ng-content>
-        </div>
-      </mat-card-title>
+    <div class="ms-entity-header__block account-header__main">
+      <h2 class="ms-entity-header__row account-header__title">
+        @if (statusCode) {
+          <span
+            class="account-header__dot"
+            [ngClass]="statusCode | statusLookup"
+            [matTooltip]="statusTooltip"
+            [attr.aria-label]="statusTooltip"
+            role="img"
+          ></span>
+        }
+        <ng-content select="[accountTitle]"></ng-content>
+      </h2>
 
-      <mat-card-subtitle>
+      <div class="account-header__meta">
         <ng-content select="[accountMetadata]"></ng-content>
-      </mat-card-subtitle>
+      </div>
     </div>
-  </mat-card-title-group>
-</mat-card-header>
+  </div>
+
+  <div class="account-header__menu">
+    <ng-content select="[accountMenu]"></ng-content>
+  </div>
+</section>

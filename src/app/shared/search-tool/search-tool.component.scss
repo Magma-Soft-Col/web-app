@@ -6,17 +6,51 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/colours' as *;
-
 // ── Toolbar toggle ────────────────────────────────────────────────────────────
 
 .search-toggle {
-  color: rgb(255 255 255 / 72%);
-  transition: color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ms-space-2);
+  width: 220px;
+  height: 32px;
+  padding: 0 var(--ms-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--ms-radius-control);
+  background: var(--ms-color-surface-subtle);
+  color: var(--ms-color-text-secondary);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--ms-duration-fast) var(--ms-easing),
+    background-color var(--ms-duration-fast) var(--ms-easing);
 
   &:hover {
-    color: $white;
+    border-color: var(--ms-color-border);
+    background: var(--ms-color-surface);
   }
+
+  @media (width < 1024px) {
+    width: 36px;
+    justify-content: center;
+    padding: 0;
+
+    .search-toggle__label {
+      display: none;
+    }
+  }
+}
+
+.search-toggle__icon {
+  font-size: 12px;
+}
+
+.search-toggle__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 // ── Backdrop ──────────────────────────────────────────────────────────────────
@@ -29,23 +63,20 @@
   align-items: flex-start;
   justify-content: center;
   padding-top: clamp(80px, 22vh, 200px);
-  background-color: rgb(6 10 22 / 60%);
-  backdrop-filter: blur(8px);
+  background-color: color-mix(in srgb, var(--ms-color-brand-navy) 45%, transparent);
 }
 
-// ── Spotlight container ───────────────────────────────────────────────────────
+// ── Spotlight container: a floating dialog surface ────────────────────────────
 
 .spotlight-wrap {
   width: 100%;
   max-width: 640px;
-  margin: 0 1.25rem;
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 20px;
-  box-shadow:
-    0 24px 64px rgb(0 0 0 / 52%),
-    0 4px 16px rgb(0 0 0 / 28%);
-  backdrop-filter: blur(24px);
+  margin: 0 var(--ms-space-5);
   overflow: hidden;
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-dialog);
+  box-shadow: var(--ms-shadow-dialog);
 }
 
 // ── Input row ─────────────────────────────────────────────────────────────────
@@ -53,38 +84,30 @@
 .spotlight-row {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
-  padding: 1.125rem 0.875rem 1.125rem 1.375rem;
+  gap: var(--ms-space-3);
+  padding: var(--ms-space-3) var(--ms-space-3) var(--ms-space-3) var(--ms-space-5);
 }
 
 .spotlight-icon {
-  font-size: 1.15rem;
-  color: rgb(255 255 255 / 38%);
   flex-shrink: 0;
+  font-size: 16px;
+  color: var(--ms-color-text-secondary);
 }
 
 .spotlight-input {
   flex: 1;
-  font-size: 1.35rem;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  color: rgb(255 255 255 / 95%) !important;
-  background: transparent !important;
+  min-width: 0;
+  padding: 0;
   border: none;
   outline: none;
-  padding: 0;
+  background: transparent;
+  color: var(--ms-color-text-primary);
+  font: inherit;
+  font-size: 17px;
   line-height: 1.4;
 
   &::placeholder {
-    color: rgb(255 255 255 / 20%) !important;
-    font-weight: 300;
-  }
-
-  &:-webkit-autofill,
-  &:-webkit-autofill:focus {
-    box-shadow: 0 0 0 100px transparent inset;
-    -webkit-text-fill-color: rgb(255 255 255 / 95%);
-    transition: background-color 5000s;
+    color: var(--ms-color-text-disabled);
   }
 }
 
@@ -95,29 +118,28 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: var(--ms-control-height);
+  height: var(--ms-control-height);
   border: none;
-  background-color: $status-approved !important;
-  color: $white !important;
+  border-radius: var(--ms-radius-md);
+  background-color: var(--ms-color-brand-primary);
+  color: var(--ms-color-on-primary);
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    transform 0.1s ease;
+  transition: background-color var(--ms-duration-fast) var(--ms-easing);
 
   mat-icon {
-    font-size: 1.15rem;
-    width: 1.15rem;
-    height: 1.15rem;
-    line-height: 1.15;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 1;
   }
 
   &:hover {
-    background-color: #2d4bc8 !important;
+    background-color: var(--ms-color-brand-primary-hover);
   }
 
-  &:active {
-    transform: scale(0.91);
+  &:focus-visible {
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: 2px;
   }
 }

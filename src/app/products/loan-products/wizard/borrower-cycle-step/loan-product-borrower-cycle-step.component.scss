@@ -9,13 +9,13 @@
 .borrower-cycle {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--ms-space-8);
 }
 
 .borrower-cycle__section {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--ms-space-3);
 }
 
 .borrower-cycle__header {
@@ -23,18 +23,21 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--ms-space-4);
 }
 
 .borrower-cycle__heading {
-  margin: 0;
-  font-weight: 500;
+  font-size: var(--ms-font-size-body);
 }
 
 /* The five value columns plus the actions cell overflow a narrow viewport, so the table scrolls
    inside its own wrapper rather than widening the wizard panel. */
 .borrower-cycle__table-wrapper {
   overflow-x: auto;
+}
+
+.ms-num {
+  text-align: right;
 }
 
 .borrower-cycle__table {
@@ -44,13 +47,15 @@
 
 .borrower-cycle__empty {
   margin: 0;
-  opacity: 0.7;
+  padding: var(--ms-space-5) var(--ms-space-4);
+  border: 1px dashed var(--ms-color-border);
+  border-radius: var(--ms-radius-md);
 }
 
 .borrower-cycle__error {
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--mat-sys-error, #b3261e);
-  font-size: 0.875rem;
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-table);
 }

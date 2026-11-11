@@ -6,7 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-fa-icon {
-  position: relative;
-  left: 5%;
+/* The stepper is the form panel (pen: white surface, hairline border). */
+.product-stepper {
+  --mat-stepper-container-color: var(--ms-color-surface);
+
+  padding: var(--ms-space-2) 0;
 }

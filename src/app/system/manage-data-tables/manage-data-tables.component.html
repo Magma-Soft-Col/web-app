@@ -6,49 +6,64 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row align-end gap-20px">
-  <div #createDatatableRef class="in-block">
-    <button mat-raised-button color="primary" [routerLink]="['create']" *mifosxHasPermission="'CREATE_DATATABLE'">
-      <fa-icon icon="plus" class="m-r-10"></fa-icon>
-      {{ 'labels.buttons.Create Data Table' | translate }}
-    </button>
-  </div>
-</div>
-
 <div class="container">
-  <div #filter class="layout-row gap-20px">
-    <mat-form-field class="flex-fill">
-      <mat-label>{{ 'labels.inputs.Filter' | translate }}</mat-label>
-      <input matInput (keyup)="applyFilter($event.target.value)" />
-    </mat-form-field>
-  </div>
+  <div class="ms-page">
+    <div class="ms-list-toolbar">
+      <div class="ms-filter-bar">
+        <div #filter class="ms-search">
+          <fa-icon icon="search" class="ms-search__icon" aria-hidden="true"></fa-icon>
+          <input
+            type="search"
+            (keyup)="applyFilter($any($event.target).value)"
+            [placeholder]="'labels.inputs.Filter' | translate"
+            [attr.aria-label]="'labels.inputs.Filter' | translate"
+          />
+        </div>
+      </div>
+      <div class="ms-actions">
+        <div #createDatatableRef class="in-block">
+          <button mat-flat-button color="primary" [routerLink]="['create']" *mifosxHasPermission="'CREATE_DATATABLE'">
+            <fa-icon icon="plus" class="m-r-10"></fa-icon>
+            {{ 'labels.buttons.Create Data Table' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <div #datatablesList class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="registeredTableName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Data Table Name' | translate }}</th>
-        <td mat-cell *matCellDef="let dataTable">{{ dataTable.registeredTableName }}</td>
-      </ng-container>
+    <div #datatablesList class="ms-panel">
+      <div class="ms-table-wrap">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="registeredTableName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Data Table Name' | translate }}</th>
+            <td mat-cell *matCellDef="let dataTable" class="ms-cell-name">{{ dataTable.registeredTableName }}</td>
+          </ng-container>
 
-      <ng-container matColumnDef="applicationTableName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Associated With' | translate }}</th>
-        <td mat-cell *matCellDef="let dataTable">{{ dataTable.applicationTableName }}</td>
-      </ng-container>
+          <ng-container matColumnDef="applicationTableName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Associated With' | translate }}</th>
+            <td mat-cell *matCellDef="let dataTable">{{ dataTable.applicationTableName }}</td>
+          </ng-container>
 
-      <ng-container matColumnDef="entitySubType">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Sub Type' | translate }}</th>
-        <td mat-cell *matCellDef="let dataTable">{{ dataTable.entitySubType }}</td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        [routerLink]="[row.registeredTableName]"
-        class="select-row"
-      ></tr>
-    </table>
+          <ng-container matColumnDef="entitySubType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Sub Type' | translate }}</th>
+            <td mat-cell *matCellDef="let dataTable">{{ dataTable.entitySubType }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [routerLink]="[row.registeredTableName]"
+            class="select-row"
+          ></tr>
+          <tr class="mat-mdc-row" *matNoDataRow>
+            <td class="mat-mdc-cell ms-empty-cell" [attr.colspan]="displayedColumns.length">
+              {{ 'labels.text.No results found' | translate }}
+            </td>
+          </tr>
+        </table>
+      </div>
 
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
 </div>
 
@@ -56,14 +71,14 @@
   <h2>{{ 'labels.buttons.Create Data Table' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.Launch a page that create new data table' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateFilter, filter, 'bottom', true)"
     >
@@ -75,18 +90,18 @@
 <ng-template #templateFilter let-popover="popover">
   <h4>{{ 'labels.heading.Search bar to filter datatables' | translate }}</h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateCreateDatatableRef, createDatatableRef, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateDatatablesList, datatablesList, 'top', true)"
     >
@@ -98,17 +113,17 @@
 <ng-template #templateDatatablesList let-popover="popover">
   <h4>{{ 'labels.heading.List of all currently available data tables' | translate }}</h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateFilter, filter, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

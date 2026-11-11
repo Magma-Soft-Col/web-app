@@ -35,9 +35,11 @@ body {
   }
 }
 
+// Page content fills the shell work area, which already provides the page padding.
 .container {
-  max-width: 78rem;
-  width: 90%;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
 }
 
 .mw300 {

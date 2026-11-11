@@ -275,16 +275,16 @@ export class ClientTrendsBarComponent implements OnInit {
             {
               label: 'New Clients',
               data: clientCounts,
-              backgroundColor: 'dodgerblue',
-              borderColor: 'dodgerblue',
+              backgroundColor: '#315E9E',
+              borderColor: '#315E9E',
               borderWidth: 2,
               fill: false
             },
             {
               label: 'Loans Disbursed',
               data: loanCounts,
-              backgroundColor: 'red',
-              borderColor: 'red',
+              backgroundColor: '#18794E',
+              borderColor: '#18794E',
               borderWidth: 2,
               fill: false
             }
@@ -305,7 +305,7 @@ export class ClientTrendsBarComponent implements OnInit {
               title: {
                 display: true,
                 text: 'Values',
-                color: '#1074B9'
+                color: '#596779'
               }
             }
           }
@@ -323,7 +323,7 @@ export class ClientTrendsBarComponent implements OnInit {
    * Gets the legend color based on the current theme.
    */
   private getLegendColor(): string {
-    return this.currentTheme === 'dark-theme' ? 'white' : '#666';
+    return this.currentTheme === 'dark-theme' ? '#9FADBF' : '#596779';
   }
 
   /**

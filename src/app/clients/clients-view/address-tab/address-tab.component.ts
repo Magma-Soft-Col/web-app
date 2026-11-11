@@ -36,7 +36,6 @@ import {
   MatExpansionPanelTitle,
   MatExpansionPanelDescription
 } from '@angular/material/expansion';
-import { MatDivider } from '@angular/material/divider';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { AddressLocationMapComponent } from './address-location-map/address-location-map.component';
@@ -63,7 +62,6 @@ import { YesnoPipe } from 'app/pipes/yesno.pipe';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    MatDivider,
     MatSlideToggle,
     AddressLocationMapComponent,
     YesnoPipe

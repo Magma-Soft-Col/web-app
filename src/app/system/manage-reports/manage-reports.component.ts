@@ -47,7 +47,6 @@ import { AlertService } from '../../core/alert/alert.service';
 import { CompletionDialogComponent } from '../../configuration-wizard/completion-dialog/completion-dialog.component';
 import { UploadReportFileDialogComponent } from './upload-report-file-dialog/upload-report-file-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -68,7 +67,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

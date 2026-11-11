@@ -10,16 +10,16 @@
   @for (section of sections; track section.key) {
     <div class="borrower-cycle__section">
       <div class="borrower-cycle__header">
-        <h4 class="borrower-cycle__heading">{{ section.heading | translate }}</h4>
-        <button type="button" mat-raised-button color="primary" (click)="add(section)">
+        <h4 class="ms-section-title borrower-cycle__heading">{{ section.heading | translate }}</h4>
+        <button type="button" mat-stroked-button (click)="add(section)">
           <fa-icon icon="plus" class="m-r-10"></fa-icon>
           {{ 'labels.buttons.Add' | translate }}
         </button>
       </div>
 
       @if (rowsFor(section.key).length) {
-        <div class="borrower-cycle__table-wrapper">
-          <table class="mat-elevation-z1 borrower-cycle__table" mat-table [dataSource]="rowsFor(section.key)">
+        <div class="ms-panel ms-table-wrap borrower-cycle__table-wrapper">
+          <table class="borrower-cycle__table" mat-table [dataSource]="rowsFor(section.key)">
             <ng-container matColumnDef="valueConditionType">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Condition' | translate }}</th>
               <td mat-cell *matCellDef="let variation">
@@ -28,19 +28,19 @@
             </ng-container>
             <ng-container matColumnDef="borrowerCycleNumber">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Loan Cycle' | translate }}</th>
-              <td mat-cell *matCellDef="let variation">{{ variation.borrowerCycleNumber }}</td>
+              <td mat-cell *matCellDef="let variation" class="ms-num">{{ variation.borrowerCycleNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="minValue">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Minimum' | translate }}</th>
-              <td mat-cell *matCellDef="let variation">{{ variation.minValue }}</td>
+              <td mat-cell *matCellDef="let variation" class="ms-num">{{ variation.minValue }}</td>
             </ng-container>
             <ng-container matColumnDef="defaultValue">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Default' | translate }}</th>
-              <td mat-cell *matCellDef="let variation">{{ variation.defaultValue }}</td>
+              <td mat-cell *matCellDef="let variation" class="ms-num">{{ variation.defaultValue }}</td>
             </ng-container>
             <ng-container matColumnDef="maxValue">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Maximum' | translate }}</th>
-              <td mat-cell *matCellDef="let variation">{{ variation.maxValue }}</td>
+              <td mat-cell *matCellDef="let variation" class="ms-num">{{ variation.maxValue }}</td>
             </ng-container>
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
@@ -70,7 +70,7 @@
           </table>
         </div>
       } @else {
-        <p class="borrower-cycle__empty">{{ 'labels.text.No variations added yet' | translate }}</p>
+        <p class="ms-empty borrower-cycle__empty">{{ 'labels.text.No variations added yet' | translate }}</p>
       }
 
       @if (sectionErrorKey(section); as errorKey) {

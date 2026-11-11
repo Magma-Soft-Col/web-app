@@ -56,6 +56,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ExternalIdentifierComponent } from '../../../shared/external-identifier/external-identifier.component';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { FormatNumberPipe } from '../../../pipes/format-number.pipe';
@@ -92,6 +93,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ExternalIdentifierComponent,
     MatMenuTrigger,
     MatIcon,
+    MatIconButton,
     MatMenu,
     MatMenuItem,
     FaIconComponent,

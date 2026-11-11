@@ -7,8 +7,10 @@
  */
 
 body {
-  table {
-    border: 1px solid rgba($color: #000, $alpha: 12%);
+  // Legacy native tables get a hairline; mat-table and .ms-table sit inside
+  // pen panels, which already draw the frame.
+  table:not(.mat-mdc-table, .ms-table) {
+    border: 1px solid var(--ms-color-border-subtle);
   }
 }
 
@@ -77,28 +79,28 @@ body {
 }
 
 .border-black {
-  border-color: black;
+  border-color: var(--ms-color-text-primary);
 }
 
 .border-light-grey {
-  border-color: #e5e5e5;
+  border-color: var(--ms-color-border-subtle);
 }
 
 .border-medium-grey {
-  border-color: #ccc;
+  border-color: var(--ms-color-border);
 }
 
 .border-grey {
-  border-color: #999;
+  border-color: var(--ms-color-text-disabled);
 }
 
 .border-dark-grey {
-  border-color: #2222;
+  border-color: var(--ms-color-text-secondary);
 }
 
 .border-white,
 .border-fff {
-  border-color: #fff;
+  border-color: var(--ms-color-surface);
 }
 
 .no-border-radius {
@@ -106,13 +108,13 @@ body {
 }
 
 .radius3 {
-  border-radius: 3px;
+  border-radius: var(--ms-radius-sm);
 }
 
 .radius5 {
-  border-radius: 5px;
+  border-radius: var(--ms-radius-control);
 }
 
 .radius10 {
-  border-radius: 10px;
+  border-radius: var(--ms-radius-panel);
 }

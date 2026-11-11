@@ -24,7 +24,6 @@ import { FormfieldBase } from 'app/shared/form-dialog/formfield/model/formfield-
 import { SelectBase } from 'app/shared/form-dialog/formfield/model/select-base';
 import { TranslateService } from '@ngx-translate/core';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
-import { MatDivider } from '@angular/material/divider';
 import { GlAccountSelectorComponent } from '../../../../shared/accounting/gl-account-selector/gl-account-selector.component';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -53,7 +52,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatRadioGroup,
     MatRadioButton,
-    MatDivider,
     GlAccountSelectorComponent,
     MatCheckbox,
     FaIconComponent,

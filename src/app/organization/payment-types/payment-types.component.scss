@@ -6,19 +6,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.table-container {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 table {
   width: 100%;
 }
 
-.true {
-  color: #32cd32;
-}
-
-.false {
-  color: #f44366;
+.row-actions {
+  white-space: nowrap;
 }

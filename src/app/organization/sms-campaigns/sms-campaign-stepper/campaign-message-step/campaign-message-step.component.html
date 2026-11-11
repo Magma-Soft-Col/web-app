@@ -6,15 +6,15 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-column">
-  <mat-form-field class="flex-98">
+<div class="step-content">
+  <mat-form-field class="ms-form-full">
     <mat-label>{{ 'labels.inputs.Campaign Message' | translate }}</mat-label>
     <textarea matInput [formControl]="message"></textarea>
   </mat-form-field>
 
-  <h3 class="mat-h3 flex-98">{{ 'labels.heading.Template Parameters' | translate }}</h3>
+  <h3 class="ms-subsection-title">{{ 'labels.heading.Template Parameters' | translate }}</h3>
 
-  <div class="layout-row-wrap layout-xs-column layout-align-center">
+  <div class="parameter-list">
     @for (label of parameterLabels; track label) {
       <button mat-stroked-button color="primary" class="parameter" (click)="addText(label)">
         {{ label }}
@@ -22,12 +22,12 @@
     }
   </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious>
+  <div class="ms-form-actions">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext [disabled]="!smsCampaignFormValid">
+    <button mat-flat-button color="primary" matStepperNext [disabled]="!smsCampaignFormValid">
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

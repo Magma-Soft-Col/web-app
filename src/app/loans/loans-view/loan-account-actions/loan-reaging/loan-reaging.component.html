@@ -6,12 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     @if (loanTransactionData !== null) {
       <form [formGroup]="reagingLoanForm" (ngSubmit)="submit()">
         <mat-card-content>
-          <div class="layout-column">
+          <div class="loan-form__grid">
             <mifosx-input-positive-integer
               [inputFormControl]="reagingLoanForm.controls.numberOfInstallments"
               [inputLabel]="'Number of Installments'"
@@ -85,7 +85,7 @@
               <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
               <input matInput formControlName="note" />
             </mat-form-field>
-            <div class="flex-fill">
+            <div class="flex-fill loan-form__full">
               <span class="expandcollapsebutton m-l-10 m-t-5 m-b-5 flex-75" (click)="displayTransactionAmount()">
                 <mat-slide-toggle>
                   <div>
@@ -105,27 +105,26 @@
               </mifosx-input-amount>
             }
           </div>
-          <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-            <button type="button" mat-raised-button (click)="gotoLoanDefaultView()">
+          <mat-card-actions class="loan-form__actions">
+            <button type="button" mat-stroked-button (click)="gotoLoanDefaultView()">
               {{ 'labels.buttons.Cancel' | translate }}
             </button>
             <button
-              mat-raised-button
-              color="primary"
-              [disabled]="!reagingLoanForm.valid"
-              *mifosxHasPermission="'REAGING_LOAN'"
-            >
-              {{ 'labels.buttons.Submit' | translate }}
-            </button>
-            <button
               type="button"
-              mat-raised-button
-              color="accent"
+              mat-stroked-button
               [disabled]="!reagingLoanForm.valid"
               *mifosxHasPermission="'REAGING_LOAN'"
               (click)="preview()"
             >
               {{ 'labels.buttons.Preview' | translate }}
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              [disabled]="!reagingLoanForm.valid"
+              *mifosxHasPermission="'REAGING_LOAN'"
+            >
+              {{ 'labels.buttons.Submit' | translate }}
             </button>
           </mat-card-actions>
         </mat-card-content>

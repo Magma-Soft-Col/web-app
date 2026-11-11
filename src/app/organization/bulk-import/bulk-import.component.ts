@@ -8,8 +8,6 @@
 
 /** Angular Imports */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -22,17 +20,11 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./bulk-import.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatNavList,
-    MatListItem,
-    MatIcon,
     FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BulkImportComponent {
-  // Initialize an array of 17 boolean values, all set to false
-  arrowBooleans: boolean[] = new Array(17).fill(false);
-
   /** Bulk Import Options */
   bulkImportOptions = [
     {
@@ -176,13 +168,4 @@ export class BulkImportComponent {
   ];
 
   constructor() {}
-
-  /**
-   * Popover function
-   * @param arrowNumber - The index of the boolean value to toggle.
-   */
-  arrowBooleansToggle(arrowNumber: number) {
-    // Toggle the boolean value at the given index
-    this.arrowBooleans[arrowNumber] = !this.arrowBooleans[arrowNumber];
-  }
 }

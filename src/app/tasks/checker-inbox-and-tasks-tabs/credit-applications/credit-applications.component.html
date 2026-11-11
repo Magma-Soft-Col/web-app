@@ -6,11 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
+<div class="ms-page tasks-tab">
   <form
     [formGroup]="creditApplicationsForm"
     (ngSubmit)="applyFilters()"
-    class="credit-applications-filter"
+    class="ms-panel ms-panel--padded credit-applications-filter"
     [class.credit-search-filter]="isCreditSearch || isMassRejection"
   >
     <mat-form-field>
@@ -126,29 +126,33 @@
     }
 
     <div class="filter-actions">
-      <button mat-raised-button color="primary" type="submit">
+      <button mat-stroked-button type="button" (click)="clearFilters()">
+        {{ 'labels.buttons.Clear' | translate }}
+      </button>
+      <button mat-flat-button color="primary" type="submit">
         {{
           (isCreditSearch || isMassRejection ? 'labels.buttons.Advanced Search' : 'labels.buttons.Search') | translate
         }}
       </button>
-      <button mat-button type="button" (click)="clearFilters()">{{ 'labels.buttons.Clear' | translate }}</button>
     </div>
   </form>
 
   @if (filterError) {
-    <div class="alert error">
+    <div class="tasks-notice tasks-notice--error">
       <div class="message">
         <i class="fa fa-exclamation-circle alert-check"></i>
         {{ filterError | translate }}
         @if (loadFailed) {
-          <button mat-button type="button" (click)="retryLoad()">{{ 'labels.buttons.Retry' | translate }}</button>
+          <button mat-stroked-button type="button" (click)="retryLoad()">
+            {{ 'labels.buttons.Retry' | translate }}
+          </button>
         }
       </div>
     </div>
   }
 
   @if (loading) {
-    <div class="alert">
+    <div class="tasks-notice">
       <div class="message">
         <i class="fa fa-circle-notch fa-spin alert-check"></i>
         {{ 'labels.text.Loading credit applications' | translate }}
@@ -157,7 +161,7 @@
   }
 
   @if (rejectionResultMessage) {
-    <div class="alert" [class.error]="rejectionResultType === 'error'">
+    <div class="tasks-notice" [class.tasks-notice--error]="rejectionResultType === 'error'">
       <div class="message">
         <i
           class="fa alert-check"
@@ -183,7 +187,7 @@
         {{ selectedApplicationIds.size }}
       </span>
       <button
-        mat-raised-button
+        mat-flat-button
         color="warn"
         type="button"
         [disabled]="selectedApplicationIds.size === 0 || rejecting || confirmingRejection"
@@ -197,118 +201,121 @@
     </div>
   }
 
-  <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
-      <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox
-            [checked]="allVisibleSelected()"
-            [indeterminate]="partiallyVisibleSelected()"
-            [disabled]="visibleRejectableApplications().length === 0 || rejecting"
-            (click)="$event.stopPropagation()"
-            (change)="toggleVisibleSelection($event.checked)"
-          >
-          </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let application">
-          <mat-checkbox
-            [checked]="isSelected(application)"
-            [disabled]="!isRejectable(application) || rejecting"
-            (click)="$event.stopPropagation()"
-            (change)="toggleSelection(application, $event.checked)"
-          >
-          </mat-checkbox>
-        </td>
-      </ng-container>
+  <div class="ms-panel">
+    <div class="ms-table-wrap">
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              [checked]="allVisibleSelected()"
+              [indeterminate]="partiallyVisibleSelected()"
+              [disabled]="visibleRejectableApplications().length === 0 || rejecting"
+              (click)="$event.stopPropagation()"
+              (change)="toggleVisibleSelection($event.checked)"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let application">
+            <mat-checkbox
+              [checked]="isSelected(application)"
+              [disabled]="!isRejectable(application) || rejecting"
+              (click)="$event.stopPropagation()"
+              (change)="toggleSelection(application, $event.checked)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="accountNo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="accountNo">
-          {{ 'labels.inputs.Application / Account No.' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application" class="view-details">
-          {{ application.accountNo || application.loanId }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="accountNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="accountNo">
+            {{ 'labels.inputs.Application / Account No.' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application" class="view-details">
+            {{ application.accountNo || application.loanId }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="clientName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="clientName">
-          {{ 'labels.inputs.Customer' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">{{ application.clientName }}</td>
-      </ng-container>
+        <ng-container matColumnDef="clientName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="clientName">
+            {{ 'labels.inputs.Customer' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application">{{ application.clientName }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="clientType">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="clientTypeId">
-          {{ 'labels.inputs.Customer Type' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">{{ clientTypeName(application.clientTypeId) }}</td>
-      </ng-container>
+        <ng-container matColumnDef="clientType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="clientTypeId">
+            {{ 'labels.inputs.Customer Type' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application">{{ clientTypeName(application.clientTypeId) }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="productName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="productName">
-          {{ 'labels.inputs.Product' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">{{ application.productName }}</td>
-      </ng-container>
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="productName">
+            {{ 'labels.inputs.Product' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application">{{ application.productName }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="amount">{{ 'labels.inputs.Amount' | translate }}</th>
-        <td mat-cell *matCellDef="let application">{{ application.amount | formatNumber }}</td>
-      </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="amount" class="ms-num">
+            {{ 'labels.inputs.Amount' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application" class="ms-num">{{ application.amount | formatNumber }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="currencyCode">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="currencyCode">
-          {{ 'labels.inputs.Currency' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">{{ application.currencyCode }}</td>
-      </ng-container>
+        <ng-container matColumnDef="currencyCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="currencyCode">
+            {{ 'labels.inputs.Currency' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application">{{ application.currencyCode }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="submittedOnDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="submittedOnDate">
-          {{ 'labels.inputs.Submitted Date' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">{{ application.submittedOnDate | dateFormat }}</td>
-      </ng-container>
+        <ng-container matColumnDef="submittedOnDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="submittedOnDate">
+            {{ 'labels.inputs.Submitted Date' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let application">{{ application.submittedOnDate | dateFormat }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.State / Municipality' | translate }}</th>
-        <td mat-cell *matCellDef="let application">
-          {{ stateName(application.stateProvinceId)
-          }}{{ application.stateProvinceId && application.municipality ? ' / ' : '' }}{{ application.municipality }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.State / Municipality' | translate }}</th>
+          <td mat-cell *matCellDef="let application">
+            {{ stateName(application.stateProvinceId)
+            }}{{ application.stateProvinceId && application.municipality ? ' / ' : '' }}{{ application.municipality }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="status">{{ 'labels.inputs.Status' | translate }}</th>
-        <td mat-cell *matCellDef="let application">{{ statusLabel(application.status) }}</td>
-      </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="status">{{ 'labels.inputs.Status' | translate }}</th>
+          <td mat-cell *matCellDef="let application">
+            <span class="ms-badge">{{ statusLabel(application.status) }}</span>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        [class.clickable-row]="row.loanId"
-        (click)="viewCreditApplication(row)"
-      ></tr>
-    </table>
-  </div>
-
-  @if (!loading && !loadFailed && dataSource.data.length === 0) {
-    <div class="alert">
-      <div class="message">
-        <i class="fa fa-exclamation-circle alert-check"></i>
-        {{ 'labels.text.No credit applications found' | translate }}
-      </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [class.clickable-row]="row.loanId"
+          (click)="viewCreditApplication(row)"
+        ></tr>
+      </table>
     </div>
-  }
 
-  <mat-paginator
-    [length]="totalFilteredRecords"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="[10, 25, 50, 100]"
-    showFirstLastButtons
-    (page)="changePaging($event)"
-  >
-  </mat-paginator>
+    @if (!loading && !loadFailed && dataSource.data.length === 0) {
+      <div class="ms-empty">
+        <strong>{{ 'labels.text.No credit applications found' | translate }}</strong>
+      </div>
+    }
+
+    <mat-paginator
+      [length]="totalFilteredRecords"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+      (page)="changePaging($event)"
+    >
+    </mat-paginator>
+  </div>
 </div>

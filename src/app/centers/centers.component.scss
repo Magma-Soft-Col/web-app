@@ -6,13 +6,62 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/entity-list';
+/* Center list (pen list pattern): toolbar, table panel and paginator come from the global layer. */
+.entity-list .ms-search input {
+  padding-right: var(--ms-space-8);
+}
 
-/* Shared entity-list system: tokens + toolbar/rows/pager/empty state. */
-@include entity-list.tokens;
-@include entity-list.list;
+.entity-list__clear {
+  position: absolute;
+  right: var(--ms-space-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--ms-radius-control);
+  background: transparent;
+  color: var(--ms-color-text-secondary);
+  cursor: pointer;
 
-/* Secondary search box (external id) next to the name search */
-.search.secondary {
-  flex: 0 1 240px;
+  &:hover {
+    background: var(--ms-color-surface-hover);
+    color: var(--ms-color-text-primary);
+  }
+}
+
+.entity-list__toggle {
+  font-size: 13px;
+  color: var(--ms-color-text-secondary);
+}
+
+.entity-list__count {
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
+
+  strong {
+    color: var(--ms-color-text-primary);
+    font-weight: 600;
+  }
+}
+
+.entity-list__table {
+  width: 100%;
+}
+
+.entity-list__name {
+  display: block;
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
+
+.entity-list__meta {
+  display: block;
+  font-size: var(--ms-font-size-caption);
+  color: var(--ms-color-text-secondary);
+}
+
+.entity-list__muted {
+  color: var(--ms-color-text-secondary);
 }

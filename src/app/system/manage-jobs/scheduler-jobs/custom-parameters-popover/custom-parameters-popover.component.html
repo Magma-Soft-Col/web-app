@@ -32,12 +32,12 @@
   }
 </mat-list>
 
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="runSelectedJobs()">
+<mat-dialog-actions align="end">
+  <button mat-stroked-button [mat-dialog-close]="{ show: 0 }">
+    {{ 'labels.buttons.Close Custom Parameters' | translate }}
+  </button>
+  <button mat-flat-button color="primary" (click)="runSelectedJobs()">
     <fa-icon icon="play" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Run Selected Jobs' | translate }}
-  </button>
-  <button mat-raised-button color="warn" [mat-dialog-close]="{ show: 0 }">
-    {{ 'labels.buttons.Close Custom Parameters' | translate }}
   </button>
 </mat-dialog-actions>

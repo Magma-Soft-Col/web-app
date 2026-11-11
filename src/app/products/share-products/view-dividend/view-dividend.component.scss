@@ -6,6 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-list-table {
   width: 100%;
+}
+
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
+}
+
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-num {
+  text-align: right;
 }

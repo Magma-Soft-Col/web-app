@@ -5,3 +5,21 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+
+// Label/value pairs of the guarantor, one per row.
+.guarantor-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+  margin: 0;
+}
+
+.guarantor-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  dd {
+    margin: 0;
+  }
+}

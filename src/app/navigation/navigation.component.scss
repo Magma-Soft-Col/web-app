@@ -6,56 +6,36 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Component-specific styles - minimal overrides
-// Leverages global layout classes from main.scss
-
 :host {
   display: block;
 }
 
-.container {
-  width: 100%;
-}
-
-// Using existing .layout-row-wrap.responsive-column from global styles
-// Only adding specific alignment needed for this component
 .layout-row-wrap.responsive-column {
   align-items: flex-start;
+  gap: var(--ms-space-6);
 }
 
-// Extending global .flex-48 with min-width constraint for this component
 .flex-48 {
   min-width: 20rem;
-
-  @media (width >= 1200px) {
-    flex-basis: 48%;
-  }
+  flex: 1 1 0;
 }
 
 mat-card {
-  padding: 1rem;
-  border-radius: 0.5rem;
   overflow: hidden;
 }
 
 mat-card-content {
   display: grid;
   grid-template-columns: 100%;
+  gap: 0 var(--ms-space-4);
+  padding: var(--ms-space-5);
 
   @media (width >= 768px) {
-    grid-template-columns: 50% 50%;
-  }
-
-  @media (width >= 1200px) {
-    grid-template-columns: 50% 50%;
-    gap: 1rem;
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 mat-form-field {
   width: 100%;
-}
-
-mat-label {
-  letter-spacing: 0.0125rem;
 }

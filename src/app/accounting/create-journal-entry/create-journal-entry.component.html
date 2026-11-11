@@ -10,8 +10,8 @@
   <mat-card>
     <form [formGroup]="journalEntryForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div #createJournalFormRef class="layout-row-wrap responsive-column gap-2percent">
-          <mat-form-field class="flex-48">
+        <div #createJournalFormRef class="ms-form-grid">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="officeId">
               @for (office of officeData; track office) {
@@ -28,7 +28,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-24">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Currency' | translate }}</mat-label>
             <mat-select required formControlName="currencyCode">
               @for (currency of currencyData; track currency) {
@@ -46,24 +46,24 @@
           </mat-form-field>
 
           @if (assetExternalizationEnabled) {
-            <mat-form-field class="flex-23">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.External Asset Owner' | translate }}</mat-label>
               <input matInput formControlName="externalAssetOwner" />
             </mat-form-field>
           }
 
           @for (debit of debits.controls; track debit; let i = $index) {
-            <div class="flex-fill layout-row-wrap responsive-column" formArrayName="debits">
-              <div class="flex-fill layout-row-wrap gap-2percent responsive-column" [formGroupName]="i">
+            <div class="ms-form-full" formArrayName="debits">
+              <div class="entry-row" [formGroupName]="i">
                 <mifosx-gl-account-selector
-                  class="flex-48"
+                  class="entry-row__account"
                   [inputFormControl]="debits.at(i).controls.glAccountId"
                   [glAccountList]="glAccountData"
                   [required]="true"
                   [inputLabel]="'Affected GL Entry (Debit)'"
                 >
                 </mifosx-gl-account-selector>
-                <mat-form-field class="flex-48">
+                <mat-form-field>
                   <mat-label>{{ 'labels.inputs.Debit Amount' | translate }}</mat-label>
                   <input
                     type="number"
@@ -80,14 +80,25 @@
                     </mat-error>
                   }
                 </mat-form-field>
-                <span class="flex-fill">
+                <span class="entry-row__action">
                   @if (i !== 0) {
-                    <button type="button" mat-icon-button (click)="removeAffectedGLEntry(debits, i)">
+                    <button
+                      type="button"
+                      mat-icon-button
+                      (click)="removeAffectedGLEntry(debits, i)"
+                      [attr.aria-label]="'labels.buttons.Remove' | translate"
+                    >
                       <fa-icon icon="minus-circle" size="lg"></fa-icon>
                     </button>
                   }
                   @if (i === 0) {
-                    <button type="button" mat-icon-button color="primary" (click)="addAffectedGLEntry(debits)">
+                    <button
+                      type="button"
+                      mat-icon-button
+                      color="primary"
+                      (click)="addAffectedGLEntry(debits)"
+                      [attr.aria-label]="'labels.buttons.Add' | translate"
+                    >
                       <fa-icon icon="plus-circle" size="lg"></fa-icon>
                     </button>
                   }
@@ -97,17 +108,17 @@
           }
 
           @for (credit of credits.controls; track credit; let i = $index) {
-            <div class="flex-fill layout-row-wrap responsive-column" formArrayName="credits">
-              <div class="flex-fill layout-row-wrap gap-2percent responsive-column" [formGroupName]="i">
+            <div class="ms-form-full" formArrayName="credits">
+              <div class="entry-row" [formGroupName]="i">
                 <mifosx-gl-account-selector
-                  class="flex-48"
+                  class="entry-row__account"
                   [inputFormControl]="credits.at(i).controls.glAccountId"
                   [glAccountList]="glAccountData"
                   [required]="true"
                   [inputLabel]="'Affected GL Entry (Credit)'"
                 >
                 </mifosx-gl-account-selector>
-                <mat-form-field class="flex-48">
+                <mat-form-field>
                   <mat-label>{{ 'labels.inputs.Credit Amount' | translate }}</mat-label>
                   <input
                     type="number"
@@ -124,14 +135,25 @@
                     </mat-error>
                   }
                 </mat-form-field>
-                <span class="flex-fill">
+                <span class="entry-row__action">
                   @if (i !== 0) {
-                    <button type="button" mat-icon-button (click)="removeAffectedGLEntry(credits, i)">
+                    <button
+                      type="button"
+                      mat-icon-button
+                      (click)="removeAffectedGLEntry(credits, i)"
+                      [attr.aria-label]="'labels.buttons.Remove' | translate"
+                    >
                       <fa-icon icon="minus-circle" size="lg"></fa-icon>
                     </button>
                   }
                   @if (i === 0) {
-                    <button type="button" mat-icon-button color="primary" (click)="addAffectedGLEntry(credits)">
+                    <button
+                      type="button"
+                      mat-icon-button
+                      color="primary"
+                      (click)="addAffectedGLEntry(credits)"
+                      [attr.aria-label]="'labels.buttons.Add' | translate"
+                    >
                       <fa-icon icon="plus-circle" size="lg"></fa-icon>
                     </button>
                   }
@@ -140,12 +162,12 @@
             </div>
           }
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Reference Number' | translate }}</mat-label>
             <input matInput formControlName="referenceNumber" />
           </mat-form-field>
 
-          <mat-form-field class="flex-48" (click)="transactionDatePicker.open()">
+          <mat-form-field (click)="transactionDatePicker.open()">
             <mat-label>{{ 'labels.inputs.Transaction Date' | translate }}</mat-label>
             <input
               matInput
@@ -165,7 +187,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Payment Type' | translate }}</mat-label>
             <mat-select formControlName="paymentTypeId">
               @for (paymentType of paymentTypeData; track paymentType) {
@@ -176,44 +198,44 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Account Number' | translate }}</mat-label>
             <input matInput formControlName="accountNumber" />
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Cheque Number' | translate }}</mat-label>
             <input matInput formControlName="checkNumber" />
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Routing Code' | translate }}</mat-label>
             <input matInput formControlName="routingCode" />
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Receipt Number' | translate }}</mat-label>
             <input matInput formControlName="receiptNumber" />
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Bank Number' | translate }}</mat-label>
             <input matInput formControlName="bankNumber" />
           </mat-form-field>
 
-          <mat-form-field class="flex-98">
+          <mat-form-field class="ms-form-full">
             <mat-label>{{ 'labels.inputs.Comments' | translate }}</mat-label>
             <textarea matInput formControlName="comments" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
           </mat-form-field>
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!journalEntryForm.valid || isSubmitting"
           *mifosxHasPermission="'CREATE_JOURNALENTRY'"
@@ -234,13 +256,13 @@
     }}</a>
   </p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

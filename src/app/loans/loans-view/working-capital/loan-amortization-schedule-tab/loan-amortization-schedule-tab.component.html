@@ -8,25 +8,23 @@
 
 <div class="amortization-container">
   @if (totalCount > 0) {
-    <div class="progress-strip">
+    <div class="ms-panel progress-strip">
       <div class="progress-strip-top">
         <span class="progress-strip-label">
           <strong>{{ progressPercent | formatNumber: '' : '2' }} %</strong>
-          {{ 'labels.inputs.Completed' | translate | uppercase }}
+          {{ 'labels.inputs.Completed' | translate }}
         </span>
         <div class="progress-strip-meta">
           @if (executedCount > 0) {
-            <span class="ps-pill executed">
-              <span class="ps-dot"></span>
+            <span class="ms-status ms-status--success">
               <span class="ps-num">{{ executedCount }}</span>
-              {{ 'labels.inputs.Executed' | translate | uppercase }}
+              {{ 'labels.inputs.Executed' | translate }}
             </span>
           }
           @if (projectedCount > 0) {
-            <span class="ps-pill projected">
-              <span class="ps-dot"></span>
+            <span class="ms-status ms-status--neutral">
               <span class="ps-num">{{ projectedCount }}</span>
-              {{ 'labels.inputs.Projected' | translate | uppercase }}
+              {{ 'labels.inputs.Projected' | translate }}
             </span>
           }
         </div>
@@ -51,13 +49,13 @@
         {{ 'labels.inputs.Hide Projected' | translate }}
       </mat-slide-toggle>
     </div>
-    <button mat-stroked-button type="button" class="btn-export" (click)="exportToPDF()">
-      <fa-icon icon="download" class="m-r-10"></fa-icon>
+    <button mat-stroked-button type="button" (click)="exportToPDF()">
+      <fa-icon icon="download" class="m-r-5"></fa-icon>
       <span>{{ 'labels.buttons.Export to PDF' | translate }}</span>
     </button>
   </div>
 
-  <div class="table-wrapper">
+  <div class="ms-panel ms-table-wrap table-wrapper">
     <table mat-table [dataSource]="dataSource" id="amortizationSchedule" class="amortization-table">
       <ng-container matColumnDef="grpBlank">
         <th mat-header-cell *matHeaderCellDef class="grp-blank" [attr.colspan]="3"></th>
@@ -90,8 +88,13 @@
           {{ 'labels.inputs.Status' | translate }}
         </th>
         <td mat-cell *matCellDef="let item">
-          <span class="status-pill" [class]="'status-' + getStatus(item)">
-            <span class="dot"></span>{{ statusTranslateKey(item) | translate }}
+          <span
+            class="ms-badge"
+            [class.ms-badge--info]="getStatus(item) === 'disbursed'"
+            [class.ms-badge--success]="getStatus(item) === 'executed'"
+            [class.ms-badge--warning]="getStatus(item) === 'current'"
+          >
+            {{ statusTranslateKey(item) | translate }}
           </span>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>

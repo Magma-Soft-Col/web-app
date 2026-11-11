@@ -7,14 +7,12 @@
  */
 
 @use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
 
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  padding: var(--ms-space-5) 0;
 
   h3 {
-    margin: 1% auto;
+    margin: 0 0 var(--ms-space-3);
   }
 
   .action-button {
@@ -23,7 +21,7 @@
 
   table {
     width: 100%;
-    color: $black;
+    color: var(--ms-color-text-primary);
 
     .account-action-button {
       min-width: 26px;
@@ -34,20 +32,19 @@
 
     .strike {
       text-decoration: line-through;
-      color: $status-active-overdue;
+      color: var(--ms-color-danger);
     }
 
     .linked {
-      color: $status-approved;
+      color: var(--ms-color-info);
     }
 
     .accrual {
-      color: $msg-default;
+      color: var(--ms-color-text-secondary);
     }
   }
 }
 
-.select-row:hover {
+.select-row {
   cursor: pointer;
-  font-weight: 800;
 }

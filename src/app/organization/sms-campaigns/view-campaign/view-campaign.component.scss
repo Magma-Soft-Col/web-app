@@ -6,28 +6,46 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.action-buttons {
-  width: 90%;
+.template-message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  margin-top: var(--ms-space-4);
 }
 
-.sms-card {
-  margin: 0 auto;
-  width: 80%;
-  padding: 0;
+.message-preview {
+  min-height: 96px;
+  padding: var(--ms-space-3);
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface-subtle);
+  color: var(--ms-color-text-primary);
+  font: inherit;
+  font-size: var(--ms-font-size-body);
+  resize: vertical;
+}
 
-  .tab-content {
-    padding: 1%;
-    margin: 1%;
+.ms-detail-row .ms-label {
+  flex: 0 0 35%;
+}
 
-    .template-message {
-      padding-inline: 1.5%;
-      margin-top: 1%;
-    }
+.page-actions {
+  justify-content: flex-end;
+}
 
-    .search-button {
-      max-width: 3%;
-      max-height: 2%;
-      padding-block: 2.25%;
-    }
-  }
+.tab-content {
+  padding-top: var(--ms-space-4);
+}
+
+.sms-search {
+  align-items: flex-start;
+  margin-bottom: var(--ms-space-3);
+}
+
+.search-button {
+  padding-top: var(--ms-space-1);
+}
+
+table {
+  width: 100%;
 }

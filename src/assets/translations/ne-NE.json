@@ -400,7 +400,7 @@
       "reason": "कारण"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "को रूपमा लग इन गरियो",
   "Remember me": "मलाई सम्झनुहोस्",
   "errors": {
@@ -902,7 +902,7 @@
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "भाडामा लिने व्यक्ति",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "सर्भर",
       "Username": "प्रयोगकर्ता नाम",
@@ -5230,6 +5230,11 @@
       "Please select a delivery method": "कृपया डेलिभरी विधि चयन गर्नुहोस्",
       "Please select a screen report.": "कृपया स्क्रिन रिपोर्ट चयन गर्नुहोस्।",
       "Please update your password": "कृपया आफ्नो पासवर्ड अपडेट गर्नुहोस्",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "द्वारा संचालित",
       "Precedes of": "को पूर्ववर्ती",
       "Preferences for generating account numbers for client": "ग्राहक, ऋण र बचत खाताहरूको लागि खाता नम्बरहरू सिर्जना गर्न प्राथमिकताहरू",

@@ -6,20 +6,60 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.expandcollapsebutton {
-  margin-top: -7px;
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+.loan-form__toggle {
+  margin-bottom: var(--ms-space-3);
 }
 
-.container {
-  max-width: 37rem;
+// Breakdown of the quoted installment: label left, amount right.
+.repayment-summary {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-2) var(--ms-space-6);
+  margin: 0 0 var(--ms-space-4);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  background: var(--ms-color-surface-subtle);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.right-input {
-  text-align: right;
+.repayment-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+
+  dt,
+  dd {
+    margin: 0;
+  }
+
+  dd {
+    text-align: right;
+    white-space: nowrap;
+  }
 }
 
-.right-label {
-  padding-right: 25px !important;
+.penalties {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  margin-bottom: var(--ms-space-4);
+}
+
+.penalties__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
 }
 
 .penalty-item-container {
@@ -28,18 +68,20 @@
   display: grid;
   grid-template-columns: auto minmax(80px, 110px) minmax(140px, 100%) minmax(130px, 170px) minmax(90px, 120px);
   align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  padding: 12px 16px;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  background-color: var(--ms-color-surface-zebra);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
   box-sizing: border-box;
   overflow: hidden;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-primary);
 }
 
 .penalty-label {
   min-width: 80px;
+  font-weight: 500;
 }
 
 .penalty-name {
@@ -48,6 +90,7 @@
 
 .penalty-date {
   white-space: nowrap;
+  color: var(--ms-color-text-secondary);
 }
 
 .penalty-amount {
@@ -55,18 +98,9 @@
   white-space: nowrap;
 }
 
-// Dark mode styles
-:host-context(.dark-theme) {
-  .penalty-item-container {
-    background-color: #3a3a3a;
-    color: rgb(255 255 255 / 87%);
-    border-color: #4a4a4a;
-  }
-}
-
 // Explains the disabled submit button after a quote request failed.
 .quote-stale-hint {
-  color: var(--mat-sys-error, #b3261e);
-  font-size: 0.85rem;
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-label);
   margin-right: auto;
 }

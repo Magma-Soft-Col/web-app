@@ -7,20 +7,18 @@
 -->
 
 <div class="container">
-  <mat-card>
+  <section class="ms-panel ms-panel--padded">
     <div class="about-us-section">
-      <h2>{{ 'labels.heading.About Us' | translate }}</h2>
-
       <p [innerHTML]="'labels.aboutUs.Introduction' | translate"></p>
       <p [innerHTML]="'labels.aboutUs.Platform Description' | translate"></p>
 
-      <h3>{{ 'labels.heading.Our Mission' | translate }}</h3>
+      <h3 class="ms-subsection-title">{{ 'labels.heading.Our Mission' | translate }}</h3>
       <p>{{ 'labels.aboutUs.Mission' | translate }}</p>
 
-      <h3>{{ 'labels.heading.Our Vision' | translate }}</h3>
+      <h3 class="ms-subsection-title">{{ 'labels.heading.Our Vision' | translate }}</h3>
       <p>{{ 'labels.aboutUs.Vision' | translate }}</p>
 
-      <h3>{{ 'labels.heading.Why Open Source' | translate }}</h3>
+      <h3 class="ms-subsection-title">{{ 'labels.heading.Why Open Source' | translate }}</h3>
       <p>{{ 'labels.aboutUs.Why Open Source' | translate }}</p>
 
       <ul class="values-list">
@@ -42,7 +40,7 @@
         </li>
       </ul>
 
-      <h3>{{ 'labels.heading.The Ecosystem' | translate }}</h3>
+      <h3 class="ms-subsection-title">{{ 'labels.heading.The Ecosystem' | translate }}</h3>
       <p>{{ 'labels.aboutUs.Ecosystem Introduction' | translate }}</p>
 
       <ul class="ecosystem-list">
@@ -64,5 +62,5 @@
         </li>
       </ul>
     </div>
-  </mat-card>
+  </section>
 </div>

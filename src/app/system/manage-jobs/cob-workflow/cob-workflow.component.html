@@ -6,22 +6,25 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 space-top layout-row layout-row gap-20px">
-  <div #cobCatchUpStatus>
-    <h2 class="no-m">
-      {{ 'labels.heading.COB Catch-Up is' | translate }}:<span class="m-l-20 m-r-20">{{
-        isCatchUpRunning ? ('labels.catalogs.Running' | translate) : ('labels.catalogs.Inactive' | translate)
-      }}</span>
-    </h2>
+<div class="ms-page jobs-page">
+  <div class="ms-list-toolbar">
+    <div #cobCatchUpStatus class="catch-up-status">
+      <span class="ms-label">{{ 'labels.heading.COB Catch-Up is' | translate }}</span>
+      @if (isCatchUpRunning) {
+        <span class="ms-badge ms-badge--info">{{ 'labels.catalogs.Running' | translate }}</span>
+      } @else {
+        <span class="ms-badge">{{ 'labels.catalogs.Inactive' | translate }}</span>
+      }
+    </div>
+    @if (!isCatchUpRunning) {
+      <div class="ms-actions">
+        <button mat-flat-button color="primary" (click)="runCatchUp()">
+          <fa-icon icon="play" class="m-r-10"></fa-icon>
+          {{ 'labels.buttons.Run Catch-Up' | translate }}
+        </button>
+      </div>
+    }
   </div>
-  @if (!isCatchUpRunning) {
-    <button mat-raised-button class="activate" (click)="runCatchUp()">
-      <fa-icon icon="times-circle" class="m-r-10"></fa-icon>
-      {{ 'labels.buttons.Run Catch-Up' | translate }}
-    </button>
-  }
-</div>
 
-<div class="container space-top">
   <mifosx-loan-locked></mifosx-loan-locked>
 </div>

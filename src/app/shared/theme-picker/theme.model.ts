@@ -45,7 +45,7 @@ export const BRANDING_API_PATH = '/branding';
  * bright yellow cannot carry white label text without failing WCAG AA.
  */
 export const PRIMARY_COLOR_THEMES: Theme[] = [
-  { id: 'blue', name: 'Blue', primary: '#1074b9', light: '#5ba2ec', dark: '#004989', isDefault: true },
+  { id: 'blue', name: 'Blue', primary: '#315e9e', light: '#7fa3d6', dark: '#1e3a5f', isDefault: true },
   { id: 'green', name: 'Green', primary: '#2e7d32', light: '#7cc47f', dark: '#1b5e20' },
   { id: 'light-green', name: 'Light Green', primary: '#5a7d0c', light: '#c5e1a5', dark: '#3d5600' },
   { id: 'purple', name: 'Purple', primary: '#6a1b9a', light: '#c3a0ea', dark: '#4a148c' },

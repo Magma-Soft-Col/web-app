@@ -6,13 +6,37 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+/* Label / value pairs, one fact per row. */
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(160px, 40%) minmax(0, auto);
 
-  .content {
-    div {
-      margin: 1rem 0;
-      overflow-wrap: break-word;
+  > .ms-label,
+  > .ms-value {
+    padding: var(--ms-space-2) 0;
+    border-bottom: 1px solid var(--ms-color-border-subtle);
+    overflow-wrap: anywhere;
+  }
+
+  > .ms-label {
+    padding-right: var(--ms-space-4);
+  }
+
+  > .detail-full {
+    grid-column: 1 / -1;
+    padding: var(--ms-space-2) 0;
+  }
+
+  @media (width < 768px) {
+    grid-template-columns: minmax(0, auto);
+
+    > .ms-label {
+      padding-bottom: 0;
+      border-bottom: 0;
     }
   }
+}
+
+.detail-footer {
+  padding: 0 var(--ms-space-4) var(--ms-space-4);
 }

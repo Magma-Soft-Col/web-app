@@ -28,7 +28,6 @@ import { environment } from 'environments/environment';
 
 /** Custom Services */
 import { SettingsService } from 'app/settings/settings.service';
-import { MatDivider } from '@angular/material/divider';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
@@ -45,7 +44,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   providers: [ExternalNationalIdService],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatDivider,
     CdkTextareaAutosize,
     MatCheckbox,
     MatStepperPrevious,

@@ -103,8 +103,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="primary" [disabled]="!columnForm.valid || columnForm.pristine" (click)="submit()">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="primary" [disabled]="!columnForm.valid || columnForm.pristine" (click)="submit()">
     {{ 'labels.buttons.Submit' | translate }}
   </button>
 </mat-dialog-actions>

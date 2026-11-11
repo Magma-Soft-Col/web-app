@@ -7,27 +7,21 @@
 -->
 
 <div class="container base-teller">
-  <mat-card class="workflow-card">
-    <mat-card-content>
-      <h2>{{ 'labels.text.Base Teller' | translate }}</h2>
-
-      <div class="workflow-grid">
-        @for (workflow of workflows; track workflow.route) {
-          <a class="workflow-link" *mifosxHasPermission="workflow.permission" [routerLink]="workflow.route">
-            <div class="workflow-block">
-              @if (workflow.fontAwesomeIcon) {
-                <span class="workflow-icon" aria-hidden="true">
-                  <fa-icon [icon]="workflow.fontAwesomeIcon" size="lg"></fa-icon>
-                </span>
-              } @else {
-                <mat-icon class="workflow-icon" aria-hidden="true">{{ workflow.materialIcon }}</mat-icon>
-              }
-              <span class="workflow-title">{{ workflow.label | translate }}</span>
-              <mat-icon class="workflow-arrow" aria-hidden="true">chevron_right</mat-icon>
-            </div>
-          </a>
-        }
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <nav class="ms-panel ms-settings-list" [attr.aria-label]="'labels.text.Base Teller' | translate">
+    @for (workflow of workflows; track workflow.route) {
+      <a class="ms-settings-row" *mifosxHasPermission="workflow.permission" [routerLink]="workflow.route">
+        <span class="ms-icon-wrap" aria-hidden="true">
+          @if (workflow.fontAwesomeIcon) {
+            <fa-icon [icon]="workflow.fontAwesomeIcon"></fa-icon>
+          } @else {
+            <mat-icon class="workflow-icon">{{ workflow.materialIcon }}</mat-icon>
+          }
+        </span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ workflow.label | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
+    }
+  </nav>
 </div>

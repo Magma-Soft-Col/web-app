@@ -8,7 +8,6 @@
 
 /** Angular Imports */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 
 /** Third Party Imports */
@@ -193,8 +192,6 @@ export const BASE_TELLER_WORKFLOWS: readonly BaseTellerWorkflow[] = [
   styleUrls: ['./base-teller.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatCard,
-    MatCardContent,
     MatIcon,
     FaIconComponent
   ],

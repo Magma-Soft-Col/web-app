@@ -6,14 +6,20 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography production-personal-data">
+<div class="tab-container production-personal-data">
   @if (isKycEnabled) {
     <div class="button-header">
-      <button mat-raised-button class="export-kyc-button" (click)="exportKyc.emit()">
+      <button mat-stroked-button type="button" class="export-kyc-button" (click)="exportKyc.emit()">
         <mat-icon>download</mat-icon>
         {{ 'labels.buttons.Export KYC' | translate }}
       </button>
-      <button mat-raised-button color="primary" class="validate-docs-button" (click)="validateDocumentation.emit()">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        class="validate-docs-button"
+        (click)="validateDocumentation.emit()"
+      >
         <mat-icon>fact_check</mat-icon>
         {{ 'labels.buttons.Validate Documentation' | translate }}
       </button>
@@ -36,23 +42,25 @@
     </div>
   }
 
-  <section class="section">
-    <h3>{{ 'labels.heading.General Client Information' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.General Client Information' | translate }}</h3>
     <ng-container *ngTemplateOutlet="fieldGrid; context: { fields: generalClientFields }"></ng-container>
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Home Address' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Home Address' | translate }}</h3>
     <ng-container *ngTemplateOutlet="fieldGrid; context: { fields: addressFields }"></ng-container>
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Socioeconomic Information' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Socioeconomic Information' | translate }}</h3>
     <ng-container *ngTemplateOutlet="fieldGrid; context: { fields: socioeconomicFields }"></ng-container>
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Personal References (2 Family Members, 1 Acquaintance)' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">
+      {{ 'labels.heading.Personal References (2 Family Members, 1 Acquaintance)' | translate }}
+    </h3>
     @for (recordFields of personalReferenceRecords; track recordFields; let index = $index) {
       <div class="record-panel datatable-record">
         <div class="record-title">{{ 'labels.inputs.' + referenceTitle(index) | translate }}</div>
@@ -61,8 +69,8 @@
     }
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Commercial Reference' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Commercial Reference' | translate }}</h3>
     @for (recordFields of commercialReferenceRecords; track recordFields; let index = $index) {
       <div class="record-panel datatable-record">
         <div class="record-title">{{ 'labels.inputs.' + commercialReferenceTitle(index) | translate }}</div>
@@ -71,8 +79,8 @@
     }
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Beneficiaries' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Beneficiaries' | translate }}</h3>
     @if (beneficiaryRecords.length) {
       @for (recordFields of beneficiaryRecords; track recordFields; let index = $index) {
         <div class="record-panel datatable-record">
@@ -85,8 +93,8 @@
     }
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Client Type' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Client Type' | translate }}</h3>
     @for (recordFields of pepPldRecords; track recordFields; let index = $index) {
       <div class="record-panel datatable-record">
         <p class="question-text">{{ 'labels.text.' + pepPldQuestion(index) | translate }}</p>

@@ -8,7 +8,7 @@
   <!-- Role selector -->
   <mat-card class="cbild-role-card">
     <mat-card-content>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Your CB-ILD Role</mat-label>
         <mat-select [(ngModel)]="selectedRole" (ngModelChange)="onRoleChange($event)">
           @for (role of roles; track role.value) {
@@ -130,7 +130,7 @@
       <mat-card-content class="cbild-empty-content">
         <mat-icon color="warn">error_outline</mat-icon>
         <p>{{ 'labels.inputs.Failed to load bureau data' | translate }}</p>
-        <button mat-stroked-button color="primary" (click)="loadReadiness()">
+        <button mat-stroked-button (click)="loadReadiness()">
           {{ 'labels.buttons.Retry' | translate }}
         </button>
       </mat-card-content>

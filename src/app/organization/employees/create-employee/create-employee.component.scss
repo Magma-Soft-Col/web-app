@@ -6,10 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
-}
-
 .loan-officer {
-  padding: 17.5px 0;
+  align-self: center;
+  padding: var(--ms-space-4) 0;
 }

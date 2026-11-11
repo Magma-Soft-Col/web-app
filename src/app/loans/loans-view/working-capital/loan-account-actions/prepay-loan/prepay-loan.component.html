@@ -6,11 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     <form [formGroup]="prepayLoanForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="loan-form__grid">
           <mat-form-field (click)="prepayDatePicker.open()">
             <mat-label>{{ 'labels.inputs.Transaction Date' | translate }}</mat-label>
             <input
@@ -41,7 +41,7 @@
             }
           </mat-form-field>
 
-          <div class="layout-row-wrap payoff-breakdown">
+          <div class="layout-row-wrap payoff-breakdown loan-form__full loan-form__summary">
             <div class="flex-50 mat-body-strong">
               {{ 'labels.inputs.Principal' | translate }}
             </div>
@@ -114,7 +114,7 @@
             </mat-form-field>
           }
 
-          <div class="m-b-10">
+          <div class="loan-form__full loan-form__toggle">
             <mat-slide-toggle [checked]="showPaymentDetails" (change)="togglePaymentDetails()">
               {{ 'labels.inputs.Show Payment Details' | translate }}
             </mat-slide-toggle>
@@ -143,7 +143,7 @@
             </mat-form-field>
           }
 
-          <mat-form-field>
+          <mat-form-field class="loan-form__full">
             <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
             <textarea
               matInput
@@ -160,7 +160,7 @@
           </mat-form-field>
         </div>
 
-        <mat-card-actions class="layout-row align-center gap-5px responsive-column">
+        <mat-card-actions class="loan-form__actions">
           <!-- The amount on screen belongs to the previously quoted date; say so rather than leaving a
                disabled submit button unexplained. -->
           @if (isQuoteStale) {
@@ -170,11 +170,11 @@
               }}
             </div>
           }
-          <button type="button" mat-raised-button (click)="gotoLoanDefaultView()">
+          <button type="button" mat-stroked-button (click)="gotoLoanDefaultView()">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
           <button
-            mat-raised-button
+            mat-flat-button
             color="primary"
             [disabled]="!prepayLoanForm.valid || isSubmitting || isQuoteLoading || isQuoteStale"
             *mifosxHasPermission="requiredPermission"

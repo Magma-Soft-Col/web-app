@@ -9,8 +9,6 @@
 <div class="container cash-allocation">
   <mat-card>
     <mat-card-content>
-      <h2>{{ 'cashAllocation.title' | translate }}</h2>
-
       @if (isLoading) {
         <div class="loading-state">
           <mat-spinner diameter="40"></mat-spinner>
@@ -98,7 +96,7 @@
             }
 
             <section class="denominations">
-              <h3>{{ 'cashAllocation.labels.denominationBreakdown' | translate }}</h3>
+              <h3 class="ms-subsection-title">{{ 'cashAllocation.labels.denominationBreakdown' | translate }}</h3>
               @if (denominations.length === 0) {
                 <div class="empty-state">{{ 'cashAllocation.empty.denominations' | translate }}</div>
               } @else {
@@ -151,7 +149,7 @@
                   {{ 'cashAllocation.actions.retrySameTransaction' | translate }}
                 </button>
               }
-              <button mat-raised-button color="primary" type="submit" [disabled]="!canPreview">
+              <button mat-flat-button color="primary" type="submit" [disabled]="!canPreview">
                 @if (isPreviewing || isPosting) {
                   {{ 'cashAllocation.status.processing' | translate }}
                 } @else {
@@ -165,7 +163,7 @@
 
       @if (receipt) {
         <section class="receipt">
-          <h3>{{ 'cashAllocation.receipt.title' | translate }}</h3>
+          <h3 class="ms-subsection-title">{{ 'cashAllocation.receipt.title' | translate }}</h3>
           <dl class="receipt-details">
             <div>
               <dt>{{ 'cashAllocation.receipt.reference' | translate }}</dt>
@@ -237,7 +235,7 @@
             }
           </dl>
 
-          <h4>{{ 'cashAllocation.labels.denominationBreakdown' | translate }}</h4>
+          <h4 class="ms-subsection-title">{{ 'cashAllocation.labels.denominationBreakdown' | translate }}</h4>
           <div class="receipt-denominations">
             @for (denomination of receipt.denominations; track denomination.identifier) {
               <div>
@@ -251,12 +249,12 @@
             <button mat-stroked-button type="button" (click)="newOperation()">
               {{ 'cashAllocation.actions.newOperation' | translate }}
             </button>
-            <button mat-raised-button color="primary" type="button" (click)="printReceipt()" [disabled]="isReprinting">
+            <button mat-flat-button color="primary" type="button" (click)="printReceipt()" [disabled]="isReprinting">
               {{ 'cashAllocation.actions.printReceipt' | translate }}
             </button>
             @if (canReprint) {
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
                 type="button"
                 (click)="reprintReceipt()"

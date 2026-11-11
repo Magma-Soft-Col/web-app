@@ -25,7 +25,6 @@ import {
   MatRow
 } from '@angular/material/table';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -46,7 +45,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

@@ -6,117 +6,105 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<mat-card class="account-card">
-  <mat-card-header class="header layout-column">
-    <mat-card-title-group class="header-title-group">
-      <div class="profile-image-container">
-        <div>
-          <img
-            mat-card-md-image
-            class="profile-image"
-            matTooltip="{{ 'tooltips.Shares Account' | translate }}"
-            [alt]="'tooltips.Shares Account' | translate"
-            src="assets/images/shares_account_placeholder.png"
-          />
+<div class="ms-page shares-view">
+  <!-- Account header (pen): identification, status and key facts. -->
+  <section class="ms-entity-header" [attr.aria-label]="'labels.inputs.Account Number' | translate">
+    <div class="ms-entity-header__identity">
+      <div class="ms-entity-header__block">
+        <div class="ms-entity-header__row">
+          <span class="ms-sr-only">{{ 'labels.inputs.Account Number' | translate }}:</span>
+          <span class="ms-entity-header__id">
+            <mifosx-account-number accountNo="{{ sharesAccountData.accountNo }}" display="left"></mifosx-account-number>
+          </span>
+          <span
+            class="ms-badge"
+            [ngClass]="{
+              'ms-badge--success': sharesAccountData.status.active,
+              'ms-badge--warning': sharesAccountData.status.submittedAndPendingApproval,
+              'ms-badge--info': sharesAccountData.status.approved,
+              'ms-badge--danger': sharesAccountData.status.rejected
+            }"
+            >{{ sharesAccountData.status.value }}</span
+          >
         </div>
+        <span class="ms-label shares-view__product">
+          {{ 'labels.inputs.Share Product' | translate }}:
+          <mifosx-long-text textValue="{{ sharesAccountData.productName }}"></mifosx-long-text>
+        </span>
       </div>
 
-      <div class="mat-typography account-card-title">
-        <mat-card-title>
-          <div class="layout-row responsive-column">
-            <div class="flex-60">
-              <h3>
-                <i
-                  class="fa fa-stop"
-                  [ngClass]="sharesAccountData.status.code | statusLookup"
-                  [matTooltip]="sharesAccountData.status.value"
-                ></i>
-                <span class="m-r-5">{{ 'labels.inputs.Share Product' | translate }} :</span>
-                <span class="m-r-5"
-                  ><mifosx-long-text textValue="{{ sharesAccountData.productName }}"></mifosx-long-text
-                ></span>
-                <mifosx-account-number
-                  accountNo="{{ sharesAccountData.accountNo }}"
-                  display="left"
-                ></mifosx-account-number>
-              </h3>
-              <span class="shares-overview">
-                <span class="m-r-10"
-                  >{{ 'labels.text.' + entityType | translate }} {{ 'labels.inputs.name' | translate }} :</span
-                >{{ sharesAccountData.clientName || sharesAccountData.groupName }}
-                @if (sharesAccountData.clientAccountNo) {
-                  <span class="m-l-10">
-                    <mifosx-account-number accountNo="{{ sharesAccountData.clientAccountNo }}"></mifosx-account-number>
-                  </span>
-                }
-              </span>
-              <div>
-                <table class="account-overview">
-                  <tbody>
-                    <tr>
-                      <td>{{ 'labels.inputs.Current Market Price' | translate }} :</td>
-                      <td>{{ sharesAccountData.currentMarketPrice | formatNumber }}</td>
-                    </tr>
-                    @if (sharesAccountData.lockinPeriod) {
-                      <tr>
-                        <td>{{ 'labels.inputs.Lockin Period' | translate }} :</td>
-                        <td>
-                          {{ sharesAccountData.lockinPeriod }}
-                          {{ sharesAccountData.lockPeriodTypeEnum.value | translateKey: 'catalogs' }}
-                        </td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      <span class="ms-entity-header__divider" aria-hidden="true"></span>
 
-            <span class="flex-auto"></span>
-            <div class="flex-40">
-              @if (buttonConfig.singleButtons.length > 0) {
-                <button
-                  mat-icon-button
-                  [matMenuTriggerFor]="accountMenu"
-                  aria-label="Share account actions"
-                  yPosition="below"
-                >
-                  <mat-icon matListIcon class="actions-menu">
-                    <fa-icon icon="bars" size="sm"></fa-icon>
-                  </mat-icon>
-                </button>
-              }
-            </div>
-          </div>
-        </mat-card-title>
-      </div>
-    </mat-card-title-group>
-
-    <mat-menu #accountMenu="matMenu">
-      @for (item of buttonConfig.singleButtons; track item) {
-        <button mat-menu-item *mifosxHasPermission="item.taskPermissionName" (click)="doAction(item.name)">
-          <mat-icon matListIcon>
-            <fa-icon icon="{{ item.icon }}" size="sm"></fa-icon>
-          </mat-icon>
-          <span>{{ 'labels.menus.' + item.name | translate }}</span>
-        </button>
-      }
-
-      @if (buttonConfig.options.length) {
-        <button mat-menu-item [matMenuTriggerFor]="More">{{ 'labels.menus.More' | translate }}</button>
-        <mat-menu #More="matMenu">
-          @for (option of buttonConfig.options; track option) {
-            <span>
-              <button mat-menu-item *mifosxHasPermission="option.taskPermissionName" (click)="doAction(option.name)">
-                {{ 'labels.menus.' + option.name | translate }}
-              </button>
+      <div class="ms-entity-header__block">
+        <span class="ms-label">{{ 'labels.text.' + entityType | translate }}</span>
+        <span class="ms-value">
+          {{ sharesAccountData.clientName || sharesAccountData.groupName }}
+          @if (sharesAccountData.clientAccountNo) {
+            <span class="shares-view__muted">
+              (<mifosx-account-number accountNo="{{ sharesAccountData.clientAccountNo }}"></mifosx-account-number>)
             </span>
           }
-        </mat-menu>
-      }
-    </mat-menu>
-  </mat-card-header>
+        </span>
+      </div>
+    </div>
 
-  <mat-card-content class="content">
+    <div class="shares-view__aside">
+      <dl class="ms-entity-header__stats shares-view__stats">
+        <div class="ms-stat">
+          <dt class="ms-label">{{ 'labels.inputs.Current Market Price' | translate }}</dt>
+          <dd class="ms-amount">{{ sharesAccountData.currentMarketPrice | formatNumber }}</dd>
+        </div>
+        @if (sharesAccountData.lockinPeriod) {
+          <div class="ms-stat">
+            <dt class="ms-label">{{ 'labels.inputs.Lockin Period' | translate }}</dt>
+            <dd class="ms-value">
+              {{ sharesAccountData.lockinPeriod }}
+              {{ sharesAccountData.lockPeriodTypeEnum.value | translateKey: 'catalogs' }}
+            </dd>
+          </div>
+        }
+      </dl>
+
+      @if (buttonConfig.singleButtons.length > 0) {
+        <button
+          mat-stroked-button
+          type="button"
+          [matMenuTriggerFor]="accountMenu"
+          aria-label="Share account actions"
+          yPosition="below"
+        >
+          <fa-icon icon="bars" size="sm"></fa-icon>
+          <span class="m-l-5">{{ 'labels.menus.More' | translate }}</span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <mat-menu #accountMenu="matMenu">
+    @for (item of buttonConfig.singleButtons; track item) {
+      <button mat-menu-item *mifosxHasPermission="item.taskPermissionName" (click)="doAction(item.name)">
+        <mat-icon matListIcon>
+          <fa-icon icon="{{ item.icon }}" size="sm"></fa-icon>
+        </mat-icon>
+        <span>{{ 'labels.menus.' + item.name | translate }}</span>
+      </button>
+    }
+
+    @if (buttonConfig.options.length) {
+      <button mat-menu-item [matMenuTriggerFor]="More">{{ 'labels.menus.More' | translate }}</button>
+      <mat-menu #More="matMenu">
+        @for (option of buttonConfig.options; track option) {
+          <span>
+            <button mat-menu-item *mifosxHasPermission="option.taskPermissionName" (click)="doAction(option.name)">
+              {{ 'labels.menus.' + option.name | translate }}
+            </button>
+          </span>
+        }
+      </mat-menu>
+    }
+  </mat-menu>
+
+  <div class="shares-view__tabs">
     <nav mat-tab-nav-bar class="navigation-tabs" [tabPanel]="tabPanel">
       <a
         mat-tab-link
@@ -163,5 +151,5 @@
     <mat-tab-nav-panel #tabPanel>
       <router-outlet></router-outlet>
     </mat-tab-nav-panel>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

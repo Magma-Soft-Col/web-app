@@ -25,40 +25,33 @@
 
 /* ============================== Shell ============================== */
 
-/**
- * Was `var(--mat-sys-surface-container, #2e2e2e)` — an M3 token this M2 app
- * never emits, so it resolved to a hardcoded near-black in *both* themes. That
- * is the "large empty dark container" in light mode and the "almost black"
- * panel in dark mode. Now a real themed surface, matching the selection page's
- * cards (same surface, outline, radius and shadow tokens).
- */
+/* The wizard is one white panel of the approved design (no elevation). */
 .wizard-shell {
-  @include lpt.surface;
-
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
   display: grid;
-  gap: var(--lp-space-24);
-  padding: var(--lp-space-24);
+  gap: var(--ms-space-6);
+  padding: var(--ms-space-6);
 }
 
 .wizard-shell__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--lp-space-16);
-  padding-bottom: var(--lp-space-16);
-  border-bottom: 1px solid var(--lp-outline);
+  gap: var(--ms-space-4);
+  padding-bottom: var(--ms-space-4);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
 }
 
 .landing-page__eyebrow {
-  @include lpt.eyebrow;
-}
-
-.wizard-shell__header h2 {
-  margin: 0;
-  font-size: 1.125rem;
+  margin: 0 0 var(--ms-space-1);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  line-height: 1.3;
-  color: var(--lp-text);
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--ms-color-text-secondary);
 }
 
 /* ============================== Stepper ============================== */
@@ -70,21 +63,18 @@
  */
 .wizard-stepper {
   background: transparent;
-  margin-inline: calc(var(--lp-space-8) * -1);
+  margin-inline: calc(var(--ms-space-2) * -1);
 }
 
-/**
- * Each expanded step reads as its own recessed panel, which is what stops the
- * form from dissolving into one flat sheet — the "section cards disappear into
- * the page" problem.
- */
+/* Each expanded step reads as its own bordered panel inside the shell. */
 .step-panel {
-  @include lpt.surface-sunken;
-
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
   display: grid;
-  gap: var(--lp-space-24);
-  padding: var(--lp-space-24);
-  margin: var(--lp-space-8) 0 var(--lp-space-16);
+  gap: var(--ms-space-6);
+  padding: var(--ms-space-6);
+  margin: var(--ms-space-2) 0 var(--ms-space-4);
 }
 
 /* ============================== Fields ============================== */
@@ -93,7 +83,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--lp-space-16);
+  gap: var(--ms-space-4);
 }
 
 .field-grid > mat-form-field {
@@ -111,7 +101,7 @@ mat-form-field {
 
 mat-checkbox {
   align-self: center;
-  margin-top: var(--lp-space-8);
+  margin-top: var(--ms-space-2);
 }
 
 /* ============================== Actions ============================== */
@@ -120,65 +110,56 @@ mat-checkbox {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: var(--lp-space-16);
+  gap: var(--ms-space-4);
   flex-wrap: wrap;
-  padding-top: var(--lp-space-16);
-  border-top: 1px solid var(--lp-outline);
-}
-
-/* Reaches (0,4,0) with encapsulation — see `primary-button` in the partial. */
-.step-actions .mat-mdc-raised-button.mat-primary {
-  @include lpt.primary-button;
+  padding-top: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }
 
 /* ============================== Review step ============================== */
 
-/**
- * Every surface in this block used to be `rgb(255 255 255 / N%)`, which is
- * invisible on a light background — the review step only ever worked on a dark
- * one. All of them are now theme-derived.
- */
 .review-banner {
   display: grid;
-  gap: var(--lp-space-16);
-  padding: var(--lp-space-24);
-  border-radius: var(--lp-radius);
-  border: 1px solid var(--lp-outline);
-  background: var(--lp-hero-bg);
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-6);
+  border-radius: var(--ms-radius-md);
+  border: 1px solid var(--ms-color-border-subtle);
+  background: var(--ms-color-surface-zebra);
 }
 
 .review-banner__name {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: var(--ms-font-size-section-title);
   font-weight: 600;
   line-height: 1.3;
-  color: var(--lp-text);
+  color: var(--ms-color-text-primary);
 }
 
 .review-banner__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--lp-space-8);
-  margin-top: var(--lp-space-16);
+  gap: var(--ms-space-2);
+  margin-top: var(--ms-space-4);
 }
 
+/* Same treatment as `.ms-badge` (neutral). */
 .review-chip {
-  border-radius: var(--lp-radius-pill);
-  padding: var(--lp-space-8) var(--lp-space-16);
-  font-size: 0.75rem;
+  border-radius: var(--ms-radius-sm);
+  padding: 2px var(--ms-space-2);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.02em;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
   white-space: nowrap;
-  background: var(--lp-neutral-tint);
-  border: 1px solid var(--lp-outline);
-  color: var(--lp-text-muted);
+  background: var(--ms-color-neutral-bg);
+  color: var(--ms-color-neutral);
 }
 
 .review-metrics {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--lp-space-16);
+  gap: var(--ms-space-4);
 }
 
 .review-metrics > .review-metric {
@@ -188,81 +169,82 @@ mat-checkbox {
 
 .review-metric {
   display: grid;
-  gap: var(--lp-space-8);
-  padding: var(--lp-space-16);
-  border-radius: var(--lp-radius-sm);
-  border: 1px solid var(--lp-outline);
-  background: var(--lp-surface);
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-4);
+  border-radius: var(--ms-radius-md);
+  border: 1px solid var(--ms-color-border-subtle);
+  background: var(--ms-color-surface);
 }
 
 .review-metric__label,
 .review-section__title {
-  /* Was `opacity`, which is unpredictable across themes; now a real token. */
-  color: var(--lp-text-muted);
-  font-size: 0.75rem;
+  color: var(--ms-color-text-secondary);
+  font-size: var(--ms-font-size-label);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.3px;
   margin: 0;
 }
 
 .review-metric__value {
-  font-size: 1.0625rem;
+  font-size: var(--ms-font-size-body);
+  font-variant-numeric: tabular-nums;
   font-weight: 600;
-  color: var(--lp-text);
+  color: var(--ms-color-text-primary);
 }
 
 .review-section {
   display: grid;
-  gap: var(--lp-space-8);
-  padding: var(--lp-space-16) 0;
-  border-top: 1px solid var(--lp-outline);
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-4) 0;
+  border-top: 1px solid var(--ms-color-border-subtle);
 }
 
 .review-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: var(--lp-space-16);
-  font-size: 0.875rem;
+  gap: var(--ms-space-4);
+  font-size: var(--ms-font-size-table);
   line-height: 1.5;
 }
 
 .review-row__label {
-  color: var(--lp-text-muted);
+  color: var(--ms-color-text-secondary);
 }
 
 .review-row__value {
   text-align: right;
-  color: var(--lp-text);
+  font-variant-numeric: tabular-nums;
+  color: var(--ms-color-text-primary);
   font-weight: 500;
 }
 
 .review-defaults-pill {
-  border-radius: var(--lp-radius);
-  padding: var(--lp-space-16) var(--lp-space-24);
-  border: 1px solid var(--lp-outline);
-  background: var(--lp-accent-tint);
+  border-radius: var(--ms-radius-md);
+  padding: var(--ms-space-4) var(--ms-space-6);
+  border: 1px solid var(--ms-color-border-subtle);
+  background: var(--ms-color-brand-primary-subtle);
 }
 
 .review-defaults-pill__title {
   margin: 0;
   font-weight: 600;
-  color: var(--lp-text);
+  color: var(--ms-color-text-primary);
 }
 
 .review-defaults-pill__sub {
-  margin: var(--lp-space-8) 0 0;
-  font-size: 0.875rem;
+  margin: var(--ms-space-2) 0 0;
+  font-size: var(--ms-font-size-table);
   line-height: 1.5;
-  color: var(--lp-text-muted);
+  color: var(--ms-color-text-secondary);
 }
 
 /* ============================== Responsive ============================== */
 
 @media (width <=768px) {
   .wizard-shell {
-    padding: var(--lp-space-16);
+    padding: var(--ms-space-4);
   }
 
   .wizard-shell__header,
@@ -276,7 +258,7 @@ mat-checkbox {
   }
 
   .step-panel {
-    padding: var(--lp-space-16);
+    padding: var(--ms-space-4);
   }
 
   .step-actions > button {
@@ -303,9 +285,9 @@ mat-checkbox {
 }
 
 .step-actions__blocked {
-  margin: 0 0 0.75rem;
-  color: var(--mat-sys-error, #b3261e);
-  font-size: 0.875rem;
+  margin: 0 0 var(--ms-space-3);
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-table);
 }
 
 // Guided mode's answer to a blocked "Create Loan Product" click: the steps that still hold something
@@ -313,21 +295,22 @@ mat-checkbox {
 // `.review-pending` below — that block explains a summary that is merely not ready yet, this one
 // explains a button the operator just pressed and that refused.
 .submit-blocked {
-  padding: var(--lp-space-16) var(--lp-space-24);
-  margin-bottom: var(--lp-space-16);
-  border: 1px solid var(--mat-sys-error, #b3261e);
-  border-radius: var(--lp-radius);
+  padding: var(--ms-space-4) var(--ms-space-6);
+  margin-bottom: var(--ms-space-4);
+  border: 1px solid var(--ms-color-danger);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-danger-bg);
 
   &__title {
-    margin: 0 0 var(--lp-space-8);
+    margin: 0 0 var(--ms-space-2);
     font-weight: 600;
-    color: var(--mat-sys-error, #b3261e);
+    color: var(--ms-color-danger);
   }
 
   &__steps {
     margin: 0;
-    padding-left: var(--lp-space-24);
-    color: var(--lp-text);
+    padding-left: var(--ms-space-6);
+    color: var(--ms-color-text-primary);
   }
 
   // A link in a list, not a control in a toolbar: it names a step and takes you there. Underlined
@@ -345,27 +328,27 @@ mat-checkbox {
 
   &__generic {
     margin: 0;
-    color: var(--lp-text);
+    color: var(--ms-color-text-primary);
   }
 }
 
 // Shown on the Review step while the hosted Classic steps are still incomplete, in place of the
 // product summary (which cannot render a partial product).
 .review-pending {
-  padding: var(--lp-space-16) var(--lp-space-24);
-  border: 1px dashed var(--lp-outline);
-  border-radius: var(--lp-radius);
+  padding: var(--ms-space-4) var(--ms-space-6);
+  border: 1px dashed var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
 
   &__title {
-    margin: 0 0 var(--lp-space-8);
+    margin: 0 0 var(--ms-space-2);
     font-weight: 600;
-    color: var(--lp-text);
+    color: var(--ms-color-text-primary);
   }
 
   &__steps {
     margin: 0;
-    padding-left: var(--lp-space-24);
-    color: var(--lp-text-muted);
+    padding-left: var(--ms-space-6);
+    color: var(--ms-color-text-secondary);
   }
 }
 
@@ -392,11 +375,11 @@ mat-checkbox {
   ::ng-deep h2,
   ::ng-deep h3,
   ::ng-deep h4 {
-    color: var(--lp-text-muted);
-    font-size: 0.75rem;
+    color: var(--ms-color-text-secondary);
+    font-size: var(--ms-font-size-label);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.3px;
   }
 }
 
@@ -413,11 +396,11 @@ mat-checkbox {
   /* Classic's summary pairs a `.flex-40` label with a `.flex-60` value; colour them like
      `.review-row__label` / `.review-row__value` so the facts read the same as the guided Review. */
   ::ng-deep .flex-40 {
-    color: var(--lp-text-muted);
+    color: var(--ms-color-text-secondary);
   }
 
   ::ng-deep .flex-60 {
-    color: var(--lp-text);
+    color: var(--ms-color-text-primary);
     font-weight: 500;
   }
 }
@@ -426,14 +409,14 @@ mat-checkbox {
   /* The reused allocation panel is written for Classic's summary, at its type scale and with the
      same `.flex-40` / `.flex-60` label-value pair. Bring both into line with the surrounding review
      rows so one section does not read a size larger than the rest. */
-  font-size: 0.875rem;
+  font-size: var(--ms-font-size-table);
 
   ::ng-deep .flex-40 {
-    color: var(--lp-text-muted);
+    color: var(--ms-color-text-secondary);
   }
 
   ::ng-deep .flex-60 {
-    color: var(--lp-text);
+    color: var(--ms-color-text-primary);
     font-weight: 500;
   }
 
@@ -444,7 +427,16 @@ mat-checkbox {
   }
 
   ::ng-deep th {
-    color: var(--lp-text-muted);
+    padding: var(--ms-space-2) var(--ms-space-3);
+    background: var(--ms-color-surface-subtle);
+    color: var(--ms-color-text-secondary);
+    font-size: var(--ms-font-size-label);
     font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  ::ng-deep td {
+    padding: var(--ms-space-2) var(--ms-space-3);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
   }
 }

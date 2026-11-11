@@ -21,7 +21,7 @@
           transactionData.transactionType.id === 3 ||
           transactionData.transactionType.id === 17
         ) {
-          <button mat-raised-button color="primary" [routerLink]="'edit'">
+          <button mat-flat-button color="primary" [routerLink]="'edit'">
             <fa-icon icon="edit" class="m-r-10"></fa-icon>{{ 'labels.buttons.Edit' | translate }}
           </button>
         }
@@ -31,7 +31,7 @@
   @if (!transactionData.reversed && transactionData.transactionType.amountHold) {
     <span>
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         *mifosxHasPermission="'RELEASEAMOUNT_SAVINGSACCOUNT'"
         (click)="releaseAmount()"
@@ -43,7 +43,7 @@
   @if (allowUndo()) {
     <span>
       <button
-        mat-raised-button
+        mat-stroked-button
         color="warn"
         *mifosxHasPermission="'UNDOTRANSACTION_SAVINGSACCOUNT'"
         (click)="undoTransaction()"
@@ -118,8 +118,8 @@
         }
       </div>
 
-      <div class="layout-row layout-align-center gap-2percent column-on-mobile">
-        <button type="button" mat-raised-button color="primary" [routerLink]="['../../']">
+      <div class="ms-actions align-end">
+        <button type="button" mat-flat-button color="primary" [routerLink]="['../../']">
           {{ 'labels.buttons.Back' | translate }}
         </button>
       </div>

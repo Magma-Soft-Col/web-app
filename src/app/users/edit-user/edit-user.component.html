@@ -10,8 +10,8 @@
   <mat-card>
     <form [formGroup]="editUserForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-row-wrap gap-2px responsive-column">
-          <mat-form-field class="flex-48">
+        <div class="ms-form-grid">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Username' | translate }}</mat-label>
             <input matInput required formControlName="username" />
             @if (editUserForm.controls.username.hasError('required')) {
@@ -22,7 +22,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Email' | translate }}</mat-label>
             <input matInput required formControlName="email" />
             @if (editUserForm.controls.email.hasError('email')) {
@@ -39,7 +39,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.First Name' | translate }}</mat-label>
             <input matInput required formControlName="firstname" />
             @if (editUserForm.controls.firstname.hasError('pattern')) {
@@ -56,7 +56,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Last Name' | translate }}</mat-label>
             <input matInput required formControlName="lastname" />
             @if (editUserForm.controls.lastname.hasError('pattern')) {
@@ -73,13 +73,13 @@
             }
           </mat-form-field>
 
-          <div class="password-never-expires-wrapper flex-48">
+          <div class="password-never-expires-wrapper">
             <mat-checkbox labelPosition="before" formControlName="passwordNeverExpires">
               {{ 'labels.inputs.Password never expires' | translate }}
             </mat-checkbox>
           </div>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="officeId" (selectionChange)="officeChanged($event.value)">
               @for (office of officesData; track office) {
@@ -96,7 +96,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Staff' | translate }}</mat-label>
             <mat-select formControlName="staffId">
               @for (staff of staffData; track staff) {
@@ -107,7 +107,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Roles' | translate }}</mat-label>
             <mat-select required formControlName="roles" multiple>
               @for (role of rolesData; track role) {
@@ -126,11 +126,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="!editUserForm.valid">
+        <button mat-flat-button color="primary" [disabled]="!editUserForm.valid">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>

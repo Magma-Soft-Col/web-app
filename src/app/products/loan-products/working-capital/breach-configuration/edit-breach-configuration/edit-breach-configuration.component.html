@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="breachForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="layout-row-wrap gap-2px responsive-column">
           <mat-form-field class="flex-100">
             <mat-label>{{ 'labels.inputs.Name' | translate }}</mat-label>
             <input matInput required formControlName="name" />
@@ -84,12 +84,12 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="layout-row align-end gap-12px responsive-column">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="!breachForm.valid"
           *mifosxHasPermission="'UPDATE_WORKINGCAPITALBREACH'"

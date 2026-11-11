@@ -6,14 +6,20 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography production-personal-data">
+<div class="tab-container production-personal-data">
   @if (isKycEnabled) {
     <div class="button-header">
-      <button mat-raised-button class="export-kyc-button" (click)="exportKyc.emit()">
+      <button mat-stroked-button type="button" class="export-kyc-button" (click)="exportKyc.emit()">
         <mat-icon>download</mat-icon>
         {{ 'labels.buttons.Export KYC' | translate }}
       </button>
-      <button mat-raised-button color="primary" class="validate-docs-button" (click)="validateDocumentation.emit()">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        class="validate-docs-button"
+        (click)="validateDocumentation.emit()"
+      >
         <mat-icon>fact_check</mat-icon>
         {{ 'labels.buttons.Validate Documentation' | translate }}
       </button>
@@ -36,20 +42,20 @@
     </div>
   }
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Legal Entity Details' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Legal Entity Details' | translate }}</h3>
     <ng-container *ngTemplateOutlet="fieldGrid; context: { fields: legalEntityFields }"></ng-container>
   </section>
 
-  <section class="section">
-    <h3>{{ 'labels.heading.Tax Address' | translate }}</h3>
+  <section class="ms-panel ms-panel--padded section">
+    <h3 class="ms-section-title">{{ 'labels.heading.Tax Address' | translate }}</h3>
     <ng-container *ngTemplateOutlet="fieldGrid; context: { fields: taxAddressFields }"></ng-container>
   </section>
 
   @for (sectionConfig of entityDisplaySections; track sectionConfig.key; let sectionIndex = $index) {
-    <section class="section">
+    <section class="ms-panel ms-panel--padded section">
       @if (showSectionHeading(sectionConfig, sectionIndex)) {
-        <h3>{{ translationKey(sectionConfig.title, 'labels.heading') | translate }}</h3>
+        <h3 class="ms-section-title">{{ translationKey(sectionConfig.title, 'labels.heading') | translate }}</h3>
       }
       @for (group of displayGroups(sectionConfig); track group) {
         @if (group.subtitle) {

@@ -6,128 +6,99 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.cbild-reporting-dashboard {
-  padding: 16px;
-}
-
-.cbild-role-card {
-  margin-bottom: 16px;
-
-  mat-card-content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
+.cbild-role-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-4);
+  flex-wrap: wrap;
 
   mat-form-field {
     width: 240px;
   }
 }
 
-.cbild-batch-btn {
-  height: 40px;
-
-  mat-icon {
-    margin-right: 8px;
-  }
+.cbild-batch-btn mat-icon {
+  margin-right: var(--ms-space-2);
 }
 
+/* KPI row: flat bordered tiles, label above a tabular figure. */
 .cbild-stats-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
-
-  .cbild-stat-card {
-    flex: 1 1 calc(25% - 16px);
-    min-width: 160px;
-  }
-}
-
-.cbild-stat-card {
-  text-align: center;
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--ms-space-4);
 }
 
 .cbild-stat-label {
-  font-size: 12px;
-  color: var(--mdc-theme-text-secondary-on-background, rgb(0 0 0 / 54%));
-  margin-bottom: 8px;
+  margin: 0 0 var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
+  font-weight: 500;
+  color: var(--ms-color-text-secondary);
 }
 
 .cbild-stat-value {
-  font-size: 32px;
-  font-weight: 500;
   margin: 0;
-}
-
-.cbild-stat-total {
-  color: var(--mdc-theme-primary, #009fdf);
+  font-size: var(--ms-font-size-amount);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ms-color-text-primary);
 }
 
 .cbild-stat-accepted {
-  color: var(--mdc-theme-success, #16a34a);
+  color: var(--ms-color-success);
 }
 
 .cbild-stat-pending {
-  color: var(--mdc-theme-warning, #d97706);
+  color: var(--ms-color-warning);
 }
 
 .cbild-stat-failed {
-  color: var(--mdc-theme-error, #dc2626);
+  color: var(--ms-color-danger);
 }
 
-.cbild-table-card {
-  margin-bottom: 16px;
+.cbild-table-card mat-card-content {
+  padding: 0;
 }
 
 table {
   width: 100%;
 }
 
+/* Status badge, same geometry as .ms-badge. */
 .cbild-status-badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ms-color-neutral);
+  background: var(--ms-color-neutral-bg);
 }
 
 .cbild-status-accepted {
-  background: var(--cbild-status-accepted-bg, #dcfce7);
-  color: var(--cbild-status-accepted-fg, #16a34a);
+  color: var(--ms-color-success);
+  background: var(--ms-color-success-bg);
 }
 
-.cbild-status-rejected {
-  background: var(--cbild-status-rejected-bg, #fee2e2);
-  color: var(--cbild-status-rejected-fg, #dc2626);
+.cbild-status-rejected,
+.cbild-status-failed {
+  color: var(--ms-color-danger);
+  background: var(--ms-color-danger-bg);
 }
 
 .cbild-status-pending {
-  background: var(--cbild-status-pending-bg, #fef9c3);
-  color: var(--cbild-status-pending-fg, #d97706);
+  color: var(--ms-color-warning);
+  background: var(--ms-color-warning-bg);
 }
 
-.cbild-status-failed {
-  background: var(--cbild-status-failed-bg, #fee2e2);
-  color: var(--cbild-status-failed-fg, #991b1b);
-}
-
-.cbild-empty-card {
-  margin-bottom: 16px;
-}
-
-.cbild-empty-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px;
-  gap: 16px;
-  color: var(--mdc-theme-text-disabled-on-background, rgb(0 0 0 / 38%));
-
-  mat-icon {
-    font-size: 48px;
-    height: 48px;
-    width: 48px;
-  }
+.cbild-empty-content mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--ms-color-text-disabled);
 }

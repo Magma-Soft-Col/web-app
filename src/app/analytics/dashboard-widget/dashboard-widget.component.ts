@@ -261,7 +261,7 @@ export class DashboardWidgetComponent implements AfterViewInit, OnChanges, OnDes
       const flagUrl = this.getFlagUrl(pin.country);
 
       // Custom SVG icon matching enterprise dashboard design
-      const markerColor = isActive ? '#ea580c' : '#0284c7';
+      const markerColor = isActive ? '#946200' : '#315e9e';
       const customIcon = L.divIcon({
         className: `custom-map-pin ${isActive ? 'active' : ''}`,
         html: `
@@ -505,8 +505,8 @@ export class DashboardWidgetComponent implements AfterViewInit, OnChanges, OnDes
     }
 
     const canvas = this.chartCanvas.nativeElement;
-    const legendColor = this.currentTheme === 'dark-theme' ? '#f5f5f5' : '#4f4f4f';
-    const axisColor = this.currentTheme === 'dark-theme' ? '#d9d9d9' : '#757575';
+    const legendColor = this.currentTheme === 'dark-theme' ? '#9fadbf' : '#596779';
+    const axisColor = this.currentTheme === 'dark-theme' ? '#9fadbf' : '#596779';
 
     const labels = (this.state.labels || []).map((label) =>
       this.state!.translateLabels ? this.translateService.instant(label) : label
@@ -565,7 +565,7 @@ export class DashboardWidgetComponent implements AfterViewInit, OnChanges, OnDes
                     color: axisColor
                   },
                   grid: {
-                    color: this.currentTheme === 'dark-theme' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'
+                    color: this.currentTheme === 'dark-theme' ? '#233041' : '#e8ecf1'
                   }
                 }
               }

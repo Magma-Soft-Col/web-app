@@ -8,18 +8,18 @@
 
 @if (summary) {
   <div class="section-head">
-    <h3 class="section-title">{{ 'labels.heading.Loan Summary' | translate }}</h3>
+    <h3 class="ms-section-title">{{ 'labels.heading.Loan Summary' | translate }}</h3>
     @if (currency) {
       <span class="section-hint">{{ currency | currencyName }} · {{ currency.code }}</span>
     }
   </div>
-  <div class="matrix-wrap">
-    <table class="matrix" [attr.aria-label]="'labels.heading.Loan Summary' | translate">
+  <div class="ms-panel ms-table-wrap">
+    <table class="ms-table matrix" [attr.aria-label]="'labels.heading.Loan Summary' | translate">
       <thead>
         <tr>
           <th scope="col"></th>
           @for (col of columns; track col.key) {
-            <th scope="col">{{ 'labels.inputs.' + col.label | translate }}</th>
+            <th scope="col" class="ms-num">{{ 'labels.inputs.' + col.label | translate }}</th>
           }
         </tr>
       </thead>
@@ -29,6 +29,7 @@
             <td class="rowlabel">{{ 'labels.inputs.' + row.property | translate }}</td>
             @for (col of columns; track col.key) {
               <td
+                class="ms-num"
                 [class.zero]="!row[col.key]"
                 [class.paid]="col.key === 'paid' && row[col.key] > 0"
                 [class.due]="col.key === 'overdue' && row[col.key] > 0"

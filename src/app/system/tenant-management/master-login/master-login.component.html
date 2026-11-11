@@ -8,15 +8,14 @@
 
 <div class="container">
   <mat-card class="master-login-card">
-    <mat-card-header>
-      <mat-card-title>{{ 'labels.heading.Tenant Management Sign In' | translate }}</mat-card-title>
-      <mat-card-subtitle>{{ 'labels.text.Tenant management master context' | translate }}</mat-card-subtitle>
-    </mat-card-header>
-
     <form [formGroup]="masterLoginForm" (ngSubmit)="signIn()">
       <mat-card-content>
+        <h2 class="ms-section-title">{{ 'labels.heading.Tenant Management Sign In' | translate }}</h2>
+        <p class="ms-page-subtitle master-login-subtitle">
+          {{ 'labels.text.Tenant management master context' | translate }}
+        </p>
         <div class="layout-column">
-          <mat-form-field class="flex-100">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Master Username' | translate }}</mat-label>
             <input matInput required formControlName="username" autocomplete="username" />
             @if (masterLoginForm.controls.username.hasError('required')) {
@@ -44,8 +43,8 @@
         }
       </mat-card-content>
 
-      <mat-card-actions align="end">
-        <button mat-raised-button color="primary" type="submit" [disabled]="masterLoginForm.invalid || submitting()">
+      <mat-card-actions class="ms-form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="masterLoginForm.invalid || submitting()">
           {{ 'labels.buttons.Sign In' | translate }}
         </button>
       </mat-card-actions>

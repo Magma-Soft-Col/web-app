@@ -6,22 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/* Spacing of the tab content below the tab bar (pen detail pattern). */
 .tab-container {
-  padding: 1%;
-  margin: 1%;
-
-  h3 {
-    margin: 1% auto;
-  }
-
-  table {
-    width: 100%;
-
-    .document-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
-  }
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 }

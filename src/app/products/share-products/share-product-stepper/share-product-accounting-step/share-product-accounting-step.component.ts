@@ -15,7 +15,6 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
-import { MatDivider } from '@angular/material/divider';
 import { GlAccountSelectorComponent } from '../../../../shared/accounting/gl-account-selector/gl-account-selector.component';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -29,7 +28,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatRadioGroup,
     MatRadioButton,
-    MatDivider,
     GlAccountSelectorComponent,
     MatStepperPrevious,
     FaIconComponent,

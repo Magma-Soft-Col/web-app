@@ -6,10 +6,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.expandcollapsebutton {
-  margin-top: -7px;
-}
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
 
-.container {
-  max-width: 37rem;
+@include shared.action-form;
+
+.loan-form__toggle {
+  margin-bottom: var(--ms-space-3);
 }

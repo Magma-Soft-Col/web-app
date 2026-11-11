@@ -21,7 +21,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatAutocompleteTrigger, MatAutocomplete, MatOption } from '@angular/material/autocomplete';
 import { MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatListSubheaderCssMatStyler } from '@angular/material/list';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 @Component({
@@ -33,8 +32,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatAutocompleteTrigger,
     MatAutocomplete,
     MatIconButton,
-    FaIconComponent,
-    MatListSubheaderCssMatStyler
+    FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

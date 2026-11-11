@@ -25,8 +25,8 @@
   }
 
   <mat-dialog-actions align="end">
-    <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-    <button mat-raised-button color="primary" [disabled]="!file" [mat-dialog-close]="{ file: file }">
+    <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+    <button mat-flat-button color="primary" [disabled]="!file" [mat-dialog-close]="{ file: file }">
       {{ 'labels.buttons.Upload' | translate }}
     </button>
   </mat-dialog-actions>

@@ -24,24 +24,24 @@
   <!-- Date Filter -->
   <mat-card class="cbild-filter-card">
     <mat-card-content>
-      <h3 class="cbild-section-title">
+      <h3 class="ms-section-title cbild-section-title">
         <mat-icon>filter_list</mat-icon>
         {{ 'labels.cbild.auditTrail.filterTitle' | translate }}
       </h3>
       <mat-divider></mat-divider>
       <div class="cbild-filter-row">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>{{ 'labels.cbild.auditTrail.startDate' | translate }}</mat-label>
           <input matInput type="text" placeholder="2026-08-01T00:00" [(ngModel)]="startDate" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>{{ 'labels.cbild.auditTrail.endDate' | translate }}</mat-label>
           <input matInput type="text" placeholder="2026-08-07T23:59" [(ngModel)]="endDate" />
         </mat-form-field>
 
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="isLoading || !startDate || !endDate"
           (click)="applyFilter()"

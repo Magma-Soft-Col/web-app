@@ -6,14 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Variables
-$bar: 150px;
-$foo: $bar * 8;
-$color: #e2e4ec;
+// Not imported anywhere at the moment; kept on the pen tokens in case it is reused.
 
 .container {
-  padding: 24px;
-
   // Support for existing layout classes
   .layout-column,
   .layout-gt-sm-row {
@@ -91,41 +86,18 @@ $color: #e2e4ec;
   // Table styling
   .bordered-table {
     width: 100%;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
+    border: 1px solid var(--ms-color-border-subtle);
+    border-radius: var(--ms-radius-panel);
     overflow: hidden;
-    margin-top: 16px;
+    margin-top: var(--ms-space-4);
 
     .select-row {
       cursor: pointer;
-
-      &:hover {
-        background-color: #f5f5f5;
-      }
-    }
-
-    th,
-    td {
-      padding: 12px 16px;
-    }
-
-    th {
-      font-weight: 500;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    tr {
-      border-bottom: 1px solid #f0f0f0;
-
-      &:last-child {
-        border-bottom: none;
-      }
     }
   }
 
   // Paginator styling
   mat-paginator {
-    border-top: 1px solid #e0e0e0;
     margin-top: 0;
   }
 
@@ -136,10 +108,8 @@ $color: #e2e4ec;
 }
 
 // Responsive design
-@media (width <= 768px) {
+@media (width < 768px) {
   .container {
-    padding: 16px;
-
     .layout-column,
     .layout-gt-sm-row {
       flex-wrap: wrap;

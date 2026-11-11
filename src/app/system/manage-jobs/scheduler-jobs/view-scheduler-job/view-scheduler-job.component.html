@@ -6,60 +6,49 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row layout-lt-md-column align-end gap-2percent">
-  <button mat-raised-button color="primary" [routerLink]="['edit']">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-  <button mat-raised-button color="primary" [routerLink]="['viewhistory']">
-    {{ 'labels.buttons.View History' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Job Name' | translate }}
+  <div class="ms-page">
+    <div class="ms-actions align-end">
+      <button mat-stroked-button [routerLink]="['../']">
+        {{ 'labels.buttons.Back' | translate }}
+      </button>
+      <button mat-stroked-button [routerLink]="['viewhistory']">
+        {{ 'labels.buttons.View History' | translate }}
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="['edit']">
+        <fa-icon icon="edit" class="m-r-10"></fa-icon>
+        {{ 'labels.buttons.Edit' | translate }}
+      </button>
+    </div>
+
+    <mat-card>
+      <mat-card-content>
+        <div class="detail-list">
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Job Name' | translate }}</span>
+            <span class="ms-value">{{ jobData.displayName }}</span>
+          </div>
+
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Cron Expression' | translate }}</span>
+            <span class="ms-value">{{ jobData.cronExpression }}</span>
+          </div>
+
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Is Active Job' | translate }}?</span>
+            <span class="ms-value">{{ jobData.active | yesNo }}</span>
+          </div>
+
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Follow' | translate }}</span>
+            <span class="ms-value"
+              ><a [href]="'cronmaker' | documentationLink" target="_blank" rel="noopener noreferrer">
+                {{ 'labels.text.Click Here To Generate Cron Expression' | translate }}
+              </a></span
+            >
+          </div>
         </div>
-
-        <div class="flex-50">
-          {{ jobData.displayName }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Cron Expression' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ jobData.cronExpression }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">{{ 'labels.inputs.Is Active Job' | translate }}?</div>
-
-        <div class="flex-50">
-          {{ jobData.active | yesNo }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Follow' | translate }}
-        </div>
-
-        <div class="flex-50">
-          <a [href]="'cronmaker' | documentationLink" target="_blank" rel="noopener noreferrer">
-            {{ 'labels.text.Click Here To Generate Cron Expression' | translate }}
-          </a>
-        </div>
-      </div>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <div class="layout-row layout-align-center flex-100 column-on-mobile">
-        <button type="button" color="primary" mat-raised-button [routerLink]="['../']">
-          {{ 'labels.buttons.Back' | translate }}
-        </button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

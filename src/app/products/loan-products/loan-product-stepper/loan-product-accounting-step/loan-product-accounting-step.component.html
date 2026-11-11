@@ -29,7 +29,7 @@
               'labels.inputs.Enable Accrual Activity Posting on Installment Due Date' | translate
             }}</mat-checkbox>
           }
-          <h4 class="mat-h4 flex-98">
+          <h4 class="ms-section-title step-subtitle flex-98">
             {{ 'labels.heading.Assets' | translate }} / {{ 'labels.heading.Liabilities' | translate }}
           </h4>
           <mifosx-gl-account-selector
@@ -40,7 +40,7 @@
             [inputLabel]="'Fund source'"
           >
           </mifosx-gl-account-selector>
-          <h4 class="mat-h4 flex-98">{{ 'labels.heading.Assets' | translate }}</h4>
+          <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Assets' | translate }}</h4>
           <mifosx-gl-account-selector
             class="flex-48"
             [inputFormControl]="loanProductAccountingForm.controls.loanPortfolioAccountId"
@@ -88,7 +88,7 @@
             </div>
           }
           <mat-divider class="flex-98"></mat-divider>
-          <h4 class="mat-h4 flex-98">{{ 'labels.heading.Income' | translate }}</h4>
+          <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Income' | translate }}</h4>
           <mifosx-gl-account-selector
             class="flex-48"
             [inputFormControl]="loanProductAccountingForm.controls.interestOnLoanAccountId"
@@ -190,7 +190,7 @@
             </mifosx-gl-account-selector>
           }
           <mat-divider class="flex-98"></mat-divider>
-          <h4 class="mat-h4 flex-98">{{ 'labels.heading.Expenses' | translate }}</h4>
+          <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Expenses' | translate }}</h4>
           <mifosx-gl-account-selector
             class="flex-48"
             [inputFormControl]="loanProductAccountingForm.controls.writeOffAccountId"
@@ -237,7 +237,7 @@
             </mifosx-gl-account-selector>
           }
           <mat-divider class="flex-98"></mat-divider>
-          <h4 class="mat-h4 flex-98">{{ 'labels.heading.Liabilities' | translate }}</h4>
+          <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Liabilities' | translate }}</h4>
           <mifosx-gl-account-selector
             class="flex-48"
             [inputFormControl]="loanProductAccountingForm.controls.overpaymentLiabilityAccountId"
@@ -338,7 +338,7 @@
       <mat-divider class="flex-98"></mat-divider>
 
       @if (loanProductAccountingForm.value.accountingRule !== 'NONE') {
-        <h4 class="mat-h4 flex-98">
+        <h4 class="ms-section-title step-subtitle flex-98">
           {{ 'labels.heading.Assets' | translate }} / {{ 'labels.heading.Liabilities' | translate }}
         </h4>
         <mifosx-gl-account-selector
@@ -350,7 +350,7 @@
         >
         </mifosx-gl-account-selector>
 
-        <h4 class="mat-h4 flex-98">{{ 'labels.heading.Assets' | translate }}</h4>
+        <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Assets' | translate }}</h4>
         <mifosx-gl-account-selector
           class="flex-48"
           [inputFormControl]="loanProductAccountingForm.controls.loanPortfolioAccountId"
@@ -385,7 +385,7 @@
         >
         </mifosx-gl-account-selector>
 
-        <h4 class="mat-h4 flex-98">{{ 'labels.heading.Income' | translate }}</h4>
+        <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Income' | translate }}</h4>
         <mifosx-gl-account-selector
           class="flex-48"
           [inputFormControl]="loanProductAccountingForm.controls.incomeFromDiscountFeeAccountId"
@@ -451,7 +451,7 @@
         >
         </mifosx-gl-account-selector>
 
-        <h4 class="mat-h4 flex-98">{{ 'labels.heading.Expenses' | translate }}</h4>
+        <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Expenses' | translate }}</h4>
         <mifosx-gl-account-selector
           class="flex-48"
           [inputFormControl]="loanProductAccountingForm.controls.writeOffAccountId"
@@ -485,7 +485,7 @@
         >
         </mifosx-gl-account-selector>
 
-        <h4 class="mat-h4 flex-98">{{ 'labels.heading.Liabilities' | translate }}</h4>
+        <h4 class="ms-section-title step-subtitle flex-98">{{ 'labels.heading.Liabilities' | translate }}</h4>
         <mifosx-gl-account-selector
           class="flex-48"
           [inputFormControl]="loanProductAccountingForm.controls.overpaymentLiabilityAccountId"
@@ -546,12 +546,12 @@
     </div>
   }
 
-  <div class="layout-row align-center margin-t responsive-column gap-2percent">
-    <button mat-raised-button matStepperPrevious>
+  <div class="layout-row align-end margin-t responsive-column gap-12px">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext [disabled]="!loanProductFormValid">
+    <button mat-flat-button color="primary" matStepperNext [disabled]="!loanProductFormValid">
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

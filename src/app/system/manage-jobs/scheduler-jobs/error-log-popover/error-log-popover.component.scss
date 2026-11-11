@@ -11,12 +11,14 @@
   font-weight: 500;
 }
 
-tr {
-  padding-bottom: 10px;
+.error-log-table td {
+  padding: var(--ms-space-1) var(--ms-space-3) var(--ms-space-1) 0;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-primary);
 }
 
 span:not(.note) {
-  font-size: 0.9rem;
+  font-size: var(--ms-font-size-table);
   line-height: 14px;
 }
 
@@ -30,7 +32,7 @@ span:not(.note) {
 
 .note-field:not(.show)::after {
   content: '...';
-  padding-left: 0.5rem;
+  padding-left: var(--ms-space-2);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -40,16 +42,4 @@ span:not(.note) {
   overflow: visible;
   text-overflow: none;
   height: auto;
-}
-
-button {
-  background: transparent;
-  font-size: small;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-button:hover {
-  text-decoration: none;
 }

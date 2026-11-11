@@ -25,8 +25,6 @@ import {
 } from '@angular/material/table';
 
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
-import { StatusLookupPipe } from 'app/pipes/status-lookup.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -47,9 +45,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
-    MatRow,
-    NgClass,
-    StatusLookupPipe
+    MatRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

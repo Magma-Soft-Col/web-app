@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   Copyright since 2025 Mifos Initiative
 
   This Source Code Form is subject to the terms of the Mozilla Public
@@ -17,11 +17,11 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>
+  <button mat-stroked-button mat-dialog-close>
     {{ 'labels.buttons.Cancel' | translate }}
   </button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [disabled]="!importLoanProductForm.valid"
     [mat-dialog-close]="importLoanProductForm.value"

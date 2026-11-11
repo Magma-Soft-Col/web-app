@@ -30,6 +30,8 @@ import {
 } from '@angular/material/table';
 import { AccountsFilterPipe } from '../../../../pipes/accounts-filter.pipe';
 import { FormatNumberPipe } from '../../../../pipes/format-number.pipe';
+import { MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { LoanAccountActionsBaseComponent } from '../loan-account-actions-base.component';
 
@@ -43,6 +45,8 @@ import { LoanAccountActionsBaseComponent } from '../loan-account-actions-base.co
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
+    MatIconButton,
+    MatTooltip,
     ExternalIdentifierComponent,
     MatTable,
     MatColumnDef,

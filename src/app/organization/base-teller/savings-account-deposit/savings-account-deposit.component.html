@@ -9,8 +9,6 @@
 <div class="container base-teller-deposit">
   <mat-card class="workflow-card">
     <mat-card-content>
-      <h2>{{ 'labels.heading.Savings Account Deposit' | translate }}</h2>
-
       @if (!canAccessWorkflow) {
         <div class="message error-message">{{ errorMessage | translate }}</div>
       } @else {
@@ -141,7 +139,12 @@
               }
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperNext [disabled]="!lookupForm.valid || isLoadingTemplate">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  matStepperNext
+                  [disabled]="!lookupForm.valid || isLoadingTemplate"
+                >
                   {{ 'labels.buttons.Next' | translate }}
                   <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
@@ -213,7 +216,7 @@
               @if (depositType === 'CASH') {
                 <section class="funding-panel">
                   <div class="section-heading">
-                    <h3>{{ 'labels.inputs.Denominations' | translate }}</h3>
+                    <h3 class="ms-subsection-title">{{ 'labels.inputs.Denominations' | translate }}</h3>
                     <button type="button" mat-button color="primary" (click)="addDenomination()">
                       <fa-icon icon="plus" class="m-r-10"></fa-icon>
                       {{ 'labels.buttons.Add' | translate }}
@@ -287,12 +290,12 @@
               </mat-form-field>
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperPrevious>
+                <button mat-stroked-button matStepperPrevious>
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                   {{ 'labels.buttons.Previous' | translate }}
                 </button>
                 <button
-                  mat-raised-button
+                  mat-stroked-button
                   matStepperNext
                   [disabled]="!depositForm.valid || !cashDenominationsReconcile"
                   (click)="proceedToPreview()"
@@ -334,7 +337,7 @@
             @if (receipt) {
               <section class="receipt">
                 <div class="section-heading">
-                  <h3>{{ 'labels.heading.Payment Receipt' | translate }}</h3>
+                  <h3 class="ms-subsection-title">{{ 'labels.heading.Payment Receipt' | translate }}</h3>
                   <button type="button" mat-button color="primary" (click)="printReceipt()">
                     {{ 'labels.buttons.Print Receipt' | translate }}
                   </button>
@@ -386,12 +389,12 @@
             }
 
             <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-              <button mat-raised-button matStepperPrevious [disabled]="isSubmitting || !!commandResult">
+              <button mat-stroked-button matStepperPrevious [disabled]="isSubmitting || !!commandResult">
                 <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                 {{ 'labels.buttons.Previous' | translate }}
               </button>
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
                 (click)="submit()"
                 [disabled]="

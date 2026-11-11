@@ -75,7 +75,7 @@ export class ShellComponent implements OnInit, AfterViewInit {
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
   /** Sets the initial state of sidenav as collapsed. Not collapsed if false. */
-  sidenavCollapsed = true;
+  sidenavCollapsed = false;
   /**
    * Progress bar mode. Starts as 'none' so the bar stays hidden until a request
    * actually begins. The service emits through a plain EventEmitter, so

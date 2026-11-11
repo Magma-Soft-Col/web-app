@@ -22,9 +22,11 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 /**
  * View provisioning journal entries component.
@@ -35,6 +37,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./view-provisioning-journal-entries.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    FaIconComponent,
     MatTable,
     MatSort,
     MatColumnDef,
@@ -47,7 +50,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

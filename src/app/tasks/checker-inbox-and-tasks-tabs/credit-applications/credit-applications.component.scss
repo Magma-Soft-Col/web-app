@@ -6,104 +6,99 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+.tasks-tab {
+  gap: var(--ms-space-4);
+}
 
-  .credit-applications-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: start;
-    margin-bottom: 16px;
+.credit-applications-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--ms-space-3);
+  align-items: start;
 
-    mat-form-field {
-      flex: 1 1 180px;
-    }
+  mat-form-field {
+    flex: 1 1 180px;
   }
+}
 
-  .credit-search-filter {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, calc((100% - 48px) / 4)));
-    gap: 16px;
-
-    .filter-actions {
-      grid-column: 1 / -1;
-    }
-  }
+.credit-search-filter {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
 
   .filter-actions {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    min-height: 56px;
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-  }
-
-  .mass-actions {
-    display: flex;
+    grid-column: 1 / -1;
     justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
-    margin: 12px 0;
   }
 
-  table {
-    width: 100%;
+  @media (width < 1024px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .mat-column-select {
-    width: 56px;
-  }
-
-  .view-details,
-  .clickable-row {
-    cursor: pointer;
-  }
-
-  .view-details {
-    color: var(--md-sys-color-primary);
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (width <= 960px) {
-  .tab-container .credit-search-filter {
-    grid-template-columns: repeat(2, minmax(0, calc((100% - 16px) / 2)));
-  }
+.filter-actions {
+  display: flex;
+  gap: var(--ms-space-2);
+  align-items: center;
+  min-height: 56px;
 }
 
-@media (width <= 600px) {
-  .tab-container .credit-search-filter {
-    grid-template-columns: minmax(0, 100%);
-  }
+.mass-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--ms-space-4);
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-secondary);
 }
 
-.alert {
-  background-color: #e8f4fd;
-  padding: 6px 16px;
-  font-size: 0.875rem;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-weight: 400;
-  line-height: 1.43;
-  border-radius: 4px;
-  letter-spacing: normal;
-  margin: 10px 0;
+table {
+  width: 100%;
+}
 
-  &.error {
-    background-color: #fdecea;
-  }
+.mat-column-select {
+  width: 56px;
+}
+
+.view-details,
+.clickable-row {
+  cursor: pointer;
+}
+
+.view-details {
+  font-weight: 500;
+  color: var(--ms-color-text-link);
+}
+
+.tasks-notice {
+  padding: var(--ms-space-3) var(--ms-space-4);
+  border-radius: var(--ms-radius-md);
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-info);
+  background: var(--ms-color-info-bg);
 
   .message {
-    padding: 8px 0;
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: var(--ms-space-2);
+    flex-wrap: wrap;
   }
+}
 
-  .alert-check {
-    color: #359ff4;
-    margin-right: 2px;
-    font-size: 1.4rem;
-  }
+.tasks-notice--error {
+  color: var(--ms-color-danger);
+  background: var(--ms-color-danger-bg);
+}
+
+.failed-applications {
+  margin: 0;
+  font-size: var(--ms-font-size-table);
+  color: var(--ms-color-text-secondary);
 }

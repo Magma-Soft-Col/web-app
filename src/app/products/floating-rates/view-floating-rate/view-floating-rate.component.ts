@@ -25,9 +25,7 @@ import {
   MatRow
 } from '@angular/material/table';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatDivider } from '@angular/material/divider';
 import { DecimalPipe } from '@angular/common';
-import { MatTooltip } from '@angular/material/tooltip';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { YesnoPipe } from '../../../pipes/yesno.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -42,7 +40,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatDivider,
     MatTable,
     MatSort,
     MatColumnDef,
@@ -51,7 +48,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

@@ -9,7 +9,7 @@
 <div class="container">
   <mat-card>
     <div #currencyFormRef class="currency-form-container">
-      <form #formRef="ngForm" [formGroup]="currencyForm" class="layout-row gap-20px">
+      <form #formRef="ngForm" [formGroup]="currencyForm" class="currency-form">
         <mat-form-field class="currency-search-field">
           <mat-label>{{ 'labels.inputs.Currency' | translate }}</mat-label>
           <mat-select required formControlName="currency">
@@ -34,7 +34,7 @@
 
         <button
           type="submit"
-          mat-raised-button
+          mat-flat-button
           class="add-currency-button"
           color="primary"
           [disabled]="!currencyForm.valid"
@@ -65,9 +65,7 @@
                 <fa-icon icon="trash"></fa-icon>
               </button>
             </div>
-            <span class="label m-l-10 p-t-5"
-              ><b>{{ currency.name }}</b></span
-            >
+            <span class="currency-label m-l-10">{{ currency.name }}</span>
           </div>
         </mat-grid-tile>
       }
@@ -84,16 +82,16 @@
     }}</a>
   </p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close()">
+    <button mat-flat-button color="primary" (click)="popover.close()">
       {{ 'labels.buttons.Add Currency' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

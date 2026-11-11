@@ -7,12 +7,12 @@
  */
 
 import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
-import { ThemingService } from './theming.service';
 import { SettingsService } from 'app/settings/settings.service';
 import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { M3IconComponent } from '../m3-ui/m3-icon/m3-icon.component';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { UiThemeService } from '../ui-theme/ui-theme.service';
 
 @Component({
   selector: 'mifosx-theme-toggle',
@@ -27,8 +27,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeToggleComponent implements OnInit, OnChanges {
-  private themingService = inject(ThemingService);
   private settingsService = inject(SettingsService);
+  private uiThemeService = inject(UiThemeService);
 
   darkModeOn: boolean;
 
@@ -49,13 +49,11 @@ export class ThemeToggleComponent implements OnInit, OnChanges {
    * Toggle between light and dark themes
    * This method handles the complete theme switching process:
    * 1. Toggles the local state
-   * 2. Persists the preference to settings
+   * 2. Applies Obsidian or the default Magma Soft palette, which also persists
+   *    the dark-mode flag in settings
    */
   toggleTheme() {
-    // Step 1: Toggle the dark mode state
     this.darkModeOn = !this.darkModeOn;
-    // Step 2: Persist the theme preference to localStorage via settings service
-    this.settingsService.setThemeDarkEnabled(this.darkModeOn);
-    this.themingService.setDarkMode(this.darkModeOn);
+    this.uiThemeService.setDark(this.darkModeOn);
   }
 }

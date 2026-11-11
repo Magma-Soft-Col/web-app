@@ -32,7 +32,8 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -73,7 +74,8 @@ import { ExternalIdentifierComponent } from 'app/shared/external-identifier/exte
     MatRow,
     MatPaginator,
     MatIconButton,
-    ExternalIdentifierComponent
+    ExternalIdentifierComponent,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

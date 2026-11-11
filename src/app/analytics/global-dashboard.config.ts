@@ -141,51 +141,6 @@ export const GLOBAL_ANALYTICS_DASHBOARD: AnalyticsDashboardDefinition = {
       }
     },
     {
-      id: 'client-loan-trends',
-      titleKey: 'labels.inputs.Client Trends',
-      type: 'chart',
-      layout: 'wide',
-      adapter: 'client-loan-trends',
-      chartType: 'bar',
-      icon: 'chart-line',
-      visibleTo: {
-        permissionsAny: [
-          'READ_REPORT',
-          'ALL_FUNCTIONS'
-        ]
-      }
-    },
-    {
-      id: 'portfolio-growth-by-group',
-      titleKey: 'labels.text.Portfolio Growth by Client Group',
-      type: 'chart',
-      layout: 'two-thirds',
-      adapter: 'portfolio-growth-by-group',
-      chartType: 'line',
-      icon: 'chart-line',
-      visibleTo: {
-        permissionsAny: [
-          'READ_REPORT',
-          'ALL_FUNCTIONS'
-        ]
-      }
-    },
-    {
-      id: 'loan-portfolio-distribution',
-      titleKey: 'labels.text.Loan Portfolio Distribution',
-      type: 'chart',
-      layout: 'one-third',
-      adapter: 'loan-portfolio-distribution',
-      chartType: 'doughnut',
-      icon: 'chart-pie',
-      visibleTo: {
-        permissionsAny: [
-          'READ_REPORT',
-          'ALL_FUNCTIONS'
-        ]
-      }
-    },
-    {
       id: 'savings-growth-trends',
       titleKey: 'labels.text.Savings Growth',
       type: 'chart',
@@ -216,13 +171,13 @@ export const GLOBAL_ANALYTICS_DASHBOARD: AnalyticsDashboardDefinition = {
       }
     },
     {
-      id: 'new-client-onboarding-trends',
-      titleKey: 'labels.text.New Client Onboarding Trends',
+      id: 'portfolio-growth-by-group',
+      titleKey: 'labels.text.Portfolio Growth by Client Group',
       type: 'chart',
       layout: 'wide',
-      adapter: 'new-client-onboarding-trends',
+      adapter: 'portfolio-growth-by-group',
       chartType: 'line',
-      icon: 'user-plus',
+      icon: 'chart-line',
       visibleTo: {
         permissionsAny: [
           'READ_REPORT',
@@ -231,12 +186,13 @@ export const GLOBAL_ANALYTICS_DASHBOARD: AnalyticsDashboardDefinition = {
       }
     },
     {
-      id: 'georeference-map',
-      titleKey: 'labels.text.Georeference Map',
+      id: 'new-client-onboarding-trends',
+      titleKey: 'labels.text.New Client Onboarding Trends',
       type: 'chart',
       layout: 'wide',
-      adapter: 'georeference-map',
-      icon: 'globe',
+      adapter: 'new-client-onboarding-trends',
+      chartType: 'line',
+      icon: 'user-plus',
       visibleTo: {
         permissionsAny: [
           'READ_REPORT',

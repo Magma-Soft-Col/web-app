@@ -10,13 +10,10 @@ table {
   width: 100%;
 }
 
-.content {
-  div {
-    margin: 1rem 0;
-    overflow-wrap: break-word;
+.entry-filter {
+  width: 240px;
+}
 
-    &.header {
-      font-weight: 500;
-    }
-  }
+.ms-entity-header__stats {
+  align-items: center;
 }

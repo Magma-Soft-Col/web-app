@@ -9,11 +9,10 @@
 @use 'assets/styles/helper';
 
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  padding: var(--ms-space-5) 0;
 
   h3 {
-    margin: 1% auto;
+    margin: 0 0 var(--ms-space-3);
   }
 
   .action-button {
@@ -36,7 +35,11 @@
   }
 }
 
-.select-row:hover {
+.select-row {
   cursor: pointer;
-  font-weight: 800;
+}
+
+// Tab content sits right under the tab bar (pen spacing).
+.container {
+  padding-top: var(--ms-space-5);
 }

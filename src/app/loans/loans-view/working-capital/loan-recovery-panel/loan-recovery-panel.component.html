@@ -47,7 +47,7 @@
       <div class="progress-caption">
         <span class="progress-percent">{{ writeOffBalance.recoveredPercentage | number: '1.0-0' }}%</span>
         @if (writeOffBalance.fullyRecovered) {
-          <span class="recovery-complete-tag">{{ 'labels.text.Recovery Completed' | translate }}</span>
+          <span class="ms-badge ms-badge--success">{{ 'labels.text.Recovery Completed' | translate }}</span>
         }
       </div>
     </div>

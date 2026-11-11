@@ -21,10 +21,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 /** Custom Services */
 import { ConfigurationWizardService } from '../configuration-wizard/configuration-wizard.service';
 import { PopoverService } from '../configuration-wizard/popover/popover.service';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatLine } from '@angular/material/grid-list';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { environment } from 'environments/environment';
 
@@ -37,11 +34,7 @@ import { environment } from 'environments/environment';
   styleUrls: ['./organization.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatNavList,
-    MatListItem,
-    MatIcon,
-    FaIconComponent,
-    MatLine
+    FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -92,8 +85,6 @@ export class OrganizationComponent implements AfterViewInit {
   @ViewChild('manageFunds') manageFunds: ElementRef<any>;
   /* Template for popover on manage funds */
   @ViewChild('templateManageFunds') templateManageFunds: TemplateRef<any>;
-  // Initialize an array of menu toggle values, all set to false
-  arrowBooleans: boolean[] = new Array(24).fill(false);
 
   /**
    * Popover function
@@ -101,7 +92,6 @@ export class OrganizationComponent implements AfterViewInit {
    * @param target HTMLElement | ElementRef<any>.
    * @param position String.
    * @param backdrop Boolean.
-   * @param arrowNumber - The index of the boolean value to toggle.
    */
   showPopover(
     template: TemplateRef<any>,
@@ -250,10 +240,5 @@ export class OrganizationComponent implements AfterViewInit {
     this.configurationWizardService.showManageFunds = false;
     this.configurationWizardService.showRecurringDepositProductsList = true;
     this.router.navigate(['/products/recurring-deposit-products']);
-  }
-
-  arrowBooleansToggle(arrowNumber: number) {
-    // Toggle the boolean value at the given index
-    this.arrowBooleans[arrowNumber] = !this.arrowBooleans[arrowNumber];
   }
 }

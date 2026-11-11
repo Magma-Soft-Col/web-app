@@ -21,7 +21,7 @@
 }
 
 .confirmation-card {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--ms-color-border-subtle);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 16px;
@@ -56,13 +56,13 @@
     &.amount {
       font-size: 18px;
       font-weight: 700;
-      color: #2e7d32;
+      color: var(--ms-color-success);
     }
 
     &.mono {
       font-family: monospace;
       font-size: 12px;
-      background: #f5f5f5;
+      background: var(--ms-color-surface-subtle);
       padding: 2px 8px;
       border-radius: 4px;
     }
@@ -75,12 +75,12 @@
   gap: 8px;
   padding: 12px 16px;
   margin: 8px 0;
-  background-color: #fdecea;
+  background-color: var(--ms-color-danger-bg);
   border-radius: 4px;
-  color: #611a15;
+  color: var(--ms-color-danger);
 
   mat-icon {
-    color: #f44336;
+    color: var(--ms-color-danger);
     font-size: 20px;
     width: 20px;
     height: 20px;

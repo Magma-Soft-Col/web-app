@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpBackend, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 
 /** Environment Configuration */
 
@@ -38,7 +39,6 @@ import { AuthService } from './zitadel/auth.service';
 import { environment } from '../environments/environment';
 import { CallbackComponent } from './zitadel/callback/callback.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { provideLottieOptions } from 'ngx-lottie';
 import { CustomMissingTranslationHandler } from './core/translation/missing-translation.handler';
 
 @NgModule({
@@ -82,9 +82,12 @@ import { CustomMissingTranslationHandler } from './core/translation/missing-tran
       useClass: !environment.OIDC.oidcServerEnabled ? TokenInterceptor : ZitadelTokenInterceptor,
       multi: true
     },
-    provideLottieOptions({
-      player: () => import('lottie-web')
-    })
+    // Design System: outlined fields (white, bordered) as in the approved design;
+    // the error line only takes space when there is an error to show.
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline', subscriptSizing: 'dynamic' } as MatFormFieldDefaultOptions
+    }
   ]
 })
 export class AppModule {}

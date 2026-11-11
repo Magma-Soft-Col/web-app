@@ -16,8 +16,8 @@
   }
 </div>
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.No' | translate }}</button>
-  <button mat-raised-button color="warn" [mat-dialog-close]="{ cancel: true }">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.No' | translate }}</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="{ cancel: true }">
     {{ 'labels.buttons.Yes' | translate }}
   </button>
 </mat-dialog-actions>

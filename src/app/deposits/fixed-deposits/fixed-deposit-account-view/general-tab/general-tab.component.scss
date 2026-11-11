@@ -6,6 +6,61 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.fixed-deposits-account-tables {
-  padding: 1%;
+// Label / value panels (pen): white panels, secondary labels, primary values.
+.kv-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-5);
+  align-items: start;
+  padding: var(--ms-space-5) 0;
+
+  @media (width < 1024px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.kv-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-5);
+  min-width: 0;
+}
+
+.kv-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
+
+.kv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ms-font-size-table);
+  font-variant-numeric: tabular-nums;
+
+  td {
+    padding: var(--ms-space-2) 0;
+    border-bottom: 1px solid var(--ms-color-border-subtle);
+    vertical-align: top;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  td:first-child {
+    padding-right: var(--ms-space-4);
+    color: var(--ms-color-text-secondary);
+    font-size: var(--ms-font-size-label);
+    font-weight: 500;
+  }
+
+  td:last-child:not(:first-child) {
+    color: var(--ms-color-text-primary);
+    font-weight: 500;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
 }

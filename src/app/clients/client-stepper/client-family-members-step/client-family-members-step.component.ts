@@ -22,7 +22,6 @@ import {
   MatExpansionPanelTitle,
   MatExpansionPanelDescription
 } from '@angular/material/expansion';
-import { MatDivider } from '@angular/material/divider';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { FindPipe } from '../../../pipes/find.pipe';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
@@ -43,7 +42,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    MatDivider,
     MatStepperPrevious,
     MatStepperNext,
     FindPipe,

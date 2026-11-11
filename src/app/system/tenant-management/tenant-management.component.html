@@ -7,8 +7,8 @@
 -->
 
 @if (session.isSignedIn()) {
-  <div class="container m-b-20 layout-row align-center gap-20px master-session-bar">
-    <fa-icon icon="user-shield"></fa-icon>
+  <div class="container m-b-20 master-session-bar">
+    <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="user-shield"></fa-icon></span>
     <span class="flex-fill">
       {{ 'labels.text.Signed in as master user' | translate }}: <strong>{{ session.username() }}</strong>
     </span>

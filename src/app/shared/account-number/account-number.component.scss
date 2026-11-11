@@ -27,7 +27,7 @@ button.copy-btn {
   }
 
   &:focus-visible {
-    outline: 1px dashed var(--mdc-outlined-button-outline-color, rgb(255 255 255 / 40%));
-    outline-offset: 8px;
+    outline: 2px solid var(--ms-color-focus-ring);
+    outline-offset: 2px;
   }
 }

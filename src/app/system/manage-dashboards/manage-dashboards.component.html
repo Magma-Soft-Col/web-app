@@ -9,7 +9,7 @@
 <!-- Top Filter & Action Bar -->
 <div class="container m-b-15 top-action-bar">
   <div class="action-bar-left">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="compact-office-select">
+    <mat-form-field subscriptSizing="dynamic" class="compact-office-select">
       <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
       <mat-select [(ngModel)]="selectedOfficeId" (selectionChange)="fetchLiveInstitutionalData()">
         @for (office of offices; track office.id) {
@@ -20,7 +20,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="fetchLiveInstitutionalData(true)" [disabled]="isLoading">
+    <button mat-flat-button color="primary" (click)="fetchLiveInstitutionalData(true)" [disabled]="isLoading">
       <fa-icon icon="sync" class="m-r-10" [class.fa-spin]="isLoading"></fa-icon>
       {{ 'labels.buttons.Refresh' | translate }}
     </button>
@@ -45,7 +45,7 @@
 
 <!-- Main Content Container -->
 <div class="container m-b-20 manage-dashboards-wrapper">
-  <mat-card class="dashboard-main-card mat-elevation-z2 p-0">
+  <mat-card class="dashboard-main-card p-0">
     <mat-tab-group animationDuration="150ms" class="dashboard-tabs">
       <!-- TAB 1: Institutional Operations Overview -->
       <mat-tab>
@@ -58,7 +58,7 @@
           <!-- 4 Top Business KPI Cards -->
           <div class="kpi-grid m-b-20">
             <!-- 1. Clients KPI -->
-            <mat-card class="kpi-card client-card mat-elevation-z1">
+            <mat-card class="kpi-card client-card">
               <div class="kpi-icon-badge client-badge">
                 <fa-icon icon="users"></fa-icon>
               </div>
@@ -78,7 +78,7 @@
             </mat-card>
 
             <!-- 2. Loans KPI -->
-            <mat-card class="kpi-card loan-card mat-elevation-z1">
+            <mat-card class="kpi-card loan-card">
               <div class="kpi-icon-badge loan-badge">
                 <fa-icon icon="hand-holding-usd"></fa-icon>
               </div>
@@ -98,7 +98,7 @@
             </mat-card>
 
             <!-- 3. Deposits & Savings Portfolio KPI -->
-            <mat-card class="kpi-card savings-card mat-elevation-z1">
+            <mat-card class="kpi-card savings-card">
               <div class="kpi-icon-badge savings-badge">
                 <fa-icon icon="piggy-bank"></fa-icon>
               </div>
@@ -133,7 +133,7 @@
             </mat-card>
 
             <!-- 4. Shares KPI -->
-            <mat-card class="kpi-card shares-card mat-elevation-z1">
+            <mat-card class="kpi-card shares-card">
               <div class="kpi-icon-badge shares-badge">
                 <fa-icon icon="chart-pie"></fa-icon>
               </div>
@@ -156,7 +156,7 @@
           <!-- Charts Grid: Transaction Execution Breakdown & Monthly Trend -->
           <div class="charts-grid m-b-20">
             <!-- Left: Executed Transaction Volume Breakdown -->
-            <mat-card class="chart-card mat-elevation-z1">
+            <mat-card class="chart-card">
               <div class="chart-card-header">
                 <div class="header-text-group">
                   <h4 class="chart-title m-0">
@@ -207,7 +207,7 @@
             </mat-card>
 
             <!-- Right: Monthly Operational Trends -->
-            <mat-card class="chart-card mat-elevation-z1">
+            <mat-card class="chart-card">
               <div class="chart-card-header">
                 <div class="header-text-group">
                   <h4 class="chart-title m-0">
@@ -249,7 +249,7 @@
           </div>
 
           <!-- Executed Transaction Types Breakdown Table -->
-          <mat-card class="table-card mat-elevation-z1 p-0">
+          <mat-card class="table-card p-0">
             <div class="table-card-header p-15">
               <h4 class="table-title m-0">
                 <fa-icon icon="exchange" class="m-r-5 text-primary"></fa-icon>
@@ -257,16 +257,16 @@
               </h4>
             </div>
 
-            <div class="table-responsive">
-              <table class="mifos-table">
+            <div class="ms-table-wrap">
+              <table class="ms-table mifos-table">
                 <thead>
                   <tr>
                     <th>{{ 'labels.heading.Transaction Type' | translate }}</th>
                     <th>{{ 'labels.heading.Category' | translate }}</th>
-                    <th class="text-right">{{ 'labels.heading.24h / Period Count' | translate }}</th>
-                    <th class="text-right">{{ 'labels.heading.Total Volume ($)' | translate }}</th>
-                    <th class="text-right">{{ 'labels.heading.Volume Share (%)' | translate }}</th>
-                    <th class="text-right">{{ 'labels.heading.Trend' | translate }}</th>
+                    <th class="ms-num">{{ 'labels.heading.24h / Period Count' | translate }}</th>
+                    <th class="ms-num">{{ 'labels.heading.Total Volume ($)' | translate }}</th>
+                    <th class="ms-num">{{ 'labels.heading.Volume Share (%)' | translate }}</th>
+                    <th class="ms-num">{{ 'labels.heading.Trend' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -283,8 +283,8 @@
                           'labels.heading.' + item.category | translate
                         }}</span>
                       </td>
-                      <td class="text-right font-mono font-medium">{{ item.count | number }}</td>
-                      <td class="text-right font-mono font-bold text-primary">${{ item.volume | number: '1.2-2' }}</td>
+                      <td class="ms-num font-mono font-medium">{{ item.count | number }}</td>
+                      <td class="ms-num font-mono font-bold text-primary">${{ item.volume | number: '1.2-2' }}</td>
                       <td class="text-right">
                         <div class="percentage-bar-cell">
                           <div class="progress-track">
@@ -331,7 +331,7 @@
 
           <!-- Filter & Search Toolbar -->
           <div class="widget-filter-toolbar m-b-20">
-            <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-input-field">
+            <mat-form-field subscriptSizing="dynamic" class="search-input-field">
               <mat-label>{{ 'labels.inputs.Filter widgets by name or description...' | translate }}</mat-label>
               <input matInput [(ngModel)]="searchFilter" placeholder="Search widgets..." />
               <mat-icon matSuffix>
@@ -339,7 +339,7 @@
               </mat-icon>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" subscriptSizing="dynamic" class="module-select-field">
+            <mat-form-field subscriptSizing="dynamic" class="module-select-field">
               <mat-label>{{ 'labels.heading.Module' | translate }}</mat-label>
               <mat-select [(ngModel)]="selectedModuleFilter">
                 <mat-option value="all">{{ 'labels.inputs.All Modules' | translate }}</mat-option>
@@ -353,7 +353,7 @@
             </mat-form-field>
 
             <button
-              mat-raised-button
+              mat-flat-button
               color="primary"
               [disabled]="!hasUnsavedChanges"
               (click)="saveWidgetConfigurations()"
@@ -364,9 +364,9 @@
           </div>
 
           <!-- Widgets Config Table -->
-          <mat-card class="widgets-table-card mat-elevation-z1 p-0">
-            <div class="table-responsive">
-              <table class="mifos-table">
+          <mat-card class="widgets-table-card p-0">
+            <div class="ms-table-wrap">
+              <table class="ms-table mifos-table">
                 <thead>
                   <tr>
                     <th class="col-status">{{ 'labels.heading.Status' | translate }}</th>
@@ -406,7 +406,7 @@
                         }}</span>
                       </td>
                       <td>
-                        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="role-select-field">
+                        <mat-form-field subscriptSizing="dynamic" class="role-select-field">
                           <mat-select
                             multiple
                             [(ngModel)]="widget.allowedRoles"

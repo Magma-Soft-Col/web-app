@@ -6,11 +6,47 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
-  width: 100%;
-  margin: 3% 0%;
+// Original schedule: same compact table as the repayment schedule (pen "Calendario de Pagos").
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 }
 
-.container {
-  padding-bottom: 2%;
+.schedule__table {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+
+  --mat-table-header-container-height: 34px;
+  --mat-table-row-item-container-height: 34px;
+  --mat-table-footer-container-height: 38px;
+  --mat-table-row-item-label-text-size: var(--ms-font-size-label);
+  --mat-table-header-headline-size: var(--ms-font-size-caption);
+
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell,
+  td.mat-mdc-footer-cell {
+    padding: 0 var(--ms-space-2);
+    white-space: nowrap;
+  }
+
+  th.mat-mdc-header-cell {
+    color: var(--ms-color-text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  td.mat-mdc-footer-cell {
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
+  }
+
+  .r-amount {
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
 }

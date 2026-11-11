@@ -6,36 +6,41 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-content mat-typography">
-  <mat-list>
-    <mat-list-item> {{ 'labels.inputs.Campaign Name' | translate }} : {{ campaign.campaignName }} </mat-list-item>
+<div class="tab-content">
+  <div class="ms-detail-row">
+    <span class="ms-label">{{ 'labels.inputs.Campaign Name' | translate }}</span>
+    <span class="ms-value">{{ campaign.campaignName }}</span>
+  </div>
 
-    <mat-list-item>
-      {{ 'labels.inputs.SMS Provider' | translate }} :
-      {{ (campaign.providerId | find: smsProviders : 'id' : 'name') || 'Unassigned' }}
-    </mat-list-item>
+  <div class="ms-detail-row">
+    <span class="ms-label">{{ 'labels.inputs.SMS Provider' | translate }}</span>
+    <span class="ms-value">{{ (campaign.providerId | find: smsProviders : 'id' : 'name') || 'Unassigned' }}</span>
+  </div>
 
-    <mat-list-item>
-      {{ 'labels.inputs.Trigger Type' | translate }} :
-      {{ (campaign.editFlag ? campaign.triggerType.id : campaign.triggerType) | find: triggerTypes : 'id' : 'value' }}
-    </mat-list-item>
+  <div class="ms-detail-row">
+    <span class="ms-label">{{ 'labels.inputs.Trigger Type' | translate }}</span>
+    <span class="ms-value">{{
+      (campaign.editFlag ? campaign.triggerType.id : campaign.triggerType) | find: triggerTypes : 'id' : 'value'
+    }}</span>
+  </div>
 
-    <mat-list-item>
-      {{ 'labels.inputs.Bussiness Rule' | translate }} :
-      {{ campaign.editFlag ? campaign.reportName : campaign.paramValue?.reportName }}
-    </mat-list-item>
+  <div class="ms-detail-row">
+    <span class="ms-label">{{ 'labels.inputs.Bussiness Rule' | translate }}</span>
+    <span class="ms-value">{{ campaign.editFlag ? campaign.reportName : campaign.paramValue?.reportName }}</span>
+  </div>
 
-    <div class="layout-column gap-10px template-message">
-      <h3>{{ 'labels.heading.Campaign Message' | translate }} :</h3>
-      <textarea matInput disabled>{{ campaign.editFlag ? editedCampaignMessage : campaign.message }}</textarea>
-    </div>
-  </mat-list>
+  <div class="template-message">
+    <h3 class="ms-subsection-title">{{ 'labels.heading.Campaign Message' | translate }}</h3>
+    <textarea class="message-preview" disabled>{{
+      campaign.editFlag ? editedCampaignMessage : campaign.message
+    }}</textarea>
+  </div>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button [routerLink]="['../']">
+  <div class="ms-form-actions">
+    <button mat-stroked-button [routerLink]="['../']">
       {{ 'labels.buttons.Cancel' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="submitEvent.emit()">
+    <button mat-flat-button color="primary" (click)="submitEvent.emit()">
       {{ 'labels.buttons.Submit' | translate }}
     </button>
   </div>

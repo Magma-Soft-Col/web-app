@@ -6,12 +6,142 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+.layout-column {
+  gap: var(--ms-space-1);
+  padding-top: var(--ms-space-2);
+}
+
 .header {
+  margin-top: var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
   font-weight: 500;
+  color: var(--ms-color-text-secondary);
 }
 
 .submit-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--ms-space-4);
+}
+
+/* Brand images: preview, picker and remove action on one row. */
+.brand-asset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-3) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+.brand-asset__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-4);
+  flex-wrap: wrap;
+}
+
+.brand-asset__preview {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface-subtle);
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.brand-asset__preview--wide {
+  width: 160px;
+}
+
+.brand-asset__empty {
+  font-size: var(--ms-font-size-caption);
+  color: var(--ms-color-text-secondary);
+}
+
+.brand-asset__upload {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.brand-asset__error {
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-danger);
+}
+
+.brand-asset__note {
+  margin: var(--ms-space-2) 0 0;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
+}
+
+/* Predesigned palettes as selectable cards. */
+.theme-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--ms-space-3);
+  margin-bottom: var(--ms-space-4);
+}
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-2);
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
+  color: var(--ms-color-text-primary);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--ms-color-text-disabled);
+  }
+}
+
+.theme-card--active,
+.theme-card--active:hover {
+  border-color: var(--ms-color-brand-primary);
+  box-shadow: 0 0 0 1px var(--ms-color-brand-primary);
+}
+
+.theme-card__preview {
+  display: flex;
+  height: 56px;
+  overflow: hidden;
+  border-radius: var(--ms-radius-control);
+  border: 1px solid var(--ms-color-border-subtle);
+}
+
+.theme-card__sidebar {
+  width: 30%;
+}
+
+.theme-card__body {
+  flex: 1 1 auto;
+  padding: var(--ms-space-2);
+}
+
+.theme-card__accent {
+  display: block;
+  width: 60%;
+  height: 10px;
+  border-radius: var(--ms-radius-sm);
+}
+
+.theme-card__name {
+  font-weight: 500;
 }

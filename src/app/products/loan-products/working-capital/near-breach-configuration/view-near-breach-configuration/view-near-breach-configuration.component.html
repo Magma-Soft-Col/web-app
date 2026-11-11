@@ -1,73 +1,52 @@
-<!--
-  Copyright since 2025 Mifos Initiative
-
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-2px responsive-column container m-b-20">
-  <button
-    mat-raised-button
-    color="primary"
-    [routerLink]="['edit']"
-    *mifosxHasPermission="'UPDATE_WORKINGCAPITALNEARBREACH'"
-  >
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.heading.Edit' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      @if (nearBreachData) {
-        <div class="layout-row-wrap">
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Id' | translate }}
-          </div>
-
-          <div class="flex-50">
-            {{ nearBreachData.id }}
-          </div>
-
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Name' | translate }}
-          </div>
-
-          <div class="flex-50">
-            {{ nearBreachData.name }}
-          </div>
-
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Frequency' | translate }}
-          </div>
-
-          <div class="flex-50">
-            {{ nearBreachData.frequency | formatNumber: '' : 0 }}
-          </div>
-
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Frequency Type' | translate }}
-          </div>
-
-          <div class="flex-50">
-            {{ nearBreachData.frequencyType.code | translateKey: 'catalogs' }}
-          </div>
-
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Threshold' | translate }}
-          </div>
-
-          <div class="flex-50">{{ nearBreachData.threshold | formatNumber }} %</div>
-        </div>
-
-        <div class="layout-row layout-align-center gap-2percent column-on-mobile">
-          <button type="button" mat-raised-button color="primary" [routerLink]="['../']">
+  @if (nearBreachData) {
+    <div class="ms-page">
+      <div class="ms-page-header">
+        <h2 class="ms-section-title">{{ nearBreachData.name }}</h2>
+        <div class="ms-actions">
+          <button type="button" mat-stroked-button [routerLink]="['../']">
             {{ 'labels.buttons.Back' | translate }}
           </button>
+          <button
+            mat-flat-button
+            color="primary"
+            [routerLink]="['edit']"
+            *mifosxHasPermission="'UPDATE_WORKINGCAPITALNEARBREACH'"
+          >
+            <fa-icon icon="edit" class="m-r-10"></fa-icon>
+            {{ 'labels.heading.Edit' | translate }}
+          </button>
         </div>
-      }
-    </mat-card-content>
-  </mat-card>
+      </div>
+
+      <mat-card>
+        <mat-card-content>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Id' | translate }}</span>
+            <span class="flex-50 ms-value">{{ nearBreachData.id }}</span>
+          </div>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Name' | translate }}</span>
+            <span class="flex-50 ms-value">{{ nearBreachData.name }}</span>
+          </div>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Frequency' | translate }}</span>
+            <span class="flex-50 ms-value">{{ nearBreachData.frequency | formatNumber: '' : 0 }}</span>
+          </div>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Frequency Type' | translate }}</span>
+            <span class="flex-50 ms-value">{{ nearBreachData.frequencyType.code | translateKey: 'catalogs' }}</span>
+          </div>
+          <div class="layout-row detail-row">
+            <span class="flex-50 ms-label">{{ 'labels.inputs.Threshold' | translate }}</span>
+            <span class="flex-50 ms-value"
+              ><span class="ms-num">{{ nearBreachData.threshold | formatNumber }} %</span></span
+            >
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
 </div>

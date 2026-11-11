@@ -6,26 +6,26 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="breach-actions-card">
+<div class="breach-actions-card ms-panel">
   <div class="kpi-strip">
     <div class="kpi">
-      <span class="kpi-label">{{ 'labels.inputs.Total Actions' | translate }}</span>
-      <span class="kpi-value">{{ kpis().total }}</span>
+      <span class="ms-label kpi-label">{{ 'labels.inputs.Total Actions' | translate }}</span>
+      <span class="kpi-value ms-num">{{ kpis().total }}</span>
     </div>
     <div class="kpi">
-      <span class="kpi-label">{{ 'labels.inputs.Active Pause' | translate }}</span>
-      <span class="kpi-value accent">{{ kpis().activeCount }}</span>
+      <span class="ms-label kpi-label">{{ 'labels.inputs.Active Pause' | translate }}</span>
+      <span class="kpi-value ms-num accent">{{ kpis().activeCount }}</span>
     </div>
     <div class="kpi">
-      <span class="kpi-label">{{ 'labels.inputs.Total Days Paused' | translate }}</span>
-      <span class="kpi-value">
+      <span class="ms-label kpi-label">{{ 'labels.inputs.Total Days Paused' | translate }}</span>
+      <span class="kpi-value ms-num">
         {{ kpis().totalDays }}
         <span class="unit">{{ 'labels.inputs.days' | translate }}</span>
       </span>
     </div>
     <div class="kpi">
-      <span class="kpi-label">{{ 'labels.inputs.Last Action' | translate }}</span>
-      <span class="kpi-value">
+      <span class="ms-label kpi-label">{{ 'labels.inputs.Last Action' | translate }}</span>
+      <span class="kpi-value ms-num">
         @if (kpis().lastActionDate) {
           {{ kpis().lastActionDate | dateFormat }}
         } @else {
@@ -35,8 +35,7 @@
     </div>
     <div class="kpi-status">
       @if (activeBreachDisable(); as activeDisable) {
-        <span class="status-chip status-chip--disabled">
-          <span class="dot"></span>
+        <span class="ms-badge ms-badge--danger">
           {{
             'labels.inputs.Breach evaluation disabled since'
               | translate: { date: (activeDisable.startDateObj | dateFormat) }
@@ -44,8 +43,7 @@
         </span>
       }
       @if (hasPauseActiveToday()) {
-        <span class="status-chip">
-          <span class="dot"></span>
+        <span class="ms-badge ms-badge--info">
           {{ 'labels.inputs.Pause Active' | translate }}
         </span>
       }
@@ -55,7 +53,7 @@
   @if (rows().length > 0) {
     <div class="timeline-section">
       <div class="section-header">
-        <span class="section-title"> {{ 'labels.heading.Pause Timeline' | translate }} · {{ timelineYear() }} </span>
+        <h3 class="ms-section-title">{{ 'labels.heading.Pause Timeline' | translate }} · {{ timelineYear() }}</h3>
         <div class="legend">
           <span class="legend-item">
             <span class="legend-swatch legend-active"></span>{{ 'labels.inputs.Active' | translate }}
@@ -69,7 +67,7 @@
         </div>
       </div>
 
-      <svg class="timeline" viewBox="0 0 1200 180" preserveAspectRatio="none">
+      <svg class="timeline" aria-hidden="true" viewBox="0 0 1200 180" preserveAspectRatio="none">
         <text class="lane-label" x="6" y="92">{{ 'labels.inputs.Pauses' | translate }}</text>
 
         <g class="grid-group">
@@ -133,6 +131,7 @@
                 type="button"
                 class="filter-chip"
                 [class.is-active]="filter() === option.value"
+                [attr.aria-pressed]="filter() === option.value"
                 (click)="selectFilter(option.value)"
               >
                 {{ option.label | translate }}
@@ -142,40 +141,6 @@
         }
       </div>
       <div class="toolbar-right">
-        <!-- While a DISABLE window is active every breach action other than
-             Enable is removed, not just disabled (WEB-657 agreement). -->
-        @if (!breachEvaluationDisabled()) {
-          @if (hasActivePause()) {
-            <button
-              type="button"
-              class="btn btn-warn"
-              (click)="resumeBreachAction()"
-              *mifosxHasPermission="'CREATE_WC_BREACH_ACTION'"
-            >
-              <fa-icon icon="play"></fa-icon>
-              {{ 'labels.buttons.Resume Breach' | translate }}
-            </button>
-          }
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="createBreachActionPause()"
-            *mifosxHasPermission="'CREATE_WC_BREACH_ACTION'"
-          >
-            <fa-icon icon="pause"></fa-icon>
-            {{ 'labels.buttons.Pause Breach' | translate }}
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="createBreachActionReset()"
-            [disabled]="resetInFlight()"
-            *mifosxHasPermission="'CREATE_WC_BREACH_RESET'"
-          >
-            <fa-icon icon="calendar"></fa-icon>
-            {{ 'labels.buttons.Reset' | translate }}
-          </button>
-        }
         @if (breachToggleAvailable) {
           <!-- Both permissions are required; nesting the directive ANDs them,
                whereas passing an array would only require one of the two. -->
@@ -183,12 +148,11 @@
             <span *mifosxHasPermission="'CREATE_WC_BREACH_DISABLE'">
               <button
                 type="button"
-                class="btn"
-                [class.btn-warn]="!breachEvaluationDisabled()"
-                [class.btn-primary]="breachEvaluationDisabled()"
+                mat-stroked-button
+                [color]="breachEvaluationDisabled() ? 'primary' : 'warn'"
                 (click)="toggleBreachEvaluation()"
               >
-                <fa-icon [icon]="breachEvaluationDisabled() ? 'play' : 'ban'"></fa-icon>
+                <fa-icon [icon]="breachEvaluationDisabled() ? 'play' : 'ban'" class="m-r-5"></fa-icon>
                 @if (breachEvaluationDisabled()) {
                   {{ 'labels.buttons.Enable Breach' | translate }}
                 } @else {
@@ -198,12 +162,47 @@
             </span>
           </span>
         }
+        <!-- While a DISABLE window is active every breach action other than
+             Enable is removed, not just disabled (WEB-657 agreement). -->
+        @if (!breachEvaluationDisabled()) {
+          @if (hasActivePause()) {
+            <button
+              type="button"
+              mat-stroked-button
+              (click)="resumeBreachAction()"
+              *mifosxHasPermission="'CREATE_WC_BREACH_ACTION'"
+            >
+              <fa-icon icon="play" class="m-r-5"></fa-icon>
+              {{ 'labels.buttons.Resume Breach' | translate }}
+            </button>
+          }
+          <button
+            type="button"
+            mat-stroked-button
+            (click)="createBreachActionReset()"
+            [disabled]="resetInFlight()"
+            *mifosxHasPermission="'CREATE_WC_BREACH_RESET'"
+          >
+            <fa-icon icon="calendar" class="m-r-5"></fa-icon>
+            {{ 'labels.buttons.Reset' | translate }}
+          </button>
+          <button
+            type="button"
+            mat-flat-button
+            color="primary"
+            (click)="createBreachActionPause()"
+            *mifosxHasPermission="'CREATE_WC_BREACH_ACTION'"
+          >
+            <fa-icon icon="pause" class="m-r-5"></fa-icon>
+            {{ 'labels.buttons.Pause Breach' | translate }}
+          </button>
+        }
       </div>
     </div>
 
     @if (rows().length > 0) {
-      <div class="table-wrap">
-        <table class="breach-actions-table">
+      <div class="ms-table-wrap">
+        <table class="ms-table breach-actions-table">
           <thead>
             <tr>
               <th class="id-col">{{ 'labels.inputs.Id' | translate }}</th>
@@ -227,8 +226,11 @@
                   </span>
                 </td>
                 <td>
-                  <span [attr.class]="'status-pill status-pill--' + row.status">
-                    <span class="dot"></span>
+                  <span
+                    class="ms-badge"
+                    [class.ms-badge--success]="row.status === 'active'"
+                    [class.ms-badge--info]="row.status === 'scheduled'"
+                  >
                     {{ row.statusLabelKey | translate }}
                   </span>
                 </td>
@@ -249,7 +251,7 @@
                 <td>
                   @if (row.action !== 'RESUME' && row.action !== 'ENABLE') {
                     <span class="duration">
-                      <span class="days">{{ row.durationDays }}{{ row.isOngoing ? '+' : '' }}</span>
+                      <span class="days ms-num">{{ row.durationDays }}{{ row.isOngoing ? '+' : '' }}</span>
                       <span class="duration-unit">{{ 'labels.inputs.days' | translate }}</span>
                       <span class="duration-bar">
                         <span
@@ -275,12 +277,10 @@
         </table>
       </div>
     } @else {
-      <div class="empty">
-        <div class="ico">
-          <fa-icon icon="pause"></fa-icon>
-        </div>
-        <h4>{{ 'labels.heading.No Breach Actions' | translate }}</h4>
-        <p>{{ 'labels.inputs.No breach actions have been recorded for this loan' | translate }}</p>
+      <div class="ms-empty">
+        <fa-icon icon="pause" aria-hidden="true"></fa-icon>
+        <strong>{{ 'labels.heading.No Breach Actions' | translate }}</strong>
+        <span>{{ 'labels.inputs.No breach actions have been recorded for this loan' | translate }}</span>
       </div>
     }
   </div>
@@ -288,58 +288,61 @@
 
 @if (breachEnabled) {
   @if (loanDetails?.breach) {
-    <div class="list-section">
+    <div class="list-section ms-panel">
       <div class="list-section-header">
-        <h3>{{ 'labels.heading.Breach Actions' | translate }}</h3>
+        <h3 class="ms-section-title">{{ 'labels.heading.Breach Actions' | translate }}</h3>
         @if (!breachEvaluationDisabled()) {
           <button
             type="button"
-            class="btn btn-primary"
+            mat-flat-button
+            color="primary"
             (click)="loanAction('Update Breach')"
             *mifosxHasPermission="'CREATE_WC_BREACH_ACTION'"
           >
-            <fa-icon icon="not-equal"></fa-icon>
+            <fa-icon icon="not-equal" class="m-r-5"></fa-icon>
             {{ 'labels.menus.Update Breach' | translate }}
           </button>
         }
       </div>
 
       @if (breachActionsList.length > 0) {
-        <table mat-table [dataSource]="breachActionsList">
-          <ng-container matColumnDef="identifier">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.id }}</td>
-          </ng-container>
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Action' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.action }}</td>
-          </ng-container>
-          <ng-container matColumnDef="startDate">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Start Date' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.startDate | dateFormat }}</td>
-          </ng-container>
-          <ng-container matColumnDef="minimumPayment">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Minimum Payment' | translate }}</th>
-            <td mat-cell *matCellDef="let item">
-              @if (item.action === 'RESCHEDULE') {
-                {{ item.minimumPayment | formatNumber: '' : 0 }}
-                {{ item.minimumPaymentType | translateKey: 'catalogs' }}
-              }
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="frequency">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Frequency' | translate }}</th>
-            <td mat-cell *matCellDef="let item">
-              @if (item.action === 'RESCHEDULE') {
-                {{ item.frequency | formatNumber: '' : 0 }} {{ item.frequencyType | translateKey: 'catalogs' }}
-              }
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="breachActionsColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: breachActionsColumns"></tr>
-        </table>
+        <div class="ms-table-wrap">
+          <table mat-table [dataSource]="breachActionsList">
+            <ng-container matColumnDef="identifier">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Action' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.action }}</td>
+            </ng-container>
+            <ng-container matColumnDef="startDate">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Start Date' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.startDate | dateFormat }}</td>
+            </ng-container>
+            <ng-container matColumnDef="minimumPayment">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Minimum Payment' | translate }}</th>
+              <td mat-cell *matCellDef="let item">
+                @if (item.action === 'RESCHEDULE') {
+                  {{ item.minimumPayment | formatNumber: '' : 0 }}
+                  {{ item.minimumPaymentType | translateKey: 'catalogs' }}
+                }
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="frequency">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Frequency' | translate }}</th>
+              <td mat-cell *matCellDef="let item">
+                @if (item.action === 'RESCHEDULE') {
+                  {{ item.frequency | formatNumber: '' : 0 }} {{ item.frequencyType | translateKey: 'catalogs' }}
+                }
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="breachActionsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: breachActionsColumns"></tr>
+          </table>
+        </div>
       } @else {
-        <p>{{ 'labels.text.No Breach Actions' | translate }}</p>
+        <p class="ms-empty">{{ 'labels.text.No Breach Actions' | translate }}</p>
       }
     </div>
   }
@@ -347,51 +350,54 @@
 
 @if (nearBreachEnabled) {
   @if (loanDetails?.nearBreach) {
-    <div class="list-section">
+    <div class="list-section ms-panel">
       <div class="list-section-header">
-        <h3>{{ 'labels.heading.Near Breach Actions' | translate }}</h3>
+        <h3 class="ms-section-title">{{ 'labels.heading.Near Breach Actions' | translate }}</h3>
         @if (!breachEvaluationDisabled()) {
           <button
             type="button"
-            class="btn btn-primary"
+            mat-flat-button
+            color="primary"
             (click)="loanAction('Update Near Breach')"
             *mifosxHasPermission="'CREATE_WC_NEAR_BREACH_ACTION'"
           >
-            <fa-icon icon="not-equal"></fa-icon>
+            <fa-icon icon="not-equal" class="m-r-5"></fa-icon>
             {{ 'labels.menus.Update Near Breach' | translate }}
           </button>
         }
       </div>
 
       @if (nearBreachActions.length > 0) {
-        <table mat-table [dataSource]="nearBreachActions">
-          <ng-container matColumnDef="identifier">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.id }}</td>
-          </ng-container>
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Action' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.action }}</td>
-          </ng-container>
-          <ng-container matColumnDef="threshold">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Threshold' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.threshold | formatNumber }} %</td>
-          </ng-container>
-          <ng-container matColumnDef="frequency">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Frequency' | translate }}</th>
-            <td mat-cell *matCellDef="let item">
-              {{ item.frequency | formatNumber: '' : 0 }} {{ item.frequencyType | translateKey: 'catalogs' }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="submittedOnDate">
-            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
-            <td mat-cell *matCellDef="let item">{{ item.submittedOnDate | dateFormat }}</td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="nearBreachActionsColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: nearBreachActionsColumns"></tr>
-        </table>
+        <div class="ms-table-wrap">
+          <table mat-table [dataSource]="nearBreachActions">
+            <ng-container matColumnDef="identifier">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Id' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Action' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.action }}</td>
+            </ng-container>
+            <ng-container matColumnDef="threshold">
+              <th mat-header-cell *matHeaderCellDef class="ms-num">{{ 'labels.inputs.Threshold' | translate }}</th>
+              <td mat-cell *matCellDef="let item" class="ms-num">{{ item.threshold | formatNumber }} %</td>
+            </ng-container>
+            <ng-container matColumnDef="frequency">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Frequency' | translate }}</th>
+              <td mat-cell *matCellDef="let item">
+                {{ item.frequency | formatNumber: '' : 0 }} {{ item.frequencyType | translateKey: 'catalogs' }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="submittedOnDate">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
+              <td mat-cell *matCellDef="let item">{{ item.submittedOnDate | dateFormat }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="nearBreachActionsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: nearBreachActionsColumns"></tr>
+          </table>
+        </div>
       } @else {
-        <p>{{ 'labels.text.No Near Breach Actions' | translate }}</p>
+        <p class="ms-empty">{{ 'labels.text.No Near Breach Actions' | translate }}</p>
       }
     </div>
   }

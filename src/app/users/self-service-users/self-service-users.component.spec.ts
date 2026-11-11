@@ -11,7 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faBan, faCheck, faCircle, faLink, faTrash, faUnlink } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faCheck, faCircle, faLink, faSearch, faTrash, faUnlink } from '@fortawesome/free-solid-svg-icons';
 import { of, Subject } from 'rxjs';
 
 import { ClientsService } from 'app/clients/clients.service';
@@ -91,7 +91,7 @@ describe('SelfServiceUsersComponent', () => {
         { provide: AuthenticationService, useValue: { getCredentials: () => ({ permissions: userPermissions }) } }
       ]
     });
-    TestBed.inject(FaIconLibrary).addIcons(faBan, faCheck, faCircle, faLink, faTrash, faUnlink);
+    TestBed.inject(FaIconLibrary).addIcons(faBan, faCheck, faCircle, faLink, faSearch, faTrash, faUnlink);
     fixture = TestBed.createComponent(SelfServiceUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

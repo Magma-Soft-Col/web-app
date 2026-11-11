@@ -6,26 +6,24 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-list-table {
   width: 100%;
-
-  .select-row:hover {
-    cursor: pointer;
-  }
 }
 
-.true {
-  color: #32cd32;
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
 }
 
-.false {
-  color: #f44366;
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
 }
 
-.ispenalty {
-  color: #32cd32;
+.ms-num {
+  text-align: right;
 }
 
-.nopenalty {
-  color: #f44366;
+/* Right-align the header of numeric sortable columns with their figures. */
+th.ms-num ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
 }

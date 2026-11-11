@@ -6,19 +6,47 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+// Loan tab (pen): section title with actions, then content in white panels.
+.loan-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0;
+}
+
+.loan-tab__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
 table {
   width: 100%;
-  margin-top: 3%;
 
-  .document-action-button {
-    min-width: 26px;
-    padding: 0 6px;
-    margin: 4px;
-    line-height: 25px;
+  .ms-num {
+    text-align: right;
+    white-space: nowrap;
   }
 }
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+// Key figures of the collateral set, as label/value pairs.
+.collateral-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-6);
+  margin: 0;
+  padding: var(--ms-space-4) var(--ms-space-5);
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  dt,
+  dd {
+    margin: 0;
+  }
 }

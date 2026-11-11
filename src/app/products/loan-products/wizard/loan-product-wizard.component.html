@@ -10,7 +10,7 @@
   <div class="wizard-shell__header">
     <div>
       <p class="landing-page__eyebrow">{{ profileLabel | translate }}</p>
-      <h2>{{ 'labels.heading.Multi-step form' | translate }}</h2>
+      <h2 class="ms-section-title">{{ 'labels.heading.Multi-step form' | translate }}</h2>
     </div>
   </div>
 
@@ -143,7 +143,7 @@
         >
           <div class="field-grid">
             <ng-container *ngFor="let field of visibleFields(step); trackBy: trackByFieldKey">
-              <mat-form-field *ngIf="field.type !== 'checkbox'" appearance="outline">
+              <mat-form-field *ngIf="field.type !== 'checkbox'">
                 <mat-label>{{ field.label | translate }}</mat-label>
 
                 <input
@@ -440,11 +440,11 @@
           <button mat-stroked-button matStepperPrevious *ngIf="i > 0">
             {{ 'labels.buttons.Back' | translate }}
           </button>
-          <button mat-raised-button color="primary" matStepperNext *ngIf="i < visibleSteps.length - 1">
+          <button mat-flat-button color="primary" matStepperNext *ngIf="i < visibleSteps.length - 1">
             {{ 'labels.buttons.Next' | translate }}
           </button>
           <button
-            mat-raised-button
+            mat-flat-button
             color="primary"
             *ngIf="i === visibleSteps.length - 1 && !usesClassicSteps"
             (click)="submit()"

@@ -6,25 +6,33 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.add-family-member-container {
-  width: 70%;
-  margin: 0 auto;
-  padding: 5%;
+/* Pen form pattern: white panel, two-column field grid (one below 768px), actions at the foot. */
+.form-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
 
-  @media screen and (width >= 960px) {
-    .flex-50-minus-25px:nth-child(odd) {
-      margin-right: 25px;
-    }
+  /* Anything that is not a single field (rows, checkboxes, tables) spans the full width. */
+  > :not(mat-form-field) {
+    grid-column: 1 / -1;
+  }
 
-    .flex-50-minus-25px:last-child {
-      margin-right: 0;
-    }
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-.mat-form-field-hint {
-  font-size: 75%;
-  color: rgb(0 0 0 / 60%);
-  margin-top: 4px;
-  margin-bottom: 8px;
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+  padding: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
+}
+
+.family-form {
+  margin: var(--ms-space-5) 0 var(--ms-space-6);
 }

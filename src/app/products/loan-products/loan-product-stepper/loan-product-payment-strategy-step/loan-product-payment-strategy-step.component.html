@@ -37,7 +37,12 @@
 
   <mat-tab>
     <ng-template mat-tab-label>
-      <button (click)="addTransaction(); $event.stopPropagation()" mat-icon-button type="button">
+      <button
+        (click)="addTransaction(); $event.stopPropagation()"
+        mat-icon-button
+        type="button"
+        [attr.aria-label]="'labels.buttons.Add' | translate"
+      >
         <mat-icon><fa-icon icon="plus" size="sm"></fa-icon></mat-icon>
       </button>
     </ng-template>

@@ -6,21 +6,49 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+.home-actions {
+  justify-content: flex-end;
+}
 
+.home-card {
   .title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-left: -15px;
+    font-size: var(--ms-font-size-section-title);
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
   }
-}
 
-.mat-list-base {
-  padding-top: 0;
-}
+  mat-card-header {
+    padding: var(--ms-space-5) var(--ms-space-5) 0;
+  }
 
-a {
-  text-decoration: none;
-  color: black;
+  mat-card-content {
+    padding: var(--ms-space-4) var(--ms-space-5) 0;
+  }
+
+  // Welcome logo: centred at a fixed brand size, never stretched to the card width.
+  .home-image {
+    display: block;
+    box-sizing: content-box;
+    width: auto;
+    max-width: min(360px, 80%);
+    height: auto;
+    max-height: 120px;
+    margin: var(--ms-space-8) auto;
+    object-fit: contain;
+  }
+
+  // Bundled Magma Soft logo: dark-text version on light themes, white-text on Obsidian.
+  .logo-oscuro {
+    display: none;
+  }
+
+  :host-context(body.dark-theme) & {
+    .logo-claro {
+      display: none;
+    }
+
+    .logo-oscuro {
+      display: block;
+    }
+  }
 }

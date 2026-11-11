@@ -10,44 +10,48 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Transaction Type' | translate }}:</span>
-          <span class="flex-60">{{ transactionTypeValue(paymentAllocation.transactionType) }}</span>
+        <div class="flex-fill allocation-row">
+          <span class="flex-40 ms-label">{{ 'labels.inputs.Transaction Type' | translate }}:</span>
+          <span class="flex-60 ms-value">{{ transactionTypeValue(paymentAllocation.transactionType) }}</span>
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="flex-fill">
       @if (loanProductService.isLoanProduct) {
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Future Installment Allocation Rule' | translate }}:</span>
-          <span class="flex-60">{{
+        <div class="flex-fill allocation-row">
+          <span class="flex-40 ms-label">{{ 'labels.inputs.Future Installment Allocation Rule' | translate }}:</span>
+          <span class="flex-60 ms-value">{{
             futureInstallmentRuleValue(paymentAllocation.futureInstallmentAllocationRule) | translateKey: 'catalogs'
           }}</span>
         </div>
       }
-      <div class="flex-fill">
-        <span class="flex-40">{{ 'labels.inputs.Payment Allocation Order' | translate }}</span>
-        <span class="flex-60">
-          <table>
-            <thead>
-              <tr>
-                <th>{{ 'labels.inputs.Order' | translate }}</th>
-                <th>{{ 'labels.inputs.Payment Allocation Rule' | translate }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (
-                paymentAllocation of paymentAllocation.paymentAllocationOrder;
-                track paymentAllocation;
-                let idx = $index
-              ) {
+      <div class="flex-fill allocation-row">
+        <span class="flex-40 ms-label">{{ 'labels.inputs.Payment Allocation Order' | translate }}</span>
+        <span class="flex-60 ms-value">
+          <span class="ms-panel ms-table-wrap allocation-table">
+            <table class="ms-table ms-table--compact">
+              <thead>
                 <tr>
-                  <td>{{ idx + 1 }}</td>
-                  <td>{{ allocationRuleValue(paymentAllocation.paymentAllocationRule) | translateKey: 'catalogs' }}</td>
+                  <th>{{ 'labels.inputs.Order' | translate }}</th>
+                  <th>{{ 'labels.inputs.Payment Allocation Rule' | translate }}</th>
                 </tr>
-              }
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @for (
+                  paymentAllocation of paymentAllocation.paymentAllocationOrder;
+                  track paymentAllocation;
+                  let idx = $index
+                ) {
+                  <tr>
+                    <td>{{ idx + 1 }}</td>
+                    <td>
+                      {{ allocationRuleValue(paymentAllocation.paymentAllocationRule) | translateKey: 'catalogs' }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </span>
         </span>
       </div>
     </div>
@@ -57,36 +61,38 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Transaction Type' | translate }}:</span>
-          <span class="flex-60">{{ transactionTypeValue(creditAllocation.transactionType) }}</span>
+        <div class="flex-fill allocation-row">
+          <span class="flex-40 ms-label">{{ 'labels.inputs.Transaction Type' | translate }}:</span>
+          <span class="flex-60 ms-value">{{ transactionTypeValue(creditAllocation.transactionType) }}</span>
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="flex-fill">
-      <div class="flex-fill">
-        <span class="flex-40">{{ 'labels.inputs.Credit Allocation Order' | translate }}</span>
-        <span class="flex-60">
-          <table>
-            <thead>
-              <tr>
-                <th>{{ 'labels.inputs.Order' | translate }}</th>
-                <th>{{ 'labels.inputs.Credit Allocation Rule' | translate }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (
-                creditAllocation of creditAllocation.creditAllocationOrder;
-                track creditAllocation;
-                let idx = $index
-              ) {
+      <div class="flex-fill allocation-row">
+        <span class="flex-40 ms-label">{{ 'labels.inputs.Credit Allocation Order' | translate }}</span>
+        <span class="flex-60 ms-value">
+          <span class="ms-panel ms-table-wrap allocation-table">
+            <table class="ms-table ms-table--compact">
+              <thead>
                 <tr>
-                  <td>{{ idx + 1 }}</td>
-                  <td>{{ allocationRuleValue(creditAllocation.creditAllocationRule) | translateKey: 'catalogs' }}</td>
+                  <th>{{ 'labels.inputs.Order' | translate }}</th>
+                  <th>{{ 'labels.inputs.Credit Allocation Rule' | translate }}</th>
                 </tr>
-              }
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @for (
+                  creditAllocation of creditAllocation.creditAllocationOrder;
+                  track creditAllocation;
+                  let idx = $index
+                ) {
+                  <tr>
+                    <td>{{ idx + 1 }}</td>
+                    <td>{{ allocationRuleValue(creditAllocation.creditAllocationRule) | translateKey: 'catalogs' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </span>
         </span>
       </div>
     </div>

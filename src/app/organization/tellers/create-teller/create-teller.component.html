@@ -10,7 +10,7 @@
   <mat-card>
     <form [formGroup]="tellerForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
+        <div class="ms-form-grid">
           <mat-form-field>
             <mat-label>{{ 'labels.inputs.Teller Name' | translate }}</mat-label>
             <input matInput required formControlName="name" />
@@ -47,7 +47,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="ms-form-full">
             <mat-label>{{ 'labels.inputs.Description' | translate }}</mat-label>
             <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
           </mat-form-field>
@@ -104,11 +104,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="!tellerForm.valid" *mifosxHasPermission="'CREATE_TELLER'">
+        <button mat-flat-button color="primary" [disabled]="!tellerForm.valid" *mifosxHasPermission="'CREATE_TELLER'">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>

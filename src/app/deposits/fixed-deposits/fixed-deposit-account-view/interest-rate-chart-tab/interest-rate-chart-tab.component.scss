@@ -7,11 +7,10 @@
  */
 
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  padding: var(--ms-space-5) 0;
 
   h3 {
-    margin: 1% auto;
+    margin: 0 0 var(--ms-space-3);
   }
 
   table {

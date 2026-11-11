@@ -20,7 +20,6 @@ import {
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { Accounting } from 'app/core/utils/accounting';
 import { OptionData } from 'app/shared/models/option-data.model';
-import { MatDivider } from '@angular/material/divider';
 
 import {
   MatTable,
@@ -56,7 +55,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   ],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

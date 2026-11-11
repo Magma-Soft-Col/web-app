@@ -11,7 +11,6 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCardHeader, MatCardTitle, MatCardSubtitle } from '@angular/material/card';
 
 /** Translation Imports */
 import { TranslateService } from '@ngx-translate/core';
@@ -41,10 +40,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    InputPasswordComponent,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardSubtitle
+    InputPasswordComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -6,16 +6,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.password-never-expires-wrapper {
-  padding: 17.5px 0;
+.password-never-expires-wrapper,
+.send-password-to-email-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
 }
 
-.send-password-to-email-wrapper {
-  padding: 17.5px 0;
+.phone-group {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 0 var(--ms-space-2);
 }
 
 .reset-password-error {
-  color: #f44336;
-  font-size: 80%;
   margin: 0;
+  color: var(--ms-color-danger);
+  font-size: var(--ms-font-size-label);
 }

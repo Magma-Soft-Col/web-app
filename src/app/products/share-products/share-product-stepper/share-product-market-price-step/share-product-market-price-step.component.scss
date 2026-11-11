@@ -6,26 +6,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-section-title {
+  margin: var(--ms-space-5) 0 var(--ms-space-2);
+}
+
+.ms-subsection-title {
+  font-size: var(--ms-font-size-body);
+}
+
+.ms-table-panel {
+  margin: var(--ms-space-3) 0 var(--ms-space-5);
+}
+
+.ms-detail-table {
   width: 100%;
 }
 
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
-h4 {
-  font-weight: 500;
-  margin: 1em 0;
-}
-
+/* Step footer: secondary + primary aligned right (pen). */
 .margin-t {
-  margin-top: 1em;
+  margin-top: var(--ms-space-5);
 }
 
 .add-option {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--ms-space-6);
 }

@@ -13,14 +13,14 @@
     </div>
     <div class="action-button m-b-7 gap-10px">
       <span *mifosxHasPermission="'CREATE_' + datatableName">
-        <button mat-raised-button color="primary" (click)="add()">
+        <button mat-flat-button color="primary" (click)="add()">
           <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
         </button>
       </span>
       <ng-container *mifosxHasPermission="'DELETE_' + datatableName">
         @if (isSelected) {
           <span>
-            <button class="delete-button" mat-raised-button color="warn" (click)="deleteSelected()">
+            <button class="delete-button" mat-flat-button color="warn" (click)="deleteSelected()">
               <fa-icon icon="trash" class="m-r-10"></fa-icon>
               {{ 'labels.buttons.Delete Selected' | translate }}
             </button>
@@ -30,7 +30,7 @@
       <ng-container *mifosxHasPermission="'DELETE_' + datatableName">
         @if (datatableData.data.length > 0) {
           <span>
-            <button class="delete-button" mat-raised-button color="warn" (click)="delete()">
+            <button class="delete-button" mat-flat-button color="warn" (click)="delete()">
               <fa-icon icon="trash" class="m-r-10"></fa-icon>
               {{ 'labels.buttons.Delete All' | translate }}
             </button>
@@ -47,7 +47,7 @@
   <mat-card [hidden]="isLoading" class="data-table-card m-t-10">
     <mat-card-content>
       <div class="table-scroll-wrapper">
-        <table #dataTable mat-table [dataSource]="datatableData" matSort class="mat-elevation-z2 m-b-25">
+        <table #dataTable mat-table [dataSource]="datatableData" matSort class="m-b-25">
           @for (datatableColumn of datatableColumns; track datatableColumn; let i = $index) {
             <ng-container [matColumnDef]="datatableColumn">
               @if (i === 0) {

@@ -9,7 +9,7 @@
 <div class="container cash-management">
   <mat-card>
     <mat-card-content>
-      <h1>{{ 'web1232.views.' + view | translate }}</h1>
+      <h2 class="ms-section-title">{{ 'web1232.views.' + view | translate }}</h2>
 
       @if (errorMessage) {
         <div class="message error" role="alert">
@@ -62,7 +62,7 @@
           </mat-form-field>
 
           <div class="form-action">
-            <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+            <button mat-flat-button color="primary" type="submit" [disabled]="isLoading">
               {{ 'web1232.actions.load' | translate }}
             </button>
           </div>
@@ -70,7 +70,7 @@
 
         @if (closingContext) {
           <section class="context-section">
-            <h2>{{ 'web1232.sections.authoritativeContext' | translate }}</h2>
+            <h2 class="ms-section-title">{{ 'web1232.sections.authoritativeContext' | translate }}</h2>
             <dl class="summary-grid">
               <div>
                 <dt>{{ 'web1232.fields.businessDate' | translate }}</dt>
@@ -122,7 +122,7 @@
           <form [formGroup]="assetForm" class="asset-form">
             <section>
               <div class="section-heading">
-                <h2>{{ 'web1232.sections.denominations' | translate }}</h2>
+                <h2 class="ms-section-title">{{ 'web1232.sections.denominations' | translate }}</h2>
                 <button mat-stroked-button type="button" (click)="addDenomination()">
                   <mat-icon>add</mat-icon>{{ 'web1232.actions.addDenomination' | translate }}
                 </button>
@@ -163,7 +163,7 @@
             </section>
 
             <section>
-              <h2>{{ 'web1232.sections.eligibleChecks' | translate }}</h2>
+              <h2 class="ms-section-title">{{ 'web1232.sections.eligibleChecks' | translate }}</h2>
               @if (closingContext.eligibleChecks.length) {
                 <div class="check-list">
                   @for (check of closingContext.eligibleChecks; track check.id) {
@@ -189,7 +189,7 @@
             }
 
             <section class="preview-section">
-              <h2>{{ 'web1232.sections.preview' | translate }}</h2>
+              <h2 class="ms-section-title">{{ 'web1232.sections.preview' | translate }}</h2>
               <p class="hint">{{ 'web1232.hints.previewOnly' | translate }}</p>
               <dl class="summary-grid">
                 <div>
@@ -216,7 +216,7 @@
                 <div class="message warning">{{ 'web1232.states.authorizationRequired' | translate }}</div>
               }
               <button
-                mat-raised-button
+                mat-stroked-button
                 color="warn"
                 type="button"
                 (click)="reviewAndSubmit()"
@@ -239,7 +239,7 @@
 
         @if (closingReceipt) {
           <section class="receipt print-area">
-            <h2>{{ 'web1232.sections.receipt' | translate }}</h2>
+            <h2 class="ms-section-title">{{ 'web1232.sections.receipt' | translate }}</h2>
             <dl class="summary-grid">
               <div>
                 <dt>{{ 'web1232.fields.reference' | translate }}</dt>
@@ -282,7 +282,7 @@
               <button mat-stroked-button type="button" (click)="loadReceipt()">
                 {{ 'web1232.actions.reprint' | translate }}
               </button>
-              <button mat-raised-button color="primary" type="button" (click)="printReceipt()">
+              <button mat-flat-button color="primary" type="button" (click)="printReceipt()">
                 {{ 'web1232.actions.printReceipt' | translate }}
               </button>
             </div>
@@ -291,7 +291,7 @@
 
         @if (operationReceipt) {
           <section class="receipt print-area">
-            <h2>{{ 'web1232.sections.receipt' | translate }}</h2>
+            <h2 class="ms-section-title">{{ 'web1232.sections.receipt' | translate }}</h2>
             <dl class="summary-grid">
               <div>
                 <dt>{{ 'web1232.fields.reference' | translate }}</dt>
@@ -322,7 +322,7 @@
                 <dd>{{ operationReceipt.createdOn }}</dd>
               </div>
             </dl>
-            <button mat-raised-button color="primary" class="no-print" type="button" (click)="printReceipt()">
+            <button mat-flat-button color="primary" class="no-print" type="button" (click)="printReceipt()">
               {{ 'web1232.actions.printReceipt' | translate }}
             </button>
           </section>
@@ -345,7 +345,7 @@
             </mat-select>
           </mat-form-field>
           <div class="form-action">
-            <button mat-raised-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
+            <button mat-flat-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
           </div>
         </form>
         @if (globalCount) {
@@ -460,7 +460,7 @@
             ><input matInput formControlName="q"
           /></mat-form-field>
           <div class="form-action">
-            <button mat-raised-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
+            <button mat-flat-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
           </div>
         </form>
         @if (history.length) {
@@ -526,7 +526,7 @@
             </mat-select></mat-form-field
           >
           <div class="form-action">
-            <button mat-raised-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
+            <button mat-flat-button color="primary" type="submit">{{ 'web1232.actions.search' | translate }}</button>
           </div>
         </form>
         @if (holdings.length) {

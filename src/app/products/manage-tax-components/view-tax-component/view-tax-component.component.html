@@ -6,101 +6,105 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container m-b-20 layout-row layout-lt-md-column align-end gap-2percent">
-  <button mat-raised-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_TAXCOMPONENT'">
-    <fa-icon icon="edit" class="m-r-10"></fa-icon>
-    {{ 'labels.buttons.Edit' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Name' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ taxComponentData.name }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Percentage' | translate }}
-        </div>
-
-        <div class="flex-50">{{ taxComponentData.percentage | formatNumber }} %</div>
-
-        @if (taxComponentData.debitAccountType) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Debit Account Type' | translate }}
-          </div>
-        }
-
-        @if (taxComponentData.debitAccountType) {
-          <div class="flex-50">
-            {{
-              'labels.inputs.accounting.' + (taxComponentData.debitAccountType.value?.split('.')[1] || '').toUpperCase()
-                | translate
-            }}
-          </div>
-        }
-
-        @if (taxComponentData.debitAccount) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Debit Account' | translate }}
-          </div>
-        }
-
-        @if (taxComponentData.debitAccount) {
-          <div class="flex-50">
-            ({{ taxComponentData.debitAccount.glCode }})
-            {{ taxComponentData.debitAccount.name }}
-          </div>
-        }
-
-        @if (taxComponentData.creditAccountType) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Credit Account Type' | translate }}
-          </div>
-        }
-
-        @if (taxComponentData.creditAccountType) {
-          <div class="flex-50">
-            {{
-              'labels.inputs.accounting.' +
-                (taxComponentData.creditAccountType.value?.split('.')[1] || '').toUpperCase() | translate
-            }}
-          </div>
-        }
-
-        @if (taxComponentData.creditAccount) {
-          <div class="flex-50 mat-body-strong">
-            {{ 'labels.inputs.Credit Account' | translate }}
-          </div>
-        }
-
-        @if (taxComponentData.creditAccount) {
-          <div class="flex-50">
-            ({{ taxComponentData.creditAccount.glCode }})
-            {{ taxComponentData.creditAccount.name }}
-          </div>
-        }
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Start Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ taxComponentData.startDate | dateFormat }}
-        </div>
+  <div class="ms-page">
+    <div class="ms-page-header">
+      <h2 class="ms-section-title">{{ taxComponentData.name }}</h2>
+      <div class="ms-actions">
+        <button mat-flat-button color="primary" [routerLink]="['edit']" *mifosxHasPermission="'UPDATE_TAXCOMPONENT'">
+          <fa-icon icon="edit" class="m-r-10"></fa-icon>
+          {{ 'labels.buttons.Edit' | translate }}
+        </button>
       </div>
-    </mat-card-content>
-
-    <div class="layout-row layout-align-center gap-2percent layout-lt-md-column">
-      <button type="button" color="primary" mat-raised-button [routerLink]="['../']">
-        {{ 'labels.buttons.Back' | translate }}
-      </button>
     </div>
-  </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <div class="detail-grid">
+          <div class="ms-label">
+            {{ 'labels.inputs.Name' | translate }}
+          </div>
+
+          <div class="ms-value">
+            {{ taxComponentData.name }}
+          </div>
+
+          <div class="ms-label">
+            {{ 'labels.inputs.Percentage' | translate }}
+          </div>
+
+          <div class="ms-value">{{ taxComponentData.percentage | formatNumber }} %</div>
+
+          @if (taxComponentData.debitAccountType) {
+            <div class="ms-label">
+              {{ 'labels.inputs.Debit Account Type' | translate }}
+            </div>
+          }
+
+          @if (taxComponentData.debitAccountType) {
+            <div class="ms-value">
+              {{
+                'labels.inputs.accounting.' +
+                  (taxComponentData.debitAccountType.value?.split('.')[1] || '').toUpperCase() | translate
+              }}
+            </div>
+          }
+
+          @if (taxComponentData.debitAccount) {
+            <div class="ms-label">
+              {{ 'labels.inputs.Debit Account' | translate }}
+            </div>
+          }
+
+          @if (taxComponentData.debitAccount) {
+            <div class="ms-value">
+              ({{ taxComponentData.debitAccount.glCode }})
+              {{ taxComponentData.debitAccount.name }}
+            </div>
+          }
+
+          @if (taxComponentData.creditAccountType) {
+            <div class="ms-label">
+              {{ 'labels.inputs.Credit Account Type' | translate }}
+            </div>
+          }
+
+          @if (taxComponentData.creditAccountType) {
+            <div class="ms-value">
+              {{
+                'labels.inputs.accounting.' +
+                  (taxComponentData.creditAccountType.value?.split('.')[1] || '').toUpperCase() | translate
+              }}
+            </div>
+          }
+
+          @if (taxComponentData.creditAccount) {
+            <div class="ms-label">
+              {{ 'labels.inputs.Credit Account' | translate }}
+            </div>
+          }
+
+          @if (taxComponentData.creditAccount) {
+            <div class="ms-value">
+              ({{ taxComponentData.creditAccount.glCode }})
+              {{ taxComponentData.creditAccount.name }}
+            </div>
+          }
+
+          <div class="ms-label">
+            {{ 'labels.inputs.Start Date' | translate }}
+          </div>
+
+          <div class="ms-value">
+            {{ taxComponentData.startDate | dateFormat }}
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="ms-actions align-end detail-footer">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
+          {{ 'labels.buttons.Back' | translate }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>

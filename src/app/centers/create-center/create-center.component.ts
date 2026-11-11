@@ -25,8 +25,6 @@ import { Dates } from 'app/core/utils/dates';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatNavList, MatListSubheaderCssMatStyler } from '@angular/material/list';
-import { MatLine } from '@angular/material/grid-list';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -40,10 +38,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     ...STANDALONE_SHARED_IMPORTS,
     MatCheckbox,
     MatIconButton,
-    FaIconComponent,
-    MatNavList,
-    MatListSubheaderCssMatStyler,
-    MatLine
+    FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

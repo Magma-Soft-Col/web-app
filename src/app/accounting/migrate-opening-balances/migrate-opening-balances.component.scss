@@ -6,14 +6,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.content {
-  padding-top: 20px;
+.search-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ms-space-3);
+  margin-bottom: var(--ms-space-4);
 
-  div {
-    overflow-wrap: break-word;
+  .search-row__field {
+    flex: 1 1 auto;
+    min-width: 0;
 
-    &.header {
-      font-weight: 500;
+    mat-form-field {
+      width: 100%;
     }
   }
+
+  .search-row__action {
+    flex: 0 0 auto;
+    padding-top: var(--ms-space-1);
+  }
+}
+
+.amount-field {
+  width: 160px;
 }

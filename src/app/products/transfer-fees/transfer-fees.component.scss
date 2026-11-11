@@ -6,25 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/colours' as c;
-
-table {
+.ms-list-table {
   width: 100%;
-  min-width: 900px;
-
-  .select-row:hover {
-    cursor: pointer;
-  }
 }
 
-.table-container {
-  overflow-x: auto;
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
 }
 
-.true {
-  color: c.$msg-success;
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
 }
 
-.false {
-  color: c.$msg-danger;
+.ms-num {
+  text-align: right;
 }

@@ -9,3 +9,12 @@
 .select-row {
   cursor: pointer;
 }
+
+table {
+  width: 100%;
+}
+
+.notification-date {
+  color: var(--ms-color-text-secondary);
+  white-space: nowrap;
+}

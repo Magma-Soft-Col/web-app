@@ -28,6 +28,8 @@ import { UnassignRoleDialogComponent } from '../custom-dialogs/unassign-role-dia
 
 /** Custom Services */
 import { GroupsService } from 'app/groups/groups.service';
+import { MatIconButton } from '@angular/material/button';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -47,6 +49,8 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatCellDef,
     MatCell,
     MatTooltip,
+    MatIconButton,
+    FaIconComponent,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

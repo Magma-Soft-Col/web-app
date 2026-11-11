@@ -14,9 +14,9 @@
   padding: 6rem 1rem;
 
   .page-loader-text {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: #1976d2;
+    margin-top: var(--ms-space-4);
+    font-size: 13px;
+    color: var(--ms-color-text-secondary);
     font-weight: 500;
   }
 }

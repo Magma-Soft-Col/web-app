@@ -6,22 +6,26 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.detail-row {
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  align-items: baseline;
+  gap: var(--ms-space-4);
+  overflow-wrap: anywhere;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.periods-table {
   width: 100%;
 }
 
-// TODO: CONFIGURE THESE CLASSES GLOBALLY
-.is-differential {
-  color: #32cd32;
+.ms-num {
+  text-align: right;
 }
 
-.not-is-differential {
-  color: #f44366;
-}
-
-.content {
-  div {
-    margin: 1rem 0;
-    overflow-wrap: break-word;
-  }
+th.ms-num ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
 }

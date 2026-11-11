@@ -6,29 +6,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  margin: auto !important;
+.jobs-page {
+  padding-top: var(--ms-space-4);
 }
 
-.workflow-graph {
-  min-height: 400px;
+.job-select {
+  width: 320px;
+  max-width: 100%;
 }
 
-.space-top {
-  margin-top: 20px !important;
-}
-
-.space-bottom {
-  margin-bottom: 20px !important;
+table {
+  width: 100%;
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow:
-    0 5px 5px -3px rgb(0 0 0 / 20%),
-    0 8px 10px 1px rgb(0 0 0 / 14%),
-    0 3px 14px 2px rgb(0 0 0 / 12%);
+  border-radius: var(--ms-radius-sm);
+  box-shadow: var(--ms-shadow-float);
 }
 
 .cdk-drag-placeholder {
@@ -36,9 +30,9 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform var(--ms-duration) var(--ms-easing);
 }
 
-.cdk-drop-list-dragging .mat-row:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.cdk-drop-list-dragging .mat-mdc-row:not(.cdk-drag-placeholder) {
+  transition: transform var(--ms-duration) var(--ms-easing);
 }

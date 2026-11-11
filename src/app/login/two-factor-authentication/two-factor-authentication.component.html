@@ -28,7 +28,7 @@
         </mat-radio-button>
       }
     </mat-radio-group>
-    <button mat-raised-button color="primary" [disabled]="!twoFactorAuthenticationDeliveryMethodForm.valid || loading">
+    <button mat-flat-button color="primary" [disabled]="!twoFactorAuthenticationDeliveryMethodForm.valid || loading">
       {{ 'labels.buttons.Request OTP' | translate }}
       @if (loading) {
         <mat-spinner [diameter]="20"></mat-spinner>
@@ -42,7 +42,7 @@
   <p>{{ 'labels.text.Please enter the OTP' | translate }}:</p>
 
   <form class="two-factor-auth-form" [formGroup]="twoFactorAuthenticationForm" (ngSubmit)="validateOTP()">
-    <mat-form-field class="two-factor-auth-input" appearance="fill">
+    <mat-form-field class="two-factor-auth-input" appearance="outline">
       <span matPrefix>
         <fa-icon icon="user-shield" class="m-r-10"></fa-icon>
       </span>
@@ -63,7 +63,7 @@
         </mat-error>
       }
     </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="!twoFactorAuthenticationForm.valid || loading">
+    <button mat-flat-button color="primary" [disabled]="!twoFactorAuthenticationForm.valid || loading">
       {{ 'labels.buttons.Validate OTP' | translate }}
       @if (loading) {
         <mat-spinner [diameter]="20"></mat-spinner>

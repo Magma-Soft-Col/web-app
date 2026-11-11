@@ -8,31 +8,31 @@
 
 @use 'assets/styles/member-list';
 
-.container {
-  max-width: 50rem;
+/* Pen form pattern: white panel, two-column field grid (one below 768px), actions at the foot. */
+.form-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
+
+  /* Anything that is not a single field (rows, checkboxes, tables) spans the full width. */
+  > :not(mat-form-field) {
+    grid-column: 1 / -1;
+  }
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.mat-table {
-  display: block;
-  font-family: Tahoma, Verdana, sans-serif;
-  width: 50%;
-}
-
-.mat-row,
-.mat-header-row {
+.form-actions {
   display: flex;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 24px;
-}
-
-.mat-cell,
-.mat-header-cell {
-  flex: 1;
-  overflow: hidden;
-  overflow-wrap: break-word;
+  justify-content: flex-end;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+  padding: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }
 
 /* Rich autocomplete option: name | id | office
@@ -40,7 +40,7 @@
 .client-option-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--ms-space-4);
   width: 100%;
 
   .client-col {
@@ -64,19 +64,65 @@
    Row styles come from the shared member-list mixin. */
 @include member-list.member-list;
 
-.selected-clients {
-  flex: 1;
-  min-width: 0;
-  margin-left: 3rem;
+/* Selected client summary and the list of clients to add, side by side. */
+.members-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-4);
+  align-items: flex-start;
+  margin-top: var(--ms-space-2);
+}
 
-  .selected-clients-title {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
+.details-list,
+.selected-clients {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.details-list {
+  margin: 0;
+  font-size: var(--ms-font-size-table);
+
+  dt,
+  dd {
     margin: 0;
-    padding: 0 8px;
-    font-size: inherit;
+  }
+}
+
+.details-list__title,
+.selected-clients .selected-clients-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 var(--ms-space-1) 0 var(--ms-space-3);
+  background: var(--ms-color-surface-subtle);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+  color: var(--ms-color-text-secondary);
+  font-size: var(--ms-font-size-label);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.details-list__row {
+  display: flex;
+  gap: var(--ms-space-4);
+  padding: 9px var(--ms-space-3);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    flex: 0 0 40%;
+    color: var(--ms-color-text-secondary);
+  }
+
+  dd {
+    color: var(--ms-color-text-primary);
     font-weight: 500;
-    border-bottom: 1px solid var(--mdc-outlined-text-field-outline-color, #e0e0e0);
+    overflow-wrap: anywhere;
   }
 }

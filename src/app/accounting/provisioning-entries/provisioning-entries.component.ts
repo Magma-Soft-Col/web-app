@@ -21,14 +21,14 @@ import {
   MatHeaderRowDef,
   MatHeaderRow,
   MatRowDef,
-  MatRow
+  MatRow,
+  MatNoDataRow
 } from '@angular/material/table';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 
 /** Custom Services */
 import { AccountingService } from '../accounting.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 /**
@@ -49,12 +49,12 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatCheckbox,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    MatPaginator
+    MatPaginator,
+    MatNoDataRow
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

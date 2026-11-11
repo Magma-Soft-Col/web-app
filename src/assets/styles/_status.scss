@@ -6,123 +6,123 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'colours' as *;
+/*
+ * Legacy status classes, mapped onto the pen semantic tokens so they follow
+ * every theme. Templates combine them with an icon or a label, so colour is
+ * never the only signal.
+ */
 
 .status-active {
-  color: $status-active;
+  color: var(--ms-color-success);
 }
 
 .status-inactive {
-  color: $status-inactive;
+  color: var(--ms-color-neutral);
 }
 
 .status-deleted {
-  color: $status-deleted;
+  color: var(--ms-color-text-primary);
 }
 
 .status-pending {
-  color: $status-pending;
+  color: var(--ms-color-warning);
 }
 
 .status-approved {
-  color: $status-approved;
+  color: var(--ms-color-info);
 }
 
 .status-overpaid {
-  color: $status-overpaid;
+  color: var(--ms-color-info);
 }
 
 .status-chargeoff {
-  color: $status-chargeoff;
+  color: var(--ms-color-danger);
 }
 
 .status-active-overdue {
-  color: $status-active-overdue;
+  color: var(--ms-color-danger);
 }
 
 .status-block {
-  color: $status-active-overdue;
+  color: var(--ms-color-danger);
 }
 
 .status-matured {
-  color: $status-matured;
+  color: var(--ms-color-warning);
+}
+
+.status-transfer-progress {
+  color: var(--ms-color-warning);
+}
+
+.status-transfer-hold {
+  color: var(--ms-color-danger);
 }
 
 .subStatus-contract-termination {
-  color: $subStatus-contract-termination;
+  color: var(--ms-color-text-disabled);
 }
 
 .mat-step-header .mat-step-icon-state-done {
-  background-color: $state-done;
-
-  .status-transfer-progress {
-    color: $status-transfer-progress;
-  }
-
-  .status-transfer-hold {
-    color: $status-transfer-hold;
-  }
+  background-color: var(--ms-color-success);
+  color: var(--ms-color-on-primary);
 }
 
 /* ── Account status pill ─────────────────────────────────────────
-   Inline pill shown next to the entity name/account number in the
-   account headers (loans, clients, groups, centers). Background is
-   driven by the same status class the status dot uses (statusLookup),
-   so the pill and dot always agree in colour.
+   Inline status shown next to the entity name/account number in the
+   account headers. Rendered as the pen `.ms-badge`: tinted background,
+   semantic text colour, uppercase caption. The modifier is the same
+   status class the status dot uses (statusLookup), so both agree.
 ──────────────────────────────────────────────────────────────── */
 .account-status-pill {
-  display: inline-block;
-  margin-left: 12px;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ms-space-1);
+  margin-left: var(--ms-space-2);
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
+  line-height: 16px;
+  letter-spacing: 0.2px;
   text-transform: uppercase;
+  white-space: nowrap;
   vertical-align: middle;
-  color: #fff;
-  background-color: $status-inactive;
+  color: var(--ms-color-neutral);
+  background-color: var(--ms-color-neutral-bg);
 
   &.status-active {
-    background-color: $status-active;
+    color: var(--ms-color-success);
+    background-color: var(--ms-color-success-bg);
   }
 
   &.status-active-overdue,
-  &.status-block {
-    background-color: $status-active-overdue;
-  }
-
-  &.status-pending {
-    background-color: $status-pending;
-  }
-
-  &.status-approved {
-    background-color: $status-approved;
-  }
-
-  &.status-overpaid {
-    background-color: $status-overpaid;
-  }
-
-  &.status-chargeoff {
-    background-color: $status-chargeoff;
-  }
-
-  &.status-matured {
-    background-color: $status-matured;
-  }
-
-  &.status-transfer-progress {
-    background-color: $status-transfer-progress;
-  }
-
+  &.status-block,
+  &.status-chargeoff,
   &.status-transfer-hold {
-    background-color: $status-transfer-hold;
+    color: var(--ms-color-danger);
+    background-color: var(--ms-color-danger-bg);
   }
 
+  &.status-pending,
+  &.status-matured,
+  &.status-transfer-progress {
+    color: var(--ms-color-warning);
+    background-color: var(--ms-color-warning-bg);
+  }
+
+  &.status-approved,
+  &.status-overpaid {
+    color: var(--ms-color-info);
+    background-color: var(--ms-color-info-bg);
+  }
+
+  &.status-inactive,
+  &.status-deleted,
   &.subStatus-contract-termination {
-    background-color: $subStatus-contract-termination;
+    color: var(--ms-color-neutral);
+    background-color: var(--ms-color-neutral-bg);
   }
 }
 
@@ -130,19 +130,15 @@
    Reusable left-border status indicator for mat-table rows.
    Apply one class to <tr mat-row>:
      .row-state-paid | .row-state-partial | .row-state-alert | .row-state-waived
+   The values are the pen semantic tokens, so the dark theme comes for free.
 ──────────────────────────────────────────────────────────────── */
-:root {
-  --row-state-paid: #2e7d32;
-  --row-state-partial: #e65100;
-  --row-state-alert: #c62828;
-  --row-state-waived: #5c6bc0;
-}
-
+:root,
+body,
 .dark-theme {
-  --row-state-paid: #66bb6a;
-  --row-state-partial: #ffa726;
-  --row-state-alert: #ef9a9a;
-  --row-state-waived: #9fa8da;
+  --row-state-paid: var(--ms-color-success);
+  --row-state-partial: var(--ms-color-warning);
+  --row-state-alert: var(--ms-color-danger);
+  --row-state-waived: var(--ms-color-text-disabled);
 }
 
 .row-state-paid .mat-mdc-cell:first-child {

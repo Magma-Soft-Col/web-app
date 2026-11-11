@@ -11,8 +11,6 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatCard, MatCardHeader, MatCardTitleGroup, MatCardMdImage, MatCardTitle } from '@angular/material/card';
-import { MatTooltip } from '@angular/material/tooltip';
 import { MatTabNav, MatTabLink, MatTabNavPanel } from '@angular/material/tabs';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { AccountNumberComponent } from 'app/shared/account-number/account-number.component';
@@ -20,10 +18,8 @@ import { CurrencyPipe, NgClass } from '@angular/common';
 import { Currency } from 'app/shared/models/general.model';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { LongTextComponent } from 'app/shared/long-text/long-text.component';
-import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { StatusLookupPipe } from 'app/pipes/status-lookup.pipe';
 import { SavingsButtonsConfiguration } from '../../savings-buttons.config';
 
 interface TransactionDatatable {
@@ -37,15 +33,8 @@ interface TransactionDatatable {
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     AccountNumberComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitleGroup,
-    MatCardMdImage,
-    MatCardTitle,
-    MatTooltip,
     NgClass,
     LongTextComponent,
-    MatIconButton,
     MatMenuTrigger,
     MatIcon,
     FaIconComponent,
@@ -56,8 +45,7 @@ interface TransactionDatatable {
     RouterLinkActive,
     MatTabNavPanel,
     RouterOutlet,
-    CurrencyPipe,
-    StatusLookupPipe
+    CurrencyPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

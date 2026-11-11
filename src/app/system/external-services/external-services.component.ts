@@ -9,10 +9,7 @@
 /** Angular Imports */
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatLine } from '@angular/material/grid-list';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { AuthenticationService } from 'app/core/authentication/authentication.service';
 import { environment } from 'environments/environment';
@@ -31,12 +28,8 @@ import {
   templateUrl: './external-services.component.html',
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatNavList,
-    MatListItem,
-    MatIcon,
     MatIconButton,
-    FaIconComponent,
-    MatLine
+    FaIconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

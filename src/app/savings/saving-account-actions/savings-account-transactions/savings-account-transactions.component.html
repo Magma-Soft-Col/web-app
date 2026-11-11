@@ -6,7 +6,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     @if (transactionType.withdrawal) {
       <mat-card-title class="form-heading">
@@ -123,13 +123,13 @@
                 <textarea formControlName="note" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
               </mat-form-field>
 
-              <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-                <button type="button" mat-raised-button [routerLink]="['../../transactions']">
+              <mat-card-actions class="ms-actions align-end">
+                <button type="button" mat-stroked-button [routerLink]="['../../transactions']">
                   {{ 'labels.buttons.Cancel' | translate }}
                 </button>
                 <button
                   type="button"
-                  mat-raised-button
+                  mat-flat-button
                   color="primary"
                   [disabled]="!savingAccountTransactionForm.valid"
                   (click)="proceedToConfirmation()"
@@ -212,13 +212,13 @@
               }
             </div>
 
-            <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-              <button type="button" mat-raised-button (click)="goBack()">
+            <mat-card-actions class="ms-actions align-end">
+              <button type="button" mat-stroked-button (click)="goBack()">
                 {{ 'labels.buttons.Cancel' | translate }}
               </button>
               <button
                 type="button"
-                mat-raised-button
+                mat-flat-button
                 color="primary"
                 [disabled]="isSubmitting"
                 (click)="confirmTransaction()"
@@ -297,11 +297,11 @@
                 </div>
               </div>
 
-              <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-                <button type="button" mat-raised-button (click)="printReceipt()">
+              <mat-card-actions class="ms-actions align-end">
+                <button type="button" mat-stroked-button (click)="printReceipt()">
                   {{ 'labels.buttons.PRINT' | translate }}
                 </button>
-                <button type="button" mat-raised-button color="primary" (click)="done()">
+                <button type="button" mat-flat-button color="primary" (click)="done()">
                   {{ 'labels.buttons.DONE' | translate }}
                 </button>
               </mat-card-actions>

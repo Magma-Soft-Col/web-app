@@ -6,17 +6,45 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
+
+// Read-only amounts of the operation, shown before the user confirms.
+.loan-form__summary {
+  margin-bottom: var(--ms-space-4);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface-subtle);
+  font-size: 13px;
+  row-gap: var(--ms-space-2);
+  color: var(--ms-color-text-primary);
+
+  .mat-body-strong {
+    font-weight: 500;
+    color: var(--ms-color-text-secondary);
+  }
+
+  .r-amount {
+    text-align: right;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
 }
 
-.charge-off-amount {
-  margin-bottom: 1rem;
+.loan-form__toggle {
+  margin-bottom: var(--ms-space-4);
+}
+
+.currency-suffix {
+  padding-right: var(--ms-space-3);
+  color: var(--ms-color-text-secondary);
 }
 
 // Explains the disabled submit button after a quote request failed.
 .quote-stale-hint {
-  color: var(--mat-sys-error, #b3261e);
-  font-size: 0.85rem;
   margin-right: auto;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-danger);
 }

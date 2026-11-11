@@ -105,7 +105,6 @@ describe('Savings ViewTransactionComponent', () => {
     expect(text()).toContain('labels.inputs.External Id');
     expect(text()).toContain('CR92037300110010000087');
     expect(text()).toContain('an kh');
-    expect(text()).toContain('labels.heading.Account Overview');
     expect(text()).toContain('labels.inputs.Current Balance');
     expect(text()).toContain('labels.inputs.Available Balance');
   });
@@ -115,9 +114,7 @@ describe('Savings ViewTransactionComponent', () => {
 
     expect(text()).not.toContain('labels.inputs.Office');
     expect(text()).not.toContain('labels.inputs.Staff');
-    expect(fixture.nativeElement.querySelector('img.profile-image')?.getAttribute('src')).toBe(
-      'assets/images/savings_account_placeholder.png'
-    );
+    expect(fixture.nativeElement.querySelector('.ms-entity-header')).not.toBeNull();
   });
 
   it('keeps existing transaction tabs rendered', async () => {

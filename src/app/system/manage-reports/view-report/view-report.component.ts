@@ -17,7 +17,7 @@ import { SystemService } from 'app/system/system.service';
 /** Custom Components */
 import { DeleteDialogComponent } from 'app/shared/delete-dialog/delete-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { YesnoPipe } from '../../../pipes/yesno.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -31,7 +31,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatCardTitle,
     YesnoPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

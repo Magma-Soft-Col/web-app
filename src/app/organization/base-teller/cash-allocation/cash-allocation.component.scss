@@ -8,7 +8,6 @@
 
 .cash-allocation {
   mat-card {
-    max-width: 1120px;
     margin: 0 auto;
   }
 
@@ -29,9 +28,9 @@
   .error-message {
     margin-bottom: 16px;
     padding: 16px;
-    border-radius: 4px;
-    color: var(--mat-sys-error);
-    background: var(--mat-sys-error-container);
+    border-radius: var(--ms-radius-control);
+    color: var(--ms-color-danger);
+    background: var(--ms-color-danger-bg);
   }
 
   .form-grid,
@@ -56,7 +55,7 @@
 
   .context-summary span,
   dt {
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--ms-color-text-secondary);
   }
 
   dd {
@@ -83,11 +82,11 @@
 
   .denomination-header {
     font-weight: 500;
-    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
   }
 
   .denomination-row {
-    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
   }
 
   .denomination-row mat-form-field {
@@ -121,7 +120,7 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
-    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    border-bottom: 1px solid var(--ms-color-border-subtle);
   }
 }
 

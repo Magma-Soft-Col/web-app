@@ -6,18 +6,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  width: 37rem;
-  margin-top: 3%;
-  padding-bottom: 2%;
-}
+@use 'app/loans/loans-view/loan-tab-shared' as shared;
+
+@include shared.action-form;
 
 // Shown when the loan is closed or overpaid: the adjustment is accepted but
-// reopens the account. Styled with opacity rather than a fixed colour so it
-// reads the same in both themes.
+// reopens the account.
 .adjust-warning {
-  margin: 0 0 16px;
-  font-size: 0.85rem;
+  margin: 0 0 var(--ms-space-4);
+  padding: var(--ms-space-3) var(--ms-space-4);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-warning-bg);
+  color: var(--ms-color-warning);
+  font-size: 13px;
   line-height: 1.5;
-  opacity: 0.85;
+}
+
+.payment-toggle {
+  padding: var(--ms-space-2) 0 var(--ms-space-4);
 }

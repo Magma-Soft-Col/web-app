@@ -7,49 +7,52 @@
  */
 
 // Application Color Profiles
-// Description: Set all application-wide color definitions here
-// To see examples, see the Color Swatches PNG
+// Legacy Sass palette, re-pointed at the Magma Soft design system (pen).
+// These variables must stay real Sass colours: components outside this file
+// still feed them to `rgba()` and `color.adjust()`. Their values are therefore
+// the light-theme hex of the matching `--ms-*` token in `_ms-tokens.scss`.
+// New code reads `var(--ms-*)` instead, so it also follows the dark theme.
 
 // Endpoints
 $white: #fff;
 $black: #000;
 
-// Greys
-$light-grey: #f5f5f5;
-$mid-grey: #d7dada;
-$dark-grey: #353b3b;
+// Greys (pen: background, border, text-primary)
+$light-grey: #f5f7fa;
+$mid-grey: #dce3eb;
+$dark-grey: #202d3d;
 
 // Default Color
 $default: $dark-grey;
 
-// Flat UI Color Swatches (http://designmodo.github.io/Flat-UI) see the color-swatchs.png
-$turquoise: #1abc9c;
-$green-sea: #16a085;
-$emerald: #2ecc71;
-$nephritis: #27ae60;
-$peter-river: #3498db;
-$belize-hole: #2980b9;
-$amethyst: #9b59b6;
-$wisteria: #8e44ad;
-$wet-asphalt: #34495e;
-$midnight-blue: #2c3e50;
-$sunflower: #f1c40f;
-$orange: #f39c12;
-$carrot: #e67e22;
-$pumpkin: #d35400;
-$alizarin: #e74c3c;
-$pomegranate: #c0392b;
-$clouds: #ecf0f1;
-$silver: #bdc3c7;
-$concrete: #95a5a6;
-$asbestos: #7f8c8d;
+// Former Flat UI swatches, folded onto the pen palette
+$turquoise: #18794e;
+$green-sea: #18794e;
+$emerald: #18794e;
+$nephritis: #18794e;
+$peter-river: #315e9e;
+$belize-hole: #284f86;
+$amethyst: #315e9e;
+$wisteria: #315e9e;
+$wet-asphalt: #202d3d;
+$midnight-blue: #14243a;
+$sunflower: #946200;
+$orange: #946200;
+$carrot: #946200;
+$pumpkin: #946200;
+$alizarin: #b42318;
+$pomegranate: #b42318;
+$clouds: #eef2f6;
+$silver: #dce3eb;
+$concrete: #8b97a6;
+$asbestos: #596779;
 
-// Message Colors
-$msg-default: #999;
-$msg-success: #5cb85c;
-$msg-warning: #f0ad4e;
-$msg-danger: #d9534f;
-$msg-info: #5bc0de;
+// Message Colors (pen semantic states)
+$msg-default: #596779;
+$msg-success: #18794e;
+$msg-warning: #946200;
+$msg-danger: #b42318;
+$msg-info: #315e9e;
 
 //Social Colors
 $dailymile: #ffaa25;
@@ -70,87 +73,88 @@ $base: $dark-grey;
 $highlight: $belize-hole;
 $accent: $peter-river;
 
-//Status Colors Defined Here
-$status-active: #5cb85c;
-$status-inactive: #666f73;
-$status-paid: #666f73;
-$status-deleted: #000;
-$status-pending: #ffa500;
-$status-approved: #4461e2;
-$status-chargeoff: #f39c12;
-$status-overpaid: #800080;
-$status-downpayment: #16a085;
-$status-reage: #e08e0b;
-$status-reamortize: #4461e2;
-$status-transfer: #16a085;
-$status-active-overdue: #f00;
-$status-matured: #ff4000;
-$state-done: #2af72a;
-$status-transfer-progress: #ff4000;
-$status-transfer-hold: #df0101;
-$subStatus-contract-termination: #b3b3b3;
+// Status Colors (pen semantic states)
+$status-active: #18794e;
+$status-inactive: #596779;
+$status-paid: #596779;
+$status-deleted: #202d3d;
+$status-pending: #946200;
+$status-approved: #315e9e;
+$status-chargeoff: #b42318;
+$status-overpaid: #315e9e;
+$status-downpayment: #18794e;
+$status-reage: #946200;
+$status-reamortize: #315e9e;
+$status-transfer: #315e9e;
+$status-active-overdue: #b42318;
+$status-matured: #946200;
+$state-done: #18794e;
+$status-transfer-progress: #946200;
+$status-transfer-hold: #b42318;
+$subStatus-contract-termination: #8b97a6;
 
-$error-log: #ffa726;
+$error-log: #946200;
 
-$manual-entry: #d7e3ff;
+$manual-entry: #e8eff8;
 
 .column-mandatory {
-  color: $status-active;
+  color: var(--ms-color-success);
   text-align: center;
 }
 
 .not-column-mandatory {
-  color: $status-inactive;
+  color: var(--ms-color-text-secondary);
   text-align: center;
 }
 
 .cdk-drag-placeholder {
-  background: $peter-river;
+  background: var(--ms-color-brand-primary-subtle);
+  border: 1px dashed var(--ms-color-brand-primary);
 }
 
 .yes {
-  color: $status-active !important;
-  background-color: $status-active;
+  color: var(--ms-color-success) !important;
+  background-color: var(--ms-color-success);
   height: 4px;
   cursor: none;
 }
 
 .no {
-  color: $status-active-overdue;
-  background-color: $status-active-overdue;
+  color: var(--ms-color-danger);
+  background-color: var(--ms-color-danger);
   height: 4px;
   cursor: none;
 }
 
 .strike {
   text-decoration: line-through;
-  color: red;
+  color: var(--ms-color-danger);
 }
 
 .transfer {
-  color: $status-transfer;
+  color: var(--ms-color-info);
 }
 
 .linked {
-  color: $status-approved;
+  color: var(--ms-color-brand-primary);
 }
 
 .accrual {
-  color: $msg-default;
+  color: var(--ms-color-text-secondary);
 }
 
 .fa-question {
-  color: $status-approved;
+  color: var(--ms-color-brand-primary);
 }
 
 .enabled {
-  color: #32cd32;
+  color: var(--ms-color-success);
 }
 
 .disabled {
-  color: #f44366;
+  color: var(--ms-color-danger);
 }
 
 .pending {
-  color: $status-pending;
+  color: var(--ms-color-warning);
 }

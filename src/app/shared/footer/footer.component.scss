@@ -7,37 +7,33 @@
  */
 
 @use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
 
 // ===== Business Date (independent of variant) =====
 .business-date-field {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin: 6px 0;
+  gap: var(--ms-space-2);
+  margin: var(--ms-space-1) 0;
 }
 
 .business-date-label {
-  font-size: 10px;
+  font-size: var(--ms-font-size-caption);
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ds-text-3);
+  color: var(--ms-color-text-secondary);
 }
 
 .business-date-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px;
-  border: 1px solid color-mix(in srgb, var(--ds-paid) 35%, transparent);
-  border-radius: 20px;
-  background: var(--ds-paid-bg);
-  color: var(--ds-paid);
-  font-size: 11px;
+  padding: 2px var(--ms-space-2);
+  border-radius: var(--ms-radius-sm);
+  background: var(--ms-color-success-bg);
+  color: var(--ms-color-success);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.2px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -46,7 +42,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ds-paid);
+  background: currentcolor;
   animation: business-date-pulse 2.5s ease-in-out infinite;
 }
 
@@ -72,10 +68,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--ms-space-2);
   width: 100%;
-  font-size: 0.75rem;
-  color: var(--md-sys-color-on-surface-variant, #44474e);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 
   .footer-info {
     display: flex;
@@ -93,29 +89,21 @@
 
   .info-label {
     font-weight: 500;
-    opacity: 0.8;
   }
 
   .info-value {
     font-weight: 400;
-    opacity: 0.9;
+    color: var(--ms-color-text-primary);
   }
 
   .info-separator {
-    opacity: 0.4;
-    font-size: 0.875rem;
+    color: var(--ms-color-text-disabled);
   }
 
   .footer-copyright {
-    font-size: 0.875rem;
-    opacity: 0.7;
-    margin-top: 0.25rem;
+    margin-top: var(--ms-space-1);
+    font-size: var(--ms-font-size-label);
   }
-}
-
-// Dark theme support for compact mode
-.dark-theme .footer-compact {
-  color: var(--md-sys-color-on-surface-variant, #c4c6d0);
 }
 
 // ===== Default Mode (Shell) =====
@@ -131,7 +119,7 @@
 
     .versions {
       width: 100%;
-      color: $status-inactive;
+      color: var(--ms-color-text-secondary);
     }
 
     .footer-content {

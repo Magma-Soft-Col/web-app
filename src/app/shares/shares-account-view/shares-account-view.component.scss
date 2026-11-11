@@ -6,11 +6,32 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.shares-overview {
-  font-size: 14px;
+// Shares account view (pen): entity header, then tabbed content.
+.shares-view__product {
+  font-size: var(--ms-font-size-label);
+  font-weight: 400;
 }
 
-.account-overview {
-  min-width: 60%;
-  font-weight: 400;
+.shares-view__muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.shares-view__aside {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-6);
+  flex-wrap: wrap;
+}
+
+.shares-view__stats {
+  margin: 0;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.shares-view__tabs {
+  min-width: 0;
 }

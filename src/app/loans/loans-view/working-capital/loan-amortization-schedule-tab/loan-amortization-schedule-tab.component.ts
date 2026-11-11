@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import { CurrencyPipe, UpperCasePipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -68,8 +68,7 @@ type PaymentStatus = 'disbursed' | 'executed' | 'current' | 'projected';
     MatFooterRowDef,
     MatFooterRow,
     DateFormatPipe,
-    FormatNumberPipe,
-    UpperCasePipe
+    FormatNumberPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

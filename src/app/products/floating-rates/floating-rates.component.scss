@@ -6,19 +6,24 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-list-table {
   width: 100%;
-
-  .select-row:hover {
-    cursor: pointer;
-  }
 }
 
-// TODO: CONFIGURE THESE CLASSES GLOBALLY
-.is-base-lending-rate-or-active {
-  color: #32cd32;
+.ms-cell-name {
+  font-weight: 500;
+  color: var(--ms-color-text-primary);
 }
 
-.not-is-base-lending-rate-or-active {
-  color: #f44366;
+.ms-cell-muted {
+  color: var(--ms-color-text-secondary);
+}
+
+.ms-num {
+  text-align: right;
+}
+
+/* Right-align the header of numeric sortable columns with their figures. */
+th.ms-num ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
 }

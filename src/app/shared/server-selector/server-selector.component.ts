@@ -36,8 +36,8 @@ export class ServerSelectorComponent implements OnInit {
   dialog = inject(MatDialog);
   private formBuilder = inject(UntypedFormBuilder);
 
-  /** Appearance of the form field (fill, outline). Defaults to 'fill'. */
-  @Input() appearance: 'fill' | 'outline' = 'fill';
+  /** Appearance of the form field (fill, outline). Defaults to 'outline'. */
+  @Input() appearance: 'fill' | 'outline' = 'outline';
 
   /** Show label in the form field. Defaults to true. */
   @Input() showLabel: boolean = true;

@@ -32,7 +32,6 @@ import { OrganizationService } from 'app/organization/organization.service';
 /** Dialog Component */
 import { DeleteDialogComponent } from 'app/shared/delete-dialog/delete-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatDivider } from '@angular/material/divider';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 import { LoanProduct } from 'app/products/loan-products/models/loan-product.model';
@@ -47,7 +46,6 @@ import { LoanProduct } from 'app/products/loan-products/models/loan-product.mode
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

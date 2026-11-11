@@ -9,8 +9,6 @@
 <div class="container base-teller-opening">
   <mat-card class="workflow-card">
     <mat-card-content>
-      <h2>{{ 'labels.heading.Savings Account Opening' | translate }}</h2>
-
       @if (!canAccessWorkflow) {
         <div class="message error-message">{{ errorMessage | translate }}</div>
       } @else {
@@ -103,7 +101,12 @@
               }
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperNext [disabled]="!customerForm.valid || isLoadingProducts">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  matStepperNext
+                  [disabled]="!customerForm.valid || isLoadingProducts"
+                >
                   {{ 'labels.buttons.Next' | translate }}
                   <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
@@ -164,11 +167,11 @@
               }
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperPrevious>
+                <button mat-stroked-button matStepperPrevious>
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                   {{ 'labels.buttons.Previous' | translate }}
                 </button>
-                <button mat-raised-button matStepperNext [disabled]="!productForm.valid">
+                <button mat-flat-button color="primary" matStepperNext [disabled]="!productForm.valid">
                   {{ 'labels.buttons.Next' | translate }}
                   <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
@@ -227,11 +230,11 @@
               </div>
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperPrevious>
+                <button mat-stroked-button matStepperPrevious>
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                   {{ 'labels.buttons.Previous' | translate }}
                 </button>
-                <button mat-raised-button matStepperNext [disabled]="!accountForm.valid">
+                <button mat-flat-button color="primary" matStepperNext [disabled]="!accountForm.valid">
                   {{ 'labels.buttons.Next' | translate }}
                   <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
@@ -300,7 +303,7 @@
               @if (fundingType === 'CASH') {
                 <section class="funding-panel">
                   <div class="section-heading">
-                    <h3>{{ 'labels.inputs.Denominations' | translate }}</h3>
+                    <h3 class="ms-subsection-title">{{ 'labels.inputs.Denominations' | translate }}</h3>
                     <button type="button" mat-button color="primary" (click)="addDenomination()">
                       <fa-icon icon="plus" class="m-r-10"></fa-icon>
                       {{ 'labels.buttons.Add' | translate }}
@@ -440,11 +443,16 @@
               </mat-form-field>
 
               <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-                <button mat-raised-button matStepperPrevious>
+                <button mat-stroked-button matStepperPrevious>
                   <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                   {{ 'labels.buttons.Previous' | translate }}
                 </button>
-                <button mat-raised-button matStepperNext [disabled]="!fundingForm.valid || !cashDenominationsReconcile">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  matStepperNext
+                  [disabled]="!fundingForm.valid || !cashDenominationsReconcile"
+                >
                   {{ 'labels.buttons.Next' | translate }}
                   <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
                 </button>
@@ -483,7 +491,7 @@
               <mat-divider></mat-divider>
               <section class="receipt">
                 <div class="section-heading">
-                  <h3>{{ 'labels.heading.Payment Receipt' | translate }}</h3>
+                  <h3 class="ms-subsection-title">{{ 'labels.heading.Payment Receipt' | translate }}</h3>
                   <div class="receipt-actions">
                     <button type="button" mat-button color="primary" (click)="reviewReceipt()">
                       {{ 'labels.buttons.View Receipt' | translate }}
@@ -538,12 +546,12 @@
             }
 
             <div class="layout-row align-center gap-2percent margin-t responsive-column step-actions">
-              <button mat-raised-button matStepperPrevious [disabled]="isSubmitting || !!receipt">
+              <button mat-stroked-button matStepperPrevious [disabled]="isSubmitting || !!receipt">
                 <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
                 {{ 'labels.buttons.Previous' | translate }}
               </button>
               <button
-                mat-raised-button
+                mat-flat-button
                 color="primary"
                 (click)="submit()"
                 [disabled]="isSubmitting || !!receipt"

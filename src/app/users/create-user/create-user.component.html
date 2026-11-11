@@ -10,8 +10,8 @@
   <mat-card>
     <form [formGroup]="userForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div #userFormRef class="layout-row-wrap layout-lt-md-column gap-2percent">
-          <mat-form-field class="flex-48">
+        <div #userFormRef class="ms-form-grid">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Username' | translate }}</mat-label>
             <input matInput required formControlName="username" />
             @if (userForm.controls.username.hasError('required')) {
@@ -22,7 +22,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Email' | translate }}</mat-label>
             <input matInput [required]="userForm.controls.sendPasswordToEmail.value" formControlName="email" />
             @if (userForm.controls.email.hasError('email')) {
@@ -39,7 +39,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.First Name' | translate }}</mat-label>
             <input matInput required formControlName="firstname" />
             @if (userForm.controls.firstname.hasError('pattern')) {
@@ -56,7 +56,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Last Name' | translate }}</mat-label>
             <input matInput required formControlName="lastname" />
             @if (userForm.controls.lastname.hasError('pattern')) {
@@ -73,20 +73,20 @@
             }
           </mat-form-field>
 
-          <div class="password-never-expires-wrapper flex-48">
+          <div class="password-never-expires-wrapper">
             <mat-checkbox labelPosition="before" formControlName="passwordNeverExpires">
               {{ 'labels.inputs.Password never expires' | translate }}
             </mat-checkbox>
           </div>
 
-          <div class="send-password-to-email-wrapper flex-48">
+          <div class="send-password-to-email-wrapper">
             <mat-checkbox labelPosition="before" formControlName="sendPasswordToEmail">
               {{ 'labels.inputs.Send password to email address' | translate }}
             </mat-checkbox>
           </div>
 
           @if (!userForm.controls.sendPasswordToEmail.value) {
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Password' | translate }}</mat-label>
               <input matInput required type="password" formControlName="password" />
               @if (userForm.controls.password.hasError('required')) {
@@ -123,7 +123,7 @@
           }
 
           @if (!userForm.controls.sendPasswordToEmail.value) {
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Repeat Password' | translate }}</mat-label>
               <input matInput required type="password" formControlName="repeatPassword" />
               @if (userForm.controls.repeatPassword.hasError('required')) {
@@ -140,13 +140,13 @@
             !userForm.controls.password.hasError('required') &&
             !userForm.controls.repeatPassword.hasError('required')
           ) {
-            <p class="flex-98 reset-password-error">
+            <p class="ms-form-full reset-password-error">
               {{ 'labels.inputs.Passwords' | translate }}
               <strong>{{ 'labels.commons.do not match' | translate }}</strong>
             </p>
           }
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="officeId">
               @for (office of officesData; track office) {
@@ -163,7 +163,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Staff' | translate }}</mat-label>
             <mat-select formControlName="staffId">
               @for (staff of staffData; track staff) {
@@ -174,7 +174,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Roles' | translate }}</mat-label>
             <mat-select required formControlName="roles" multiple>
               @for (role of rolesData; track role) {
@@ -193,11 +193,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="!userForm.valid">
+        <button mat-flat-button color="primary" [disabled]="!userForm.valid">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>
@@ -214,16 +214,16 @@
     }}</a>
   </p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close()">
+    <button mat-flat-button color="primary" (click)="popover.close()">
       {{ 'labels.buttons.Create User' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

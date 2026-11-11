@@ -6,28 +6,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
+// Text and state colours come from the pen tokens, which switch with the theme.
+// `$theme` is kept for the include in `theme/mifosx-theme.scss`.
 @mixin view-account-transfer-component-theme($theme) {
-  $is-dark: map.get($theme, is-dark);
-  $foreground: map.get($theme, foreground);
-  $primary: map.get($theme, primary);
-
   mifosx-view-account-transfer {
     .section-title {
-      color: mat.m2-get-color-from-palette($foreground, text);
+      color: var(--ms-color-text-primary);
     }
 
     .info-label {
-      color: mat.m2-get-color-from-palette($foreground, secondary-text);
+      color: var(--ms-color-text-secondary);
     }
 
     .info-value {
-      color: mat.m2-get-color-from-palette($foreground, text);
+      color: var(--ms-color-text-primary);
 
       a {
-        color: mat.m2-get-color-from-palette($primary, 500);
+        color: var(--ms-color-text-link);
 
         &:hover {
           text-decoration: underline;
@@ -37,11 +32,11 @@
 
     .status-indicator {
       &.active {
-        background-color: #4caf50;
+        background-color: var(--ms-color-success);
       }
 
       &.undo {
-        background-color: #f44336;
+        background-color: var(--ms-color-danger);
       }
     }
   }

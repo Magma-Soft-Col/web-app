@@ -34,6 +34,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { StatusLookupPipe } from '../../../pipes/status-lookup.pipe';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { MatIconButton } from '@angular/material/button';
 import { LoanAccountTabBaseComponent } from '../loan-account-tab-base.component';
 
 @Component({
@@ -42,6 +43,7 @@ import { LoanAccountTabBaseComponent } from '../loan-account-tab-base.component'
   styleUrls: ['./reschedule-loan-tab.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
+    MatIconButton,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

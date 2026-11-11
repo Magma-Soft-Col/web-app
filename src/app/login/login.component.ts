@@ -7,7 +7,7 @@
  */
 
 /** Angular Imports */
-import { ChangeDetectionStrategy, Component, OnInit, inject, DestroyRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit, inject, DestroyRef, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -33,6 +33,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 /** Environment Imports */
 import { environment } from '../../environments/environment';
+import { BrandAssetsService } from 'app/shared/ui-theme/brand-assets.service';
 import { SettingsService } from 'app/settings/settings.service';
 import { LanguageSelectorComponent } from '../shared/language-selector/language-selector.component';
 import { ThemeToggleComponent } from '../shared/theme-toggle/theme-toggle.component';
@@ -41,13 +42,16 @@ import { TenantSelectorComponent } from '../shared/tenant-selector/tenant-select
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TwoFactorAuthenticationComponent } from './two-factor-authentication/two-factor-authentication.component';
-import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { M3IconComponent } from '../shared/m3-ui/m3-icon/m3-icon.component';
 
 import { VersionService } from '../system/version.service';
 import { sanitizeReturnUrl } from '../core/utils/return-url.utils';
+import { launchSplash } from '../core/splash/splash';
+
+/** Bundled Magma Soft logos, used when no tenant or Settings logo is configured. */
+const MAGMA_LOGO = 'assets/images/magma/logo-horizontal.png';
+const MAGMA_LOGO_DARK = 'assets/images/magma/logo-horizontal-oscuro.png';
 
 /**
  * Login component.
@@ -65,10 +69,6 @@ import { sanitizeReturnUrl } from '../core/utils/return-url.utils';
     LoginFormComponent,
     ResetPasswordComponent,
     TwoFactorAuthenticationComponent,
-    MatMenuTrigger,
-    FaIconComponent,
-    MatMenu,
-    MatMenuItem,
     M3IconComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -78,8 +78,6 @@ export class LoginComponent implements OnInit {
   showTenantSelector = true;
   /** Show version info table if env allows */
   displayBackendInfo = environment.displayBackEndInfo !== 'false';
-  /** Production mode - minimal hero with branding only */
-  productionMode = environment.productionMode === true;
 
   private alertService = inject(AlertService);
   private settingsService = inject(SettingsService);
@@ -108,10 +106,22 @@ export class LoginComponent implements OnInit {
   resetPassword = false;
   /** True if user requires two factor authentication. */
   twoFactorAuthenticationRequired = false;
-  logoPath = 'assets/images/default_home.png';
-  logoPathDark = 'assets/images/white-mifos.png';
+  private brandAssets = inject(BrandAssetsService);
 
-  themeDarkEnabled: boolean = false;
+  /** Logo chosen in Settings for this tenant, preferred over the bundled one. */
+  get brandLogo(): string | null {
+    const assets = this.brandAssets.assets();
+    return assets.logoWithName ?? assets.logo ?? null;
+  }
+
+  logoPath = MAGMA_LOGO;
+  logoPathDark = MAGMA_LOGO_DARK;
+
+  /** The reload-settings button is a support tool: hidden until Ctrl + Alt + R. */
+  readonly showReloadSettings = signal(false);
+
+  /** A signal so the OnPush view swaps the logo when the theme changes. */
+  readonly themeDarkEnabled = signal(false);
 
   /**
    * Subscribes to alert event of alert service and theme changes.
@@ -124,10 +134,10 @@ export class LoginComponent implements OnInit {
 
     this.showTenantSelector = this.calculateTenantSelectorVisibility();
     this.updateLogo();
-    this.themeDarkEnabled = this.settingsService.themeDarkEnabled;
+    this.themeDarkEnabled.set(!!this.settingsService.themeDarkEnabled);
     // Subscribe to theme changes
     this.themingService.theme.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.themeDarkEnabled = this.settingsService.themeDarkEnabled;
+      this.themeDarkEnabled.set(!!this.settingsService.themeDarkEnabled);
     });
 
     // Initialize theme based on settings
@@ -145,6 +155,7 @@ export class LoginComponent implements OnInit {
       } else if (alertType === this.translateService.instant('errors.auth.success.type')) {
         this.resetPassword = false;
         this.twoFactorAuthenticationRequired = false;
+        launchSplash();
         this.router.navigateByUrl(this.preservedReturnUrl(), { replaceUrl: true });
       } else if (alertType === this.translateService.instant('errors.tenant.changed.type')) {
         this.updateLogo();
@@ -187,6 +198,14 @@ export class LoginComponent implements OnInit {
    */
   private preservedReturnUrl(): string {
     return sanitizeReturnUrl(this.route.snapshot.queryParamMap.get('returnUrl'));
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent): void {
+    if (event.ctrlKey && event.altKey && event.key.toLowerCase() === 'r') {
+      event.preventDefault();
+      this.showReloadSettings.update((visible) => !visible);
+    }
   }
 
   reloadSettings(): void {
@@ -236,22 +255,22 @@ export class LoginComponent implements OnInit {
     if (environment.tenantLogoUrl && environment.tenantLogoUrl.trim() !== '') {
       this.logoPath = environment.tenantLogoUrl;
     } else {
-      this.logoPath = isTenantSpecific ? `assets/images/${tenant}_home.png` : 'assets/images/default_home.png';
+      this.logoPath = isTenantSpecific ? `assets/images/${tenant}_home.png` : MAGMA_LOGO;
     }
 
     // Set dark mode logo (env override takes priority)
     if (environment.tenantLogoUrlDark && environment.tenantLogoUrlDark.trim() !== '') {
       this.logoPathDark = environment.tenantLogoUrlDark;
     } else {
-      this.logoPathDark = isTenantSpecific ? `assets/images/${tenant}_home_dark.png` : 'assets/images/white-mifos.png';
+      this.logoPathDark = isTenantSpecific ? `assets/images/${tenant}_home_dark.png` : MAGMA_LOGO_DARK;
     }
   }
 
   onLogoError(): void {
-    this.logoPath = 'assets/images/default_home.png';
+    this.logoPath = MAGMA_LOGO;
   }
 
   onLogoErrorDark(): void {
-    this.logoPathDark = 'assets/images/white-mifos.png';
+    this.logoPathDark = MAGMA_LOGO_DARK;
   }
 }

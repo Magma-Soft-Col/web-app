@@ -397,7 +397,7 @@
       "reason": "Důvod"
     }
   },
-  "APP_NAME": "Mifos® X WebApp",
+  "APP_NAME": "Magma Soft",
   "Logged in as": "Přihlášen jako",
   "Remember me": "Zapamatuj si mě",
   "error.resource.notImplemented.type": "Nenaimplementovaná chyba",
@@ -900,7 +900,7 @@
   "labels": {
     "version": {
       "Tenant": "Instanci",
-      "Mifos WebApp": "Mifos® WebApp",
+      "Mifos WebApp": "Web App",
       "Apache Fineract": "Apache Fineract®",
       "Server": "Server",
       "Username": "Uživatelské jméno",
@@ -5228,6 +5228,11 @@
       "Please select a delivery method": "Vyberte prosím způsob doručení",
       "Please select a screen report.": "Vyberte přehled obrazovky.",
       "Please update your password": "Aktualizujte prosím své heslo",
+      "Magma tagline highlight": "future.",
+      "Login welcome": "Welcome",
+      "Login welcome subtitle": "Sign in with your username to continue.",
+      "Magma tagline": "We build the foundation that supports your",
+      "Magma subtitle": "MS Finance · Core banking by MAGMA SOFT SAS",
       "Powered by": "Provozováno",
       "Precedes of": "Předchází",
       "Preferences for generating account numbers for client": "Předvolby pro generování čísel účtů pro klientské, úvěrové a spořicí účty",

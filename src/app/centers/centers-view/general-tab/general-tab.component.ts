@@ -24,7 +24,7 @@ import {
 } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatTooltip } from '@angular/material/tooltip';
-import { StatusLookupPipe } from '../../../pipes/status-lookup.pipe';
+import { MatIconButton } from '@angular/material/button';
 import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -50,7 +50,7 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderRow,
     MatRowDef,
     MatRow,
-    StatusLookupPipe,
+    MatIconButton,
     DateFormatPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -92,6 +92,15 @@ export class GeneralTabComponent {
       this.savingsAccountData = data.savingsAccountData.savingsAccounts;
       this.groupResourceData = data.centerViewData.groupMembers;
     });
+  }
+
+  /** Status modifier class (dot + text) for a group or savings account status code. */
+  statusClass(code: string): string {
+    const status = code ?? '';
+    if (/rejected|withdraw|Overdue|chargeoff|Dormant|Inactive/.test(status)) return 'ms-status--danger';
+    if (/pending|approved/.test(status)) return 'ms-status--warning';
+    if (/active/.test(status)) return 'ms-status--success';
+    return 'ms-status--neutral';
   }
 
   /**

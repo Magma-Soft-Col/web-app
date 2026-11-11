@@ -6,21 +6,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '@angular/material' as mat;
-@use 'sass:map';
-
+// Pen header and table header: surface tokens, so one rule serves every theme.
+// `$theme` is kept for the include in `theme/mifosx-theme.scss`.
 @mixin shares-account-view-component-theme($theme) {
-  $primary: map.get($theme, primary);
-
   mifosx-shares-account-view {
     .shares-account-card {
       .header {
-        background-color: mat.m2-get-color-from-palette($primary, 500);
+        background-color: var(--ms-color-surface);
+        border-bottom: 1px solid var(--ms-color-border-subtle);
       }
 
       .table-headers {
-        background-color: mat.m2-get-color-from-palette($primary, 500);
-        color: mat.m2-get-contrast-color-from-palette($primary, 500);
+        background-color: var(--ms-color-surface-subtle);
+        color: var(--ms-color-text-secondary);
+        font-size: var(--ms-font-size-label);
+        font-weight: 600;
+        letter-spacing: 0.3px;
       }
     }
   }

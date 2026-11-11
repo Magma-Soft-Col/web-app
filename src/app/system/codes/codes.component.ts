@@ -38,7 +38,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PopoverService } from '../../configuration-wizard/popover/popover.service';
 import { ConfigurationWizardService } from '../../configuration-wizard/configuration-wizard.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatTooltip } from '@angular/material/tooltip';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
 @Component({
@@ -56,7 +55,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatSortHeader,
     MatCellDef,
     MatCell,
-    MatTooltip,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,

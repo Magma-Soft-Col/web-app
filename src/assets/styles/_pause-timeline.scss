@@ -8,35 +8,35 @@
 
 // Shared pause-timeline styles (SVG year timeline with pause bars).
 // Consumed by loan tabs that chart PAUSE actions over time
-// (e.g. breach actions, delinquency tags). Uses the shared --ds-* tokens.
+// (e.g. breach actions, delinquency tags). Uses the pen --ms-* tokens.
 
 .timeline-section {
-  padding: 22px 24px 18px;
-  background: var(--ds-surface);
+  padding: var(--ms-space-5) var(--ms-space-6) var(--ms-space-4);
+  background: var(--ms-color-surface);
 }
 
 .section-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 14px;
-  gap: 16px;
+  margin-bottom: var(--ms-space-3);
+  gap: var(--ms-space-4);
   flex-wrap: wrap;
 }
 
 .section-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: var(--ms-font-size-label);
+  font-weight: 600;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
-  color: var(--ds-text-2);
+  color: var(--ms-color-text-secondary);
 }
 
 .legend {
   display: flex;
-  gap: 16px;
-  font-size: 11.5px;
-  color: var(--ds-text-2);
+  gap: var(--ms-space-4);
+  font-size: var(--ms-font-size-caption);
+  color: var(--ms-color-text-secondary);
 }
 
 .legend-item {
@@ -48,18 +48,18 @@
 .legend-swatch {
   width: 12px;
   height: 12px;
-  border-radius: 3px;
+  border-radius: var(--ms-radius-sm);
 
   &.legend-active {
-    background: var(--ds-paid);
+    background: var(--ms-color-success);
   }
 
   &.legend-scheduled {
-    background: var(--ds-blue-700);
+    background: var(--ms-color-brand-primary);
   }
 
   &.legend-expired {
-    background: var(--ds-zero);
+    background: var(--ms-color-text-disabled);
   }
 }
 
@@ -70,36 +70,36 @@
 }
 
 .month-grid {
-  stroke: var(--ds-border);
+  stroke: var(--ms-color-border-subtle);
   stroke-width: 1;
   stroke-dasharray: 2 3;
 }
 
 .month-label,
 .lane-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10.5px;
+  font-family: var(--ms-font-family);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  fill: var(--ds-text-3);
-  letter-spacing: 0.05em;
+  fill: var(--ms-color-text-secondary);
+  letter-spacing: 0.3px;
   text-transform: uppercase;
 }
 
 .lane-label {
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .baseline {
-  stroke: var(--ds-border);
+  stroke: var(--ms-color-border-subtle);
   stroke-width: 1.5;
 }
 
 .pause-bar {
   cursor: pointer;
   transition:
-    transform 0.14s ease,
-    filter 0.14s ease;
+    transform var(--ms-duration-fast) var(--ms-easing),
+    filter var(--ms-duration-fast) var(--ms-easing);
   transform-origin: center center;
 
   &:hover {
@@ -107,58 +107,55 @@
   }
 
   &--active {
-    fill: var(--ds-paid);
+    fill: var(--ms-color-success);
   }
 
   &--scheduled {
-    fill: var(--ds-blue-700);
+    fill: var(--ms-color-brand-primary);
   }
 
   &--expired {
-    fill: var(--ds-zero);
+    fill: var(--ms-color-text-disabled);
   }
 }
 
 .pause-bar-edge {
   &--active {
-    fill: var(--ds-paid);
+    fill: var(--ms-color-success);
     opacity: 0.18;
   }
 
   &--scheduled {
-    fill: var(--ds-blue-700);
+    fill: var(--ms-color-brand-primary);
     opacity: 0.2;
   }
 
   &--expired {
-    fill: var(--ds-zero);
+    fill: var(--ms-color-text-disabled);
     opacity: 0.18;
   }
 }
 
 .bar-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-family: var(--ms-font-family);
+  font-size: var(--ms-font-size-caption);
   font-weight: 600;
-  fill: #fff;
-}
-
-:host-context(.dark-theme) .bar-tag {
-  fill: #0d1b2a;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ms-color-on-primary);
 }
 
 .today-line {
-  stroke: var(--ds-alert);
+  stroke: var(--ms-color-danger);
   stroke-width: 1.5;
   stroke-dasharray: 4 3;
 }
 
 .today-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  fill: var(--ds-alert);
-  letter-spacing: 0.06em;
+  font-family: var(--ms-font-family);
+  font-size: var(--ms-font-size-caption);
+  font-weight: 600;
+  fill: var(--ms-color-danger);
+  letter-spacing: 0.3px;
   text-transform: uppercase;
 }
 

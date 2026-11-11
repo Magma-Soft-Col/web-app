@@ -18,7 +18,7 @@
   window["env"]["apiActuator"] = '';
 
   window["env"]["fineractPlatformTenantId"] = '';
-  window["env"]["fineractPlatformTenantIds"] = '';
+  window["env"]["fineractPlatformTenantIds"] = 'default, chile';
 
   window['env']['tenantLogoUrl'] = '';
   window['env']['tenantLogoUrlDark'] = '';

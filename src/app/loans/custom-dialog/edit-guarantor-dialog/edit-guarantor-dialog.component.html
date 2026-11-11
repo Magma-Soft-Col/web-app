@@ -55,7 +55,7 @@
   </form>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="primary" (click)="submit()">{{ 'labels.buttons.Submit' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="primary" (click)="submit()">{{ 'labels.buttons.Submit' | translate }}</button>
 </mat-dialog-actions>

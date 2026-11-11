@@ -55,10 +55,10 @@
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="center">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
   <button
-    mat-raised-button
+    mat-flat-button
     color="primary"
     [mat-dialog-close]="{ data: addCollateralForm }"
     [disabled]="!addCollateralForm.valid || addCollateralForm.pristine"

@@ -6,46 +6,45 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.client-collateral-card {
-  margin: 0 auto;
-  max-width: 80rem;
-  width: 90%;
-  padding: 0;
+/* Collateral detail (pen detail pattern): actions, summary panel and transactions table. */
+.collateral__toolbar {
+  justify-content: flex-end;
 }
 
-.tab-container {
-  padding: 1%;
-  margin: 1%;
+.collateral__summary,
+.collateral__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
 
-  h3 {
-    margin: 1% auto;
+.collateral__grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--ms-space-4) var(--ms-space-6);
+  margin: 0;
+}
+
+.collateral__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  dt,
+  dd {
+    margin: 0;
   }
+}
 
-  .group-details-container {
-    border: 1px solid;
-    padding: 1%;
-  }
+.collateral__table {
+  width: 100%;
+}
 
-  .action-button {
-    margin-left: auto;
-  }
+.collateral__right {
+  text-align: right;
+}
 
-  table {
-    width: 100%;
-
-    .account-action-button {
-      min-width: 26px;
-      padding: 0 6px;
-      margin: 4px;
-      line-height: 25px;
-    }
-
-    tr.select-row:hover {
-      cursor: pointer;
-    }
-  }
-
-  i:hover {
-    cursor: pointer;
-  }
+.collateral__muted {
+  color: var(--ms-color-text-secondary);
 }

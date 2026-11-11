@@ -34,7 +34,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
-import { MatDivider } from '@angular/material/divider';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatCheckbox } from '@angular/material/checkbox';
 import {
@@ -72,7 +71,6 @@ import {
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     FaIconComponent,
-    MatDivider,
     MatIconButton,
     MatTooltip,
     MatCheckbox,

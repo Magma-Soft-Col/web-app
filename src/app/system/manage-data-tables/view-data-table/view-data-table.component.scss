@@ -19,7 +19,7 @@ td.mat-mdc-cell:first-child {
 }
 
 .code-name {
-  opacity: 0.6;
-  font-size: 0.9em;
-  margin-left: 4px;
+  color: var(--ms-color-text-secondary);
+  font-size: var(--ms-font-size-label);
+  margin-left: var(--ms-space-1);
 }

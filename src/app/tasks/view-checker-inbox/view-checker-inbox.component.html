@@ -6,117 +6,112 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="layout-row align-end gap-1percent layout-lt-md-column container m-b-20">
-  <button
-    *mifosxHasPermission="checkerPermission()"
-    mat-raised-button
-    class="mat-success"
-    (click)="approveChecker()"
-    [disabled]="processing"
-  >
-    <fa-icon icon="check" class="m-r-10"></fa-icon>{{ 'labels.buttons.Approve' | translate }}
-  </button>
-  <button
-    *mifosxHasPermission="checkerPermission()"
-    mat-raised-button
-    color="warn"
-    (click)="deleteChecker()"
-    [disabled]="processing"
-  >
-    <fa-icon icon="trash" class="m-r-10"></fa-icon>{{ 'labels.buttons.Delete' | translate }}
-  </button>
-  <button
-    *mifosxHasPermission="checkerPermission()"
-    mat-raised-button
-    class="mat-reject"
-    (click)="rejectChecker()"
-    [disabled]="processing"
-  >
-    <fa-icon icon="times" class="m-r-10"></fa-icon>{{ 'labels.buttons.Reject' | translate }}
-  </button>
-</div>
-
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="layout-row-wrap responsive-column">
-        <h2 class="mat-h2 flex-fill">{{ 'labels.heading.View Checker Inbox' | translate }}</h2>
+  <div class="ms-page">
+    <div class="ms-actions align-end">
+      <button
+        *mifosxHasPermission="checkerPermission()"
+        mat-flat-button
+        class="mat-success"
+        (click)="approveChecker()"
+        [disabled]="processing"
+      >
+        <fa-icon icon="check" class="m-r-10"></fa-icon>{{ 'labels.buttons.Approve' | translate }}
+      </button>
+      <button
+        *mifosxHasPermission="checkerPermission()"
+        mat-stroked-button
+        color="warn"
+        (click)="deleteChecker()"
+        [disabled]="processing"
+      >
+        <fa-icon icon="trash" class="m-r-10"></fa-icon>{{ 'labels.buttons.Delete' | translate }}
+      </button>
+      <button
+        *mifosxHasPermission="checkerPermission()"
+        mat-flat-button
+        class="mat-reject"
+        (click)="rejectChecker()"
+        [disabled]="processing"
+      >
+        <fa-icon icon="times" class="m-r-10"></fa-icon>{{ 'labels.buttons.Reject' | translate }}
+      </button>
+    </div>
 
-        <mat-divider [inset]="true"></mat-divider>
+    <mat-card>
+      <mat-card-content>
+        <div class="detail-list">
+          <h2 class="ms-section-title section-heading">{{ 'labels.heading.Details' | translate }}</h2>
 
-        <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Details' | translate }}</h3>
-
-        <mat-divider [inset]="true"></mat-divider>
-
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.ID' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.id }}</span>
-        </div>
-
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Status' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.processingResult }}</span>
-        </div>
-
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.User' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.maker }}</span>
-        </div>
-
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Action' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.actionName }}</span>
-        </div>
-
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Entity' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.entityName }}</span>
-        </div>
-
-        @if (checkerInboxDetail.resourceId) {
-          <div class="flex-fill">
-            <span class="flex-40">{{ 'labels.inputs.Resource ID' | translate }}:</span>
-            <span class="flex-60">{{ checkerInboxDetail.resourceId }}</span>
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.ID' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.id }}</span>
           </div>
-        }
 
-        <div class="flex-fill">
-          <span class="flex-40">{{ 'labels.inputs.Date' | translate }}:</span>
-          <span class="flex-60">{{ checkerInboxDetail.madeOnDate | dateFormat }}</span>
-        </div>
-
-        @if (checkerInboxDetail.officeName) {
-          <div class="flex-fill">
-            <span class="flex-40">{{ 'labels.inputs.Office' | translate }}:</span>
-            <span class="flex-60">{{ checkerInboxDetail.officeName }}</span>
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Status' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.processingResult }}</span>
           </div>
-        }
 
-        @if (checkerInboxDetail.savingsAccountNo) {
-          <div class="flex-fill">
-            <span class="flex-40">{{ 'labels.inputs.Savings Account Number' | translate }}:</span>
-            <span class="flex-60">{{ checkerInboxDetail.savingsAccountNo }}</span>
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.User' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.maker }}</span>
           </div>
-        }
 
-        @if (checkerInboxDetail.groupLevelName) {
-          <div class="flex-fill">
-            <span class="flex-40"> {{ checkerInboxDetail.groupLevelName }}</span>
-            <span class="flex-60">{{ checkerInboxDetail.groupName }}</span>
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Action' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.actionName }}</span>
           </div>
-        }
 
-        @if (displayJSONData) {
-          <h3 class="mat-h3 flex-fill">{{ 'labels.heading.Command' | translate }}</h3>
-          <mat-divider [inset]="true"></mat-divider>
-          @for (json of jsondata | keyvalue; track json) {
-            <div class="flex-fill">
-              <span class="flex-40">{{ json.key }}:</span>
-              <span class="flex-60">{{ json.value }}</span>
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Entity' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.entityName }}</span>
+          </div>
+
+          @if (checkerInboxDetail.resourceId) {
+            <div class="ms-detail-row">
+              <span class="ms-label">{{ 'labels.inputs.Resource ID' | translate }}</span>
+              <span class="ms-value">{{ checkerInboxDetail.resourceId }}</span>
             </div>
           }
-        }
-      </div>
-    </mat-card-content>
-  </mat-card>
+
+          <div class="ms-detail-row">
+            <span class="ms-label">{{ 'labels.inputs.Date' | translate }}</span>
+            <span class="ms-value">{{ checkerInboxDetail.madeOnDate | dateFormat }}</span>
+          </div>
+
+          @if (checkerInboxDetail.officeName) {
+            <div class="ms-detail-row">
+              <span class="ms-label">{{ 'labels.inputs.Office' | translate }}</span>
+              <span class="ms-value">{{ checkerInboxDetail.officeName }}</span>
+            </div>
+          }
+
+          @if (checkerInboxDetail.savingsAccountNo) {
+            <div class="ms-detail-row">
+              <span class="ms-label">{{ 'labels.inputs.Savings Account Number' | translate }}</span>
+              <span class="ms-value">{{ checkerInboxDetail.savingsAccountNo }}</span>
+            </div>
+          }
+
+          @if (checkerInboxDetail.groupLevelName) {
+            <div class="ms-detail-row">
+              <span class="ms-label">{{ checkerInboxDetail.groupLevelName }}</span>
+              <span class="ms-value">{{ checkerInboxDetail.groupName }}</span>
+            </div>
+          }
+
+          @if (displayJSONData) {
+            <h3 class="ms-subsection-title command-heading">{{ 'labels.heading.Command' | translate }}</h3>
+            @for (json of jsondata | keyvalue; track json) {
+              <div class="ms-detail-row">
+                <span class="ms-label">{{ json.key }}</span>
+                <span class="ms-value">{{ json.value }}</span>
+              </div>
+            }
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

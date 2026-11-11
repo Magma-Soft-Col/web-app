@@ -7,7 +7,6 @@
  */
 
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { SystemInfoService, SystemInformation } from 'app/system/system-info.service';
 import { Observable } from 'rxjs';
@@ -17,8 +16,7 @@ import { Observable } from 'rxjs';
   templateUrl: './system-information.component.html',
   styleUrls: ['./system-information.component.scss'],
   imports: [
-    ...STANDALONE_SHARED_IMPORTS,
-    MatCard
+    ...STANDALONE_SHARED_IMPORTS
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

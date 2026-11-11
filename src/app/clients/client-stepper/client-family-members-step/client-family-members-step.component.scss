@@ -6,25 +6,35 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/* Entries added in this step: expansion panels with the detail as label/value rows. */
 .family-member {
   .family-member-actions {
-    margin-top: 1%;
-
-    button {
-      margin-right: 1%;
-    }
-  }
-
-  h3 {
-    margin: 1% auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ms-space-2);
+    margin-top: var(--ms-space-2);
   }
 
   p {
-    line-height: 30px;
-    margin-left: 2%;
+    margin: var(--ms-space-2) 0 0;
+    color: var(--ms-color-text-primary);
+    font-size: 13px;
+    line-height: 24px;
   }
 }
 
-.margin-t {
-  margin-top: 2em;
+.ms-section-title {
+  margin-bottom: var(--ms-space-3);
+}
+
+/* Step navigation (pen form pattern): secondary + primary, right aligned. */
+.step-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+  margin-top: var(--ms-space-6);
+  padding-top: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }

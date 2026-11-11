@@ -6,11 +6,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.content {
-  div {
-    margin: 1rem 0;
-    overflow-wrap: break-word;
+.audit-layout {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-6);
+  align-items: start;
+
+  @media (width < 1024px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
+}
+
+.detail-list .ms-label {
+  flex: 0 0 40%;
 }
 
 table {
@@ -19,12 +29,4 @@ table {
 
 .column-value-wrapper {
   word-break: break-all;
-}
-
-.command {
-  background-color: #eee;
-}
-
-.command-table {
-  background-color: inherit;
 }

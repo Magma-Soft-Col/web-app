@@ -10,8 +10,8 @@
   <mat-card>
     <form [formGroup]="clientSavingsAccountForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
-          <mat-form-field class="flex-48">
+        <div class="action-form__grid">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Default Savings Account' | translate }}</mat-label>
             <mat-select formControlName="savingsAccountId">
               @for (account of savingsAccounts; track account) {
@@ -30,11 +30,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../../']">
+      <mat-card-actions class="action-form__actions">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="!clientSavingsAccountForm.valid">
+        <button mat-flat-button color="primary" [disabled]="!clientSavingsAccountForm.valid">
           {{ 'labels.buttons.Confirm' | translate }}
         </button>
       </mat-card-actions>

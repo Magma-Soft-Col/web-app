@@ -17,6 +17,13 @@ import { environment } from '../../environments/environment';
 /**
  * Settings Service
  */
+/** Organisation contact details shown in Settings. */
+export interface ContactInfo {
+  website: string;
+  email: string;
+  phone: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,6 +67,24 @@ export class SettingsService {
    */
   setDecimalToDisplay(decimals: string) {
     localStorage.setItem('mifosXDecimalsToDisplay', decimals);
+  }
+
+  /**
+   * Organisation contact details entered in Settings, kept in this browser.
+   * @param {ContactInfo} contact Website, email and phone number.
+   */
+  setContactInfo(contact: ContactInfo) {
+    localStorage.setItem('msContactInfo', JSON.stringify(contact));
+  }
+
+  /** Contact details saved in Settings; empty strings when none were saved. */
+  get contactInfo(): ContactInfo {
+    const empty: ContactInfo = { website: '', email: '', phone: '' };
+    try {
+      return { ...empty, ...JSON.parse(localStorage.getItem('msContactInfo') ?? '{}') };
+    } catch {
+      return empty;
+    }
   }
 
   setDefaultLanguage() {

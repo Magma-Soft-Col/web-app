@@ -44,21 +44,17 @@ import { DelinquencyPausePeriod } from '../models/loan-account.model';
 import { TranslateService } from '@ngx-translate/core';
 import { LoanTransaction } from 'app/products/loan-products/models/loan-account.model';
 import { OptionData } from 'app/shared/models/option-data.model';
-import { AccountHeaderComponent } from '../../shared/account-header/account-header.component';
-import { SvgIconComponent } from '../../shared/svg-icon/svg-icon.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { NgClass, CurrencyPipe } from '@angular/common';
 import { LongTextComponent } from '../../shared/long-text/long-text.component';
 import { AccountNumberComponent } from '../../shared/account-number/account-number.component';
 import { ExternalIdentifierComponent } from '../../shared/external-identifier/external-identifier.component';
-import { MatIconButton } from '@angular/material/button';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTabNav, MatTabLink, MatTabNavPanel } from '@angular/material/tabs';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { FormatNumberPipe } from '../../pipes/format-number.pipe';
-import { StatusLookupPipe } from '@pipes/status-lookup.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { LoanProducts } from 'app/products/loan-products/loan-products';
 import { LoanProductBaseComponent } from 'app/products/loan-products/common/loan-product-base.component';
@@ -70,14 +66,11 @@ import { SystemService } from 'app/system/system.service';
   styleUrls: ['./loans-view.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    AccountHeaderComponent,
-    SvgIconComponent,
     MatTooltip,
     NgClass,
     LongTextComponent,
     AccountNumberComponent,
     ExternalIdentifierComponent,
-    MatIconButton,
     MatMenuTrigger,
     MatIcon,
     FaIconComponent,
@@ -90,8 +83,7 @@ import { SystemService } from 'app/system/system.service';
     RouterOutlet,
     CurrencyPipe,
     DateFormatPipe,
-    FormatNumberPipe,
-    StatusLookupPipe
+    FormatNumberPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -767,6 +759,31 @@ export class LoansViewComponent extends LoanProductBaseComponent implements OnIn
       }
     }
     return this.loanDetailsData.status?.code;
+  }
+
+  /**
+   * Design System badge variant for the header status. Presentation only: it
+   * reads the status resolved by iconLoanStatusColor() and never changes it.
+   */
+  statusBadgeClass(): string {
+    const status = this.iconLoanStatusColor();
+    if (status === 'loanStatusType.activeOverdue' || status === 'loanStatusType.chargeoff') {
+      return 'ms-badge--danger';
+    }
+    if (status === 'loanSubStatusType.contractTermination') {
+      return 'ms-badge--warning';
+    }
+    if (status === 'loanStatusType.active') {
+      return 'ms-badge--success';
+    }
+    if (
+      status === 'loanStatusType.submitted.and.pending.approval' ||
+      status === 'loanStatusType.approved' ||
+      status === 'loanStatusType.overpaid'
+    ) {
+      return 'ms-badge--info';
+    }
+    return '';
   }
 
   loanStatusTooltip() {

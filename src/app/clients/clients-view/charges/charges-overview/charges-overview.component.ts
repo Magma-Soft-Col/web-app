@@ -25,8 +25,6 @@ import {
   MatRow
 } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { NgClass } from '@angular/common';
-import { StatusLookupPipe } from '../../../../pipes/status-lookup.pipe';
 import { DateFormatPipe } from '../../../../pipes/date-format.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -45,13 +43,11 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatHeaderCell,
     MatCellDef,
     MatCell,
-    NgClass,
     MatHeaderRowDef,
     MatHeaderRow,
     MatRowDef,
     MatRow,
     MatPaginator,
-    StatusLookupPipe,
     DateFormatPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -21,8 +21,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageLoaderComponent } from '../shared/page-loader/page-loader.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
-import { MatPrefix } from '@angular/material/form-field';
 import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 /** rxjs Imports */
@@ -164,8 +162,6 @@ function humanizeName(name: string): string {
     PageLoaderComponent,
     MatSlideToggle,
     MatIcon,
-    MatIconButton,
-    MatPrefix,
     AccountNumberComponent,
     CdkDropList,
     CdkDrag,

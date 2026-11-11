@@ -9,7 +9,7 @@
 <mat-card class="onboarding-board">
   <mat-card-content>
     <div class="board-header">
-      <h2>{{ 'labels.heading.Onboarding Board' | translate }}</h2>
+      <h2 class="ms-section-title">{{ 'labels.heading.Onboarding Board' | translate }}</h2>
       @if (!loading && !loadError && tasks.length > 0) {
         <mat-form-field class="search-field">
           <mat-label>{{ 'labels.text.Filter by name' | translate }}</mat-label>
@@ -19,12 +19,12 @@
     </div>
 
     @if (loading) {
-      <div class="state" role="status">
+      <div class="state ms-empty" role="status">
         <mat-spinner diameter="40"></mat-spinner>
         <p>{{ 'labels.text.Loading data' | translate }}</p>
       </div>
     } @else if (loadError) {
-      <div class="state" role="alert">
+      <div class="state ms-empty" role="alert">
         <mat-icon>error_outline</mat-icon>
         <p>{{ 'labels.text.Failed to load' | translate }}</p>
         <button mat-stroked-button color="primary" (click)="loadTasks()">
@@ -32,17 +32,17 @@
         </button>
       </div>
     } @else if (tasks.length === 0) {
-      <div class="state">
+      <div class="state ms-empty">
         <mat-icon>task_alt</mat-icon>
         <p>{{ 'labels.text.No data found' | translate }}</p>
       </div>
     } @else if (filteredTasks.length === 0) {
-      <div class="state">
+      <div class="state ms-empty">
         <mat-icon>search_off</mat-icon>
         <p>{{ 'labels.inputs.No records match the selected filter' | translate }}</p>
       </div>
     } @else {
-      <div class="table-container">
+      <div class="table-container ms-table-wrap">
         <table mat-table [dataSource]="filteredTasks">
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Task' | translate }}</th>
@@ -52,15 +52,15 @@
           </ng-container>
           <ng-container matColumnDef="customer">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Client' | translate }}</th>
-            <td mat-cell *matCellDef="let task">{{ task.customer }}</td>
+            <td mat-cell *matCellDef="let task" class="board-name">{{ task.customer }}</td>
           </ng-container>
           <ng-container matColumnDef="reference">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Account Number' | translate }}</th>
-            <td mat-cell *matCellDef="let task">{{ task.reference }}</td>
+            <td mat-cell *matCellDef="let task" class="board-muted ms-num">{{ task.reference }}</td>
           </ng-container>
           <ng-container matColumnDef="office">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Office' | translate }}</th>
-            <td mat-cell *matCellDef="let task">{{ task.office }}</td>
+            <td mat-cell *matCellDef="let task" class="board-muted">{{ task.office }}</td>
           </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Status' | translate }}</th>

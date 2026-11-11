@@ -8,24 +8,23 @@
 
 @use 'assets/styles/action-dashboard';
 @use 'assets/styles/pause-timeline';
-@use 'assets/styles/colours' as *;
 
 :host {
   display: block;
-  padding: 12px 4px 24px;
+  padding: var(--ms-space-5) 0 var(--ms-space-6);
 }
 
 // Reset delinquency period marker in the range schedule (expectedAmount === null)
 .reset-period {
   font-style: italic;
-  color: var(--ds-text-3);
+  color: var(--ms-color-text-secondary);
 }
 
 // Active/undone flag next to a RESET row in the actions history
 .reset-flag {
-  margin-left: 8px;
-  font-size: 11px;
-  color: var(--ds-text-3);
+  margin-left: var(--ms-space-2);
+  font-size: var(--ms-font-size-caption);
+  color: var(--ms-color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }

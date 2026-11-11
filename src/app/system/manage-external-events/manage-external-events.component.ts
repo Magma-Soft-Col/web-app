@@ -27,12 +27,14 @@ import { SystemService } from '../system.service';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'mifosx-manage-external-events',
   templateUrl: './manage-external-events.component.html',
   styleUrls: ['./manage-external-events.component.scss'],
   imports: [
+    FaIconComponent,
     ...STANDALONE_SHARED_IMPORTS,
     MatTable,
     MatSort,

@@ -6,6 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+/* Two-column field grid on desktop, one column under 768px. */
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--ms-space-4);
+
+  > mat-form-field,
+  > mifosx-gl-account-selector {
+    flex: 1 1 calc(50% - var(--ms-space-4));
+    min-width: 0;
+
+    @media (width < 768px) {
+      flex-basis: 100%;
+    }
+  }
 }

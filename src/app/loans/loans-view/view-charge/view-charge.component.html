@@ -7,25 +7,15 @@
 -->
 
 @if (loansAccountData.status.value === 'Active') {
-  <div class="layout-row align-end gap-2percent layout-xs-column container m-b-20">
+  <div class="ms-actions view-charge__actions">
     @if (chargeData.amountOutstanding !== 0) {
-      <button
-        mat-raised-button
-        color="primary"
-        *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'"
-        (click)="editCharge()"
-      >
+      <button mat-stroked-button *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'" (click)="editCharge()">
         <fa-icon icon="flag" class="m-r-10"></fa-icon>
         {{ 'labels.buttons.Edit' | translate }}
       </button>
       @if (allowPayCharge) {
         <span>
-          <button
-            mat-raised-button
-            color="accent"
-            *mifosxHasPermission="'PAY_SAVINGSACCOUNTCHARGE'"
-            (click)="payCharge()"
-          >
+          <button mat-stroked-button *mifosxHasPermission="'PAY_SAVINGSACCOUNTCHARGE'" (click)="payCharge()">
             <fa-icon icon="dollar-sign" class="m-r-10"></fa-icon>
             {{ 'labels.buttons.Pay' | translate }}
           </button>
@@ -33,12 +23,7 @@
       }
       @if (allowWaive) {
         <span>
-          <button
-            mat-raised-button
-            color="primary"
-            *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'"
-            (click)="waiveCharge()"
-          >
+          <button mat-stroked-button *mifosxHasPermission="'WAIVE_SAVINGSACCOUNTCHARGE'" (click)="waiveCharge()">
             <fa-icon icon="flag" class="m-r-10"></fa-icon>
             {{ 'labels.buttons.Waive' | translate }}
           </button>
@@ -46,12 +31,7 @@
       }
     }
     <span>
-      <button
-        mat-raised-button
-        color="accent"
-        *mifosxHasPermission="'ADJUSTMENT_LOANCHARGE'"
-        (click)="adjustmentCharge()"
-      >
+      <button mat-stroked-button *mifosxHasPermission="'ADJUSTMENT_LOANCHARGE'" (click)="adjustmentCharge()">
         <fa-icon icon="pen" class="m-r-10"></fa-icon>
         {{ 'labels.buttons.Adjustment' | translate }}
       </button>
@@ -60,18 +40,13 @@
 }
 
 @if (loansAccountData.status.value === 'Submitted and pending approval') {
-  <div class="layout-row align-end gap-2percent layout-xs-column container m-b-20">
-    <button
-      mat-raised-button
-      color="primary"
-      *mifosxHasPermission="'UPDATE_SAVINGSACCOUNTCHARGE'"
-      (click)="editCharge()"
-    >
+  <div class="ms-actions view-charge__actions">
+    <button mat-stroked-button *mifosxHasPermission="'UPDATE_SAVINGSACCOUNTCHARGE'" (click)="editCharge()">
       <fa-icon icon="edit" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Edit' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-stroked-button
       color="warn"
       *mifosxHasPermission="'DELETE_SAVINGSACCOUNTCHARGE'"
       (click)="deleteCharge()"
@@ -82,106 +57,69 @@
   </div>
 }
 
-<div class="container">
-  <mat-card>
+<div class="view-charge">
+  <mat-card class="view-charge__panel">
+    <div class="view-charge__stripe" [ngClass]="loanChargeColor()"></div>
     <mat-card-content>
-      <div class="layout-row-wrap">
-        <div class="flex-100" [ngClass]="loanChargeColor()"></div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.name' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.name }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Charge Type' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.penalty ? 'Penalty' : 'Fees' }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Currency' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.currency.displayLabel }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Payment due at' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.chargeTimeType.value }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Payment due as of' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.dueDate | dateFormat }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Calculation Type' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.chargeCalculationType.value }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Due' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.amount | formatNumber }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Paid' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.amountPaid | formatNumber }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Waived' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.amountWaived | formatNumber }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Outstanding' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.amountOutstanding | formatNumber }}
-        </div>
-
-        <div class="flex-50 mat-body-strong">
-          {{ 'labels.inputs.Submitted On Date' | translate }}
-        </div>
-
-        <div class="flex-50">
-          {{ chargeData.submittedOnDate | dateFormat }}
-        </div>
+      <div class="view-charge__head">
+        <h2 class="ms-section-title">{{ chargeData.name }}</h2>
+        @if (chargeData.paid) {
+          <span class="ms-badge ms-badge--success">{{ 'labels.inputs.Paid' | translate }}</span>
+        } @else {
+          <span class="ms-badge ms-badge--warning">{{ 'labels.inputs.Outstanding' | translate }}</span>
+        }
       </div>
+      <dl class="view-charge__grid">
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.name' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.name }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Charge Type' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.penalty ? 'Penalty' : 'Fees' }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Currency' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.currency.displayLabel }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Payment due at' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.chargeTimeType.value }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Payment due as of' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.dueDate | dateFormat }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Calculation Type' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.chargeCalculationType.value }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Due' | translate }}</dt>
+          <dd class="ms-value ms-num">{{ chargeData.amount | formatNumber }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Paid' | translate }}</dt>
+          <dd class="ms-value ms-num">{{ chargeData.amountPaid | formatNumber }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Waived' | translate }}</dt>
+          <dd class="ms-value ms-num">{{ chargeData.amountWaived | formatNumber }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Outstanding' | translate }}</dt>
+          <dd class="ms-value ms-num">{{ chargeData.amountOutstanding | formatNumber }}</dd>
+        </div>
+        <div class="view-charge__item">
+          <dt class="ms-label">{{ 'labels.inputs.Submitted On Date' | translate }}</dt>
+          <dd class="ms-value">{{ chargeData.submittedOnDate | dateFormat }}</dd>
+        </div>
+      </dl>
 
-      <div class="layout-row layout-align-center gap-2percent column-on-mobile">
+      <div class="view-charge__footer">
         <button
           type="button"
-          mat-raised-button
-          color="primary"
+          mat-stroked-button
           [routerLink]="['../']"
           [queryParams]="{ productType: loanProductService.productType.value }"
         >

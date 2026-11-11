@@ -17,6 +17,10 @@ test.use({ storageState: { cookies: [], origins: [] } });
  * and fills the viewport at different screen sizes.
  */
 
+/** Below this width the brand panel is hidden and the logo moves onto the card. */
+const BRAND_PANEL_MIN_WIDTH = 900;
+const SUBMIT_BUTTON = '#login-form button[type="submit"]';
+
 const VIEWPORTS = {
   mobile: { width: 375, height: 667 }, // iPhone SE
   mobileLandscape: { width: 667, height: 375 },
@@ -52,7 +56,8 @@ test.describe('Login Page - Responsive Layout', () => {
     // Check all essential elements are visible
     await expect(loginPage.divLocator('.logo-section')).toBeVisible();
     await expect(loginPage.divLocator('.form-section')).toBeVisible();
-    await expect(loginPage.divLocator('.login-footer')).toBeVisible();
+    // The reload-settings footer is a support tool, hidden until Ctrl + Alt + R.
+    await expect(loginPage.divLocator('.login-footer')).toHaveCount(0);
 
     // Verify no horizontal scroll
     const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
@@ -116,8 +121,8 @@ test.describe('Login Page - Responsive Layout', () => {
     const loginCard = loginPage.divLocator('.login-card');
     const cardBox = await loginCard.boundingBox();
 
-    // Logo should be visible
-    const logo = loginPage.divLocator('.logo-image');
+    // On desktop the logo is on the brand panel
+    const logo = page.locator('.hero-logo');
     const logoBox = await logo.boundingBox();
     expect(logoBox).toBeTruthy();
 
@@ -132,19 +137,12 @@ test.describe('Login Page - Responsive Layout', () => {
     expect(passwordBox).toBeTruthy();
 
     // Login button should be visible
-    const loginButton = page.locator('mifosx-m3-button[type="submit"]');
+    const loginButton = page.locator(SUBMIT_BUTTON);
     const buttonBox = await loginButton.boundingBox();
     expect(buttonBox).toBeTruthy();
 
-    // Resources section should be visible
-    const resourcesSection = page.locator('.resources-section');
-    const resourcesBox = await resourcesSection.boundingBox();
-    expect(resourcesBox).toBeTruthy();
-
-    // Footer should be visible
-    const footer = loginPage.divLocator('.login-footer');
-    const footerBox = await footer.boundingBox();
-    expect(footerBox).toBeTruthy();
+    // The Mifos resources links are not part of the Magma Soft sign-in
+    await expect(page.locator('.resources-section')).toHaveCount(0);
   });
 
   test('should handle small mobile screens (375x667) with all content visible', async ({ page }) => {
@@ -152,12 +150,10 @@ test.describe('Login Page - Responsive Layout', () => {
     // Verify the login form is visible
     await loginPage.assertOnLoginPage();
 
-    // Scroll to bottom to ensure footer is accessible
+    // The reload-settings footer appears with Ctrl + Alt + R and is reachable after scrolling
+    await page.keyboard.press('Control+Alt+r');
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-
-    // Footer should be visible after scroll
-    const footer = loginPage.divLocator('.login-footer');
-    await expect(footer).toBeVisible();
+    await expect(loginPage.divLocator('.login-footer')).toBeVisible();
 
     // Scroll back to top
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -179,23 +175,21 @@ test.describe('Login Page - Responsive Layout', () => {
       // Verify the login form is visible
       await loginPage.assertOnLoginPage();
 
-      const logo = loginPage.divLocator('.logo-section');
       const form = loginPage.divLocator('.form-section');
-
-      // All sections should be visible
-      await expect(logo).toBeVisible();
       await expect(form).toBeVisible();
 
-      if (viewport.width > 1024) {
-        const resources = loginPage.divLocator('.resources-section');
-        await expect(resources).toBeVisible();
+      if (viewport.width > BRAND_PANEL_MIN_WIDTH) {
+        // Wide screens: the logo is on the brand panel, beside the form
+        await expect(page.locator('.hero-panel')).toBeVisible();
+        continue;
       }
 
-      // Get bounding boxes
+      const logo = loginPage.divLocator('.logo-section');
+      await expect(logo).toBeVisible();
+
+      // Form should be below the card logo
       const logoBox = await logo.boundingBox();
       const formBox = await form.boundingBox();
-
-      // Form should be below logo
       if (logoBox && formBox) {
         expect(formBox.y).toBeGreaterThan(logoBox.y + logoBox.height);
       }
@@ -249,15 +243,15 @@ test.describe('Login Page - Responsive Layout', () => {
     await loginPage.assertOnLoginPage();
 
     // Username field
-    const usernameField = page.locator('mat-form-field').filter({ hasText: 'Username' });
+    const usernameField = page.locator('.ms-auth-field').filter({ hasText: 'Username' });
     await expect(usernameField).toBeVisible();
 
     // Password field
-    const passwordField = page.locator('mat-form-field').filter({ hasText: 'Password' });
+    const passwordField = page.locator('.ms-auth-field').filter({ hasText: 'Password' });
     await expect(passwordField).toBeVisible();
 
     // Login button
-    const loginButton = page.locator('mifosx-m3-button[type="submit"]');
+    const loginButton = page.locator(SUBMIT_BUTTON);
     await expect(loginButton).toBeVisible();
   });
 
@@ -273,7 +267,7 @@ test.describe('Login Page - Responsive Layout', () => {
       // Verify the login form is visible
       await loginPage.assertOnLoginPage();
 
-      const logo = page.locator('.logo-image');
+      const logo = page.locator(viewport.width > BRAND_PANEL_MIN_WIDTH ? '.hero-logo' : '.logo-image');
       await expect(logo).toBeVisible();
 
       // Logo should have appropriate size

@@ -6,131 +6,112 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// Reused so the panel inherits the same tokens (and their dark-theme
-// overrides) as the tabs it is embedded in.
-@use '../../loan-tab-shared' as shared;
-
 .recovery-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--ms-space-4);
 }
 
 /* ── The three figures ─────────────────────────────────────── */
 .recovery-figures {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--ms-space-4);
 }
 
 .figure {
   flex: 1 1 160px;
   min-width: 140px;
-  padding: 16px;
-  border: 1px solid var(--ch-border);
-  border-radius: 8px;
-  background: var(--ch-surface);
+  padding: var(--ms-space-4);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
+  background: var(--ms-color-surface);
 }
 
 .figure-label {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--ch-text-3);
-  margin-bottom: 8px;
+  margin-bottom: var(--ms-space-1);
+  font-size: var(--ms-font-size-caption);
+  font-weight: 500;
+  color: var(--ms-color-text-secondary);
 }
 
 .figure-value {
   font-size: 16px;
-  font-weight: 600;
-  color: var(--ch-text-1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ms-color-text-primary);
 }
 
 // Recovered is the good news: green, one step below the lead figure.
-.figure-recovered {
-  border-color: var(--ch-paid);
-  background: var(--ch-paid-bg);
-
-  .figure-value {
-    color: var(--ch-paid);
-  }
+.figure-recovered .figure-value {
+  color: var(--ms-color-success);
 }
 
 // Pending recovery is the number the officer acts on, so it gets the strongest
 // treatment of the three.
 .figure-lead {
-  border-color: var(--ch-partial);
-  background: var(--ch-partial-bg);
+  border-color: var(--ms-color-warning);
+  background: var(--ms-color-warning-bg);
 
   .figure-value {
     font-size: 20px;
-    color: var(--ch-partial);
+    color: var(--ms-color-warning);
   }
 }
 
 /* ── Progress bar ──────────────────────────────────────────── */
 .progress-track {
   height: 8px;
-  border-radius: 8px;
-  background: var(--ch-surface-h);
-  border: 1px solid var(--ch-border);
+  border-radius: var(--ms-radius-pill);
+  background: var(--ms-color-surface-subtle);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--ch-blue-600);
-  transition: width 200ms ease;
+  background: var(--ms-color-brand-primary);
+  transition: width var(--ms-duration) var(--ms-easing);
 }
 
 .progress-complete {
-  background: var(--ch-paid);
+  background: var(--ms-color-success);
 }
 
 .progress-caption {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--ch-text-2);
+  gap: var(--ms-space-2);
+  margin-top: var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }
 
 .progress-percent {
   font-weight: 600;
-}
-
-.recovery-complete-tag {
-  padding: 2px 8px;
-  border-radius: 16px;
-  font-size: 11px;
-  font-weight: 600;
-  background: var(--ch-paid-bg);
-  color: var(--ch-paid);
-  border: 1px solid var(--ch-paid);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Written-off breakdown ─────────────────────────────────── */
 .recovery-breakdown {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
-  font-size: 12.5px;
-  color: var(--ch-text-2);
+  gap: var(--ms-space-2) var(--ms-space-6);
+  font-size: var(--ms-font-size-label);
 }
 
 .breakdown-item {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: var(--ms-space-2);
 }
 
 .breakdown-label {
-  color: var(--ch-text-3);
+  color: var(--ms-color-text-secondary);
 }
 
 .breakdown-value {
   font-weight: 600;
-  color: var(--ch-text-1);
+  font-variant-numeric: tabular-nums;
+  color: var(--ms-color-text-primary);
 }

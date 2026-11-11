@@ -6,29 +6,82 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  max-width: 37rem;
+@use 'assets/styles/member-list';
+
+@include member-list.member-list;
+
+/* Pen form pattern: white panel, two-column field grid (one below 768px), actions at the foot. */
+.form-grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
+
+  /* Anything that is not a single field (rows, checkboxes, tables) spans the full width. */
+  > :not(mat-form-field) {
+    grid-column: 1 / -1;
+  }
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.mat-table {
-  display: block;
-  font-family: Tahoma, Verdana, sans-serif;
-  width: 50%;
-}
-
-.mat-row,
-.mat-header-row {
+.form-actions {
   display: flex;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 24px;
+  justify-content: flex-end;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+  padding: var(--ms-space-4);
+  border-top: 1px solid var(--ms-color-border-subtle);
 }
 
-.mat-cell,
-.mat-header-cell {
-  flex: 1;
-  overflow: hidden;
-  overflow-wrap: break-word;
+/* Group picker: details of the chosen group and the selected list, side by side. */
+.member-picker {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-space-4);
+  margin-top: var(--ms-space-4);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.member-picker__panel {
+  align-self: start;
+}
+
+.member-picker__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 0 var(--ms-space-2) 0 var(--ms-space-4);
+  background: var(--ms-color-surface-subtle);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+.member-picker__title {
+  margin: 0;
+  font-size: var(--ms-font-size-label);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--ms-color-text-secondary);
+}
+
+.member-picker__details {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: var(--ms-space-2) var(--ms-space-4);
+  margin: 0;
+  padding: var(--ms-space-4);
+
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
 }

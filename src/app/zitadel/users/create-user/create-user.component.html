@@ -10,9 +10,9 @@
   <mat-card>
     <form [formGroup]="userForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-row-wrap layout-lt-md-column gap-2percent">
+        <div class="ms-form-grid">
           <!-- Username -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Username' | translate }}</mat-label>
             <input matInput required formControlName="username" />
             @if (userForm.controls.username.hasError('required')) {
@@ -24,7 +24,7 @@
           </mat-form-field>
 
           <!-- Email -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Email' | translate }}</mat-label>
             <input matInput required formControlName="email" />
             @if (userForm.controls.email.hasError('email')) {
@@ -42,19 +42,19 @@
           </mat-form-field>
 
           <!-- First Name -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.First Name' | translate }}</mat-label>
             <input matInput formControlName="firstName" required />
           </mat-form-field>
 
           <!-- Last Name -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Last Name' | translate }}</mat-label>
             <input matInput formControlName="lastName" required />
           </mat-form-field>
 
           <!-- Preferred Language -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Language' | translate }}</mat-label>
             <mat-select formControlName="preferredLanguage" required>
               @for (lang of languageCodes; track lang) {
@@ -65,7 +65,7 @@
             </mat-select>
           </mat-form-field>
           <!-- Gender -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Gender' | translate }}</mat-label>
             <mat-select formControlName="gender" required>
               <mat-option value="GENDER_MALE">{{ 'labels.catalogs.male' | translate }}</mat-option>
@@ -75,8 +75,8 @@
           </mat-form-field>
 
           <!-- Country code and phone -->
-          <div class="flex items-center gap-2">
-            <mat-form-field class="flex-48">
+          <div class="phone-group">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Code' | translate }}</mat-label>
               <mat-select formControlName="countryCode" required>
                 @for (country of countryCodes; track country) {
@@ -87,13 +87,13 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="flex-48">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.Phone Number' | translate }}</mat-label>
               <input matInput formControlName="phoneNumber" required maxlength="12" minlength="4" />
             </mat-form-field>
           </div>
 
-          <mat-form-field class="flex-20">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Office' | translate }}</mat-label>
             <mat-select required formControlName="officeId">
               @for (office of officesData; track office) {
@@ -110,7 +110,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="flex-20">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Staff' | translate }}</mat-label>
             <mat-select formControlName="staffId">
               @for (staff of staffData; track staff) {
@@ -122,7 +122,7 @@
           </mat-form-field>
 
           <!-- Password -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Password' | translate }}</mat-label>
             <input matInput type="password" formControlName="password" required />
             @if (userForm.get('password')?.hasError('required')) {
@@ -160,7 +160,7 @@
           </mat-form-field>
 
           <!-- Repeat password -->
-          <mat-form-field class="flex-48">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Repeat Password' | translate }}</mat-label>
             <input matInput type="password" formControlName="repeatPassword" required />
             @if (userForm.get('repeatPassword')?.hasError('required')) {
@@ -177,14 +177,14 @@
             !userForm.get('password')?.hasError('required') &&
             !userForm.get('repeatPassword')?.hasError('required')
           ) {
-            <p class="flex-98 reset-password-error">
+            <p class="ms-form-full reset-password-error">
               {{ 'labels.inputs.Passwords' | translate }}
               <strong>{{ 'labels.commons.do not match' | translate }}</strong>
             </p>
           }
 
           <!-- Roles -->
-          <mat-form-field class="flex-20">
+          <mat-form-field>
             <mat-label>{{ 'labels.inputs.Roles' | translate }}</mat-label>
             <mat-select formControlName="roles" required multiple>
               @for (role of rolesData; track role) {
@@ -203,11 +203,11 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../']">
+      <mat-card-actions class="ms-form-actions">
+        <button type="button" mat-stroked-button [routerLink]="['../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="primary" [disabled]="userForm.invalid">
+        <button mat-flat-button color="primary" [disabled]="userForm.invalid">
           {{ 'labels.buttons.Submit' | translate }}
         </button>
       </mat-card-actions>
@@ -224,16 +224,16 @@
     }}</a>
   </p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close()">
+    <button mat-flat-button color="primary" (click)="popover.close()">
       {{ 'labels.buttons.Create User' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

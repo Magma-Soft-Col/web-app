@@ -6,62 +6,79 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.surveyOption {
-  border: 1px solid #cbcbcb;
-  padding: 5px;
-}
+/* Action form (pen form pattern): 2 columns on desktop, 1 below 768px, actions at the foot. */
+.action-form__grid {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ms-space-4);
 
-.display-questions {
-  margin-top: 20px;
-}
-
-.question {
-  padding: 10px 0;
-}
-
-.wrap-mat-radio-label {
-  white-space: normal;
-}
-
-.question-text {
-  font-weight: bold;
-}
-
-.survey-select {
-  height: 40px;
-  margin-bottom: 20px;
-}
-
-.name-label {
-  width: 25%;
-}
-
-.surveyCont {
-  padding: 5%;
-}
-
-.button-cancel {
-  margin-left: 35%;
-}
-
-.button-submit {
-  margin-left: 2%;
-}
-
-.radio-button {
-  margin-bottom: 5px;
-  align-items: normal;
-  white-space: normal;
-}
-
-.radio-group-spacing {
-  display: flex;
-  gap: 2rem;
-  flex-direction: row;
-}
-
-@media (width <= 768px) {
-  .radio-group-spacing {
-    flex-direction: column;
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
   }
+}
+
+.action-form__contents {
+  display: contents;
+}
+
+.action-form__full {
+  grid-column: 1 / -1;
+}
+
+.action-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+}
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
+
+.survey__group {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--ms-color-border-subtle);
+}
+
+.survey__question {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: var(--ms-space-2) var(--ms-space-4);
+  align-items: start;
+  padding: var(--ms-space-3) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.survey__question-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
+}
+
+.survey__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-2) var(--ms-space-6);
+}
+
+.survey__option {
+  white-space: normal;
+}
+
+.survey__answer {
+  grid-column: 1 / -1;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

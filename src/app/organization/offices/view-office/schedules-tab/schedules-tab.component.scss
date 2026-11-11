@@ -7,16 +7,18 @@
  */
 
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
 
   .schedule-state {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: var(--ms-space-4);
     min-height: 120px;
     text-align: center;
+    color: var(--ms-color-text-secondary);
   }
 
   .compact-state {
@@ -25,16 +27,12 @@
   }
 
   .error-state {
-    color: var(--warn-color, #b00020);
-  }
-
-  .unavailable-state {
-    color: rgb(78 78 78);
+    color: var(--ms-color-danger);
   }
 
   .schedule-table {
     display: grid;
-    gap: 8px;
+    gap: var(--ms-space-2);
   }
 
   .schedule-header,
@@ -42,13 +40,23 @@
     display: grid;
     grid-template-columns: minmax(96px, 26%) 76px minmax(0, calc(37% - 53px)) minmax(0, calc(37% - 53px));
     align-items: center;
-    column-gap: 10px;
+    column-gap: var(--ms-space-3);
+  }
+
+  .tab-header {
+    display: flex;
+    align-items: center;
   }
 
   .schedule-header {
     min-height: 36px;
-    font-weight: 500;
-    color: rgb(0 0 0 / 60%);
+    padding: 0 var(--ms-space-2);
+    border-radius: var(--ms-radius-sm);
+    background: var(--ms-color-surface-subtle);
+    font-size: var(--ms-font-size-label);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--ms-color-text-secondary);
   }
 
   .schedule-row {
@@ -57,6 +65,7 @@
 
   .weekday-label {
     font-weight: 500;
+    color: var(--ms-color-text-primary);
   }
 
   .schedule-header span,
@@ -73,12 +82,6 @@
     min-width: 0;
   }
 
-  .schedule-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
-  }
-
   mat-form-field {
     width: 100%;
   }
@@ -87,12 +90,12 @@
     .schedule-header,
     .schedule-row {
       grid-template-columns: minmax(96px, calc(100% - 74px)) 64px;
-      row-gap: 8px;
-      padding: 8px 0;
+      row-gap: var(--ms-space-2);
+      padding: var(--ms-space-2) 0;
     }
 
     .schedule-row {
-      border-bottom: 1px solid rgb(0 0 0 / 12%);
+      border-bottom: 1px solid var(--ms-color-border-subtle);
     }
 
     .schedule-header .time-column {

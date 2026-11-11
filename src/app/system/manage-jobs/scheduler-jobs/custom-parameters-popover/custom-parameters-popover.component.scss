@@ -9,9 +9,9 @@
 .message {
   height: auto;
   font-weight: 500;
-  color: #f44366;
+  color: var(--ms-color-danger);
 }
 
 .message.green {
-  color: #32cd32;
+  color: var(--ms-color-success);
 }

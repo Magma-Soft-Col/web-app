@@ -6,37 +6,43 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container">
-  <h3>{{ 'labels.inputs.Deferred income' | translate }} - {{ 'labels.menus.Capitalized Income' | translate }}</h3>
+<div class="tab-panel">
+  <h3 class="ms-section-title">
+    {{ 'labels.inputs.Deferred income' | translate }} - {{ 'labels.menus.Capitalized Income' | translate }}
+  </h3>
 
   @if (capitalizedIncomeData.length > 0) {
-    <table mat-table [dataSource]="capitalizedIncomeData">
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
-        <td mat-cell class="r-amount" *matCellDef="let item">
-          {{ item.amount | formatNumber }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="amortizedAmount">
-        <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Amortized Amount' | translate }}</th>
-        <td mat-cell class="r-amount" *matCellDef="let item">
-          {{ item.amortizedAmount | formatNumber }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="unrecognizedAmount">
-        <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Unrecognized Amount' | translate }}</th>
-        <td mat-cell class="r-amount" *matCellDef="let item">
-          {{ item.unrecognizedAmount | formatNumber }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="amountAdjustment">
-        <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Adjustment Amount' | translate }}</th>
-        <td mat-cell class="r-amount" *matCellDef="let item">
-          {{ item.amountAdjustment | formatNumber: '-' }}
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="capitalizedIncomeColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: capitalizedIncomeColumns"></tr>
-    </table>
+    <div class="ms-panel ms-table-wrap">
+      <table mat-table [dataSource]="capitalizedIncomeData">
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Amount' | translate }}</th>
+          <td mat-cell class="ms-num" *matCellDef="let item">
+            {{ item.amount | formatNumber }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="amortizedAmount">
+          <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Amortized Amount' | translate }}</th>
+          <td mat-cell class="ms-num" *matCellDef="let item">
+            {{ item.amortizedAmount | formatNumber }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="unrecognizedAmount">
+          <th mat-header-cell class="ms-num" *matHeaderCellDef>
+            {{ 'labels.inputs.Unrecognized Amount' | translate }}
+          </th>
+          <td mat-cell class="ms-num" *matCellDef="let item">
+            {{ item.unrecognizedAmount | formatNumber }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="amountAdjustment">
+          <th mat-header-cell class="ms-num" *matHeaderCellDef>{{ 'labels.inputs.Adjustment Amount' | translate }}</th>
+          <td mat-cell class="ms-num" *matCellDef="let item">
+            {{ item.amountAdjustment | formatNumber: '-' }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="capitalizedIncomeColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: capitalizedIncomeColumns"></tr>
+      </table>
+    </div>
   }
 </div>

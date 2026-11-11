@@ -6,57 +6,69 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container layout-row gap-3percent">
-  <mat-card class="group-card flex-fill layout-column gap-2percent">
-    <mat-form-field class="flex-30">
-      <mat-label>{{ 'labels.inputs.Add Groups' | translate }}</mat-label>
-      <input matInput [formControl]="groupChoice" [matAutocomplete]="groupsAutocomplete" />
-    </mat-form-field>
+<div class="container">
+  <div class="member-picker">
+    <section class="ms-panel ms-panel--padded member-picker__panel">
+      <mat-form-field class="member-picker__field">
+        <mat-label>{{ 'labels.inputs.Add Groups' | translate }}</mat-label>
+        <input matInput [formControl]="groupChoice" [matAutocomplete]="groupsAutocomplete" />
+      </mat-form-field>
 
-    <mat-autocomplete autoActiveFirstOption #groupsAutocomplete="matAutocomplete" [displayWith]="displayGroup">
-      @for (group of groupsData; track group) {
-        <mat-option [value]="group">
-          {{ group.name }}
-        </mat-option>
-      }
-    </mat-autocomplete>
-
-    <div class="mat-table">
-      <div class="mat-header-row">
-        <div class="mat-header-cell">{{ 'labels.inputs.Group Details' | translate }}</div>
-        <button mat-icon-button (click)="addGroup()">
-          <fa-icon icon="plus"></fa-icon>
-        </button>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell">{{ 'labels.inputs.name' | translate }}</div>
-        <div class="mat-cell">{{ groupChoice.value.name }}</div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell">{{ 'labels.inputs.Id' | translate }}</div>
-        <div class="mat-cell">{{ groupChoice.value.id }}</div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell">{{ 'labels.inputs.Office' | translate }}</div>
-        <div class="mat-cell">{{ groupChoice.value.officeName }}</div>
-      </div>
-    </div>
-  </mat-card>
-
-  <mat-card class="flex-50">
-    <h3 matSubheader>{{ 'labels.heading.Group Members' | translate }}</h3>
-
-    @if (groupMembers?.length) {
-      <div class="member-list">
-        @for (group of groupMembers; track group; let i = $index) {
-          <div class="member-row">
-            <span class="member-name">{{ group.name }}</span>
-            <button mat-icon-button color="warn" aria-label="Remove group" (click)="removeGroup(i, group)">
-              <fa-icon icon="trash"></fa-icon>
-            </button>
-          </div>
+      <mat-autocomplete autoActiveFirstOption #groupsAutocomplete="matAutocomplete" [displayWith]="displayGroup">
+        @for (group of groupsData; track group) {
+          <mat-option [value]="group">
+            {{ group.name }}
+          </mat-option>
         }
+      </mat-autocomplete>
+
+      <div class="ms-panel">
+        <div class="member-picker__head">
+          <h3 class="member-picker__title">{{ 'labels.inputs.Group Details' | translate }}</h3>
+          <button
+            mat-icon-button
+            type="button"
+            (click)="addGroup()"
+            [attr.aria-label]="'labels.buttons.Add' | translate"
+          >
+            <fa-icon icon="plus" aria-hidden="true"></fa-icon>
+          </button>
+        </div>
+        <dl class="member-picker__details">
+          <dt class="ms-label">{{ 'labels.inputs.name' | translate }}</dt>
+          <dd class="ms-value">{{ groupChoice.value.name }}</dd>
+          <dt class="ms-label">{{ 'labels.inputs.Id' | translate }}</dt>
+          <dd class="ms-value ms-num">{{ groupChoice.value.id }}</dd>
+          <dt class="ms-label">{{ 'labels.inputs.Office' | translate }}</dt>
+          <dd class="ms-value">{{ groupChoice.value.officeName }}</dd>
+        </dl>
       </div>
-    }
-  </mat-card>
+    </section>
+
+    <section class="ms-panel member-picker__panel">
+      <div class="member-picker__head">
+        <h3 class="member-picker__title">{{ 'labels.heading.Group Members' | translate }}</h3>
+      </div>
+
+      @if (groupMembers?.length) {
+        <div class="member-list">
+          @for (group of groupMembers; track group; let i = $index) {
+            <div class="member-row">
+              <span class="member-name">{{ group.name }}</span>
+              <button
+                mat-icon-button
+                type="button"
+                [attr.aria-label]="'labels.buttons.Remove' | translate"
+                (click)="removeGroup(i, group)"
+              >
+                <fa-icon icon="trash" aria-hidden="true"></fa-icon>
+              </button>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="ms-empty">{{ 'labels.text.No data found' | translate }}</div>
+      }
+    </section>
+  </div>
 </div>

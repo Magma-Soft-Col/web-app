@@ -20,6 +20,7 @@
           type="button"
           mat-icon-button
           color="warn"
+          [attr.aria-label]="'labels.buttons.Delete' | translate"
           (click)="removeJobFromSelection(rowIndex)"
           matTooltip="{{ 'labels.buttons.Delete' | translate }}"
           matTooltipPosition="right"

@@ -6,13 +6,13 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
-  <div class="general-card">
+<div class="tab-container">
+  <div class="ms-panel general-card">
     @if (loanDetails.summary) {
       @if (loanProductService.isWorkingCapital && loanDetails.chargedOff) {
         <div class="section">
           <div class="section-head">
-            <h3 class="section-title">{{ 'labels.menus.Charge-Off' | translate }}</h3>
+            <h3 class="ms-section-title section-title">{{ 'labels.menus.Charge-Off' | translate }}</h3>
           </div>
           <div class="fact-grid">
             <div class="fact">
@@ -34,7 +34,7 @@
       @if (loanProductService.isWorkingCapital && loanDetails.writtenOffOnDate) {
         <div class="section">
           <div class="section-head">
-            <h3 class="section-title">{{ 'labels.menus.Write-Off' | translate }}</h3>
+            <h3 class="ms-section-title section-title">{{ 'labels.menus.Write-Off' | translate }}</h3>
           </div>
           <div class="fact-grid">
             <div class="fact">
@@ -54,7 +54,7 @@
       @if (loanProductService.isWorkingCapital && loanDetails.writtenOffOnDate) {
         <div class="section">
           <div class="section-head">
-            <h3 class="section-title">{{ 'labels.heading.Recovery' | translate }}</h3>
+            <h3 class="ms-section-title section-title">{{ 'labels.heading.Recovery' | translate }}</h3>
           </div>
           <mifosx-working-capital-recovery-panel
             [balance]="loanDetails.balance"
@@ -66,7 +66,7 @@
       @if (hasNumberOfRepayments() || loanDetails.timeline?.expectedMaturityDate) {
         <div class="section">
           <div class="section-head">
-            <h3 class="section-title">{{ 'labels.heading.Performance History' | translate }}</h3>
+            <h3 class="ms-section-title section-title">{{ 'labels.heading.Performance History' | translate }}</h3>
           </div>
           <div class="fact-grid">
             @if (hasNumberOfRepayments()) {
@@ -96,7 +96,7 @@
 
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.heading.Loan Details' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.heading.Loan Details' | translate }}</h3>
         </div>
         <div class="fact-grid">
           <div class="fact">
@@ -114,8 +114,7 @@
           <div class="fact">
             <div class="fact-label">{{ 'labels.inputs.Status' | translate }}</div>
             <div class="fact-value">
-              <span class="status-chip" [ngClass]="statusClass()">
-                <span class="st"></span>
+              <span class="ms-badge status-chip" [ngClass]="statusClass()">
                 {{ 'labels.status.' + loanDetails.status?.value | translate }}
               </span>
             </div>
@@ -182,7 +181,7 @@
     @if (!loanDetails.summary) {
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.heading.Loan Details' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.heading.Loan Details' | translate }}</h3>
         </div>
         <div class="fact-grid">
           <div class="fact">
@@ -200,8 +199,7 @@
           <div class="fact">
             <div class="fact-label">{{ 'labels.inputs.Status' | translate }}</div>
             <div class="fact-value">
-              <span class="status-chip" [ngClass]="statusClass()">
-                <span class="st"></span>
+              <span class="ms-badge status-chip" [ngClass]="statusClass()">
                 {{ 'labels.status.' + loanDetails.status?.value | translate }}
               </span>
             </div>
@@ -250,7 +248,7 @@
 
       <div class="section">
         <div class="section-head">
-          <h3 class="section-title">{{ 'labels.heading.Loan Amounts' | translate }}</h3>
+          <h3 class="ms-section-title section-title">{{ 'labels.heading.Loan Amounts' | translate }}</h3>
         </div>
         <div class="fact-grid">
           <div class="fact">

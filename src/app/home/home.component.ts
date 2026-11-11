@@ -35,12 +35,13 @@ import { AuthenticationService } from '../core/authentication/authentication.ser
 import { PopoverService } from '../configuration-wizard/popover/popover.service';
 import { ConfigurationWizardService } from '../configuration-wizard/configuration-wizard.service';
 import { SettingsService } from 'app/settings/settings.service';
+import { BrandAssetsService } from 'app/shared/ui-theme/brand-assets.service';
 import { TranslateService } from '@ngx-translate/core';
 
 /** Custom Components */
 import { NextStepDialogComponent } from '../configuration-wizard/next-step-dialog/next-step-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardImage } from '@angular/material/card';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { MatAutocompleteTrigger, MatAutocomplete, MatOption } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -60,7 +61,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatCardTitle,
     MatAutocompleteTrigger,
     MatAutocomplete,
-    MatCardImage,
     AsyncPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,6 +81,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   username: string;
   /** Tenant name */
   tenant: string;
+  /** Set once the tenant-specific home image failed to load. */
+  private tenantImageMissing = false;
+  private brandAssets = inject(BrandAssetsService);
   /** Activity Form. */
   activityForm: any;
   /** Search Text. */
@@ -261,12 +264,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return this.settingsService.tenantIdentifier;
   }
 
-  onImageMissing(event: Event): void {
-    const target = event.currentTarget;
-    if (!(target instanceof HTMLImageElement)) {
-      return;
+  /**
+   * Image for the welcome card: the logo with name chosen in Settings, else an
+   * `assets/images/<tenant>_home.png` shipped for that tenant. Null selects the
+   * bundled Magma Soft logo, which follows the light or dark theme.
+   */
+  get homeLogo(): string | null {
+    const brandLogo = this.brandAssets.assets().logoWithName;
+    if (brandLogo) {
+      return brandLogo;
     }
-    target.onerror = null;
-    target.src = `assets/images/default_home.png`;
+    if (!this.tenant || this.tenant === 'default' || this.tenantImageMissing) {
+      return null;
+    }
+    return `assets/images/${this.tenant}_home.png`;
+  }
+
+  /** The tenant has no image of its own: fall back to the Magma Soft logo. */
+  onImageMissing(): void {
+    this.tenantImageMissing = true;
   }
 }

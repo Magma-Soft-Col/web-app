@@ -8,7 +8,6 @@
 
 /** Angular Imports */
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { MatList, MatListItem } from '@angular/material/list';
 import { FindPipe } from '../../../../pipes/find.pipe';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 
@@ -21,8 +20,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./campaign-preview-step.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatList,
-    MatListItem,
     FindPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

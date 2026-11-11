@@ -7,10 +7,10 @@
 -->
 
 <div class="mat-typography">
-  <h3>{{ 'labels.heading.Family Members' | translate }}</h3>
+  <h3 class="ms-section-title">{{ 'labels.heading.Family Members' | translate }}</h3>
 
   <div class="layout-row align-end m-b-20">
-    <button mat-raised-button color="primary" (click)="addFamilyMember()">
+    <button mat-stroked-button (click)="addFamilyMember()">
       <fa-icon icon="plus" class="m-r-10"></fa-icon>{{ 'labels.buttons.Add' | translate }}
     </button>
   </div>
@@ -26,12 +26,16 @@
             {{ member.relationship }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-divider></mat-divider>
         <div class="family-member-actions layout-row align-end">
-          <button mat-button color="primary">
+          <button mat-button type="button" [attr.aria-label]="'labels.buttons.Edit' | translate">
             <fa-icon icon="edit" (click)="editFamilyMember(member, i)"></fa-icon>
           </button>
-          <button mat-button color="warn" (click)="deleteFamilyMember(member.firstName, i)">
+          <button
+            mat-button
+            type="button"
+            (click)="deleteFamilyMember(member.firstName, i)"
+            [attr.aria-label]="'labels.buttons.Delete' | translate"
+          >
             <fa-icon icon="trash"></fa-icon>
           </button>
         </div>
@@ -58,12 +62,12 @@
     }
   </mat-accordion>
 
-  <div class="layout-row align-center gap-2percent margin-t responsive-column">
-    <button mat-raised-button matStepperPrevious>
+  <div class="step-actions">
+    <button mat-stroked-button matStepperPrevious>
       <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>
       {{ 'labels.buttons.Previous' | translate }}
     </button>
-    <button mat-raised-button matStepperNext>
+    <button mat-flat-button color="primary" matStepperNext>
       {{ 'labels.buttons.Next' | translate }}
       <fa-icon icon="arrow-right" class="m-l-10"></fa-icon>
     </button>

@@ -6,77 +6,96 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container">
-  <div #filter class="layout-row">
-    <mat-form-field class="flex-fill">
-      <mat-label>{{ 'labels.inputs.Filter' | translate }}</mat-label>
-      <input matInput (keyup)="applyFilter($event.target.value)" />
-    </mat-form-field>
+<div class="ms-page config-page">
+  <div class="ms-list-toolbar">
+    <div class="ms-filter-bar">
+      <div #filter class="ms-search">
+        <fa-icon icon="search" class="ms-search__icon" aria-hidden="true"></fa-icon>
+        <input
+          type="search"
+          (keyup)="applyFilter($any($event.target).value)"
+          [placeholder]="'labels.inputs.Filter' | translate"
+          [attr.aria-label]="'labels.inputs.Filter' | translate"
+        />
+      </div>
+    </div>
   </div>
 
-  <div #configurationsTable class="mat-elevation-z8 m-b-10">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.name' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">
-          <span class="m-r-10">{{ configuration.name }}</span>
-          @if (configuration.description) {
-            <fa-icon
-              icon="question-circle"
-              matTooltip="{{ configuration.description | translate }}"
-              matTooltipPosition="right"
-            ></fa-icon>
-          }
-        </td>
-      </ng-container>
+  <div #configurationsTable class="ms-panel">
+    <div class="ms-table-wrap">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.name' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration">
+            <span class="m-r-10 ms-cell-name">{{ configuration.name }}</span>
+            @if (configuration.description) {
+              <fa-icon
+                class="ms-cell-muted"
+                icon="question-circle"
+                matTooltip="{{ configuration.description | translate }}"
+                matTooltipPosition="right"
+              ></fa-icon>
+            }
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="enabled">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Status' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">
-          <mat-slide-toggle
-            [(ngModel)]="configuration.enabled"
-            name="{{ configuration.name }}"
-            (click)="toggleStatus(configuration)"
-          >
-            <div [className]="configuration.enabled ? 'enabled' : 'disabled'">
+        <ng-container matColumnDef="enabled">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Status' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration">
+            <mat-slide-toggle
+              [(ngModel)]="configuration.enabled"
+              name="{{ configuration.name }}"
+              (click)="toggleStatus(configuration)"
+            >
               @if (configuration.enabled) {
-                <span>{{ 'labels.inputs.Enabled' | translate }}</span>
+                <span class="ms-status ms-status--success">{{ 'labels.inputs.Enabled' | translate }}</span>
+              } @else {
+                <span class="ms-status ms-status--neutral">{{ 'labels.inputs.Disabled' | translate }}</span>
               }
-              @if (!configuration.enabled) {
-                <span>{{ 'labels.inputs.Disabled' | translate }}</span>
-              }
-            </div>
-          </mat-slide-toggle>
-        </td>
-      </ng-container>
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Value' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">{{ configuration.value }}</td>
-      </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Value' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration" class="ms-cell-muted">{{ configuration.value }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="stringValue">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.String Value' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">{{ configuration.stringValue }}</td>
-      </ng-container>
+        <ng-container matColumnDef="stringValue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.String Value' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration" class="ms-cell-muted">{{ configuration.stringValue }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="dateValue">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Date Value' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">{{ configuration.dateValue | dateFormat }}</td>
-      </ng-container>
+        <ng-container matColumnDef="dateValue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Date Value' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration" class="ms-cell-muted">
+            {{ configuration.dateValue | dateFormat }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
-        <td mat-cell *matCellDef="let configuration">
-          <button mat-button color="primary" [routerLink]="[configuration.id, 'edit']">
-            <fa-icon icon="edit"></fa-icon>
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
+          <td mat-cell *matCellDef="let configuration">
+            <button
+              mat-icon-button
+              color="primary"
+              [attr.aria-label]="'labels.buttons.Edit' | translate"
+              [routerLink]="[configuration.id, 'edit']"
+            >
+              <fa-icon icon="edit"></fa-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-mdc-row" *matNoDataRow>
+          <td class="mat-mdc-cell ms-empty-cell" [attr.colspan]="displayedColumns.length">
+            {{ 'labels.text.No results found' | translate }}
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
@@ -85,14 +104,14 @@
 <ng-template #templateFilter let-data let-popover="popover">
   <h4>{{ 'labels.heading.Search bar to filter configurations' | translate }}</h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStep()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateConfigurationsTable, configurationsTable, 'top', true)"
     >
@@ -109,17 +128,17 @@
     }}</a>
   </h4>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="popover.close(); showPopover(templateFilter, filter, 'bottom', true)"
     >
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStep()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStep()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

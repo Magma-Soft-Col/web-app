@@ -19,7 +19,6 @@ import {
 } from '@angular/core';
 import { Accounting } from 'app/core/utils/accounting';
 import { OptionData } from 'app/shared/models/option-data.model';
-import { MatDivider } from '@angular/material/divider';
 import {
   MatTable,
   MatColumnDef,
@@ -46,7 +45,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   styleUrls: ['./saving-product-preview-step.component.scss'],
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
-    MatDivider,
     MatTable,
     MatColumnDef,
     MatHeaderCellDef,

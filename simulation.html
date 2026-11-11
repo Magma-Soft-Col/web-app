@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Ahorro para Estudios Superiores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        .perspective-3d {
+            transform: perspective(1000px) rotateX(10deg);
+            transform-style: preserve-3d;
+        }
+        .bar-3d {
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        .bar-3d:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                Simulador de Ahorro para Estudios Superiores
+            </h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Planifica tu ahorro para cubrir al menos 3 semestres de universidad en Colombia.
+                Utilizamos proyecciones oficiales de inflación para cálculos más realistas.
+            </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Form Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Configura tu Plan de Ahorro</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Costo por Semestre (COP)
+                                <span class="ml-2 text-xs text-gray-500">Costo estimado de un semestre</span>
+                            </label>
+                            <input type="number" id="costoSemestre" value="10000000" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Número de Semestres
+                                <span class="ml-2 text-xs text-red-600 font-semibold">Mínimo: 3 semestres</span>
+                            </label>
+                            <input type="number" id="numSemestres" value="3" min="3" max="8"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-yellow-800 mb-2">Inflación Proyectada</h3>
+                            <p class="text-sm text-yellow-700 mb-2">Basada en proyecciones del Banco de la República:</p>
+                            <div class="text-xs space-y-1">
+                                <div class="flex justify-between"><span>2024:</span><span>5.5%</span></div>
+                                <div class="flex justify-between"><span>2025:</span><span>4.5%</span></div>
+                                <div class="flex justify-between"><span>2026:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2027:</span><span>22.0%</span></div>
+                                <div class="flex justify-between"><span>2028:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2029:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2030:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2031:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2032:</span><span>15.0%</span></div>
+                                <div class="flex justify-between"><span>2033:</span><span>3.0%</span></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Ahorro Mensual (COP)
+                            </label>
+                            <input type="number" id="ahorroMensual" value="200000"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Ahorro Semestral (COP)
+                            </label>
+                            <input type="number" id="ahorroSemestral" value="1000000"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Plazo en Años
+                            </label>
+                            <input type="number" id="plazoAnios" value="4" min="1" max="10"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <button id="calcularBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">
+                            Calcular Plan de Ahorro
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Resumen del Plan de Ahorro</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Meta de Ahorro</h3>
+                            <p class="text-2xl font-bold text-blue-600" id="metaAhorro">$30,000,000</p>
+                            <p class="text-sm text-blue-700 mt-1" id="textoMeta">para 3 semestres (mínimo)</p>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                            <h3 class="text-lg font-semibold text-green-800 mb-2">Total Ahorrado</h3>
+                            <p class="text-2xl font-bold text-green-600" id="totalAhorrado">$0</p>
+                            <p class="text-sm text-green-700 mt-1">incluyendo intereses</p>
+                        </div>
+                        
+                        <div class="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">Intereses Generados</h3>
+                            <p class="text-2xl font-bold text-purple-600" id="interesesGenerados">$0</p>
+                            <p class="text-sm text-purple-700 mt-1">con inflación proyectada</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold mb-2" id="estadoMeta">Calculando...</h3>
+                            <div class="w-full bg-gray-200 rounded-full h-4 mt-2">
+                                <div class="h-4 rounded-full bg-blue-500" id="progressBar" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm mt-2" id="porcentajeMeta">0% completado</p>
+                        </div>
+                    </div>
+
+                    <!-- 3D Chart -->
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Evolución del Ahorro (Gráfico 3D)</h3>
+                        <div class="chart-container perspective-3d">
+                            <canvas id="ahorroChart"></canvas>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            * Visualización 3D del crecimiento de tu ahorro a lo largo del tiempo con efecto de profundidad.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Table -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Plan de Ahorro Detallado</h2>
+                        <button id="downloadBtn" class="btn-download">
+                            Descargar Resultados
+                        </button>
+                    </div>
+                    <div class="table-container bg-gray-50 rounded-lg p-4">
+                        <table class="w-full text-sm min-w-full" id="tablaResultados">
+                            <thead class="bg-gray-100 sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mes/Año</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inflación</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ahorro Mensual</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ahorro Semestral</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intereses</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Saldo Acumulado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="tablaBody">
+                                <tr>
+                                    <td colspan="6" class="px-4 py-8 text-center text-gray-500">Configura los valores y haz clic en "Calcular Plan de Ahorro"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500 text-center">
+                        Desplaza la tabla verticalmente para ver todos los resultados.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="mt-10 bg-white rounded-xl shadow-lg p-6 card">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Consejos para tu Plan de Ahorro</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                    <h3 class="font-semibold text-blue-800 mb-2">📊 Proyecciones Realistas</h3>
+                    <p class="text-sm text-blue-700">Hemos utilizado proyecciones oficiales de inflación para que tus cálculos sean más precisos y te prepares adecuadamente para el futuro.</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 border border-green-100">
+                    <h3 class="font-semibold text-green-800 mb-2">💰 Ajusta tu ahorro</h3>
+                    <p class="text-sm text-green-700">Si no alcanzas tu meta, aumenta tu ahorro mensual o considera aportes semestrales adicionales cuando recibas ingresos extra.</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 border border-purple-100">
+                    <h3 class="font-semibold text-purple-800 mb-2">⏳ El tiempo es tu aliado</h3>
+                    <p class="text-sm text-purple-700">Extender tu plazo de ahorro reduce lo que necesitas ahorrar mensualmente gracias al efecto de los intereses acumulados.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-10 text-center text-sm text-gray-500">
+            <p>Simulador de Ahorro para Estudios Superiores en Colombia</p>
+            <p class="mt-1">Los cálculos son estimativos y se basan en proyecciones de inflación del Banco de la República.</p>
+        </div>
+    </div>
+
+    <script>
+        // Proyecciones de inflación del Banco de la República de Colombia
+        const inflacionProyectada = {
+            2024: 5.5,
+            2025: 4.5,
+            2026: 15.0,
+            2027: 22.0,
+            2028: 15.0,
+            2029: 15.0,
+            2030: 15.0,
+            2031: 3.1,
+            2032: 3.0,
+            2033: 3.0
+        };
+
+        let ahorroChart = null;
+
+        // Formatear moneda en formato colombiano
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        // Crear gráfico 3D con Chart.js
+        function crearGrafico3D(labels, data, meta) {
+            const ctx = document.getElementById('ahorroChart').getContext('2d');
+            
+            // Destruir gráfico anterior si existe
+            if (ahorroChart) {
+                ahorroChart.destroy();
+            }
+            
+            // Crear nuevo gráfico con efecto 3D usando sombras y gradientes
+            ahorroChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Saldo Acumulado',
+                        data: data,
+                        backgroundColor: function(context) {
+                            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                            gradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
+                            gradient.addColorStop(1, 'rgba(59, 130, 246, 0.4)');
+                            return gradient;
+                        },
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        borderSkipped: false,
+                        barPercentage: 0.8,
+                        categoryPercentage: 0.9,
+                        // Simular efecto 3D con sombras
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top'
+                        }
+                    },
+                    {
+                        label: 'Meta',
+                        data: Array(labels.length).fill(meta),
+                        type: 'line',
+                        borderColor: 'rgba(239, 68, 68, 0.8)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatCurrency(context.raw)}`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Evolución del Ahorro a lo largo del tiempo',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                },
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Valor en COP',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Periodo (Meses)',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Calcular plan de ahorro
+        function calcularPlanAhorro() {
+            // Obtener valores del formulario
+            const costoSemestre = parseFloat(document.getElementById('costoSemestre').value) || 0;
+            let numSemestres = parseFloat(document.getElementById('numSemestres').value) || 0;
+            
+            // Asegurar mínimo de 3 semestres
+            if (numSemestres < 3) {
+                numSemestres = 3;
+                document.getElementById('numSemestres').value = 3;
+            }
+            
+            const ahorroMensual = parseFloat(document.getElementById('ahorroMensual').value) || 0;
+            const ahorroSemestral = parseFloat(document.getElementById('ahorroSemestral').value) || 0;
+            const plazoAnios = parseFloat(document.getElementById('plazoAnios').value) || 0;
+            
+            // Calcular meta
+            const meta = costoSemestre * numSemestres;
+            const totalMeses = plazoAnios * 12;
+            const anioInicio = new Date().getFullYear();
+            
+            // Inicializar variables
+            let saldo = 0;
+            let resultados = [];
+            let totalIntereses = 0;
+
+            // Calcular mes por mes
+            for (let mes = 1; mes <= totalMeses; mes++) {
+                // Determinar el año actual en la simulación
+                const anioActual = anioInicio + Math.floor((mes - 1) / 12);
+                // Obtener la tasa de inflación proyectada para ese año
+                const tasaAnual = inflacionProyectada[anioActual] || 3.0;
+                const tasaMensual = tasaAnual / 100 / 12;
+
+                // Añadir ahorro mensual
+                saldo += ahorroMensual;
+                
+                // Añadir ahorro semestral (cada 6 meses)
+                if (mes % 6 === 0) {
+                    saldo += ahorroSemestral;
+                }
+                
+                // Calcular intereses del mes
+                const interesesMes = saldo * tasaMensual;
+                saldo += interesesMes;
+                totalIntereses += interesesMes;
+                
+                // Guardar resultado del mes
+                resultados.push({
+                    mes,
+                    anio: anioActual,
+                    tasaInflacion: tasaAnual,
+                    ahorroMensual,
+                    ahorroSemestral: mes % 6 === 0 ? ahorroSemestral : 0,
+                    intereses: interesesMes,
+                    saldoAcumulado: saldo
+                });
+            }
+
+            // Actualizar resultados en la interfaz
+            document.getElementById('metaAhorro').textContent = formatCurrency(meta);
+            document.getElementById('textoMeta').textContent = `para ${numSemestres} semestres (mínimo)`;
+            document.getElementById('totalAhorrado').textContent = formatCurrency(saldo);
+            document.getElementById('interesesGenerados').textContent = formatCurrency(totalIntereses);
+            
+            // Calcular y mostrar porcentaje completado
+            const porcentaje = Math.min((saldo / meta) * 100, 100);
+            document.getElementById('porcentajeMeta').textContent = `${porcentaje.toFixed(1)}% completado`;
+            document.getElementById('progressBar').style.width = `${porcentaje}%`;
+            
+            // Actualizar estado de la meta
+            if (saldo >= meta) {
+                document.getElementById('estadoMeta').textContent = '¡Meta Alcanzada!';
+                document.getElementById('estadoMeta').className = 'text-lg font-semibold text-green-800 mb-2';
+                document.getElementById('progressBar').className = 'h-4 rounded-full bg-green-500';
+            } else {
+                document.getElementById('estadoMeta').textContent = 'Meta No Alcanzada';
+                document.getElementById('estadoMeta').className = 'text-lg font-semibold text-red-800 mb-2';
+                document.getElementById('progressBar').className = 'h-4 rounded-full bg-red-500';
+            }
+
+            // Crear gráfico 3D
+            const labels = [];
+            const data = [];
+            const step = Math.max(1, Math.floor(resultados.length / 12));
+            
+            for (let i = 0; i < resultados.length; i += step) {
+                labels.push(`Mes ${resultados[i].mes}`);
+                data.push(resultados[i].saldoAcumulado);
+            }
+            
+            // Si no hay suficientes puntos, agregar el último
+            if (resultados.length > 0 && !labels.includes(`Mes ${resultados[resultados.length-1].mes}`)) {
+                labels.push(`Mes ${resultados[resultados.length-1].mes}`);
+                data.push(resultados[resultados.length-1].saldoAcumulado);
+            }
+            
+            crearGrafico3D(labels, data, meta);
+
+            // Actualizar tabla
+            const tablaBody = document.getElementById('tablaBody');
+            tablaBody.innerHTML = '';
+            
+            // Mostrar todos los resultados
+            if (resultados.length === 0) {
+                tablaBody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-gray-500">No hay resultados para mostrar</td></tr>';
+            } else {
+                resultados.forEach(resultado => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50 transition-colors duration-150';
+                    tr.innerHTML = `
+                        <td class="px-4 py-3 whitespace-nowrap">${resultado.mes} (${resultado.anio})</td>
+                        <td class="px-4 py-3 whitespace-nowrap">${resultado.tasaInflacion}%</td>
+                        <td class="px-4 py-3 whitespace-nowrap">${formatCurrency(resultado.ahorroMensual)}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">${formatCurrency(resultado.ahorroSemestral)}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">${formatCurrency(resultado.intereses)}</td>
+                        <td class="px-4 py-3 whitespace-nowrap font-medium">${formatCurrency(resultado.saldoAcumulado)}</td>
+                    `;
+                    tablaBody.appendChild(tr);
+                });
+            }
+            
+            // Guardar resultados para la descarga
+            window.resultadosSimulacion = {
+                parametros: {
+                    costoSemestre,
+                    numSemestres,
+                    ahorroMensual,
+                    ahorroSemestral,
+                    plazoAnios,
+                    meta
+                },
+                resultados,
+                totales: {
+                    totalAhorrado: saldo,
+                    totalIntereses,
+                    porcentaje,
+                    metaAlcanzada: saldo >= meta
+                }
+            };
+        }
+
+        // Descargar resultados
+        function descargarResultados() {
+            if (!window.resultadosSimulacion) {
+                alert("Por favor, calcula primero tu plan de ahorro.");
+                return;
+            }
+            
+            const { parametros, resultados, totales } = window.resultadosSimulacion;
+            
+            // Crear contenido para el archivo
+            let contenido = `SIMULADOR DE AHORRO PARA ESTUDIOS SUPERIORES\n`;
+            contenido += `=========================================\n\n`;
+            contenido += `PARÁMETROS DEL PLAN:\n`;
+            contenido += `Costo por semestre: ${formatCurrency(parametros.costoSemestre)}\n`;
+            contenido += `Número de semestres: ${parametros.numSemestres} (mínimo 3)\n`;
+            contenido += `Meta total: ${formatCurrency(parametros.meta)}\n`;
+            contenido += `Ahorro mensual: ${formatCurrency(parametros.ahorroMensual)}\n`;
+            contenido += `Ahorro semestral: ${formatCurrency(parametros.ahorroSemestral)}\n`;
+            contenido += `Plazo: ${parametros.plazoAnios} años\n\n`;
+            contenido += `RESULTADOS:\n`;
+            contenido += `Total ahorrado: ${formatCurrency(totales.totalAhorrado)}\n`;
+            contenido += `Intereses generados: ${formatCurrency(totales.totalIntereses)}\n`;
+            contenido += `Porcentaje completado: ${totales.porcentaje.toFixed(2)}%\n`;
+            contenido += `Estado: ${totales.metaAlcanzada ? '¡META ALCANZADA!' : 'META NO ALCANZADA'}\n\n`;
+            contenido += `DETALLE COMPLETO POR MES:\n`;
+            contenido += `Mes, Año, Tasa Inflación(%), Ahorro Mensual, Ahorro Semestral, Intereses, Saldo Acumulado\n`;
+            
+            // Agregar todos los datos
+            resultados.forEach(resultado => {
+                contenido += `${resultado.mes}, ${resultado.anio}, ${resultado.tasaInflacion}, ${formatCurrency(resultado.ahorroMensual)}, ${formatCurrency(resultado.ahorroSemestral)}, ${formatCurrency(resultado.intereses)}, ${formatCurrency(resultado.saldoAcumulado)}\n`;
+            });
+            
+            // Crear y descargar el archivo
+            const blob = new Blob([contenido], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'plan_ahorro_estudios_completo.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.getElementById('calcularBtn').addEventListener('click', calcularPlanAhorro);
+        document.getElementById('downloadBtn').addEventListener('click', descargarResultados);
+        
+        // Calcular automáticamente al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            calcularPlanAhorro();
+            
+            // Agregar eventos para recalcular al cambiar valores
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Asegurar mínimo de 3 semestres
+                    if (this.id === 'numSemestres' && parseFloat(this.value) < 3) {
+                        this.value = 3;
+                    }
+                    calcularPlanAhorro();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

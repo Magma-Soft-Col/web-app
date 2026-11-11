@@ -6,23 +6,51 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+.section-heading {
+  margin-bottom: var(--ms-space-4);
+}
+
+.immutable-fields {
+  margin-bottom: var(--ms-space-4);
+}
+
 .connection-explanation,
-.provisioning-note {
-  color: var(--md-sys-color-on-surface-variant, #44474e);
+.provisioning-note,
+.connection-note,
+.immutable-note,
+.password-note {
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
+}
+
+.immutable-note {
+  margin-left: var(--ms-space-2);
 }
 
 .provisioning-note {
-  margin-top: 16px;
+  margin-top: var(--ms-space-4);
+}
+
+.connection-test {
+  display: flex;
+  align-items: center;
+  gap: var(--ms-space-4);
+  flex-wrap: wrap;
+  margin-top: var(--ms-space-4);
+  font-size: var(--ms-font-size-table);
 }
 
 .connection-reachable {
-  color: var(--md-sys-color-primary, #1074b9);
+  color: var(--ms-color-success);
 }
 
-.connection-note {
-  color: var(--md-sys-color-on-surface-variant, #44474e);
+.connection-unreachable,
+.password-unproven {
+  color: var(--ms-color-danger);
 }
 
-.connection-unreachable {
-  color: var(--md-sys-color-error, #ba1a1a);
+.password-unproven {
+  display: flex;
+  align-items: center;
+  font-size: var(--ms-font-size-table);
 }

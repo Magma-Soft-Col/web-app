@@ -6,8 +6,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use '../../../../assets/styles/colours' as *;
-
 .spreadsheet-title {
   overflow-wrap: anywhere;
 }
@@ -20,43 +18,53 @@
 .sheet-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  margin-bottom: 0.75rem;
+  gap: var(--ms-space-1);
+  margin-bottom: var(--ms-space-3);
 }
 
 .sheet-tab {
-  border: 1px solid $silver;
-  border-radius: 4px;
-  background: $white;
-  color: $dark-grey;
-  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--ms-color-border);
+  border-radius: var(--ms-radius-control);
+  background: var(--ms-color-surface);
+  color: var(--ms-color-text-secondary);
+  padding: var(--ms-space-1) var(--ms-space-3);
   font: inherit;
+  font-size: var(--ms-font-size-label);
+  font-weight: 500;
   cursor: pointer;
 
+  &:hover {
+    background: var(--ms-color-surface-hover);
+  }
+
   &.active {
-    background: $clouds;
-    font-weight: 700;
+    background: var(--ms-color-brand-primary-subtle);
+    border-color: var(--ms-color-brand-primary);
+    color: var(--ms-color-brand-primary);
+    font-weight: 600;
   }
 }
 
 .grid-scroll {
   overflow: auto;
   max-height: 60vh;
-  border: 1px solid $silver;
-  border-radius: 4px;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
 }
 
 .spreadsheet-grid {
   border-collapse: collapse;
-  font-size: 0.8125rem;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-primary);
+  font-variant-numeric: tabular-nums;
   // Let wide content scroll rather than squeezing every column into the dialog width.
   width: max-content;
   min-width: 100%;
 
   th,
   td {
-    border: 1px solid $silver;
-    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--ms-color-border-subtle);
+    padding: var(--ms-space-1) var(--ms-space-2);
     text-align: left;
     vertical-align: top;
     // A single outsized cell must not stretch the whole grid past the point of usefulness.
@@ -69,9 +77,9 @@
   thead th,
   .gutter {
     position: sticky;
-    background: $clouds;
-    color: $asbestos;
-    font-weight: 700;
+    background: var(--ms-color-surface-subtle);
+    color: var(--ms-color-text-secondary);
+    font-weight: 600;
     text-align: center;
   }
 
@@ -92,10 +100,11 @@
 }
 
 .muted {
-  color: $concrete;
+  color: var(--ms-color-text-secondary);
 }
 
 .truncation-note {
-  margin: 0.5rem 0 0;
-  font-size: 0.8125rem;
+  margin: var(--ms-space-2) 0 0;
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

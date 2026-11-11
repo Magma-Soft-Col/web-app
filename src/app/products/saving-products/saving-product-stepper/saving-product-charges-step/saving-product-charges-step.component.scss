@@ -6,14 +6,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-table {
+.ms-table-panel {
+  margin: var(--ms-space-3) 0 var(--ms-space-5);
+}
+
+.ms-detail-table {
   width: 100%;
 }
 
-.mat-elevation-z1 {
-  margin: 1em 0 1.5em;
-}
-
+/* Step footer: secondary + primary aligned right (pen). */
 .margin-t {
-  margin-top: 1em;
+  margin-top: var(--ms-space-5);
 }

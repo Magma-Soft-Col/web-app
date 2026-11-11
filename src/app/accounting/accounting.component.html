@@ -7,300 +7,166 @@
 -->
 
 <div class="container">
-  <mat-card>
-    <div class="layout-row responsive-column gap-20px">
-      <div class="flex-50">
-        <mat-nav-list>
-          <mat-list-item *mifosxHasPermission="'CREATE_JOURNALENTRY'">
-            <div class="menu-list-item-content">
-              <div class="menu-left-section" [routerLink]="['journal-entries/frequent-postings']">
-                <mat-icon matListIcon>
-                  <fa-icon icon="sync" size="sm"></fa-icon>
-                </mat-icon>
-                <div matLine>
-                  {{ 'labels.heading.Frequent Postings' | translate }}
-                  @if (arrowBooleans[0]) {
-                    <p matLine [routerLink]="['journal-entries/frequent-postings']" class="menu-explanation">
-                      {{ 'labels.text.These are predefined postings' | translate }}
-                    </p>
-                  }
-                </div>
-              </div>
-              <div class="menu-right-section">
-                @if (!arrowBooleans[0]) {
-                  <fa-icon (click)="arrowBooleansToggle(0)" icon="arrow-down" size="md"></fa-icon>
-                }
-                @if (arrowBooleans[0]) {
-                  <fa-icon (click)="arrowBooleansToggle(0)" icon="arrow-up" size="md"></fa-icon>
-                }
-              </div>
-            </div>
-          </mat-list-item>
+  <div class="ms-settings-grid">
+    <nav class="ms-panel ms-settings-list">
+      <a
+        class="ms-settings-row"
+        [routerLink]="['journal-entries/frequent-postings']"
+        *mifosxHasPermission="'CREATE_JOURNALENTRY'"
+      >
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="sync"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Frequent Postings' | translate }}</span>
+          <span class="ms-settings-row__desc">{{ 'labels.text.These are predefined postings' | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
 
-          <div #createJournalEntries>
-            <mat-list-item *mifosxHasPermission="'CREATE_JOURNALENTRY'">
-              <div class="menu-list-item-content">
-                <div class="menu-left-section" [routerLink]="['journal-entries/create']">
-                  <mat-icon matListIcon>
-                    <fa-icon icon="plus" size="sm"></fa-icon>
-                  </mat-icon>
-                  <div matLine>
-                    {{ 'labels.heading.Create Journal Entries' | translate }}
-                    @if (arrowBooleans[1]) {
-                      <p matLine [routerLink]="['journal-entries/create']" class="menu-explanation">
-                        {{ 'labels.text.Manual journal entry transactions recorded in a journal' | translate }}
-                      </p>
-                    }
-                  </div>
-                </div>
-                <div class="menu-right-section">
-                  @if (!arrowBooleans[1]) {
-                    <fa-icon (click)="arrowBooleansToggle(1)" icon="arrow-down" size="md"></fa-icon>
-                  }
-                  @if (arrowBooleans[1]) {
-                    <fa-icon (click)="arrowBooleansToggle(1)" icon="arrow-up" size="md"></fa-icon>
-                  }
-                </div>
-              </div>
-            </mat-list-item>
-          </div>
-
-          <mat-list-item *mifosxHasPermission="'READ_JOURNALENTRY'">
-            <div class="menu-list-item-content">
-              <div class="menu-left-section" [routerLink]="['journal-entries']">
-                <mat-icon matListIcon>
-                  <fa-icon icon="search" size="sm"></fa-icon>
-                </mat-icon>
-                <div matLine>
-                  {{ 'labels.heading.Search Journal Entries' | translate }}
-                  @if (arrowBooleans[2]) {
-                    <p matLine [routerLink]="['journal-entries']" class="menu-explanation">
-                      {{ 'labels.text.Advanced search option for journal entries' | translate }}
-                    </p>
-                  }
-                </div>
-              </div>
-              <div class="menu-right-section">
-                @if (!arrowBooleans[2]) {
-                  <fa-icon (click)="arrowBooleansToggle(2)" icon="arrow-down" size="md"></fa-icon>
-                }
-                @if (arrowBooleans[2]) {
-                  <fa-icon (click)="arrowBooleansToggle(2)" icon="arrow-up" size="md"></fa-icon>
-                }
-              </div>
-            </div>
-          </mat-list-item>
-
-          <div #accountsLinked>
-            <mat-list-item *mifosxHasPermission="'READ_FINANCIALACTIVITYACCOUNT'">
-              <div class="menu-list-item-content">
-                <div class="menu-left-section" [routerLink]="['financial-activity-mappings']">
-                  <mat-icon matListIcon>
-                    <fa-icon icon="link" size="sm"></fa-icon>
-                  </mat-icon>
-                  <div matLine>
-                    {{ 'labels.heading.Accounts Linked to Financial Activities' | translate }}
-                    @if (arrowBooleans[3]) {
-                      <p matLine [routerLink]="['financial-activity-mappings']" class="menu-explanation">
-                        {{ 'labels.text.List of Financial Activities and GL Account Mappings' | translate }}
-                      </p>
-                    }
-                  </div>
-                </div>
-                <div class="menu-right-section">
-                  @if (!arrowBooleans[3]) {
-                    <fa-icon (click)="arrowBooleansToggle(3)" icon="arrow-down" size="md"></fa-icon>
-                  }
-                  @if (arrowBooleans[3]) {
-                    <fa-icon (click)="arrowBooleansToggle(3)" icon="arrow-up" size="md"></fa-icon>
-                  }
-                </div>
-              </div>
-            </mat-list-item>
-          </div>
-
-          <div #migrateOpeningBalances>
-            <mat-list-item *mifosxHasPermission="'READ_JOURNALENTRY'">
-              <div class="menu-list-item-content">
-                <div class="menu-left-section" [routerLink]="['migrate-opening-balances']">
-                  <mat-icon matListIcon>
-                    <fa-icon icon="hand-holding-usd" size="sm"></fa-icon>
-                  </mat-icon>
-                  <div matLine>
-                    {{ 'labels.heading.Migrate Opening Balances (Office-wise)' | translate }}
-                    @if (arrowBooleans[4]) {
-                      <p matLine [routerLink]="['migrate-opening-balances']" class="menu-explanation">
-                        {{ 'labels.text.Set or update office-level opening balances for GL accounts' | translate }}
-                      </p>
-                    }
-                  </div>
-                </div>
-                <div class="menu-right-section">
-                  @if (!arrowBooleans[4]) {
-                    <fa-icon (click)="arrowBooleansToggle(4)" icon="arrow-down" size="md"></fa-icon>
-                  }
-                  @if (arrowBooleans[4]) {
-                    <fa-icon (click)="arrowBooleansToggle(4)" icon="arrow-up" size="md"></fa-icon>
-                  }
-                </div>
-              </div>
-            </mat-list-item>
-          </div>
-        </mat-nav-list>
+      <div #createJournalEntries>
+        <a
+          class="ms-settings-row"
+          [routerLink]="['journal-entries/create']"
+          *mifosxHasPermission="'CREATE_JOURNALENTRY'"
+        >
+          <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="plus"></fa-icon></span>
+          <span class="ms-settings-row__text">
+            <span class="ms-settings-row__title">{{ 'labels.heading.Create Journal Entries' | translate }}</span>
+            <span class="ms-settings-row__desc">{{
+              'labels.text.Manual journal entry transactions recorded in a journal' | translate
+            }}</span>
+          </span>
+          <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+        </a>
       </div>
 
-      <div class="flex-50">
-        <mat-nav-list>
-          <div #chartofAccounts>
-            <mat-list-item *mifosxHasPermission="'READ_GLACCOUNT'">
-              <div class="menu-list-item-content">
-                <div class="menu-left-section" [routerLink]="['chart-of-accounts']">
-                  <mat-icon matListIcon>
-                    <fa-icon icon="sitemap" size="sm"></fa-icon>
-                  </mat-icon>
-                  <div matLine>
-                    {{ 'labels.heading.Chart of Accounts' | translate }}
-                    @if (arrowBooleans[5]) {
-                      <p matLine [routerLink]="['chart-of-accounts']" class="menu-explanation">
-                        {{ 'labels.text.List of accounts used by the organization' | translate }}
-                      </p>
-                    }
-                  </div>
-                </div>
-                <div class="menu-right-section">
-                  @if (!arrowBooleans[5]) {
-                    <fa-icon (click)="arrowBooleansToggle(5)" icon="arrow-down" size="md"></fa-icon>
-                  }
-                  @if (arrowBooleans[5]) {
-                    <fa-icon (click)="arrowBooleansToggle(5)" icon="arrow-up" size="md"></fa-icon>
-                  }
-                </div>
-              </div>
-            </mat-list-item>
-          </div>
+      <a class="ms-settings-row" [routerLink]="['journal-entries']" *mifosxHasPermission="'READ_JOURNALENTRY'">
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="search"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Search Journal Entries' | translate }}</span>
+          <span class="ms-settings-row__desc">{{
+            'labels.text.Advanced search option for journal entries' | translate
+          }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
 
-          <div #closingEntries>
-            <mat-list-item *mifosxHasPermission="'READ_GLCLOSURE'">
-              <div class="menu-list-item-content">
-                <div class="menu-left-section" [routerLink]="['closing-entries']">
-                  <mat-icon matListIcon>
-                    <fa-icon icon="archive" size="sm"></fa-icon>
-                  </mat-icon>
-                  <div matLine>
-                    {{ 'labels.heading.Closing Entries' | translate }}
-                    @if (arrowBooleans[6]) {
-                      <p matLine [routerLink]="['closing-entries']" class="menu-explanation">
-                        {{ 'labels.text.Journal entries made at the end of accounting period' | translate }}
-                      </p>
-                    }
-                  </div>
-                </div>
-                <div class="menu-right-section">
-                  @if (!arrowBooleans[6]) {
-                    <fa-icon (click)="arrowBooleansToggle(6)" icon="arrow-down" size="md"></fa-icon>
-                  }
-                  @if (arrowBooleans[6]) {
-                    <fa-icon (click)="arrowBooleansToggle(6)" icon="arrow-up" size="md"></fa-icon>
-                  }
-                </div>
-              </div>
-            </mat-list-item>
-          </div>
-
-          <mat-list-item *mifosxHasPermission="'READ_ACCOUNTINGRULE'">
-            <div class="menu-list-item-content">
-              <div class="menu-left-section" [routerLink]="['accounting-rules']">
-                <mat-icon matListIcon>
-                  <fa-icon icon="list" size="sm"></fa-icon>
-                </mat-icon>
-                <div matLine>
-                  {{ 'labels.heading.Accounting Rules' | translate }}
-                  @if (arrowBooleans[7]) {
-                    <p matLine [routerLink]="['accounting-rules']" class="menu-explanation">
-                      {{ 'labels.text.List of all accounting rules' | translate }}
-                    </p>
-                  }
-                </div>
-              </div>
-              <div class="menu-right-section">
-                @if (!arrowBooleans[7]) {
-                  <fa-icon (click)="arrowBooleansToggle(7)" icon="arrow-down" size="md"></fa-icon>
-                }
-                @if (arrowBooleans[7]) {
-                  <fa-icon (click)="arrowBooleansToggle(7)" icon="arrow-up" size="md"></fa-icon>
-                }
-              </div>
-            </div>
-          </mat-list-item>
-
-          <mat-list-item *mifosxHasPermission="'EXECUTE_PERIODICACCRUALACCOUNTING'">
-            <div class="menu-list-item-content">
-              <div class="menu-left-section" [routerLink]="['periodic-accruals']">
-                <mat-icon matListIcon>
-                  <fa-icon icon="calendar" size="sm"></fa-icon>
-                </mat-icon>
-                <div matLine>
-                  {{ 'labels.heading.Accruals' | translate }}
-                  @if (arrowBooleans[8]) {
-                    <p matLine [routerLink]="['periodic-accruals']" class="menu-explanation">
-                      {{ 'labels.text.Accrues income, expenses and liabilities' | translate }}
-                    </p>
-                  }
-                </div>
-              </div>
-              <div class="menu-right-section">
-                @if (!arrowBooleans[8]) {
-                  <fa-icon (click)="arrowBooleansToggle(8)" icon="arrow-down" size="md"></fa-icon>
-                }
-                @if (arrowBooleans[8]) {
-                  <fa-icon (click)="arrowBooleansToggle(8)" icon="arrow-up" size="md"></fa-icon>
-                }
-              </div>
-            </div>
-          </mat-list-item>
-
-          <mat-list-item *mifosxHasPermission="'VIEW_PROVISIONING_ENTRIES'">
-            <div class="menu-list-item-content">
-              <div class="menu-left-section" [routerLink]="['provisioning-entries']">
-                <mat-icon matListIcon>
-                  <fa-icon icon="cogs" size="sm"></fa-icon>
-                </mat-icon>
-                <div matLine>
-                  {{ 'labels.heading.Provisioning Entries' | translate }}
-                  @if (arrowBooleans[9]) {
-                    <p matLine [routerLink]="['provisioning-entries']" class="menu-explanation">
-                      {{ 'labels.text.Create provisioning entries' | translate }}
-                    </p>
-                  }
-                </div>
-              </div>
-              <div class="menu-right-section">
-                @if (!arrowBooleans[9]) {
-                  <fa-icon (click)="arrowBooleansToggle(9)" icon="arrow-down" size="md"></fa-icon>
-                }
-                @if (arrowBooleans[9]) {
-                  <fa-icon (click)="arrowBooleansToggle(9)" icon="arrow-up" size="md"></fa-icon>
-                }
-              </div>
-            </div>
-          </mat-list-item>
-        </mat-nav-list>
+      <div #accountsLinked>
+        <a
+          class="ms-settings-row"
+          [routerLink]="['financial-activity-mappings']"
+          *mifosxHasPermission="'READ_FINANCIALACTIVITYACCOUNT'"
+        >
+          <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="link"></fa-icon></span>
+          <span class="ms-settings-row__text">
+            <span class="ms-settings-row__title">{{
+              'labels.heading.Accounts Linked to Financial Activities' | translate
+            }}</span>
+            <span class="ms-settings-row__desc">{{
+              'labels.text.List of Financial Activities and GL Account Mappings' | translate
+            }}</span>
+          </span>
+          <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+        </a>
       </div>
-    </div>
-  </mat-card>
+
+      <div #migrateOpeningBalances>
+        <a
+          class="ms-settings-row"
+          [routerLink]="['migrate-opening-balances']"
+          *mifosxHasPermission="'READ_JOURNALENTRY'"
+        >
+          <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="hand-holding-usd"></fa-icon></span>
+          <span class="ms-settings-row__text">
+            <span class="ms-settings-row__title">{{
+              'labels.heading.Migrate Opening Balances (Office-wise)' | translate
+            }}</span>
+            <span class="ms-settings-row__desc">{{
+              'labels.text.Set or update office-level opening balances for GL accounts' | translate
+            }}</span>
+          </span>
+          <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+        </a>
+      </div>
+    </nav>
+
+    <nav class="ms-panel ms-settings-list">
+      <div #chartofAccounts>
+        <a class="ms-settings-row" [routerLink]="['chart-of-accounts']" *mifosxHasPermission="'READ_GLACCOUNT'">
+          <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="sitemap"></fa-icon></span>
+          <span class="ms-settings-row__text">
+            <span class="ms-settings-row__title">{{ 'labels.heading.Chart of Accounts' | translate }}</span>
+            <span class="ms-settings-row__desc">{{
+              'labels.text.List of accounts used by the organization' | translate
+            }}</span>
+          </span>
+          <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+        </a>
+      </div>
+
+      <div #closingEntries>
+        <a class="ms-settings-row" [routerLink]="['closing-entries']" *mifosxHasPermission="'READ_GLCLOSURE'">
+          <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="archive"></fa-icon></span>
+          <span class="ms-settings-row__text">
+            <span class="ms-settings-row__title">{{ 'labels.heading.Closing Entries' | translate }}</span>
+            <span class="ms-settings-row__desc">{{
+              'labels.text.Journal entries made at the end of accounting period' | translate
+            }}</span>
+          </span>
+          <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+        </a>
+      </div>
+
+      <a class="ms-settings-row" [routerLink]="['accounting-rules']" *mifosxHasPermission="'READ_ACCOUNTINGRULE'">
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="list"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Accounting Rules' | translate }}</span>
+          <span class="ms-settings-row__desc">{{ 'labels.text.List of all accounting rules' | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
+
+      <a
+        class="ms-settings-row"
+        [routerLink]="['periodic-accruals']"
+        *mifosxHasPermission="'EXECUTE_PERIODICACCRUALACCOUNTING'"
+      >
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="calendar"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Accruals' | translate }}</span>
+          <span class="ms-settings-row__desc">{{
+            'labels.text.Accrues income, expenses and liabilities' | translate
+          }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
+
+      <a
+        class="ms-settings-row"
+        [routerLink]="['provisioning-entries']"
+        *mifosxHasPermission="'VIEW_PROVISIONING_ENTRIES'"
+      >
+        <span class="ms-icon-wrap" aria-hidden="true"><fa-icon icon="cogs"></fa-icon></span>
+        <span class="ms-settings-row__text">
+          <span class="ms-settings-row__title">{{ 'labels.heading.Provisioning Entries' | translate }}</span>
+          <span class="ms-settings-row__desc">{{ 'labels.text.Create provisioning entries' | translate }}</span>
+        </span>
+        <fa-icon class="ms-settings-row__chevron" icon="chevron-right" aria-hidden="true"></fa-icon>
+      </a>
+    </nav>
+  </div>
 </div>
 
 <ng-template #templateChartofAccounts let-popover="popover">
   <h2>{{ 'labels.heading.Chart of Accounts' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.The Chart of Accounts - General Ledger Setup' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStepChartofAccounts()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStepChartofAccounts()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStepChartofAccounts()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStepChartofAccounts()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>
@@ -310,13 +176,13 @@
   <h2>{{ 'labels.heading.Accounts Linked to Financial Activities' | translate }}</h2>
   <p class="mw400">{{ 'labels.text.Accounts linked to Financial Activities' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStepAccountsLinked()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStepAccountsLinked()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStepAccountsLinked()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStepAccountsLinked()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>
@@ -326,13 +192,13 @@
   <h2>{{ 'labels.heading.Migrate Opening Balances (Office-wise)' | translate }}</h2>
   <p class="mw400">{{ 'labels.text.GLAccount Balances Application' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStepMigrateOpeningBalances()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStepMigrateOpeningBalances()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStepMigrateOpeningBalances()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStepMigrateOpeningBalances()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>
@@ -342,13 +208,13 @@
   <h2>{{ 'labels.heading.Closing Entries' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.Accounting to journal entries' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStepClosingEntries()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStepClosingEntries()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStepClosingEntries()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStepClosingEntries()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>
@@ -358,13 +224,13 @@
   <h2>{{ 'labels.heading.Create Journal Entries' | translate }}</h2>
   <p class="mw300">{{ 'labels.text.Journal Entries Transactions' | translate }}</p>
   <div class="layout-row align-end gap-2px responsive-column">
-    <button mat-raised-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
+    <button mat-stroked-button color="warn" (click)="popover.close(); configurationWizardService.closeConfigWizard()">
       {{ 'labels.buttons.Close' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); previousStepCreateJournalEntries()">
+    <button mat-flat-button color="primary" (click)="popover.close(); previousStepCreateJournalEntries()">
       {{ 'labels.buttons.Back' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="popover.close(); nextStepCreateJournalEntries()">
+    <button mat-flat-button color="primary" (click)="popover.close(); nextStepCreateJournalEntries()">
       {{ 'labels.buttons.Next' | translate }}
     </button>
   </div>

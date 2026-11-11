@@ -6,11 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/* The shell `.container` already provides the page padding; `.ms-page` sets the rhythm. */
 .dashboard-shell {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px;
+  gap: var(--ms-space-5);
 }
 
 /* ── Header ── */
@@ -19,53 +17,50 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--ms-space-4);
 }
 
 .header-text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--ms-space-1);
 }
 
 .dashboard-title {
   margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1e293b;
-  line-height: 1.2;
+  font-size: var(--ms-font-size-section-title);
+  font-weight: 600;
+  color: var(--ms-color-text-primary);
+  line-height: 1.25;
 }
 
 .dashboard-subtitle {
   margin: 0;
   font-size: 13px;
-  color: #1565c0;
-  font-weight: 500;
+  color: var(--ms-color-text-secondary);
+  font-weight: 400;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--ms-space-3);
   flex-shrink: 0;
 }
 
-/* ── Filters Container ── */
+/* ── Filters: flat panel, filters on the left and the export action on the right ── */
 .filter-row {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 8px;
-
-  /* Spacing before grid */
-  background: white;
-  padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
+  gap: var(--ms-space-3);
+  padding: var(--ms-space-4) var(--ms-space-5);
+  background: var(--ms-color-surface);
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
 }
 
-/* Remove invisible error space below dropdowns for perfect vertical alignment */
+/* Remove the reserved hint space below the filters so they align vertically. */
 .filter-row ::ng-deep .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
@@ -79,14 +74,9 @@
 }
 
 .export-btn {
-  height: 40px;
-  line-height: 40px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 16px;
-  border-radius: 4px;
-  font-weight: 500;
+  gap: var(--ms-space-2);
   margin-left: auto;
 }
 
@@ -94,14 +84,14 @@
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* stylelint-disable-line unit-allowed-list */
-  gap: 16px;
+  gap: var(--ms-space-4);
 }
 
 /* ── Chart grid ── */
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr)); /* stylelint-disable-line unit-allowed-list */
-  gap: 16px;
+  gap: var(--ms-space-4);
 }
 
 .widget-wide {
@@ -120,12 +110,9 @@
   grid-column: span 4;
 }
 
-/* ── Empty state ── */
+/* ── Empty state (layout from `.ms-empty`) ── */
 .empty-dashboard {
-  padding: 40px;
-  text-align: center;
-  border-radius: 12px !important;
-  color: rgb(0 0 0 / 38%);
+  color: var(--ms-color-text-secondary);
 }
 
 /* ── Responsive ── */
@@ -139,19 +126,18 @@
 }
 
 @media screen and (width <=768px) {
-  .dashboard-shell {
-    padding: 16px;
-  }
-
   .filter-row {
     align-items: stretch;
+    padding: var(--ms-space-4);
   }
 
   .office-field,
   .product-field,
   .client-group-field,
+  .timescale-field,
   .filter-row button,
   .filter-row mat-button-toggle-group {
+    flex-basis: 100%;
     width: 100%;
   }
 
@@ -172,36 +158,3 @@
   }
 }
 
-/* ── Dark theme ── */
-::ng-deep .dark-theme mifosx-analytics-dashboard {
-  .dashboard-title {
-    color: #f1f5f9;
-  }
-
-  .dashboard-subtitle {
-    color: #90caf9;
-  }
-
-  .timescale-label {
-    color: #94a3b8;
-  }
-
-  .filter-row {
-    background: #1e1e1e !important;
-    border: 1px solid rgb(255 255 255 / 8%) !important;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 20%) !important;
-  }
-
-  .export-btn {
-    border-color: #90caf9 !important;
-    color: #90caf9 !important;
-
-    &:hover {
-      background: rgb(144 202 249 / 8%) !important;
-    }
-  }
-
-  .empty-dashboard {
-    color: rgb(255 255 255 / 38%);
-  }
-}

@@ -6,14 +6,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
+<div class="tab-container">
   <router-outlet>
-    <div class="layout-row align-start">
-      <div class="m-b-10">
-        <h3>{{ 'labels.heading.Family Members' | translate }}</h3>
-      </div>
-      <div class="action-button m-b-10 gap-25px">
-        <button mat-raised-button color="primary" [routerLink]="['./add']">
+    <div class="tab-header">
+      <h3 class="ms-section-title">{{ 'labels.heading.Family Members' | translate }}</h3>
+      <div class="ms-actions">
+        <button mat-flat-button color="primary" type="button" [routerLink]="['./add']">
           <fa-icon icon="plus" class="m-r-10" aria-hidden="true"></fa-icon>{{ 'labels.buttons.Add' | translate }}
         </button>
       </div>
@@ -30,61 +28,86 @@
               {{ member.relationship }}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <mat-divider [inset]="true"></mat-divider>
-          <div class="family-member-actions layout-row align-end">
+          <div class="panel-actions">
             <button
-              mat-raised-button
-              color="primary"
-              [routerLink]="[member.id, 'edit']"
-              [title]="'labels.buttons.Edit' | translate"
-            >
-              <fa-icon icon="edit" class="m-r-10" aria-hidden="true"></fa-icon>{{ 'labels.buttons.Edit' | translate }}
-            </button>
-            <button
-              mat-raised-button
-              color="warn"
+              mat-stroked-button
+              type="button"
               (click)="deleteFamilyMember(member.clientId, member.id, member.firstName, i)"
-              [title]="'labels.buttons.Delete' | translate"
             >
-              <fa-icon icon="trash" class="m-r-10" aria-hidden="true"></fa-icon
-              >{{ 'labels.buttons.Delete' | translate }}
+              <fa-icon icon="trash" class="m-r-5" aria-hidden="true"></fa-icon>{{ 'labels.buttons.Delete' | translate }}
+            </button>
+            <button mat-stroked-button type="button" [routerLink]="[member.id, 'edit']">
+              <fa-icon icon="edit" class="m-r-5" aria-hidden="true"></fa-icon>{{ 'labels.buttons.Edit' | translate }}
             </button>
           </div>
-          <p>
+          <dl class="data-list">
             @if (member.firstName) {
-              <span>{{ 'labels.inputs.First Name' | translate }} : {{ member.firstName }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.First Name' | translate }}</dt>
+                <dd>{{ member.firstName }}</dd>
+              </div>
             }
             @if (member.middleName) {
-              <span>{{ 'labels.inputs.Middle Name' | translate }} : {{ member.middleName }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Middle Name' | translate }}</dt>
+                <dd>{{ member.middleName }}</dd>
+              </div>
             }
             @if (member.lastName) {
-              <span>{{ 'labels.inputs.Last Name' | translate }} : {{ member.lastName }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Last Name' | translate }}</dt>
+                <dd>{{ member.lastName }}</dd>
+              </div>
             }
             @if (member.qualification) {
-              <span>{{ 'labels.inputs.Qualification' | translate }} : {{ member.qualification }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Qualification' | translate }}</dt>
+                <dd>{{ member.qualification }}</dd>
+              </div>
             }
             @if (member.mobileNumber) {
-              <span>{{ 'labels.inputs.Mobile Number' | translate }} : {{ member.mobileNumber }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Mobile Number' | translate }}</dt>
+                <dd>{{ member.mobileNumber }}</dd>
+              </div>
             }
             @if (member.age) {
-              <span>{{ 'labels.inputs.Age' | translate }} : {{ member.age }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Age' | translate }}</dt>
+                <dd class="ms-num">{{ member.age }}</dd>
+              </div>
             }
             @if (member.isDependent) {
-              <span>{{ 'labels.inputs.Is Dependent' | translate }} : {{ member.isDependent | yesNo }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Is Dependent' | translate }}</dt>
+                <dd>{{ member.isDependent | yesNo }}</dd>
+              </div>
             }
             @if (member.maritalStatus) {
-              <span>{{ 'labels.inputs.Marital Status' | translate }} : {{ member.maritalStatus }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Marital Status' | translate }}</dt>
+                <dd>{{ member.maritalStatus }}</dd>
+              </div>
             }
             @if (member.gender) {
-              <span>{{ 'labels.inputs.Gender' | translate }} : {{ member.gender }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Gender' | translate }}</dt>
+                <dd>{{ member.gender }}</dd>
+              </div>
             }
             @if (member.profession) {
-              <span>{{ 'labels.inputs.Profession' | translate }} : {{ member.profession }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Profession' | translate }}</dt>
+                <dd>{{ member.profession }}</dd>
+              </div>
             }
             @if (member.dateOfBirth) {
-              <span>{{ 'labels.inputs.Date Of Birth' | translate }} : {{ member.dateOfBirth | dateFormat }}<br /></span>
+              <div class="data-list__item">
+                <dt>{{ 'labels.inputs.Date Of Birth' | translate }}</dt>
+                <dd>{{ member.dateOfBirth | dateFormat }}</dd>
+              </div>
             }
-          </p>
+          </dl>
         </mat-expansion-panel>
       }
     </mat-accordion>

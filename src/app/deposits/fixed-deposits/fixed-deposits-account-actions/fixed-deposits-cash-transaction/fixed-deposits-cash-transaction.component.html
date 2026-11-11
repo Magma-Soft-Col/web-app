@@ -6,10 +6,10 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     @if (transactionType.withdrawal) {
-      <h2 mat-title>
+      <h2 class="ms-section-title">
         {{ 'labels.menus.' + actionName | translate }} {{ 'labels.heading.Fixed Deposit Transactions' | translate }}
       </h2>
     }
@@ -105,11 +105,11 @@
           <textarea formControlName="note" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
         </mat-form-field>
 
-        <mat-card-actions class="layout-row layout-xs-column layout-align-center gap-5px">
-          <button type="button" mat-raised-button [routerLink]="['../../transactions']">
+        <mat-card-actions class="ms-actions align-end">
+          <button type="button" mat-stroked-button [routerLink]="['../../transactions']">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
-          <button mat-raised-button color="primary" [disabled]="!accountTransactionForm.valid">
+          <button mat-flat-button color="primary" [disabled]="!accountTransactionForm.valid">
             {{ 'labels.buttons.Submit' | translate }}
           </button>
         </mat-card-actions>

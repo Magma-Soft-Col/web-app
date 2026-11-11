@@ -13,7 +13,7 @@
     {{ 'labels.dialogContext.Reset neutralizes overdue delinquency periods effective today' | translate }}
   </p>
   <div class="layout-column">
-    <mat-checkbox class="flex-98" formControlName="startNewPeriod">
+    <mat-checkbox formControlName="startNewPeriod">
       <p>{{ 'labels.inputs.Start new period' | translate }}</p>
     </mat-checkbox>
     <p class="hint-text">
@@ -27,9 +27,9 @@
   </div>
 </div>
 
-<mat-dialog-actions class="layout-row layout-xs-column layout-align-center gap-2percent">
-  <button mat-raised-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{ data: delinquencyActionForm }">
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>{{ 'labels.buttons.Cancel' | translate }}</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="{ data: delinquencyActionForm }">
     {{ 'labels.buttons.Reset' | translate }}
   </button>
 </mat-dialog-actions>

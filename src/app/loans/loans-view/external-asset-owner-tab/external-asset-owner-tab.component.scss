@@ -6,45 +6,89 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.tab-container {
-  padding: 1% 1% 2%;
-  margin: 1%;
+// Loan tab (pen): section title with actions, then content in white panels.
+.loan-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0;
+}
 
-  h3 {
-    margin: 1% auto;
-  }
+.loan-tab__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
 
-  .transaction-buttons {
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+table {
+  width: 100%;
 
-    .accruals {
-      padding-top: 1%;
-    }
-  }
-
-  .asset-transfer-container {
-    border: 1px solid;
-    padding: 1%;
-    margin-bottom: 20px;
-  }
-
-  table {
-    width: 100%;
-
-    .select-row:hover {
-      cursor: pointer;
-    }
+  .ms-num {
+    text-align: right;
+    white-space: nowrap;
   }
 }
 
-.external-asset-owner-status {
-  color: black;
+.loan-tab__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
 }
 
-.account-action-button {
-  min-width: 26px;
-  padding: 0 0 3px;
-  margin: 0 2%;
-  line-height: 25px;
+// Transfer summary: key facts, then the outstanding breakdown with amounts right aligned.
+.transfer-facts {
+  display: grid;
+  /* stylelint-disable-next-line unit-allowed-list */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ms-space-4) var(--ms-space-6);
+  margin: 0;
+
+  @media (width < 768px) {
+    /* stylelint-disable-next-line unit-allowed-list */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.transfer-facts__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.transfer-facts__status {
+  color: var(--ms-color-text-primary);
+}
+
+.transfer-details__title {
+  margin: var(--ms-space-5) 0 var(--ms-space-2);
+}
+
+.transfer-details {
+  max-width: 480px;
+  margin: 0;
+}
+
+.transfer-details__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  dt,
+  dd {
+    margin: 0;
+  }
 }

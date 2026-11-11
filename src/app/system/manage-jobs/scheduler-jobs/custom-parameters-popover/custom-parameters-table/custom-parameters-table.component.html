@@ -7,7 +7,7 @@
 -->
 
 <div>
-  <h2>{{ 'labels.inputs.Job' | translate }}: {{ displayName }}</h2>
+  <h3 class="ms-subsection-title">{{ 'labels.inputs.Job' | translate }}: {{ displayName }}</h3>
   <table mat-table [dataSource]="updatedJobParameters">
     <ng-container matColumnDef="parameterName">
       <th mat-header-cell *matHeaderCellDef>
@@ -48,6 +48,7 @@
           type="button"
           mat-icon-button
           color="warn"
+          [attr.aria-label]="'labels.buttons.Delete' | translate"
           (click)="deleteParameter(rowIndex)"
           [matTooltip]="'labels.buttons.Delete' | translate"
           matTooltipPosition="left"
@@ -61,7 +62,7 @@
     <tr mat-row *matRowDef="let updatedJobParameters; columns: columnsToDisplay"></tr>
   </table>
 
-  <button mat-button (click)="addParameter()">
+  <button mat-stroked-button class="add-parameter" (click)="addParameter()">
     <fa-icon icon="plus" class="m-r-10"></fa-icon>
     {{ 'labels.buttons.Add' | translate }} {{ 'labels.inputs.Parameter' | translate }}
   </button>

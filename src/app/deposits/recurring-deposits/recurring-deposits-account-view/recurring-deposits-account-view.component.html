@@ -6,123 +6,117 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<mat-card class="account-card">
-  <mat-card-header class="header layout-column">
-    <mat-card-title-group class="header-title-group">
-      <div class="profile-image-container">
-        <div>
-          <img
-            mat-card-md-image
-            class="profile-image"
-            matTooltip="{{ 'tooltips.Recurring Deposits Account' | translate }}"
-            [alt]="'tooltips.Recurring Deposits Account' | translate"
-            [src]="'assets/images/recurring-deposits_account_placeholder.png'"
-          />
+<div class="ms-page rd-view">
+  <!-- Account header (pen): identification, status and key balances. -->
+  <section class="ms-entity-header" [attr.aria-label]="'labels.inputs.Account Number' | translate">
+    <div class="ms-entity-header__identity">
+      <div class="ms-entity-header__block">
+        <div class="ms-entity-header__row">
+          <span class="ms-sr-only">{{ 'labels.inputs.Account Number' | translate }}:</span>
+          <span class="ms-entity-header__id">
+            <mifosx-account-number
+              accountNo="{{ recurringDepositsAccountData.accountNo }}"
+              display="left"
+            ></mifosx-account-number>
+          </span>
+          <span
+            class="ms-badge"
+            [ngClass]="{
+              'ms-badge--success': recurringDepositsAccountData.status.active,
+              'ms-badge--warning': recurringDepositsAccountData.status.submittedAndPendingApproval,
+              'ms-badge--info':
+                recurringDepositsAccountData.status.approved || recurringDepositsAccountData.status.matured,
+              'ms-badge--danger': recurringDepositsAccountData.status.rejected
+            }"
+            >{{ recurringDepositsAccountData.status.value }}</span
+          >
         </div>
+        <span class="ms-label rd-view__product">
+          {{ 'labels.inputs.Recurring Deposit' | translate }}: {{ recurringDepositsAccountData.depositProductName }}
+        </span>
       </div>
 
-      <div class="mat-typography account-card-title">
-        <mat-card-title>
-          <div class="layout-row responsive-column">
-            <div class="flex-60">
-              <h3>
-                <i
-                  class="fa fa-stop"
-                  [ngClass]="recurringDepositsAccountData.status.code | statusLookup"
-                  [matTooltip]="recurringDepositsAccountData.status.value"
-                ></i>
-                {{ 'labels.inputs.Recurring Deposit' | translate }} :
-                {{ recurringDepositsAccountData.depositProductName }}
-                <mifosx-account-number accountNo="{{ recurringDepositsAccountData.accountNo }}"></mifosx-account-number>
-              </h3>
-              <span class="account-overview">
-                {{ 'labels.text.' + entityType | translate }} {{ 'labels.inputs.name' | translate }}:
-                {{ recurringDepositsAccountData.clientName || recurringDepositsAccountData.groupName }}
-                @if (recurringDepositsAccountData.clientAccountNo) {
-                  <span class="m-l-10">
-                    <mifosx-account-number
-                      accountNo="{{ recurringDepositsAccountData.clientAccountNo }}"
-                    ></mifosx-account-number>
-                  </span>
-                }
-              </span>
-            </div>
+      <span class="ms-entity-header__divider" aria-hidden="true"></span>
 
-            @if (
-              !recurringDepositsAccountData.status.rejected &&
-              !recurringDepositsAccountData.status.submittedAndPendingApproval
-            ) {
-              <div class="flex-30">
-                <h3>{{ 'labels.heading.Account Overview' | translate }}</h3>
-                <table class="account-overview">
-                  <tbody>
-                    <tr>
-                      <td>{{ 'labels.inputs.Current Balance' | translate }}</td>
-                      <td class="r-amount">
-                        {{
-                          recurringDepositsAccountData.summary.accountBalance
-                            | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                        }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>{{ 'labels.inputs.Deposit Amount' | translate }}</td>
-                      <td class="r-amount">
-                        {{
-                          recurringDepositsAccountData.depositAmount
-                            | currency: currency.code : 'symbol-narrow' : '1.2-2'
-                        }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>{{ 'labels.inputs.Deposit Period' | translate }}</td>
-                      <td class="r-amount">{{ recurringDepositsAccountData.depositPeriod | number }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            }
+      <div class="ms-entity-header__block">
+        <span class="ms-label">{{ 'labels.text.' + entityType | translate }}</span>
+        <span class="ms-value">
+          {{ recurringDepositsAccountData.clientName || recurringDepositsAccountData.groupName }}
+          @if (recurringDepositsAccountData.clientAccountNo) {
+            <span class="rd-view__muted">
+              (<mifosx-account-number
+                accountNo="{{ recurringDepositsAccountData.clientAccountNo }}"
+              ></mifosx-account-number
+              >)
+            </span>
+          }
+        </span>
+      </div>
+    </div>
 
-            <div class="flex-5">
-              <button
-                mat-icon-button
-                [matMenuTriggerFor]="accountMenu"
-                [attr.aria-label]="'labels.text.Recurring Deposits Account Actions' | translate"
-                yPosition="below"
-              >
-                <mat-icon matListIcon class="actions-menu">
-                  <fa-icon icon="bars" size="sm"></fa-icon>
-                </mat-icon>
-              </button>
-            </div>
+    <div class="rd-view__aside">
+      @if (
+        !recurringDepositsAccountData.status.rejected &&
+        !recurringDepositsAccountData.status.submittedAndPendingApproval
+      ) {
+        <dl class="ms-entity-header__stats rd-view__stats">
+          <div class="ms-stat">
+            <dt class="ms-label">{{ 'labels.inputs.Current Balance' | translate }}</dt>
+            <dd class="ms-amount">
+              {{
+                recurringDepositsAccountData.summary.accountBalance
+                  | currency: currency.code : 'symbol-narrow' : '1.2-2'
+              }}
+            </dd>
           </div>
-        </mat-card-title>
-      </div>
+          <div class="ms-stat">
+            <dt class="ms-label">{{ 'labels.inputs.Deposit Amount' | translate }}</dt>
+            <dd class="ms-amount">
+              {{ recurringDepositsAccountData.depositAmount | currency: currency.code : 'symbol-narrow' : '1.2-2' }}
+            </dd>
+          </div>
+          <div class="ms-stat">
+            <dt class="ms-label">{{ 'labels.inputs.Deposit Period' | translate }}</dt>
+            <dd class="ms-amount">{{ recurringDepositsAccountData.depositPeriod | number }}</dd>
+          </div>
+        </dl>
+      }
 
-      <mat-menu #accountMenu="matMenu">
-        @for (item of buttonConfig.singleButtons; track item) {
-          <button mat-menu-item *mifosxHasPermission="item.taskPermissionName" (click)="doAction(item.name)">
-            <i ngClass="{{ item.icon }}"></i> {{ 'labels.menus.' + item.name | translate }}
-          </button>
-        }
+      <button
+        mat-stroked-button
+        type="button"
+        [matMenuTriggerFor]="accountMenu"
+        [attr.aria-label]="'labels.text.Recurring Deposits Account Actions' | translate"
+        yPosition="below"
+      >
+        <fa-icon icon="bars" size="sm"></fa-icon>
+        <span class="m-l-5">{{ 'labels.menus.More' | translate }}</span>
+      </button>
+    </div>
+  </section>
 
-        @if (buttonConfig.options.length) {
-          <button mat-menu-item [matMenuTriggerFor]="More">{{ 'labels.menus.More' | translate }}</button>
-          <mat-menu #More="matMenu">
-            @for (option of buttonConfig.options; track option) {
-              <span>
-                <button mat-menu-item *mifosxHasPermission="option.taskPermissionName" (click)="doAction(option.name)">
-                  {{ 'labels.menus.' + option.name | translate }}
-                </button>
-              </span>
-            }
-          </mat-menu>
+  <mat-menu #accountMenu="matMenu">
+    @for (item of buttonConfig.singleButtons; track item) {
+      <button mat-menu-item *mifosxHasPermission="item.taskPermissionName" (click)="doAction(item.name)">
+        <i ngClass="{{ item.icon }}"></i> {{ 'labels.menus.' + item.name | translate }}
+      </button>
+    }
+
+    @if (buttonConfig.options.length) {
+      <button mat-menu-item [matMenuTriggerFor]="More">{{ 'labels.menus.More' | translate }}</button>
+      <mat-menu #More="matMenu">
+        @for (option of buttonConfig.options; track option) {
+          <span>
+            <button mat-menu-item *mifosxHasPermission="option.taskPermissionName" (click)="doAction(option.name)">
+              {{ 'labels.menus.' + option.name | translate }}
+            </button>
+          </span>
         }
       </mat-menu>
-    </mat-card-title-group>
-  </mat-card-header>
+    }
+  </mat-menu>
 
-  <mat-card-content class="content">
+  <div class="rd-view__tabs">
     <nav mat-tab-nav-bar class="navigation-tabs" [tabPanel]="tabPanel">
       <a
         mat-tab-link
@@ -189,5 +183,5 @@
     <mat-tab-nav-panel #tabPanel>
       <router-outlet></router-outlet>
     </mat-tab-nav-panel>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

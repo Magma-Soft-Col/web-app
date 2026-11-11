@@ -16,11 +16,11 @@
         </mat-form-field>
       </mat-card-content>
 
-      <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-        <button type="button" mat-raised-button [routerLink]="['../../']">
+      <mat-card-actions class="ms-actions align-end">
+        <button type="button" mat-stroked-button [routerLink]="['../../']">
           {{ 'labels.buttons.Cancel' | translate }}
         </button>
-        <button mat-raised-button color="warn" [disabled]="!undoApprovalRecurringDepositsAccountForm.valid">
+        <button mat-stroked-button color="warn" [disabled]="!undoApprovalRecurringDepositsAccountForm.valid">
           {{ 'labels.buttons.Confirm' | translate }}
         </button>
       </mat-card-actions>

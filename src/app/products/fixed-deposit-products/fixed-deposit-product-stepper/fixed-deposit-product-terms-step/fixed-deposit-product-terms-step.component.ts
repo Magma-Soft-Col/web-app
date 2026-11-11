@@ -9,7 +9,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input, inject } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MatDivider } from '@angular/material/divider';
 import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -21,7 +20,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     MatTooltip,
-    MatDivider,
     MatStepperPrevious,
     FaIconComponent,
     MatStepperNext

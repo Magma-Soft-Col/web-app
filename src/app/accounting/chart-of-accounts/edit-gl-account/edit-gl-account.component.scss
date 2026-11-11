@@ -7,12 +7,7 @@
  */
 
 .manual-entries-allowed-wrapper {
-  position: relative;
-
-  .manual-entries-allowed {
-    padding: 0 0 17.5px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--ms-space-4);
 }

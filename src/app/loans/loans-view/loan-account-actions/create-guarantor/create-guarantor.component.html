@@ -6,17 +6,17 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="container mat-elevation-z8">
+<div class="container">
   <mat-card>
     <form [formGroup]="newGuarantorForm" (ngSubmit)="submit()">
       <mat-card-content>
-        <div class="layout-column">
-          <mat-checkbox labelPosition="before" formControlName="existingClient">
+        <div class="loan-form__grid">
+          <mat-checkbox class="loan-form__full" labelPosition="before" formControlName="existingClient">
             {{ 'labels.inputs.Existing Client' | translate }}
           </mat-checkbox>
 
           @if (!showClientDetailsForm) {
-            <mat-form-field class="flex-30">
+            <mat-form-field>
               <mat-label>{{ 'labels.inputs.name' | translate }}</mat-label>
               <input matInput formControlName="name" [matAutocomplete]="clientsAutocomplete" />
               @if (newGuarantorForm.controls.name.hasError('required')) {
@@ -136,12 +136,12 @@
           }
         </div>
 
-        <mat-card-actions class="layout-row align-center gap-5px responsive-column">
-          <button type="button" mat-raised-button (click)="gotoLoanDefaultView()">
+        <mat-card-actions class="loan-form__actions">
+          <button type="button" mat-stroked-button (click)="gotoLoanDefaultView()">
             {{ 'labels.buttons.Cancel' | translate }}
           </button>
           <button
-            mat-raised-button
+            mat-flat-button
             color="primary"
             [disabled]="!newGuarantorForm.valid"
             *mifosxHasPermission="'CREATE_GUARANTOR'"
@@ -153,23 +153,23 @@
     </form>
 
     @if (newGuarantorForm?.controls?.name?.value?.id) {
-      <div class="mat-table">
-        <div class="mat-header-row">
-          <div class="mat-header-cell">{{ 'labels.inputs.Client Details' | translate }}</div>
-        </div>
-        <div class="mat-row">
-          <div class="mat-cell">{{ 'labels.inputs.name' | translate }}</div>
-          <div class="mat-cell">{{ newGuarantorForm.controls.name.value.displayName }}</div>
-        </div>
-        <div class="mat-row">
-          <div class="mat-cell">{{ 'labels.inputs.Id' | translate }}</div>
-          <div class="mat-cell">{{ newGuarantorForm.controls.name.value.id }}</div>
-        </div>
-        <div class="mat-row">
-          <div class="mat-cell">{{ 'labels.inputs.Office' | translate }}</div>
-          <div class="mat-cell">{{ newGuarantorForm.controls.name.value.officeName }}</div>
-        </div>
-      </div>
+      <section class="guarantor-client">
+        <h3 class="ms-section-title">{{ 'labels.inputs.Client Details' | translate }}</h3>
+        <dl class="guarantor-client__facts">
+          <div>
+            <dt class="ms-label">{{ 'labels.inputs.name' | translate }}</dt>
+            <dd class="ms-value">{{ newGuarantorForm.controls.name.value.displayName }}</dd>
+          </div>
+          <div>
+            <dt class="ms-label">{{ 'labels.inputs.Id' | translate }}</dt>
+            <dd class="ms-value">{{ newGuarantorForm.controls.name.value.id }}</dd>
+          </div>
+          <div>
+            <dt class="ms-label">{{ 'labels.inputs.Office' | translate }}</dt>
+            <dd class="ms-value">{{ newGuarantorForm.controls.name.value.officeName }}</dd>
+          </div>
+        </dl>
+      </section>
     }
   </mat-card>
 </div>

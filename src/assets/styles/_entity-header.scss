@@ -15,70 +15,62 @@
      @include entity.tokens;          // charges-tab design tokens
      @include entity.header-content;  // projected header content
      @include entity.tabs;            // tabs-redesign nav bar
+
+   The header is the pen `.ms-entity-header`: a white surface with a
+   hairline border, so projected content uses the regular text tokens.
 ──────────────────────────────────────────────────────────────── */
 
-/* Design tokens (charges-tab system), light + dark. */
+@use 'redesign-tokens' as rt;
+
+/* Design tokens (charges-tab system). They alias the pen `--ms-*`
+   tokens, which already switch with the theme. */
 @mixin tokens {
   :host {
-    --ch-blue-700: #1565c0;
-    --ch-blue-600: #1976d2;
-    --ch-blue-100: #bbdefb;
-    --ch-blue-50: #e3f2fd;
-    --ch-blue-20: #f0f7ff;
-    --ch-surface: #fff;
-    --ch-surface-alt: #f4f7fb;
-    --ch-surface-h: #ebf2fa;
-    --ch-border: #dde5f0;
-    --ch-text-1: #0d1b2a;
-    --ch-text-2: #4a6785;
-    --ch-text-3: #8fa5bc;
+    @include rt.ch-tokens;
   }
 
   :host-context(.dark-theme) {
-    --ch-blue-700: #5b9bd5;
-    --ch-blue-600: #7ab3e0;
-    --ch-blue-100: #1a3a60;
-    --ch-blue-50: #0a2040;
-    --ch-blue-20: #0d1f35;
-    --ch-surface: #1a2535;
-    --ch-surface-alt: #101d2d;
-    --ch-surface-h: #132032;
-    --ch-border: #1e3050;
-    --ch-text-1: #e2ebf6;
-    --ch-text-2: #8baecf;
-    --ch-text-3: #6a8fad;
+    @include rt.ch-dark-tokens;
   }
 }
 
-/* White text and icons for all content projected into the account
-   header. Works for both light (#1074b9) and dark (#5ba2ec) theme
-   primary backgrounds. */
+/* Content projected into the account header (pen entity header). */
 @mixin header-content {
   mifosx-account-header {
     td,
-    th,
+    p {
+      font-size: var(--ms-font-size-table);
+      color: var(--ms-color-text-primary);
+    }
+
+    th {
+      font-size: var(--ms-font-size-caption);
+      font-weight: 500;
+      color: var(--ms-color-text-secondary);
+    }
+
     b,
-    span:not(.status-dot),
-    h3,
-    p,
-    a {
-      color: var(--md-sys-color-on-primary, #fff);
+    h3 {
+      font-weight: 600;
+      color: var(--ms-color-text-primary);
     }
 
     /* Links to related entities (member groups, parent center, ...) */
+    a,
     a.entity-link {
-      text-decoration: underline;
-      text-underline-offset: 2px;
+      color: var(--ms-color-text-link);
+      text-decoration: none;
       cursor: pointer;
 
       &:hover {
-        opacity: 0.85;
+        text-decoration: underline;
+        text-underline-offset: 2px;
       }
     }
 
     /* Action button (hamburger menu) and its icon */
     button.mat-mdc-icon-button {
-      color: var(--md-sys-color-on-primary, #fff);
+      color: var(--ms-color-text-secondary);
     }
 
     /* Compact icon button for the inline edit-meeting action */
@@ -90,61 +82,60 @@
     }
 
     img.profile-image {
-      width: 110px;
-      height: 110px;
+      width: 72px;
+      height: 72px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: var(--ms-radius-md);
+      border: 1px solid var(--ms-color-border-subtle);
       display: block;
-      background-color: var(--md-sys-color-on-primary, #fff);
+      background-color: var(--ms-color-surface-subtle);
     }
   }
 }
 
-/* Redesigned tab nav bar shared by the entity detail views. */
+/* Tab nav bar shared by the entity detail views: pen underline tabs. */
 @mixin tabs {
   :host ::ng-deep .tabs-redesign.mat-mdc-tab-nav-bar {
-    background: var(--ch-surface);
-    border-bottom: 1px solid var(--ch-border);
+    background: transparent;
+    border-bottom: 1px solid var(--ms-color-border-subtle);
 
-    /* hide the default ink bar — we use border-bottom on the active tab instead */
+    /* The active tab is marked with its own bottom border instead of the ink bar. */
     .mat-mdc-tab-link {
       min-width: auto;
-      height: 46px;
-      padding: 0 18px;
+      height: 36px;
+      padding: 0 14px;
       opacity: 1;
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ch-text-2);
+      font-family: var(--ms-font-family);
+      font-size: var(--ms-font-size-label);
+      font-weight: 400;
+      color: var(--ms-color-text-secondary);
       letter-spacing: 0;
       text-transform: none;
       border-bottom: 2px solid transparent;
       transition:
-        color 0.14s ease,
-        border-color 0.14s ease,
-        background 0.14s ease;
+        color var(--ms-duration-fast) var(--ms-easing),
+        border-color var(--ms-duration-fast) var(--ms-easing);
     }
 
     .mat-mdc-tab-link .mdc-tab__text-label {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--ms-space-2);
       color: inherit;
     }
 
     .mat-mdc-tab-link:hover {
-      color: var(--ch-blue-700);
-      background: var(--ch-blue-20);
+      color: var(--ms-color-text-primary);
     }
 
     .mat-mdc-tab-link.mdc-tab--active {
-      color: var(--ch-blue-700);
+      color: var(--ms-color-brand-primary);
       font-weight: 600;
-      border-bottom-color: var(--ch-blue-700);
+      border-bottom-color: var(--ms-color-brand-primary);
     }
 
     .mat-mdc-tab-link.mdc-tab--active .mdc-tab__text-label {
-      color: var(--ch-blue-700);
+      color: var(--ms-color-brand-primary);
     }
 
     /* hide MDC ink indicator (replaced by border-bottom) */
@@ -153,8 +144,8 @@
     }
 
     .tab-icon {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       flex-shrink: 0;
       opacity: 0.85;
     }

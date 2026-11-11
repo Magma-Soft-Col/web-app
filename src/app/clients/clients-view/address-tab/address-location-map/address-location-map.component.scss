@@ -7,21 +7,26 @@
  */
 
 .address-location-map {
-  margin: 1rem 2%;
+  margin: var(--ms-space-4) 0 0;
 
   h4 {
-    margin: 0 0 0.5rem;
+    margin: 0 0 var(--ms-space-2);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ms-color-text-primary);
   }
 }
 
 .map-container {
-  border: 1px solid #d8d8d8;
-  min-height: 240px;
   width: 100%;
+  min-height: 240px;
+  overflow: hidden;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
 }
 
 .map-error {
-  color: #666;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+  margin-top: var(--ms-space-2);
+  font-size: var(--ms-font-size-label);
+  color: var(--ms-color-text-secondary);
 }

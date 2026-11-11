@@ -11,7 +11,6 @@
     <mat-card-content>
       <header>
         <div>
-          <h2>{{ 'cashInventory.title' | translate }}</h2>
           <p>{{ 'cashInventory.description' | translate }}</p>
         </div>
         @if (asOf) {
@@ -79,7 +78,7 @@
             {{ 'cashInventory.filters.showLastCutOff' | translate }}
           </mat-checkbox>
 
-          <button mat-raised-button color="primary" type="submit" [disabled]="inventoryLoading">
+          <button mat-flat-button color="primary" type="submit" [disabled]="inventoryLoading">
             {{ 'cashInventory.apply' | translate }}
           </button>
         </form>

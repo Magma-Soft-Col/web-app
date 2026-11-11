@@ -1,0 +1,321 @@
+/**
+ * Copyright since 2025 Mifos Initiative
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+/*
+ * Magma Soft Design System — semantic tokens (spec.md §4).
+ *
+ * Every component of the redesign reads these tokens and never a raw hex, so a
+ * theme only has to redefine this block. Three themes are provided:
+ *
+ *   - Midnight & Porcelain: default light theme (`:root`, `body.light-theme`).
+ *   - Obsidian: professional dark theme (`body.dark-theme`).
+ *   - Predesigned light palettes selected per user through `html[data-ui-theme]`
+ *     (UiThemeService): Magma Soft (the default palette), Ivory & Slate,
+ *     Emerald, Ocean, Indigo and Graphite.
+ *
+ * Contrast of text tokens against their surfaces (WCAG 2.2 AA, >= 4.5:1):
+ *   text-primary   #202D3D on #FFFFFF 13.9:1 · on #F5F7FA 12.9:1
+ *   text-secondary #596779 on #FFFFFF  5.9:1 · on #F5F7FA  5.5:1 · on #EEF2F6 5.2:1
+ *   primary        #315E9E on #FFFFFF  6.6:1 · white on primary 6.6:1
+ *   success        #18794E on #ECFDF5  5.2:1
+ *   warning        #946200 on #FFF8E1  5.0:1
+ *   danger         #B42318 on #FEF3F2  6.1:1
+ *   sidebar text   #A8B8CC on #14243A  8.4:1
+ */
+
+:root,
+body.light-theme {
+  /* Brand */
+  --ms-color-brand-navy: #14243a;
+  --ms-color-brand-navy-active: #1e3a5f;
+  --ms-color-brand-primary: var(--brand-primary-500, #315e9e);
+  --ms-color-brand-primary-hover: var(--brand-primary-700, #284f86);
+  --ms-color-brand-primary-subtle: #e8eff8;
+  --ms-color-on-primary: #fff;
+  /* Solid brand fill under white text (active sidebar item, logo tile). */
+  --ms-color-brand-fill: var(--ms-color-brand-primary);
+  /* Decorative brand mark colour (logo, loader); never used for text. */
+  --ms-color-brand-accent: #ce5800;
+
+  /* Surfaces */
+  --ms-color-background: #f5f7fa;
+  --ms-color-surface: #fff;
+  --ms-color-surface-subtle: #eef2f6;
+  --ms-color-surface-zebra: #f9fafb;
+  --ms-color-surface-hover: #f1f5fa;
+
+  /* Text */
+  --ms-color-text-primary: #202d3d;
+  --ms-color-text-secondary: #596779;
+  --ms-color-text-disabled: #8b97a6;
+  --ms-color-text-link: var(--ms-color-brand-primary);
+
+  /* Lines */
+  --ms-color-border: #dce3eb;
+  --ms-color-border-subtle: #e8ecf1;
+  --ms-color-focus-ring: var(--ms-color-brand-primary);
+
+  /* Semantic states: text colour + tinted background */
+  --ms-color-success: #18794e;
+  --ms-color-success-bg: #ecfdf5;
+  --ms-color-warning: #946200;
+  --ms-color-warning-bg: #fff8e1;
+  --ms-color-danger: #b42318;
+  --ms-color-danger-bg: #fef3f2;
+  --ms-color-info: var(--ms-color-brand-primary);
+  --ms-color-info-bg: var(--ms-color-brand-primary-subtle);
+  --ms-color-neutral: #596779;
+  --ms-color-neutral-bg: #eef2f6;
+
+  /* Sidebar (stays dark in every theme) */
+  --ms-sidebar-bg: #14243a;
+  --ms-sidebar-text: #a8b8cc;
+  --ms-sidebar-text-active: #fff;
+  --ms-sidebar-item-hover: rgb(255 255 255 / 6%);
+  --ms-sidebar-item-active: #1e3a5f;
+  --ms-sidebar-section: #7d8fa6;
+  --ms-sidebar-divider: rgb(255 255 255 / 8%);
+
+  /* Typography */
+  --ms-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', roboto, sans-serif;
+  --ms-font-size-page-title: 24px;
+  --ms-font-size-section-title: 17px;
+  --ms-font-size-body: 14px;
+  --ms-font-size-table: 13px;
+  --ms-font-size-label: 12px;
+  --ms-font-size-caption: 11px;
+  --ms-font-size-amount: 24px;
+
+  /* Spacing (4px scale) */
+  --ms-space-1: 4px;
+  --ms-space-2: 8px;
+  --ms-space-3: 12px;
+  --ms-space-4: 16px;
+  --ms-space-5: 20px;
+  --ms-space-6: 24px;
+  --ms-space-7: 28px;
+  --ms-space-8: 32px;
+
+  /* Geometry */
+  --ms-radius-sm: 4px;
+  --ms-radius-control: 6px;
+  --ms-radius-md: 8px;
+  --ms-radius-panel: 10px;
+  --ms-radius-dialog: 12px;
+  --ms-radius-pill: 999px;
+
+  /* Elevation: reserved for floating surfaces */
+  --ms-shadow-xs: 0 1px 2px rgb(20 36 58 / 5%);
+  --ms-shadow-float: 0 4px 12px rgb(20 36 58 / 8%), 0 1px 3px rgb(20 36 58 / 6%);
+  --ms-shadow-dialog: 0 16px 40px rgb(20 36 58 / 16%);
+
+  /* Layout */
+  --ms-sidebar-width: 240px;
+  --ms-sidebar-width-compact: 64px;
+  --ms-topbar-height: 56px;
+  --ms-content-padding-x: 28px;
+  --ms-content-max-width: 1440px;
+  --ms-control-height: 36px;
+  --ms-target-size: 40px;
+
+  /* Motion */
+  --ms-duration-fast: 120ms;
+  --ms-duration: 180ms;
+  --ms-easing: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/*
+ * Predesigned palettes (light). The brand hues are set on <html> with
+ * !important so they win over the tenant colour that ThemeStorageService
+ * writes inline there, and so Angular Material, whose tokens resolve on
+ * <html>, follows them too. Surfaces and sidebar are set on <body>.
+ * Every primary scores >= 4.5:1 against white; sidebar text >= 7:1.
+ */
+/*
+ * Magma Soft: official brand colours (Manual de marca: orange #CE5800 on
+ * Magma dark #0A111A). #CE5800 is 4.2:1 on white, below AA for body text and
+ * white button labels, so actions use the deeper #B34C00 (5.3:1 on white,
+ * 4.7:1 on the subtle tint); the pure brand orange is kept for the accent.
+ */
+:root[data-ui-theme='magma'] {
+  --brand-primary-100: #f5c8a6 !important;
+  --brand-primary-500: #b34c00 !important;
+  --brand-primary-700: #8f3d00 !important;
+}
+
+:root[data-ui-theme='magma'] body {
+  --ms-color-brand-primary-subtle: #fdf0e6;
+  --ms-color-background: #f6f6f5;
+  --ms-color-surface-hover: #fbf4ee;
+  --ms-color-brand-navy: #0a111a;
+  --ms-sidebar-bg: #0a111a;
+  --ms-sidebar-item-active: #2b1b0f;
+  --ms-sidebar-text: #aeb6c0;
+  --ms-sidebar-section: #808a96;
+}
+
+:root[data-ui-theme='ivory'] body {
+  /* Ivory & Slate: warm light variant, same semantics. */
+  --ms-color-background: #f7f5f0;
+  --ms-color-surface: #fffefb;
+  --ms-color-surface-subtle: #efece4;
+  --ms-color-surface-zebra: #faf8f3;
+  --ms-color-surface-hover: #f3f0e8;
+  --ms-color-text-primary: #26303b;
+  --ms-color-text-secondary: #5d6570;
+  --ms-color-border: #e1ddd2;
+  --ms-color-border-subtle: #ebe7dd;
+  --ms-sidebar-bg: #2b3440;
+  --ms-sidebar-item-active: #3a4656;
+  --ms-color-brand-navy: #2b3440;
+}
+
+:root[data-ui-theme='emerald'] {
+  --brand-primary-100: #a7d7bf !important;
+  --brand-primary-500: #18794e !important;
+  --brand-primary-700: #0f5a39 !important;
+}
+
+:root[data-ui-theme='emerald'] body {
+  --ms-color-brand-primary-subtle: #e6f4ed;
+  --ms-color-background: #f4f7f5;
+  --ms-color-surface-hover: #eef6f1;
+  --ms-sidebar-bg: #0f2a20;
+  --ms-color-brand-navy: #0f2a20;
+  --ms-sidebar-text: #a9c4b8;
+  --ms-sidebar-section: #7fa192;
+}
+
+:root[data-ui-theme='ocean'] {
+  --brand-primary-100: #99d5cf !important;
+  --brand-primary-500: #0f766e !important;
+  --brand-primary-700: #0b5952 !important;
+}
+
+:root[data-ui-theme='ocean'] body {
+  --ms-color-brand-primary-subtle: #e4f3f1;
+  --ms-color-background: #f3f7f7;
+  --ms-color-surface-hover: #ecf5f4;
+  --ms-sidebar-bg: #0b2a2a;
+  --ms-color-brand-navy: #0b2a2a;
+  --ms-sidebar-text: #9ec3c0;
+  --ms-sidebar-section: #74a19d;
+}
+
+:root[data-ui-theme='indigo'] {
+  --brand-primary-100: #c7c4f5 !important;
+  --brand-primary-500: #4338ca !important;
+  --brand-primary-700: #3329a3 !important;
+}
+
+:root[data-ui-theme='indigo'] body {
+  --ms-color-brand-primary-subtle: #eceeff;
+  --ms-color-background: #f5f5fa;
+  --ms-color-surface-hover: #f0f0fb;
+  --ms-sidebar-bg: #1e1b4b;
+  --ms-color-brand-navy: #1e1b4b;
+  --ms-sidebar-text: #b8b5e0;
+  --ms-sidebar-section: #8c88c4;
+}
+
+:root[data-ui-theme='graphite'] {
+  --brand-primary-100: #b3c2d1 !important;
+  --brand-primary-500: #3f5872 !important;
+  --brand-primary-700: #2f4357 !important;
+}
+
+:root[data-ui-theme='graphite'] body {
+  --ms-color-brand-primary-subtle: #eceff3;
+  --ms-color-background: #f4f5f7;
+  --ms-color-surface-hover: #eff1f4;
+  --ms-sidebar-bg: #1f2329;
+  --ms-color-brand-navy: #1f2329;
+  --ms-sidebar-text: #a9b0ba;
+  --ms-sidebar-section: #7e8794;
+}
+
+/*
+ * Obsidian follows the Magma Soft brand: Material's filled buttons keep the
+ * deep orange (white label 5.3:1) and the token primary is a lighter orange
+ * for text and outlines on the dark surfaces (#F08A3C on #161F2B 6.1:1).
+ */
+:root:has(> body.dark-theme) {
+  --brand-primary-100: #f5c8a6 !important;
+  --brand-primary-500: #b34c00 !important;
+  --brand-primary-700: #8f3d00 !important;
+}
+
+body.dark-theme {
+  /* Obsidian */
+  --ms-color-brand-primary: #f08a3c;
+  --ms-color-brand-primary-hover: #f5a467;
+  --ms-color-brand-primary-subtle: #2e1d10;
+  /* The light primary is for text on dark surfaces; white labels keep the deep orange. */
+  --ms-color-brand-fill: #b34c00;
+  --ms-color-on-primary: #0d1724;
+  --ms-color-background: #0f1620;
+  --ms-color-surface: #161f2b;
+  --ms-color-surface-subtle: #1c2735;
+  --ms-color-surface-zebra: #19222f;
+  --ms-color-surface-hover: #1f2b3a;
+  --ms-color-text-primary: #e4eaf2;
+  --ms-color-text-secondary: #9fadbf;
+  --ms-color-text-disabled: #6b7a8d;
+  --ms-color-text-link: #f5a467;
+  --ms-color-border: #2a3647;
+  --ms-color-border-subtle: #233041;
+  --ms-color-focus-ring: #f5a467;
+  --ms-color-success: #5cc597;
+  --ms-color-success-bg: #12291f;
+  --ms-color-warning: #e5b454;
+  --ms-color-warning-bg: #2b2210;
+  --ms-color-danger: #f0877e;
+  --ms-color-danger-bg: #2e1614;
+  --ms-color-info: #f5a467;
+  --ms-color-info-bg: #2e1d10;
+  --ms-color-neutral: #9fadbf;
+  --ms-color-neutral-bg: #1f2a38;
+  --ms-sidebar-bg: #0a111a;
+  --ms-sidebar-item-active: #2b1b0f;
+  --ms-shadow-xs: 0 1px 2px rgb(0 0 0 / 30%);
+  --ms-shadow-float: 0 4px 12px rgb(0 0 0 / 35%), 0 1px 3px rgb(0 0 0 / 30%);
+  --ms-shadow-dialog: 0 16px 40px rgb(0 0 0 / 50%);
+}
+
+/*
+ * Legacy token bridge. Components redesigned before the Design System read the
+ * `--ds-*` tokens; pointing them at the semantic tokens moves them onto the new
+ * palette without touching each component.
+ */
+:root,
+body.light-theme,
+body.dark-theme {
+  --ds-blue-700: var(--ms-color-brand-primary);
+  --ds-blue-600: var(--ms-color-brand-primary);
+  --ds-blue-50: var(--ms-color-brand-primary-subtle);
+  --ds-blue-20: var(--ms-color-surface-hover);
+  --ds-surface: var(--ms-color-surface);
+  --ds-surface-alt: var(--ms-color-background);
+  --ds-surface-head: var(--ms-color-surface-subtle);
+  --ds-border: var(--ms-color-border-subtle);
+  --ds-border-strong: var(--ms-color-border);
+  --ds-text-1: var(--ms-color-text-primary);
+  --ds-text-2: var(--ms-color-text-secondary);
+  --ds-paid: var(--ms-color-success);
+  --ds-paid-bg: var(--ms-color-success-bg);
+  --ds-partial: var(--ms-color-warning);
+  --ds-partial-bg: var(--ms-color-warning-bg);
+  --ds-alert: var(--ms-color-danger);
+  --ds-alert-bg: var(--ms-color-danger-bg);
+  --ds-radius-sm: var(--ms-radius-sm);
+  --ds-radius: var(--ms-radius-md);
+  --ds-radius-lg: var(--ms-radius-panel);
+  --ds-shadow-xs: var(--ms-shadow-xs);
+  --ds-shadow-sm: var(--ms-shadow-xs);
+  --ds-shadow-md: var(--ms-shadow-float);
+}

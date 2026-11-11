@@ -21,7 +21,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { take } from 'rxjs';
@@ -49,7 +48,6 @@ import { ExchangeRatesService } from './exchange-rates.service';
     FaIconComponent,
     MatTableModule,
     MatSortModule,
-    MatTooltip,
     MatPaginatorModule,
     ReactiveFormsModule
   ],

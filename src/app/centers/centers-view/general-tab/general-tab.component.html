@@ -6,180 +6,192 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container mat-typography">
+<div class="tab-content">
   @if (centerViewData.status.value === 'Closed') {
-    <div>
-      <h3 class="closedCenter">{{ 'labels.heading.Center Closed' | translate }}</h3>
+    <div class="tab-content__notice" role="status">
+      <span class="ms-badge ms-badge--danger">{{ 'labels.heading.Center Closed' | translate }}</span>
     </div>
   }
-  <h3>{{ 'labels.heading.Summary Details' | translate }}</h3>
-  <!-- GroupSummaryCounts report returns lowercase column names -->
-  <div class="layout-row responsive-column gap-32px summary-details-container">
-    <p>
-      {{ 'labels.inputs.Active Clients' | translate }}: {{ centerSummaryData?.activeclients }}<br />
-      {{ 'labels.inputs.Active Group Loans' | translate }}: {{ centerSummaryData?.activegrouploans }}<br />
-      {{ 'labels.inputs.Active Client Loans' | translate }}: {{ centerSummaryData?.activeclientloans }}<br />
-    </p>
-    <p>
-      {{ 'labels.inputs.Active Group Borrowers' | translate }}: {{ centerSummaryData?.activegroupborrowers }}<br />
-      {{ 'labels.inputs.Active Client Borrowers' | translate }}: {{ centerSummaryData?.activeclientborrowers }}<br />
-    </p>
-    <p>
-      {{ 'labels.inputs.Active Overdue Group Loans' | translate }}: {{ centerSummaryData?.overduegrouploans }}<br />
-      {{ 'labels.inputs.Active Overdue Client Loans' | translate }}: {{ centerSummaryData?.overdueclientloans }}<br />
-    </p>
-  </div>
+
+  <section class="ms-panel ms-panel--padded tab-content__summary">
+    <h3 class="ms-section-title">{{ 'labels.heading.Summary Details' | translate }}</h3>
+    <!-- GroupSummaryCounts report returns lowercase column names -->
+    <dl class="summary-grid">
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Clients' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.activeclients }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Group Loans' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.activegrouploans }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Client Loans' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.activeclientloans }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Group Borrowers' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.activegroupborrowers }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Client Borrowers' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.activeclientborrowers }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Overdue Group Loans' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.overduegrouploans }}</dd>
+      </div>
+      <div class="summary-grid__item">
+        <dt class="ms-label">{{ 'labels.inputs.Active Overdue Client Loans' | translate }}</dt>
+        <dd class="ms-value ms-num">{{ centerSummaryData?.overdueclientloans }}</dd>
+      </div>
+    </dl>
+  </section>
 
   <!-- Groups -->
   @if (groupResourceData.length > 0) {
-    <h3>{{ 'labels.heading.Groups' | translate }}</h3>
-    <table mat-table [dataSource]="groupResourceData" matSort>
-      <ng-container matColumnDef="Account No">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Account Number' | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          <i
-            class="fa fa-stop"
-            matTooltip="{{ element.status.value }}"
-            [ngClass]="element.status.code | statusLookup"
-          ></i>
-          {{ element.accountNo }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="Group Name">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Group Name' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Office Name">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Office Name' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.officeName }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Submitted On">
-        <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.timeline.submittedOnDate | dateFormat }}</td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="groupsColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: groupsColumns"
-        [routerLink]="['/groups', row.id, 'general']"
-        class="select-row"
-      ></tr>
-    </table>
+    <section class="tab-content__section">
+      <h3 class="ms-section-title">{{ 'labels.heading.Groups' | translate }}</h3>
+      <div class="ms-panel ms-table-wrap">
+        <table mat-table [dataSource]="groupResourceData" matSort class="tab-content__table">
+          <ng-container matColumnDef="Account No">
+            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Account Number' | translate }}</th>
+            <td mat-cell *matCellDef="let element" class="ms-num tab-content__muted">{{ element.accountNo }}</td>
+          </ng-container>
+          <ng-container matColumnDef="Group Name">
+            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Group Name' | translate }}</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="tab-content__name">{{ element.name }}</span>
+              <span class="ms-status tab-content__status" [ngClass]="statusClass(element.status?.code)">
+                {{ element.status?.value }}
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Office Name">
+            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Office Name' | translate }}</th>
+            <td mat-cell *matCellDef="let element" class="tab-content__muted">{{ element.officeName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="Submitted On">
+            <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Submitted On' | translate }}</th>
+            <td mat-cell *matCellDef="let element" class="tab-content__muted">
+              {{ element.timeline.submittedOnDate | dateFormat }}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="groupsColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: groupsColumns"
+            [routerLink]="['/groups', row.id, 'general']"
+            class="select-row"
+          ></tr>
+        </table>
+      </div>
+    </section>
   }
 
   <!-- savings overview table -->
   @if (!(savingsAccountData === undefined)) {
     @if (savingsAccountData.length > 0) {
-      <h3>{{ 'labels.heading.Savings Account Overview' | translate }}</h3>
-      <table mat-table [dataSource]="savingsAccountData" matSort>
-        <ng-container matColumnDef="Account No">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Account No' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              class="fa fa-stop"
-              matTooltip="{{ element.status.value }}"
-              [ngClass]="element.status.code | statusLookup"
-            ></i>
-            {{ element.accountNo }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Products">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Products' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
-        </ng-container>
-        <ng-container matColumnDef="Balance">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Balance' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.accountBalance }}</td>
-        </ng-container>
-        <ng-container matColumnDef="Actions">
-          <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            @if (element.status.active) {
-              @if (element.depositType.id === 100) {
-                <button
-                  class="account-action-button"
-                  mat-raised-button
-                  color="primary"
-                  (click)="routeEdit($event)"
-                  [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Deposit']"
-                >
-                  <i class="fa fa-arrow-right" matTooltip="{{ 'tooltips.Deposit' | translate }}"></i>
-                </button>
-              }
-              @if (element.depositType.id === 300) {
-                <button
-                  class="account-action-button"
-                  mat-raised-button
-                  color="primary"
-                  (click)="routeEdit($event)"
-                  [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Deposit']"
-                >
-                  <i class="fa fa-arrow-right" matTooltip="{{ 'tooltips.Deposit' | translate }}"></i>
-                </button>
-              }
-              @if (element.depositType.id === 100) {
-                <button
-                  class="account-action-button"
-                  mat-raised-button
-                  color="primary"
-                  (click)="routeEdit($event)"
-                  [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Withdrawal']"
-                >
-                  <i class="fa fa-arrow-left" matTooltip="{{ 'tooltips.Withdraw' | translate }}"></i>
-                </button>
-              }
-              @if (element.depositType.id === 300) {
-                <button
-                  class="account-action-button"
-                  mat-raised-button
-                  color="primary"
-                  (click)="routeEdit($event)"
-                  [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Withdrawal']"
-                >
-                  <i class="fa fa-arrow-left" matTooltip="{{ 'tooltips.Withdraw' | translate }}"></i>
-                </button>
-              }
-            }
-            @if (element.status.submittedAndPendingApproval) {
-              <button
-                class="account-action-button"
-                mat-raised-button
-                color="primary"
-                (click)="routeEdit($event)"
-                [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Approve']"
-              >
-                <i class="fa fa-check" matTooltip="{{ 'tooltips.Approve' | translate }}"></i>
-              </button>
-            }
-            @if (!element.status.submittedAndPendingApproval && !element.status.active) {
-              <button
-                class="account-action-button"
-                mat-raised-button
-                color="primary"
-                (click)="routeEdit($event)"
-                [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Undo Approval']"
-              >
-                <i class="fa fa-undo" matTooltip="{{ 'tooltips.Undo Approve' | translate }}"></i>
-              </button>
-              <button
-                class="account-action-button"
-                mat-raised-button
-                color="primary"
-                (click)="routeEdit($event)"
-                [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Activate']"
-              >
-                <i class="fa fa-power-off" matTooltip="{{ 'tooltips.Activate' | translate }}"></i>
-              </button>
-            }
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="savingsAccountColumns"></tr>
-        <tr
-          mat-row
-          *matRowDef="let row; columns: savingsAccountColumns"
-          [routerLink]="['../', 'savings-accounts', row.id, 'transactions']"
-        ></tr>
-      </table>
+      <section class="tab-content__section">
+        <h3 class="ms-section-title">{{ 'labels.heading.Savings Account Overview' | translate }}</h3>
+        <div class="ms-panel ms-table-wrap">
+          <table mat-table [dataSource]="savingsAccountData" matSort class="tab-content__table">
+            <ng-container matColumnDef="Account No">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Account No' | translate }}</th>
+              <td mat-cell *matCellDef="let element">
+                <span class="ms-num tab-content__name">{{ element.accountNo }}</span>
+                <span class="ms-status tab-content__status" [ngClass]="statusClass(element.status?.code)">
+                  {{ element.status?.value }}
+                </span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Products">
+              <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.Products' | translate }}</th>
+              <td mat-cell *matCellDef="let element" class="tab-content__muted">{{ element.productName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Balance">
+              <th mat-header-cell *matHeaderCellDef class="tab-content__right">
+                {{ 'labels.inputs.Balance' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="ms-num tab-content__right">
+                {{ element.accountBalance }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Actions">
+              <th mat-header-cell *matHeaderCellDef class="tab-content__right">
+                {{ 'labels.inputs.Actions' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="tab-content__right tab-content__actions">
+                @if (element.status.active) {
+                  @if (element.depositType.id === 100 || element.depositType.id === 300) {
+                    <button
+                      mat-icon-button
+                      type="button"
+                      (click)="routeEdit($event)"
+                      [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Deposit']"
+                      [matTooltip]="'tooltips.Deposit' | translate"
+                      [attr.aria-label]="'tooltips.Deposit' | translate"
+                    >
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      mat-icon-button
+                      type="button"
+                      (click)="routeEdit($event)"
+                      [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Withdrawal']"
+                      [matTooltip]="'tooltips.Withdraw' | translate"
+                      [attr.aria-label]="'tooltips.Withdraw' | translate"
+                    >
+                      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+                  }
+                }
+                @if (element.status.submittedAndPendingApproval) {
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="routeEdit($event)"
+                    [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Approve']"
+                    [matTooltip]="'tooltips.Approve' | translate"
+                    [attr.aria-label]="'tooltips.Approve' | translate"
+                  >
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </button>
+                }
+                @if (!element.status.submittedAndPendingApproval && !element.status.active) {
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="routeEdit($event)"
+                    [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Undo Approval']"
+                    [matTooltip]="'tooltips.Undo Approve' | translate"
+                    [attr.aria-label]="'tooltips.Undo Approve' | translate"
+                  >
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="routeEdit($event)"
+                    [routerLink]="['../', 'savings-accounts', element.id, 'actions', 'Activate']"
+                    [matTooltip]="'tooltips.Activate' | translate"
+                    [attr.aria-label]="'tooltips.Activate' | translate"
+                  >
+                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                  </button>
+                }
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="savingsAccountColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: savingsAccountColumns"
+              [routerLink]="['../', 'savings-accounts', row.id, 'transactions']"
+              class="select-row"
+            ></tr>
+          </table>
+        </div>
+      </section>
     }
   }
 </div>

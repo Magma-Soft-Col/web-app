@@ -6,30 +6,34 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<div class="tab-container">
+<div class="ms-page tab-container">
   <!-- ════ PERFORMANCE HISTORY — KPI cards ════════════════════ -->
   <section class="section">
     <div class="section-head">
-      <span class="section-title">{{ 'labels.heading.Performance History' | translate }}</span>
+      <h2 class="ms-section-title">{{ 'labels.heading.Performance History' | translate }}</h2>
     </div>
     <div class="kpi-grid">
-      <div class="kpi-card">
-        <span class="kpi-label">{{ 'labels.inputs.No. Of Loan Cycles' | translate }}</span>
-        <span class="kpi-value">{{ performanceHistory.loanCycle }}</span>
-        <span class="kpi-sub">{{ performanceHistory.activeLoans }} {{ 'labels.inputs.Active' | translate }}</span>
+      <div class="ms-panel kpi-card">
+        <span class="ms-label">{{ 'labels.inputs.No. Of Loan Cycles' | translate }}</span>
+        <span class="ms-amount kpi-value">{{ performanceHistory.loanCycle }}</span>
+        <span class="ms-label kpi-sub"
+          >{{ performanceHistory.activeLoans }} {{ 'labels.inputs.Active' | translate }}</span
+        >
       </div>
-      <div class="kpi-card">
-        <span class="kpi-label">{{ 'labels.inputs.No. of Active Loans' | translate }}</span>
-        <span class="kpi-value">{{ performanceHistory.activeLoans }}</span>
+      <div class="ms-panel kpi-card">
+        <span class="ms-label">{{ 'labels.inputs.No. of Active Loans' | translate }}</span>
+        <span class="ms-amount kpi-value">{{ performanceHistory.activeLoans }}</span>
       </div>
-      <div class="kpi-card">
-        <span class="kpi-label">{{ 'labels.inputs.Last Loan Amount' | translate }}</span>
-        <span class="kpi-value">{{ performanceHistory.lastLoanAmount | formatNumber }}</span>
+      <div class="ms-panel kpi-card">
+        <span class="ms-label">{{ 'labels.inputs.Last Loan Amount' | translate }}</span>
+        <span class="ms-amount kpi-value">{{ performanceHistory.lastLoanAmount | formatNumber }}</span>
       </div>
-      <div class="kpi-card savings">
-        <span class="kpi-label">{{ 'labels.inputs.Available Savings' | translate }}</span>
-        <span class="kpi-value">{{ performanceHistory.totalSavings | formatNumber }}</span>
-        <span class="kpi-sub">{{ performanceHistory.activeSavings }} {{ 'labels.inputs.Active' | translate }}</span>
+      <div class="ms-panel kpi-card">
+        <span class="ms-label">{{ 'labels.inputs.Available Savings' | translate }}</span>
+        <span class="ms-amount kpi-value">{{ performanceHistory.totalSavings | formatNumber }}</span>
+        <span class="ms-label kpi-sub"
+          >{{ performanceHistory.activeSavings }} {{ 'labels.inputs.Active' | translate }}</span
+        >
       </div>
     </div>
   </section>
@@ -37,20 +41,19 @@
   <!-- ════ UPCOMING CHARGES ═══════════════════════════════════ -->
   <section class="section">
     <div class="section-head">
-      <span class="section-title">{{ 'labels.heading.Upcoming Charges' | translate }}</span>
+      <h2 class="ms-section-title">{{ 'labels.heading.Upcoming Charges' | translate }}</h2>
       <a class="section-link" [routerLink]="['../', 'charges', 'overview']" *mifosxHasPermission="'READ_CLIENTCHARGE'">
         {{ 'labels.buttons.Charges Overview' | translate }} →
       </a>
     </div>
 
     @if (upcomingCharges?.length) {
-      <div class="data-card">
-        <div class="data-card-wrap">
+      <div class="ms-panel">
+        <div class="ms-table-wrap">
           <table mat-table [dataSource]="upcomingCharges" class="data-table">
             <ng-container matColumnDef="Name">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.name' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                <span class="row-dot" [ngClass]="!(element.isWaived || element.isPaid) | statusLookup"></span>
                 {{ element.name }}
               </td>
             </ng-container>
@@ -59,20 +62,22 @@
               <td mat-cell *matCellDef="let element">{{ element.dueDate | dateFormat }}</td>
             </ng-container>
             <ng-container matColumnDef="Due">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Due' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">{{ element.amount | formatNumber }}</td>
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>{{ 'labels.inputs.Due' | translate }}</th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">{{ element.amount | formatNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="Paid">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Paid' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">{{ element.amountPaid | formatNumber }}</td>
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>{{ 'labels.inputs.Paid' | translate }}</th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">{{ element.amountPaid | formatNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="Waived">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Waived' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">{{ element.amountWaived | formatNumber }}</td>
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>{{ 'labels.inputs.Waived' | translate }}</th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">{{ element.amountWaived | formatNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="Outstanding">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Outstanding' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>
+                {{ 'labels.inputs.Outstanding' | translate }}
+              </th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">
                 {{ element.amountOutstanding | formatNumber }}
               </td>
             </ng-container>
@@ -80,21 +85,25 @@
               <th mat-header-cell class="col-c" *matHeaderCellDef>{{ 'labels.inputs.Actions' | translate }}</th>
               <td mat-cell class="col-c" *matCellDef="let element">
                 <button
+                  type="button"
                   class="row-action primary"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'charges', element.id, 'pay']"
                   *mifosxHasPermission="'PAY_CLIENTCHARGE'"
-                  matTooltip="{{ 'tooltips.Make Payment' | translate }}"
+                  [matTooltip]="'tooltips.Make Payment' | translate"
+                  [attr.aria-label]="'tooltips.Make Payment' | translate"
                 >
-                  <i class="fa fa-dollar"></i>
+                  <i aria-hidden="true" class="fa fa-dollar"></i>
                 </button>
                 <button
+                  type="button"
                   class="row-action"
                   (click)="routeEdit($event); waiveCharge(element.id, element.clientId)"
                   *mifosxHasPermission="'WAIVE_CLIENTCHARGE'"
-                  matTooltip="{{ 'tooltips.Waive' | translate }}"
+                  [matTooltip]="'tooltips.Waive' | translate"
+                  [attr.aria-label]="'tooltips.Waive' | translate"
                 >
-                  <i class="fa fa-flag"></i>
+                  <i aria-hidden="true" class="fa fa-flag"></i>
                 </button>
               </td>
             </ng-container>
@@ -108,11 +117,10 @@
         </div>
       </div>
     } @else {
-      <div class="info-banner">
-        <span class="info-banner-text">
-          <i class="fa fa-info-circle info-banner-icon"></i>
-          {{ 'labels.messages.No Upcoming Charges Found' | translate }}
-        </span>
+      <div class="ms-panel">
+        <div class="ms-empty">
+          <span>{{ 'labels.messages.No Upcoming Charges Found' | translate }}</span>
+        </div>
       </div>
     }
   </section>
@@ -120,50 +128,77 @@
   <!-- ════ ACCOUNTS — unified card with sub-tabs ══════════════ -->
   <section class="section">
     <div class="section-head">
-      <span class="section-title">{{ 'labels.heading.Accounts' | translate }}</span>
+      <h2 class="ms-section-title">{{ 'labels.heading.Accounts' | translate }}</h2>
     </div>
 
-    <div class="accounts-card">
+    <div class="ms-panel accounts-card">
       <!-- Toolbar: type sub-tabs + closed toggle -->
       <div class="accounts-toolbar">
         <div class="account-type-tabs">
-          <button class="at-tab" [class.active]="currentAccountType === 'all'" (click)="selectAccountType('all')">
+          <button
+            type="button"
+            class="at-tab"
+            [class.active]="currentAccountType === 'all'"
+            [attr.aria-pressed]="currentAccountType === 'all'"
+            (click)="selectAccountType('all')"
+          >
             {{ 'labels.inputs.All' | translate }}
             <span class="at-count">{{ accountCounts.total }}</span>
           </button>
-          <button class="at-tab" [class.active]="currentAccountType === 'loan'" (click)="selectAccountType('loan')">
+          <button
+            type="button"
+            class="at-tab"
+            [class.active]="currentAccountType === 'loan'"
+            [attr.aria-pressed]="currentAccountType === 'loan'"
+            (click)="selectAccountType('loan')"
+          >
             {{ 'labels.heading.Loan Accounts' | translate }}
             <span class="at-count">{{ accountCounts.loan }}</span>
           </button>
           <button
+            type="button"
             class="at-tab"
             [class.active]="currentAccountType === 'savings'"
+            [attr.aria-pressed]="currentAccountType === 'savings'"
             (click)="selectAccountType('savings')"
           >
             {{ 'labels.heading.Saving Accounts' | translate }}
             <span class="at-count">{{ accountCounts.savings }}</span>
           </button>
-          <button class="at-tab" [class.active]="currentAccountType === 'fixed'" (click)="selectAccountType('fixed')">
+          <button
+            type="button"
+            class="at-tab"
+            [class.active]="currentAccountType === 'fixed'"
+            [attr.aria-pressed]="currentAccountType === 'fixed'"
+            (click)="selectAccountType('fixed')"
+          >
             {{ 'labels.heading.Fixed Deposit Accounts' | translate }}
             <span class="at-count">{{ accountCounts.fixed }}</span>
           </button>
           <button
+            type="button"
             class="at-tab"
             [class.active]="currentAccountType === 'recurring'"
+            [attr.aria-pressed]="currentAccountType === 'recurring'"
             (click)="selectAccountType('recurring')"
           >
             {{ 'labels.heading.Recurring Deposit Accounts' | translate }}
             <span class="at-count">{{ accountCounts.recurring }}</span>
           </button>
-          <button class="at-tab" [class.active]="currentAccountType === 'shares'" (click)="selectAccountType('shares')">
+          <button
+            type="button"
+            class="at-tab"
+            [class.active]="currentAccountType === 'shares'"
+            [attr.aria-pressed]="currentAccountType === 'shares'"
+            (click)="selectAccountType('shares')"
+          >
             {{ 'labels.inputs.Shares Accounts' | translate }}
             <span class="at-count">{{ accountCounts.shares }}</span>
           </button>
         </div>
-        <label class="toggle-pill" (click)="toggleShowClosedAccounts()">
-          <span class="switch" [class.on]="showClosedAccounts"></span>
-          <span>{{ 'labels.buttons.Show Closed Accounts' | translate }}</span>
-        </label>
+        <mat-checkbox class="toggle-pill" [checked]="showClosedAccounts" (change)="toggleShowClosedAccounts()">
+          {{ 'labels.buttons.Show Closed Accounts' | translate }}
+        </mat-checkbox>
       </div>
 
       <!-- ── LOAN ACCOUNTS ────────────────────────────────────── -->
@@ -175,19 +210,18 @@
             [routerLink]="['../', 'loans-accounts', loan.id, 'general']"
             [queryParams]="{ productType: loan.productType }"
           >
-            <div class="indicator loan"></div>
+            <div class="indicator"></div>
             <div class="acc-identity">
               <span class="acc-num">
                 <mifosx-account-number [accountNo]="loan.accountNo"></mifosx-account-number>
               </span>
               <div class="acc-status-row">
-                <span class="status-pill" [ngClass]="loanSeverity(loan)">
-                  <span class="dot"></span>
+                <span class="ms-badge" [ngClass]="badgeClass(loanSeverity(loan))">
                   {{
                     'labels.catalogs.' + (loan.inArrears ? 'In Arrears' : loan.status?.value || 'Unknown') | translate
                   }}
                 </span>
-                <span class="product-type-chip loan">
+                <span class="ms-badge product-type-chip">
                   {{ loanProductTypeLabel(loan.productType) | translate }}
                 </span>
               </div>
@@ -222,8 +256,8 @@
               </div>
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Loan Balance' | translate }}</div>
-              <div class="acc-balance-value">
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Loan Balance' | translate }}</div>
+              <div class="acc-balance-value ms-num">
                 {{ loan.loanBalance | currency: loan.currency?.code : 'symbol-narrow' : '1.2-2' }}
               </div>
               <div class="acc-balance-progress">
@@ -240,53 +274,61 @@
             <div class="acc-actions" (click)="$event.stopPropagation()">
               @if (loan.status?.active) {
                 <button
+                  type="button"
                   class="row-action primary"
-                  matTooltip="{{ 'tooltips.Make Repayment' | translate }}"
+                  [matTooltip]="'tooltips.Make Repayment' | translate"
+                  [attr.aria-label]="'tooltips.Make Repayment' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'loans-accounts', loan.id, 'actions', 'Make Repayment']"
                 >
-                  <i class="fa fa-dollar"></i>
+                  <i aria-hidden="true" class="fa fa-dollar"></i>
                 </button>
               }
               @if (loan.status?.pendingApproval) {
                 <button
+                  type="button"
                   class="row-action primary"
                   *mifosxHasPermission="'APPROVE_LOAN'"
-                  matTooltip="{{ 'tooltips.Approve' | translate }}"
+                  [matTooltip]="'tooltips.Approve' | translate"
+                  [attr.aria-label]="'tooltips.Approve' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'loans-accounts', loan.id, 'actions', 'Approve']"
                 >
-                  <i class="fa fa-check"></i>
+                  <i aria-hidden="true" class="fa fa-check"></i>
                 </button>
               }
               @if (
                 !loan.status?.pendingApproval && !loan.status?.active && !loan.status?.overpaid && !loan.status?.closed
               ) {
                 <button
+                  type="button"
                   class="row-action primary"
                   *mifosxHasPermission="'DISBURSE_LOAN'"
-                  matTooltip="{{ 'tooltips.Disburse' | translate }}"
+                  [matTooltip]="'tooltips.Disburse' | translate"
+                  [attr.aria-label]="'tooltips.Disburse' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'loans-accounts', loan.id, 'actions', 'Disburse']"
                 >
-                  <i class="fa fa-flag"></i>
+                  <i aria-hidden="true" class="fa fa-flag"></i>
                 </button>
               }
               @if (loan.status?.overpaid) {
                 <button
+                  type="button"
                   class="row-action primary"
                   *mifosxHasPermission="'DISBURSE_LOAN'"
-                  matTooltip="{{ 'tooltips.Transfer Funds' | translate }}"
+                  [matTooltip]="'tooltips.Transfer Funds' | translate"
+                  [attr.aria-label]="'tooltips.Transfer Funds' | translate"
                   (click)="routeEdit($event); routeTransferFund(loan.id)"
                 >
-                  <i class="fa fa-exchange"></i>
+                  <i aria-hidden="true" class="fa fa-exchange"></i>
                 </button>
               }
             </div>
           </div>
         } @empty {
           @if (currentAccountType === 'loan') {
-            <div class="acc-empty">
+            <div class="ms-empty acc-empty">
               {{
                 (showClosedAccounts
                   ? 'labels.messages.No Closed Loan Accounts Found'
@@ -305,17 +347,16 @@
           track saving.id
         ) {
           <div class="account-row savings" [routerLink]="['../', 'savings-accounts', saving.id, 'general']">
-            <div class="indicator savings"></div>
+            <div class="indicator"></div>
             <div class="acc-identity">
               <span class="acc-num">
                 <mifosx-account-number [accountNo]="saving.accountNo"></mifosx-account-number>
               </span>
               <div class="acc-status-row">
-                <span class="status-pill" [ngClass]="accountSeverity(saving)">
-                  <span class="dot"></span>
+                <span class="ms-badge" [ngClass]="badgeClass(accountSeverity(saving))">
                   {{ 'labels.catalogs.' + (saving.status?.value || 'Unknown') | translate }}
                 </span>
-                <span class="product-type-chip savings">{{ 'labels.heading.Saving Accounts' | translate }}</span>
+                <span class="ms-badge product-type-chip">{{ 'labels.heading.Saving Accounts' | translate }}</span>
               </div>
             </div>
             <div class="acc-external-id">
@@ -338,51 +379,57 @@
               }
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Account Balance' | translate }}</div>
-              <div class="acc-balance-value savings">
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Account Balance' | translate }}</div>
+              <div class="acc-balance-value ms-num">
                 {{ saving.accountBalance | currency: saving.currency?.code : 'symbol-narrow' : '1.2-2' }}
               </div>
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Available Balance' | translate }}</div>
-              <div class="acc-balance-value savings">
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Available Balance' | translate }}</div>
+              <div class="acc-balance-value ms-num">
                 {{ saving.availableBalance | currency: saving.currency?.code : 'symbol-narrow' : '1.2-2' }}
               </div>
             </div>
             <div class="acc-actions" (click)="$event.stopPropagation()">
               @if (saving.status?.active) {
                 <button
+                  type="button"
                   class="row-action primary"
-                  matTooltip="{{ 'tooltips.Deposit' | translate }}"
+                  [matTooltip]="'tooltips.Deposit' | translate"
+                  [attr.aria-label]="'tooltips.Deposit' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'savings-accounts', saving.id, 'actions', 'Deposit']"
                 >
-                  <i class="fa fa-arrow-up"></i>
+                  <i aria-hidden="true" class="fa fa-arrow-up"></i>
                 </button>
                 <button
+                  type="button"
                   class="row-action"
-                  matTooltip="{{ 'tooltips.Withdraw' | translate }}"
+                  [matTooltip]="'tooltips.Withdraw' | translate"
+                  [attr.aria-label]="'tooltips.Withdraw' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'savings-accounts', saving.id, 'actions', 'Withdrawal']"
                 >
-                  <i class="fa fa-arrow-down"></i>
+                  <i aria-hidden="true" class="fa fa-arrow-down"></i>
                 </button>
               }
               @if (saving.status?.submittedAndPendingApproval) {
                 <button
+                  type="button"
                   class="row-action primary"
-                  matTooltip="{{ 'tooltips.Approve' | translate }}"
+                  [matTooltip]="'tooltips.Approve' | translate"
+                  [attr.aria-label]="'tooltips.Approve' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'savings-accounts', saving.id, 'actions', 'Approve']"
                 >
-                  <i class="fa fa-check"></i>
+                  <i aria-hidden="true" class="fa fa-check"></i>
                 </button>
               }
             </div>
           </div>
         } @empty {
           @if (currentAccountType === 'savings') {
-            <div class="acc-empty">
+            <div class="ms-empty acc-empty">
               {{
                 (showClosedAccounts
                   ? 'labels.messages.No Closed Saving Accounts Found'
@@ -401,17 +448,18 @@
           track fixed.id
         ) {
           <div class="account-row fixed" [routerLink]="['../', 'fixed-deposits-accounts', fixed.id, 'general']">
-            <div class="indicator fixed"></div>
+            <div class="indicator"></div>
             <div class="acc-identity">
               <span class="acc-num">
                 <mifosx-account-number [accountNo]="fixed.accountNo"></mifosx-account-number>
               </span>
               <div class="acc-status-row">
-                <span class="status-pill" [ngClass]="accountSeverity(fixed)">
-                  <span class="dot"></span>
+                <span class="ms-badge" [ngClass]="badgeClass(accountSeverity(fixed))">
                   {{ 'labels.catalogs.' + (fixed.status?.value || 'Unknown') | translate }}
                 </span>
-                <span class="product-type-chip fixed">{{ 'labels.heading.Fixed Deposit Accounts' | translate }}</span>
+                <span class="ms-badge product-type-chip">{{
+                  'labels.heading.Fixed Deposit Accounts' | translate
+                }}</span>
               </div>
             </div>
             <div class="acc-product">
@@ -428,27 +476,29 @@
               }
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Balance' | translate }}</div>
-              <div class="acc-balance-value fixed">
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Balance' | translate }}</div>
+              <div class="acc-balance-value ms-num">
                 {{ fixed.accountBalance | currency: fixed.currency?.code : 'symbol-narrow' : '1.2-2' }}
               </div>
             </div>
             <div class="acc-actions" (click)="$event.stopPropagation()">
               @if (fixed.status?.submittedAndPendingApproval) {
                 <button
+                  type="button"
                   class="row-action primary"
-                  matTooltip="{{ 'tooltips.Approve' | translate }}"
+                  [matTooltip]="'tooltips.Approve' | translate"
+                  [attr.aria-label]="'tooltips.Approve' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'fixed-deposits-accounts', fixed.id, 'actions', 'Approve']"
                 >
-                  <i class="fa fa-check"></i>
+                  <i aria-hidden="true" class="fa fa-check"></i>
                 </button>
               }
             </div>
           </div>
         } @empty {
           @if (currentAccountType === 'fixed') {
-            <div class="acc-empty">
+            <div class="ms-empty acc-empty">
               {{
                 (showClosedAccounts
                   ? 'labels.messages.No Closed Fixed Deposit Accounts Found'
@@ -471,17 +521,16 @@
             class="account-row recurring"
             [routerLink]="['../', 'recurring-deposits-accounts', recurring.id, 'general']"
           >
-            <div class="indicator recurring"></div>
+            <div class="indicator"></div>
             <div class="acc-identity">
               <span class="acc-num">
                 <mifosx-account-number [accountNo]="recurring.accountNo"></mifosx-account-number>
               </span>
               <div class="acc-status-row">
-                <span class="status-pill" [ngClass]="accountSeverity(recurring)">
-                  <span class="dot"></span>
+                <span class="ms-badge" [ngClass]="badgeClass(accountSeverity(recurring))">
                   {{ 'labels.catalogs.' + (recurring.status?.value || 'Unknown') | translate }}
                 </span>
-                <span class="product-type-chip recurring">{{
+                <span class="ms-badge product-type-chip">{{
                   'labels.heading.Recurring Deposit Accounts' | translate
                 }}</span>
               </div>
@@ -500,28 +549,30 @@
               }
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Balance' | translate }}</div>
-              <div class="acc-balance-value recurring">
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Balance' | translate }}</div>
+              <div class="acc-balance-value ms-num">
                 {{ recurring.accountBalance | currency: recurring.currency?.code : 'symbol-narrow' : '1.2-2' }}
               </div>
             </div>
             <div class="acc-actions" (click)="$event.stopPropagation()">
               @if (recurring.status?.submittedAndPendingApproval) {
                 <button
+                  type="button"
                   class="row-action primary"
                   *mifosxHasPermission="'APPROVE_SAVINGSACCOUNT'"
-                  matTooltip="{{ 'tooltips.Approve' | translate }}"
+                  [matTooltip]="'tooltips.Approve' | translate"
+                  [attr.aria-label]="'tooltips.Approve' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'recurring-deposits-accounts', recurring.id, 'actions', 'Approve']"
                 >
-                  <i class="fa fa-check"></i>
+                  <i aria-hidden="true" class="fa fa-check"></i>
                 </button>
               }
             </div>
           </div>
         } @empty {
           @if (currentAccountType === 'recurring') {
-            <div class="acc-empty">
+            <div class="ms-empty acc-empty">
               {{
                 (showClosedAccounts
                   ? 'labels.messages.No Closed Recurring Deposit Accounts Found'
@@ -540,17 +591,16 @@
           track share.id
         ) {
           <div class="account-row shares" [routerLink]="['../', 'shares-accounts', share.id, 'general']">
-            <div class="indicator shares"></div>
+            <div class="indicator"></div>
             <div class="acc-identity">
               <span class="acc-num">
                 <mifosx-account-number [accountNo]="share.accountNo"></mifosx-account-number>
               </span>
               <div class="acc-status-row">
-                <span class="status-pill" [ngClass]="accountSeverity(share)">
-                  <span class="dot"></span>
+                <span class="ms-badge" [ngClass]="badgeClass(accountSeverity(share))">
                   {{ 'labels.catalogs.' + (share.status?.value || 'Unknown') | translate }}
                 </span>
-                <span class="product-type-chip shares">{{ 'labels.inputs.Shares Accounts' | translate }}</span>
+                <span class="ms-badge product-type-chip">{{ 'labels.inputs.Shares Accounts' | translate }}</span>
               </div>
             </div>
             <div class="acc-product">
@@ -569,25 +619,27 @@
               </div>
             </div>
             <div class="acc-balance-block">
-              <div class="acc-balance-label">{{ 'labels.inputs.Approved Shares' | translate }}</div>
-              <div class="acc-balance-value shares">{{ share.totalApprovedShares }}</div>
+              <div class="ms-label acc-balance-label">{{ 'labels.inputs.Approved Shares' | translate }}</div>
+              <div class="acc-balance-value ms-num">{{ share.totalApprovedShares }}</div>
             </div>
             <div class="acc-actions" (click)="$event.stopPropagation()">
               @if (share.status?.submittedAndPendingApproval) {
                 <button
+                  type="button"
                   class="row-action primary"
-                  matTooltip="{{ 'tooltips.Approve' | translate }}"
+                  [matTooltip]="'tooltips.Approve' | translate"
+                  [attr.aria-label]="'tooltips.Approve' | translate"
                   (click)="routeEdit($event)"
                   [routerLink]="['../', 'shares-accounts', share.id, 'actions', 'Approve']"
                 >
-                  <i class="fa fa-check"></i>
+                  <i aria-hidden="true" class="fa fa-check"></i>
                 </button>
               }
             </div>
           </div>
         } @empty {
           @if (currentAccountType === 'shares') {
-            <div class="acc-empty">
+            <div class="ms-empty acc-empty">
               {{
                 (showClosedAccounts
                   ? 'labels.messages.No Closed Share Accounts Found'
@@ -600,7 +652,7 @@
       }
 
       @if (currentAccountType === 'all' && accountCounts.total === 0 && !showClosedAccounts) {
-        <div class="acc-empty">{{ 'labels.messages.No Accounts Found' | translate }}</div>
+        <div class="ms-empty acc-empty">{{ 'labels.messages.No Accounts Found' | translate }}</div>
       }
     </div>
   </section>
@@ -608,12 +660,12 @@
   <!-- ════ COLLATERAL ════════════════════════════════════════ -->
   <section class="section">
     <div class="section-head">
-      <span class="section-title">{{ 'labels.heading.Collateral Data' | translate }}</span>
+      <h2 class="ms-section-title">{{ 'labels.heading.Collateral Data' | translate }}</h2>
     </div>
 
     @if (collaterals?.length) {
-      <div class="data-card">
-        <div class="data-card-wrap">
+      <div class="ms-panel">
+        <div class="ms-table-wrap">
           <table mat-table [dataSource]="collaterals" class="data-table">
             <ng-container matColumnDef="ID">
               <th mat-header-cell *matHeaderCellDef>{{ 'labels.inputs.ID' | translate }}</th>
@@ -624,22 +676,24 @@
               <td mat-cell *matCellDef="let element">{{ element.name }}</td>
             </ng-container>
             <ng-container matColumnDef="Quantity">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Quantity' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">{{ element.quantity | formatNumber }}</td>
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>{{ 'labels.inputs.Quantity' | translate }}</th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">{{ element.quantity | formatNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="Total Value">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>{{ 'labels.inputs.Total Value' | translate }}</th>
-              <td mat-cell class="col-r" *matCellDef="let element">
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>
+                {{ 'labels.inputs.Total Value' | translate }}
+              </th>
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">
                 {{
                   element.basePrice * element.quantity | currency: element.currency?.code : 'symbol-narrow' : '1.2-2'
                 }}
               </td>
             </ng-container>
             <ng-container matColumnDef="Total Collateral Value">
-              <th mat-header-cell class="col-r" *matHeaderCellDef>
+              <th mat-header-cell class="ms-num col-r" *matHeaderCellDef>
                 {{ 'labels.inputs.Total Collateral Value' | translate }}
               </th>
-              <td mat-cell class="col-r" *matCellDef="let element">
+              <td mat-cell class="ms-num col-r" *matCellDef="let element">
                 {{
                   (element.pctToBase * element.basePrice * element.quantity) / 100
                     | currency: element.currency?.code : 'symbol-narrow' : '1.2-2'
@@ -656,11 +710,10 @@
         </div>
       </div>
     } @else {
-      <div class="info-banner">
-        <span class="info-banner-text">
-          <i class="fa fa-info-circle info-banner-icon"></i>
-          {{ 'labels.messages.No Collateral Data Found' | translate }}
-        </span>
+      <div class="ms-panel">
+        <div class="ms-empty">
+          <span>{{ 'labels.messages.No Collateral Data Found' | translate }}</span>
+        </div>
       </div>
     }
   </section>
@@ -668,7 +721,12 @@
   <!-- ════ PDF Viewer Modal (preserved) ══════════════════════ -->
   <div *ngIf="showPdf" class="pdf-modal-overlay">
     <div class="pdf-modal-content">
-      <button mat-icon-button class="pdf-modal-close" (click)="closePdf()" aria-label="Close PDF">
+      <button
+        mat-icon-button
+        class="pdf-modal-close"
+        (click)="closePdf()"
+        [attr.aria-label]="'labels.buttons.Close' | translate"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
       <embed [src]="pdfUrl" type="application/pdf" width="100%" height="600px" />

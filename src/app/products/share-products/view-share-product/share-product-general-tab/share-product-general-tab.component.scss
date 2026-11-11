@@ -6,16 +6,41 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@use 'assets/styles/helper';
-@use 'assets/styles/colours' as *;
-
 .tab-container {
-  padding: 1%;
-  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+  padding: var(--ms-space-5);
 }
 
-.mat-h3 {
-  margin-top: 10px !important;
-  font-weight: 300;
-  color: $status-approved;
+.detail-header {
+  padding-bottom: var(--ms-space-3);
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+.detail-header__title {
+  margin: 0;
+}
+
+.detail-row {
+  gap: var(--ms-space-4);
+  align-items: baseline;
+  padding: var(--ms-space-2) 0;
+  border-bottom: 1px solid var(--ms-color-border-subtle);
+}
+
+.ms-section-title {
+  margin: var(--ms-space-5) 0 var(--ms-space-2);
+}
+
+.ms-subsection-title {
+  font-size: var(--ms-font-size-body);
+}
+
+.ms-table-panel {
+  margin: var(--ms-space-3) 0 var(--ms-space-5);
+}
+
+.ms-detail-table {
+  width: 100%;
 }

@@ -6,40 +6,32 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.container {
-  // Wide enough to show a 600px email, the usual width of HTML email templates, without scrolling
-  max-width: 40rem;
-
-  .content {
-    div {
-      margin: 1rem 0;
-      overflow-wrap: break-word;
-    }
-  }
+.detail-list .ms-label {
+  flex: 0 0 40%;
 }
 
 // The Text label sits above the template text, which takes the full width
 .text-label {
-  margin-bottom: 0.5rem;
+  margin-top: var(--ms-space-5);
 }
 
 // Plain text templates keep their line breaks
 .plain-text {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  font-size: var(--ms-font-size-body);
+  color: var(--ms-color-text-primary);
 }
 
 // HTML templates render in their own document so their styles apply and the app's do not
 .html-preview {
   display: block;
+  width: 100%;
   min-height: 6rem;
-  border: 1px solid rgb(0 0 0 / 12%);
-  border-radius: 8px;
+  border: 1px solid var(--ms-color-border-subtle);
+  border-radius: var(--ms-radius-md);
 
   // Emails are designed for a light background, whatever the app theme
-  background: #fff;
-}
-
-:host-context(.dark-theme) .html-preview {
-  border-color: rgb(255 255 255 / 12%);
+  // stylelint-disable-next-line color-named
+  background: white;
 }

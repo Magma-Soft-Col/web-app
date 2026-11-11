@@ -6,23 +6,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+// Loan tab (pen): section title with actions, then content in white panels.
+.loan-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-5) 0;
+}
+
+.loan-tab__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ms-space-3);
+  flex-wrap: wrap;
+}
+
 table {
   width: 100%;
 
-  .action-button {
-    min-width: 26px;
-    padding: 0 0 3px;
-    margin: 0 2%;
-    line-height: 25px;
+  .ms-num {
+    text-align: right;
+    white-space: nowrap;
   }
 }
 
-.container {
-  padding-top: 1%;
-  padding-bottom: 2%;
-
-  .action-buttons {
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-  }
+.reschedule__actions {
+  justify-content: flex-end;
 }

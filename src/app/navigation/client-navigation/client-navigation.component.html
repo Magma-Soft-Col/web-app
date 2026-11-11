@@ -7,20 +7,15 @@
 -->
 
 <mat-card-header class="layout-row gap-5percent">
-  <fa-icon class="main-icon" icon="user" size="3x"></fa-icon>
+  <fa-icon class="main-icon" icon="user"></fa-icon>
   <mat-card-title-group>
     <div class="mat-typography">
       <mat-card-title>
         <h2>
           {{ clientData.displayName }}
-          <span [className]="clientData.status.code | statusLookup">
-            <fa-icon
-              matTooltip="{{ clientData.status.value }}"
-              matTooltipPosition="right"
-              icon="circle"
-              size="lg"
-            ></fa-icon>
-          </span>
+          <span [className]="'ms-status ' + (clientData.status.code | statusLookup)">{{
+            clientData.status.value
+          }}</span>
         </h2>
       </mat-card-title>
       <mat-card-subtitle>

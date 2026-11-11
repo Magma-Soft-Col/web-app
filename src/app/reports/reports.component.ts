@@ -21,6 +21,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 interface Report {
   id: number;
@@ -52,6 +53,7 @@ const ENGINE_TYPES = [
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   imports: [
+    FaIconComponent,
     ...STANDALONE_SHARED_IMPORTS,
     RouterLink,
     MatTooltipModule,
